@@ -90,6 +90,28 @@
       ]
     },
     {
+      "id": "dsh-release-proof",
+      "name": "dsh-release-proof",
+      "category": "release-engineering",
+      "status": "verified",
+      "summary": "Reproducible multi-source release evidence for HTTP status, byte length, SHA-256 and version consistency.",
+      "repo": "https://github.com/dongsheng123132/dsh-release-proof",
+      "evidence": [
+        {
+          "label": "Immutable plugin source and smoke commands",
+          "url": "https://github.com/dongsheng123132/dsh-release-proof/tree/c78c861e9662f8e4adc76e0cb501bb83f4333a2a"
+        },
+        {
+          "label": "Clean GitHub Actions run",
+          "url": "https://github.com/dongsheng123132/dsh-release-proof/actions/runs/31749726816"
+        },
+        {
+          "label": "DSH revision used for isolated profile install",
+          "url": "https://github.com/deepseek-ai/deepseek-harness/commit/47f943859bef60e4160492346772ded9b24f765a"
+        }
+      ]
+    },
+    {
       "id": "dsh-novel",
       "name": "dsh-novel",
       "category": "writing-novel",

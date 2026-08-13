@@ -156,6 +156,28 @@
       ]
     },
     {
+      "id": "dsh-recovery-proof",
+      "name": "dsh-recovery-proof",
+      "category": "recovery-evidence",
+      "status": "verified",
+      "summary": "Read-only recovery drill evidence for object freshness, exact stages, RTO, failed-apply rollback and stale-plan rejection.",
+      "repo": "https://github.com/dongsheng123132/dsh-recovery-proof",
+      "evidence": [
+        {
+          "label": "Immutable plugin source and smoke commands",
+          "url": "https://github.com/dongsheng123132/dsh-recovery-proof/tree/ee31fe7d1e257cf0219e4b980cd279860b69a7c9"
+        },
+        {
+          "label": "Ubuntu and Windows GitHub Actions run",
+          "url": "https://github.com/dongsheng123132/dsh-recovery-proof/actions/runs/31755305561"
+        },
+        {
+          "label": "DSH revision used for isolated profile install",
+          "url": "https://github.com/deepseek-ai/deepseek-harness/commit/47f943859bef60e4160492346772ded9b24f765a"
+        }
+      ]
+    },
+    {
       "id": "dsh-novel",
       "name": "dsh-novel",
       "category": "writing-novel",

@@ -134,6 +134,28 @@
       ]
     },
     {
+      "id": "dsh-lineage",
+      "name": "dsh-lineage",
+      "category": "provenance-lineage",
+      "status": "verified",
+      "summary": "Append-only content-addressed artifact/fact/action/report lineage with DAG checks, missing/stale disclosure and verified upstream/downstream closure reports.",
+      "repo": "https://github.com/dongsheng123132/dsh-lineage",
+      "evidence": [
+        {
+          "label": "Immutable plugin source and smoke commands",
+          "url": "https://github.com/dongsheng123132/dsh-lineage/tree/1d2fef3dafccab3266fbe29f2a6aa8641579e63e"
+        },
+        {
+          "label": "Ubuntu and Windows GitHub Actions run",
+          "url": "https://github.com/dongsheng123132/dsh-lineage/actions/runs/31752043859"
+        },
+        {
+          "label": "DSH revision used for isolated profile install",
+          "url": "https://github.com/deepseek-ai/deepseek-harness/commit/47f943859bef60e4160492346772ded9b24f765a"
+        }
+      ]
+    },
+    {
       "id": "dsh-novel",
       "name": "dsh-novel",
       "category": "writing-novel",

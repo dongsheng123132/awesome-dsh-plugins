@@ -27,10 +27,23 @@
       "id": "dsh-cost",
       "name": "dsh-cost",
       "category": "token-cost",
-      "status": "planned",
-      "summary": "Cost, budget and per-project attribution above DSH token-meter events.",
-      "repo": null,
-      "evidence": []
+      "status": "verified",
+      "summary": "Durable usage-cost ledger, explicit evidence gaps and fail-closed budget checks for DSH.",
+      "repo": "https://github.com/dongsheng123132/dsh-cost",
+      "evidence": [
+        {
+          "label": "Immutable plugin source and smoke commands",
+          "url": "https://github.com/dongsheng123132/dsh-cost/tree/82b41f21a66f71ee44042d2ea9d3fe64419c4a2d"
+        },
+        {
+          "label": "Clean GitHub Actions run",
+          "url": "https://github.com/dongsheng123132/dsh-cost/actions/runs/31733968794"
+        },
+        {
+          "label": "DSH revision used for isolated profile install",
+          "url": "https://github.com/deepseek-ai/deepseek-harness/commit/47f943859bef60e4160492346772ded9b24f765a"
+        }
+      ]
     },
     {
       "id": "dsh-2origin",

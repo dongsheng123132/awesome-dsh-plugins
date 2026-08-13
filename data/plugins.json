@@ -15953,7 +15953,7 @@
       ],
       "checkedAt": "2026-08-13T18:32:51.201Z",
       "id": "sakikoTGW/pack-agent:dsh-plugin/package.json",
-      "category": "other",
+      "category": "developer-tools",
       "repositoryBundleCount": 2,
       "verification": {
         "status": "verified-bundle",
@@ -15962,7 +15962,14 @@
         "checkedAt": "2026-08-13T18:32:51.201Z"
       },
       "installTarget": null,
-      "installCommand": null
+      "installCommand": null,
+      "categoryOverride": {
+        "scope": "repo",
+        "id": "sakikoTGW/pack-agent",
+        "category": "developer-tools",
+        "reason": "Packages and projects skills, rules and MCP configuration across multiple agent harnesses.",
+        "source": "https://github.com/sakikoTGW/pack-agent#supported-harnesses"
+      }
     },
     {
       "repo": "sakikoTGW/pack-agent",
@@ -16024,7 +16031,7 @@
       ],
       "checkedAt": "2026-08-13T18:32:51.201Z",
       "id": "sakikoTGW/pack-agent:package.json",
-      "category": "mcp-bridge",
+      "category": "developer-tools",
       "repositoryBundleCount": 2,
       "verification": {
         "status": "verified-bundle",
@@ -16033,7 +16040,14 @@
         "checkedAt": "2026-08-13T18:32:51.201Z"
       },
       "installTarget": "github:sakikoTGW/pack-agent",
-      "installCommand": "dsh plugin --profile web add github:sakikoTGW/pack-agent"
+      "installCommand": "dsh plugin --profile web add github:sakikoTGW/pack-agent",
+      "categoryOverride": {
+        "scope": "repo",
+        "id": "sakikoTGW/pack-agent",
+        "category": "developer-tools",
+        "reason": "Packages and projects skills, rules and MCP configuration across multiple agent harnesses.",
+        "source": "https://github.com/sakikoTGW/pack-agent#supported-harnesses"
+      }
     },
     {
       "repo": "SnowCrescenter-tech/dsh-milestone",
@@ -19706,7 +19720,7 @@
       ],
       "checkedAt": "2026-08-13T18:32:51.201Z",
       "id": "Jesse-njx/dsh-skillport:package.json",
-      "category": "other",
+      "category": "developer-tools",
       "repositoryBundleCount": 1,
       "verification": {
         "status": "verified-bundle",
@@ -19715,7 +19729,14 @@
         "checkedAt": "2026-08-13T18:32:51.201Z"
       },
       "installTarget": "github:Jesse-njx/dsh-skillport",
-      "installCommand": "dsh plugin --profile web add github:Jesse-njx/dsh-skillport"
+      "installCommand": "dsh plugin --profile web add github:Jesse-njx/dsh-skillport",
+      "categoryOverride": {
+        "scope": "repo",
+        "id": "Jesse-njx/dsh-skillport",
+        "category": "developer-tools",
+        "reason": "Imports and converts cross-harness skill formats into the native DSH skill registry.",
+        "source": "https://github.com/Jesse-njx/dsh-skillport#what-you-get"
+      }
     },
     {
       "repo": "jihongboo/dsh-apple-mode",
@@ -25617,7 +25638,7 @@
       ],
       "checkedAt": "2026-08-13T18:32:51.201Z",
       "id": "Moximxxx/dsh-find-skill:package.json",
-      "category": "mcp-bridge",
+      "category": "developer-tools",
       "repositoryBundleCount": 1,
       "verification": {
         "status": "verified-bundle",
@@ -25626,7 +25647,14 @@
         "checkedAt": "2026-08-13T18:32:51.201Z"
       },
       "installTarget": "github:Moximxxx/dsh-find-skill",
-      "installCommand": "dsh plugin --profile web add github:Moximxxx/dsh-find-skill"
+      "installCommand": "dsh plugin --profile web add github:Moximxxx/dsh-find-skill",
+      "categoryOverride": {
+        "scope": "repo",
+        "id": "Moximxxx/dsh-find-skill",
+        "category": "developer-tools",
+        "reason": "Searches, installs and manages skills from an external skill ecosystem for DSH.",
+        "source": "https://github.com/Moximxxx/dsh-find-skill#%E5%8A%9F%E8%83%BD"
+      }
     },
     {
       "repo": "Porphyrioon/ironlaw",

@@ -17,7 +17,7 @@ Categories are heuristic navigation aids; manifest and patch evidence, not the c
 <!-- RADAR:START -->
 **397** verified bundles / **546** topic repositories examined / **546** reported by GitHub
 
-Other: 163 · UI / TUI: 70 · MCP Bridge: 26 · Model & Routing: 22 · Browser: 20 · Coding: 19 · Token & Cost: 17 · Memory: 16 · Developer Tools: 15 · Long-running: 10 · Security: 7 · Office: 5 · Finance: 4 · Research: 3
+Other: 161 · UI / TUI: 70 · MCP Bridge: 24 · Model & Routing: 22 · Browser: 20 · Coding: 19 · Developer Tools: 19 · Token & Cost: 17 · Memory: 16 · Long-running: 10 · Security: 7 · Office: 5 · Finance: 4 · Research: 3
 
 | Plugin | Category | Stars | License | Evidence | Install |
 |---|---:|---:|---|---|---|
@@ -64,9 +64,25 @@ npx github:dongsheng123132/awesome-dsh-plugins search memory
 npx github:dongsheng123132/awesome-dsh-plugins trending
 npx github:dongsheng123132/awesome-dsh-plugins verified
 npx github:dongsheng123132/awesome-dsh-plugins experimental
+npx github:dongsheng123132/awesome-dsh-plugins runtime skillport
 ```
 
 The CLI reads the committed snapshot, so normal searches do not require a GitHub token.
+
+## Runtime compatibility layer
+
+`Verified Bundle` proves only that a repository has both a `dsh.bundle.patch` declaration and the referenced patch file. Runtime evidence is deliberately separate in [`data/runtime-compat.json`](data/runtime-compat.json): each report pins the exact DSH commit and Node runtime, installs into a fresh temporary profile, composes the patch stack, then boots the real Web profile until DSH prints its readiness URL.
+
+The first audit already demonstrates why the split matters. `@dsh-skillport/bundle` was not available from npm at audit time, so the documented registry install failed. The same source commit, after a local build, installed, composed, and reached a real DSH Web readiness URL on Node 24.19.0 against a previously built DSH `47f943859bef` checkout. A clean detached DSH checkout installed and composed the plugin but was blocked by missing DSH Web client bundles; rebuilding that checkout then failed earlier in DSH's own build (`tsdown` could not import `unrun`). The evidence therefore supports compatibility with the built checkout, not yet a clean-source reproducibility claim. A Node 22.14 attempt is separately retained as `blocked-environment` because it does not satisfy DSH's declared engine floor.
+
+Run a reproducible check:
+
+```bash
+node scripts/runtime-verify.mjs --spec <package-or-built-checkout> \
+  --dsh-repo /path/to/deepseek-harness \
+  --node /path/to/node-24 \
+  --record data/runtime-compat.json
+```
 
 ## 2Origin plugin lab
 

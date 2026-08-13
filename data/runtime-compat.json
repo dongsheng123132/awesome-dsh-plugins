@@ -1,0 +1,223 @@
+{
+  "schemaVersion": 1,
+  "reports": [
+    {
+      "id": "dsh-skillport-bundle-47f943859bef-20260813T185801z",
+      "status": "blocked-harness",
+      "checkedAt": "2026-08-13T18:58:01.603Z",
+      "dsh": {
+        "repository": "deepseek-ai/deepseek-harness",
+        "revision": "47f943859bef60e4160492346772ded9b24f765a",
+        "dirty": false
+      },
+      "environment": {
+        "platform": "win32",
+        "arch": "x64",
+        "node": "v24.19.0",
+        "dshEngineSatisfied": true
+      },
+      "package": {
+        "spec": "github:Jesse-njx/dsh-skillport@77c1d4ecc202366e853a39ae7f7f7cf2da6713b7",
+        "resolvedName": "@dsh-skillport/bundle",
+        "resolvedVersion": "0.1.0",
+        "manifestSha256": "d33a32e0d03735ee4691e5bc3c25038eeea85ba4b5e2673a6166897c1327b13a",
+        "patchPath": "cordis.patch.yml",
+        "patchSha256": "a7a8996a7d006aa1ef7bf8e4e53e170c0ae7aad95d716c328b8e4b7f093eb1b8"
+      },
+      "stages": [
+        {
+          "name": "install",
+          "ok": true,
+          "exitCode": 0,
+          "signal": null,
+          "timedOut": false,
+          "durationMs": 2677,
+          "stdoutTail": "",
+          "stderrTail": "dsh: initialized profile web at <TEMP_DSH_HOME>\\profiles\\web\n"
+        },
+        {
+          "name": "compose",
+          "ok": true,
+          "exitCode": 0,
+          "signal": null,
+          "timedOut": false,
+          "durationMs": 4202,
+          "stdoutTail": "/dsh-client-ui-cordis'\n- id: ui-workflow-run\n  name: '@deepseek-ai/dsh-client-ui-workflow-run'\n- id: ui-deliverables\n  name: '@deepseek-ai/dsh-client-ui-deliverables'\n- id: ui-workspace\n  name: '@deepseek-ai/dsh-client-ui-workspace'\n- id: ui-input-trigger\n  name: '@deepseek-ai/dsh-client-ui-input-trigger'\n- id: ui-commands\n  name: '@deepseek-ai/dsh-client-ui-commands'\n- id: ui-skill\n  name: '@deepseek-ai/dsh-client-ui-skill'\n- id: ui-subagent\n  name: '@deepseek-ai/dsh-client-ui-subagent'\n- id: ui-jobs\n  name: '@deepseek-ai/dsh-client-ui-jobs'\n- id: ui-goal\n  name: '@deepseek-ai/dsh-client-ui-goal'\n- id: ui-message-feedback\n  name: '@deepseek-ai/dsh-client-ui-message-feedback'\n- id: ui-model-selection\n  name: '@deepseek-ai/dsh-client-ui-model-selection'\n- id: ui-permission\n  name: '@deepseek-ai/dsh-client-ui-permission-presets'\n- id: ui-agent-preset\n  name: '@deepseek-ai/dsh-client-ui-agent-preset'\n- id: ui-settings-plugins\n  name: '@deepseek-ai/dsh-client-ui-settings-plugins'\n- id: ui-plan\n  name: '@deepseek-ai/dsh-client-ui-plan'\n- id: ui-user-questions\n  name: '@deepseek-ai/dsh-client-ui-user-questions'\n- id: ui-trajectory\n  name: '@deepseek-ai/dsh-client-ui-trajectory'\n- id: agent-presets\n  name: '@deepseek-ai/dsh-agent-presets'\n  config:\n    default: standard\n# == @dsh-skillport/bundle\n- id: skillport\n  name: '@dsh-skillport/bundle'\n  config:\n    sources:\n      - dsh\n      - claude\n      - agents\n      - gemini\n    extraPaths: []\n    convert:\n      cursorRules: true\n      contextFiles: true\n      claudeCommands: true\n    maxIndexEntries: 100\n    providerName: skillport\n",
+          "stderrTail": ""
+        },
+        {
+          "name": "boot",
+          "ok": false,
+          "exitCode": 1,
+          "signal": null,
+          "timedOut": false,
+          "readyLine": null,
+          "durationMs": 66485,
+          "stdoutTail": "",
+          "stderrTail": "   [errors]: [\r\n            [MissingClientBundleError],\r\n            [MissingClientBundleError],\r\n            [MissingClientBundleError],\r\n            [MissingClientBundleError],\r\n            [MissingClientBundleError],\r\n            [MissingClientBundleError],\r\n            [MissingClientBundleError],\r\n            [MissingClientBundleError],\r\n            [MissingClientBundleError],\r\n            [MissingClientBundleError],\r\n            [MissingClientBundleError],\r\n            [MissingClientBundleError],\r\n            [MissingClientBundleError],\r\n            [MissingClientBundleError],\r\n            [MissingClientBundleError],\r\n            [MissingClientBundleError],\r\n            [MissingClientBundleError],\r\n            [MissingClientBundleError],\r\n            [MissingClientBundleError],\r\n            [MissingClientBundleError],\r\n            [MissingClientBundleError],\r\n            [MissingClientBundleError],\r\n            [MissingClientBundleError],\r\n            [MissingClientBundleError],\r\n            [MissingClientBundleError],\r\n            [MissingClientBundleError],\r\n            [MissingClientBundleError],\r\n            [MissingClientBundleError],\r\n            [MissingClientBundleError],\r\n            [MissingClientBundleError],\r\n            [MissingClientBundleError],\r\n            [MissingClientBundleError],\r\n            [MissingClientBundleError],\r\n            [MissingClientBundleError],\r\n            [MissingClientBundleError],\r\n            [MissingClientBundleError],\r\n            [MissingClientBundleError]\r\n          ]\r\n        }\r\n      }\r\n    ]\r\n  }\r\n}\r\n\r\nNode.js v24.19.0\r\n"
+        }
+      ]
+    },
+    {
+      "id": "dsh-skillport-bundle-47f943859bef-20260813T185125z",
+      "status": "passed",
+      "checkedAt": "2026-08-13T18:51:25.625Z",
+      "dsh": {
+        "repository": "deepseek-ai/deepseek-harness",
+        "revision": "47f943859bef60e4160492346772ded9b24f765a",
+        "dirty": true
+      },
+      "environment": {
+        "platform": "win32",
+        "arch": "x64",
+        "node": "v24.19.0",
+        "dshEngineSatisfied": true
+      },
+      "package": {
+        "spec": "github:Jesse-njx/dsh-skillport@77c1d4ecc202366e853a39ae7f7f7cf2da6713b7",
+        "resolvedName": "@dsh-skillport/bundle",
+        "resolvedVersion": "0.1.0",
+        "manifestSha256": "d33a32e0d03735ee4691e5bc3c25038eeea85ba4b5e2673a6166897c1327b13a",
+        "patchPath": "cordis.patch.yml",
+        "patchSha256": "a7a8996a7d006aa1ef7bf8e4e53e170c0ae7aad95d716c328b8e4b7f093eb1b8"
+      },
+      "stages": [
+        {
+          "name": "install",
+          "ok": true,
+          "exitCode": 0,
+          "signal": null,
+          "timedOut": false,
+          "durationMs": 1490,
+          "stdoutTail": "",
+          "stderrTail": "dsh: initialized profile web at <TEMP_DSH_HOME>\\profiles\\web\n"
+        },
+        {
+          "name": "compose",
+          "ok": true,
+          "exitCode": 0,
+          "signal": null,
+          "timedOut": false,
+          "durationMs": 978,
+          "stdoutTail": "eepseek-ai/dsh-web-app\n- id: tool-result-pruner\n  name: '@deepseek-ai/dsh-compaction-tool-result-pruner'\n  config:\n    thresholdChars: 8192\n    headChars: 4096\n    tailChars: 1024\n  disabled: true\n- id: tool-todo\n  name: '@deepseek-ai/dsh-tool-todo'\n  config:\n    allowParallelInProgress: true\n  disabled: true\n- id: tool-goal\n  name: '@deepseek-ai/dsh-tool-goal'\n  disabled: true\n- id: tool-ralph\n  name: '@deepseek-ai/dsh-tool-ralph'\n  config:\n    subagentProvider: spawn\n    maxRounds: 64\n  disabled: true\n- id: tool-str-replace-editor\n  name: '@deepseek-ai/dsh-tool-str-replace-editor'\n  config:\n    maxOutputChars: 16000\n  disabled: true\n# == @deepseek-ai/dsh-base\n- id: repeat-tool-reminder\n  name: '@deepseek-ai/dsh-repeat-tool-reminder'\n  config:\n    thresholds:\n      - 3\n      - 5\n      - 8\n    argumentsPreviewChars: 500\n- id: web\n  name: '@deepseek-ai/dsh-web'\n  config:\n    searchProvider: deepseek-official\n- id: web-search-deepseek\n  name: '@deepseek-ai/dsh-web-search-deepseek'\n  config:\n    apiKeyEnv: DEEPSEEK_API_KEY\n# == @deepseek-ai/dsh-base, patched by @deepseek-ai/dsh-web-app\n- id: tool-web\n  name: '@deepseek-ai/dsh-tool-web'\n  config:\n    fetch: false\n    searchTimeoutMs: 60000\n  disabled: true\n- id: tools\n  name: '@deepseek-ai/dsh-tools'\n  config:\n    mode: !!js process.env.DSH_TOOLS_MODE\n- id: system-prompt\n  name: '@deepseek-ai/dsh-system-prompt'\n  config:\n    persona: >-\n      You are a coding agent powered by the {{model}} model. Your working\n      directory is {{cwd}}.\n# == @deepseek-ai/dsh-base\n- id: agent-loop\n  name: '@deepseek-ai/dsh-agent-loop'\n  config:\n    agents: []\n- id: fs-sandbox\n  name: '@deepseek-ai/dsh-fs-sandbox'\n- id: llm-deepseek\n  name: '@deepseek-ai/dsh-llm-deepseek'\n# == @deepseek-ai/dsh-web-app\n- id: code-runtime\n  name: '@deepseek-ai/dsh-code-runtime-worker-thread'\n- id: storage\n  name: '@deepseek-ai/dsh-storage'\n- id: storage-json\n  name: '@deepseek-ai/dsh-storage-json'\n  config:\n    root: !!js dshHomePath('storages')\n- id: storage-domain\n  name: '@deepseek-ai/dsh-storage-domain'\n  config:\n    backend: json\n- id: message-feedback\n  name: '@deepseek-ai/dsh-message-feedback'\n  config:\n    maxNoteBytes: 8192\n- id: session-log-download\n  name: '@deepseek-ai/dsh-session-log-export'\n- id: workspace\n  name: '@deepseek-ai/dsh-workspace'\n- id: session-projection-cache\n  name: '@deepseek-ai/dsh-session-projection-cache'\n  config:\n    writeEveryEvents: 200\n    writeIntervalMs: 5000\n- id: session-stats\n  name: '@deepseek-ai/dsh-session-stats'\n- id: directory-picker\n  name: '@deepseek-ai/dsh-host-directory-picker-auto'\n- id: plugin-inventory\n  name: '@deepseek-ai/dsh-host-plugin-inventory'\n- id: api-gateway\n  name: '@deepseek-ai/dsh-host-apiproxy'\n- id: cordis-host-runner\n  name: '@deepseek-ai/dsh-cordis-host-runner'\n- id: web-startup\n  name: '@deepseek-ai/dsh-web-app/startup'\n- id: webserver\n  name: '@deepseek-ai/dsh-host-webserver'\n  inject:\n    - webStartup\n  config:\n    host: !!js ctx.webStartup.host ?? '127.0.0.1'\n    port: !!js ctx.webStartup.port ?? 3080\n- id: web-runtime\n  name: '@deepseek-ai/dsh-web-app'\n  inject:\n    - webStartup\n  config:\n    printUrl: true\n    surfaceContext: true\n    trustedHosts: !!js ctx.webStartup.trustedHosts\n- id: client-hmr\n  name: '@deepseek-ai/dsh-client-hmr'\n- id: modules\n  name: '@deepseek-ai/dsh-client-modules'\n- id: connection\n  name: '@deepseek-ai/dsh-client-connection'\n  inject:\n    - webRuntime\n  config:\n    trustedHosts: !!js ctx.webRuntime.trustedHosts\n- id: api-remotes\n  name: '@deepseek-ai/dsh-api-remotes'\n- id: client-runtime\n  name: '@deepseek-ai/dsh-client-runtime'\n- id: cordis-client-runner\n  name: '@deepseek-ai/dsh-cordis-client-runner'\n- id: ui-theme\n  name: '@deepseek-ai/dsh-client-ui-theme'\n- id: locale\n  name: '@deepseek-ai/dsh-client-locale'\n- id: ui-layout\n  name: '@deepseek-ai/dsh-client-ui-layout'\n- id: ui-sidebar\n  name: '@deepseek-ai/dsh-client-ui-sidebar'\n- id: ui-settings\n  name: '@deepseek-ai/dsh-client-ui-settings'\n- id: ui-settings-general\n  name: '@deepseek-ai/dsh-client-ui-settings-general'\n- id: ui-settings-models\n  name: '@deepseek-ai/dsh-client-ui-settings-models'\n- id: ui-settings-plugin-inventory\n  name: '@deepseek-ai/dsh-client-ui-settings-plugin-inventory'\n- id: ui-conversation\n  name: '@deepseek-ai/dsh-client-ui-conversation'\n- id: ui-tool\n  name: '@deepseek-ai/dsh-client-ui-tool'\n- id: ui-cordis\n  name: '@deepseek-ai/dsh-client-ui-cordis'\n- id: ui-workflow-run\n  name: '@deepseek-ai/dsh-client-ui-workflow-run'\n- id: ui-deliverables\n  name: '@deepseek-ai/dsh-client-ui-deliverables'\n- id: ui-workspace\n  name: '@deepseek-ai/dsh-client-ui-workspace'\n- id: ui-input-trigger\n  name: '@deepseek-ai/dsh-client-ui-input-trigger'\n- id: ui-commands\n  name: '@deepseek-ai/dsh-client-ui-commands'\n- id: ui-skill\n  name: '@deepseek-ai/dsh-client-ui-skill'\n- id: ui-subagent\n  name: '@deepseek-ai/dsh-client-ui-subagent'\n- id: ui-jobs\n  name: '@deepseek-ai/dsh-client-ui-jobs'\n- id: ui-goal\n  name: '@deepseek-ai/dsh-client-ui-goal'\n- id: ui-message-feedback\n  name: '@deepseek-ai/dsh-client-ui-message-feedback'\n- id: ui-model-selection\n  name: '@deepseek-ai/dsh-client-ui-model-selection'\n- id: ui-permission\n  name: '@deepseek-ai/dsh-client-ui-permission-presets'\n- id: ui-agent-preset\n  name: '@deepseek-ai/dsh-client-ui-agent-preset'\n- id: ui-settings-plugins\n  name: '@deepseek-ai/dsh-client-ui-settings-plugins'\n- id: ui-plan\n  name: '@deepseek-ai/dsh-client-ui-plan'\n- id: ui-user-questions\n  name: '@deepseek-ai/dsh-client-ui-user-questions'\n- id: ui-trajectory\n  name: '@deepseek-ai/dsh-client-ui-trajectory'\n- id: agent-presets\n  name: '@deepseek-ai/dsh-agent-presets'\n  config:\n    default: standard\n# == @dsh-skillport/bundle\n- id: skillport\n  name: '@dsh-skillport/bundle'\n  config:\n    sources:\n      - dsh\n      - claude\n      - agents\n      - gemini\n    extraPaths: []\n    convert:\n      cursorRules: true\n      contextFiles: true\n      claudeCommands: true\n    maxIndexEntries: 100\n    providerName: skillport\n",
+          "stderrTail": ""
+        },
+        {
+          "name": "boot",
+          "ok": true,
+          "exitCode": null,
+          "signal": "SIGTERM",
+          "timedOut": false,
+          "readyLine": "dsh web: http://127.0.0.1:60403",
+          "durationMs": 33508,
+          "stdoutTail": "dsh web: http://127.0.0.1:60403\n",
+          "stderrTail": ""
+        }
+      ]
+    },
+    {
+      "id": "dsh-skillport-bundle-47f943859bef-20260813T184954z",
+      "status": "blocked-environment",
+      "checkedAt": "2026-08-13T18:49:54.345Z",
+      "dsh": {
+        "repository": "deepseek-ai/deepseek-harness",
+        "revision": "47f943859bef60e4160492346772ded9b24f765a",
+        "dirty": true
+      },
+      "environment": {
+        "platform": "win32",
+        "arch": "x64",
+        "node": "v22.14.0",
+        "dshEngineSatisfied": false
+      },
+      "package": {
+        "spec": "github:Jesse-njx/dsh-skillport@77c1d4ecc202366e853a39ae7f7f7cf2da6713b7",
+        "resolvedName": "@dsh-skillport/bundle",
+        "resolvedVersion": "0.1.0",
+        "manifestSha256": "d33a32e0d03735ee4691e5bc3c25038eeea85ba4b5e2673a6166897c1327b13a",
+        "patchPath": "cordis.patch.yml",
+        "patchSha256": "a7a8996a7d006aa1ef7bf8e4e53e170c0ae7aad95d716c328b8e4b7f093eb1b8"
+      },
+      "stages": [
+        {
+          "name": "install",
+          "ok": true,
+          "exitCode": 0,
+          "signal": null,
+          "timedOut": false,
+          "durationMs": 1249,
+          "stdoutTail": "",
+          "stderrTail": "dsh: initialized profile web at <TEMP_DSH_HOME>\\profiles\\web\n"
+        },
+        {
+          "name": "compose",
+          "ok": true,
+          "exitCode": 0,
+          "signal": null,
+          "timedOut": false,
+          "durationMs": 966,
+          "stdoutTail": "eepseek-ai/dsh-web-app\n- id: tool-result-pruner\n  name: '@deepseek-ai/dsh-compaction-tool-result-pruner'\n  config:\n    thresholdChars: 8192\n    headChars: 4096\n    tailChars: 1024\n  disabled: true\n- id: tool-todo\n  name: '@deepseek-ai/dsh-tool-todo'\n  config:\n    allowParallelInProgress: true\n  disabled: true\n- id: tool-goal\n  name: '@deepseek-ai/dsh-tool-goal'\n  disabled: true\n- id: tool-ralph\n  name: '@deepseek-ai/dsh-tool-ralph'\n  config:\n    subagentProvider: spawn\n    maxRounds: 64\n  disabled: true\n- id: tool-str-replace-editor\n  name: '@deepseek-ai/dsh-tool-str-replace-editor'\n  config:\n    maxOutputChars: 16000\n  disabled: true\n# == @deepseek-ai/dsh-base\n- id: repeat-tool-reminder\n  name: '@deepseek-ai/dsh-repeat-tool-reminder'\n  config:\n    thresholds:\n      - 3\n      - 5\n      - 8\n    argumentsPreviewChars: 500\n- id: web\n  name: '@deepseek-ai/dsh-web'\n  config:\n    searchProvider: deepseek-official\n- id: web-search-deepseek\n  name: '@deepseek-ai/dsh-web-search-deepseek'\n  config:\n    apiKeyEnv: DEEPSEEK_API_KEY\n# == @deepseek-ai/dsh-base, patched by @deepseek-ai/dsh-web-app\n- id: tool-web\n  name: '@deepseek-ai/dsh-tool-web'\n  config:\n    fetch: false\n    searchTimeoutMs: 60000\n  disabled: true\n- id: tools\n  name: '@deepseek-ai/dsh-tools'\n  config:\n    mode: !!js process.env.DSH_TOOLS_MODE\n- id: system-prompt\n  name: '@deepseek-ai/dsh-system-prompt'\n  config:\n    persona: >-\n      You are a coding agent powered by the {{model}} model. Your working\n      directory is {{cwd}}.\n# == @deepseek-ai/dsh-base\n- id: agent-loop\n  name: '@deepseek-ai/dsh-agent-loop'\n  config:\n    agents: []\n- id: fs-sandbox\n  name: '@deepseek-ai/dsh-fs-sandbox'\n- id: llm-deepseek\n  name: '@deepseek-ai/dsh-llm-deepseek'\n# == @deepseek-ai/dsh-web-app\n- id: code-runtime\n  name: '@deepseek-ai/dsh-code-runtime-worker-thread'\n- id: storage\n  name: '@deepseek-ai/dsh-storage'\n- id: storage-json\n  name: '@deepseek-ai/dsh-storage-json'\n  config:\n    root: !!js dshHomePath('storages')\n- id: storage-domain\n  name: '@deepseek-ai/dsh-storage-domain'\n  config:\n    backend: json\n- id: message-feedback\n  name: '@deepseek-ai/dsh-message-feedback'\n  config:\n    maxNoteBytes: 8192\n- id: session-log-download\n  name: '@deepseek-ai/dsh-session-log-export'\n- id: workspace\n  name: '@deepseek-ai/dsh-workspace'\n- id: session-projection-cache\n  name: '@deepseek-ai/dsh-session-projection-cache'\n  config:\n    writeEveryEvents: 200\n    writeIntervalMs: 5000\n- id: session-stats\n  name: '@deepseek-ai/dsh-session-stats'\n- id: directory-picker\n  name: '@deepseek-ai/dsh-host-directory-picker-auto'\n- id: plugin-inventory\n  name: '@deepseek-ai/dsh-host-plugin-inventory'\n- id: api-gateway\n  name: '@deepseek-ai/dsh-host-apiproxy'\n- id: cordis-host-runner\n  name: '@deepseek-ai/dsh-cordis-host-runner'\n- id: web-startup\n  name: '@deepseek-ai/dsh-web-app/startup'\n- id: webserver\n  name: '@deepseek-ai/dsh-host-webserver'\n  inject:\n    - webStartup\n  config:\n    host: !!js ctx.webStartup.host ?? '127.0.0.1'\n    port: !!js ctx.webStartup.port ?? 3080\n- id: web-runtime\n  name: '@deepseek-ai/dsh-web-app'\n  inject:\n    - webStartup\n  config:\n    printUrl: true\n    surfaceContext: true\n    trustedHosts: !!js ctx.webStartup.trustedHosts\n- id: client-hmr\n  name: '@deepseek-ai/dsh-client-hmr'\n- id: modules\n  name: '@deepseek-ai/dsh-client-modules'\n- id: connection\n  name: '@deepseek-ai/dsh-client-connection'\n  inject:\n    - webRuntime\n  config:\n    trustedHosts: !!js ctx.webRuntime.trustedHosts\n- id: api-remotes\n  name: '@deepseek-ai/dsh-api-remotes'\n- id: client-runtime\n  name: '@deepseek-ai/dsh-client-runtime'\n- id: cordis-client-runner\n  name: '@deepseek-ai/dsh-cordis-client-runner'\n- id: ui-theme\n  name: '@deepseek-ai/dsh-client-ui-theme'\n- id: locale\n  name: '@deepseek-ai/dsh-client-locale'\n- id: ui-layout\n  name: '@deepseek-ai/dsh-client-ui-layout'\n- id: ui-sidebar\n  name: '@deepseek-ai/dsh-client-ui-sidebar'\n- id: ui-settings\n  name: '@deepseek-ai/dsh-client-ui-settings'\n- id: ui-settings-general\n  name: '@deepseek-ai/dsh-client-ui-settings-general'\n- id: ui-settings-models\n  name: '@deepseek-ai/dsh-client-ui-settings-models'\n- id: ui-settings-plugin-inventory\n  name: '@deepseek-ai/dsh-client-ui-settings-plugin-inventory'\n- id: ui-conversation\n  name: '@deepseek-ai/dsh-client-ui-conversation'\n- id: ui-tool\n  name: '@deepseek-ai/dsh-client-ui-tool'\n- id: ui-cordis\n  name: '@deepseek-ai/dsh-client-ui-cordis'\n- id: ui-workflow-run\n  name: '@deepseek-ai/dsh-client-ui-workflow-run'\n- id: ui-deliverables\n  name: '@deepseek-ai/dsh-client-ui-deliverables'\n- id: ui-workspace\n  name: '@deepseek-ai/dsh-client-ui-workspace'\n- id: ui-input-trigger\n  name: '@deepseek-ai/dsh-client-ui-input-trigger'\n- id: ui-commands\n  name: '@deepseek-ai/dsh-client-ui-commands'\n- id: ui-skill\n  name: '@deepseek-ai/dsh-client-ui-skill'\n- id: ui-subagent\n  name: '@deepseek-ai/dsh-client-ui-subagent'\n- id: ui-jobs\n  name: '@deepseek-ai/dsh-client-ui-jobs'\n- id: ui-goal\n  name: '@deepseek-ai/dsh-client-ui-goal'\n- id: ui-message-feedback\n  name: '@deepseek-ai/dsh-client-ui-message-feedback'\n- id: ui-model-selection\n  name: '@deepseek-ai/dsh-client-ui-model-selection'\n- id: ui-permission\n  name: '@deepseek-ai/dsh-client-ui-permission-presets'\n- id: ui-agent-preset\n  name: '@deepseek-ai/dsh-client-ui-agent-preset'\n- id: ui-settings-plugins\n  name: '@deepseek-ai/dsh-client-ui-settings-plugins'\n- id: ui-plan\n  name: '@deepseek-ai/dsh-client-ui-plan'\n- id: ui-user-questions\n  name: '@deepseek-ai/dsh-client-ui-user-questions'\n- id: ui-trajectory\n  name: '@deepseek-ai/dsh-client-ui-trajectory'\n- id: agent-presets\n  name: '@deepseek-ai/dsh-agent-presets'\n  config:\n    default: standard\n# == @dsh-skillport/bundle\n- id: skillport\n  name: '@dsh-skillport/bundle'\n  config:\n    sources:\n      - dsh\n      - claude\n      - agents\n      - gemini\n    extraPaths: []\n    convert:\n      cursorRules: true\n      contextFiles: true\n      claudeCommands: true\n    maxIndexEntries: 100\n    providerName: skillport\n",
+          "stderrTail": ""
+        },
+        {
+          "name": "boot",
+          "ok": false,
+          "exitCode": 1,
+          "signal": null,
+          "timedOut": false,
+          "readyLine": null,
+          "durationMs": 9940,
+          "stdoutTail": "",
+          "stderrTail": "<DSH_REPO>\\packages\\boot\\app-boot\\src\\index.ts:800\r\n    throw new Error(`${binName}: ${stage}: ${detail}${stack}`, { cause })\r\n          ^\r\n\r\n\r\nError: dsh: plugin tree failed to load: failed to apply loader entry include (cordis:include): failed to import loader entry session-persistence-jsonl (@deepseek-ai/dsh-session-persistence-jsonl): The requested module 'node:zlib' does not provide an export named 'createZstdDecompress'\r\n<DSH_REPO>\\packages\\session\\session-persistence-jsonl\\src\\zstd-private-decoder.ts:7\r\nimport { createZstdDecompress } from 'node:zlib'\r\n         ^\r\n\r\nSyntaxError: The requested module 'node:zlib' does not provide an export named 'createZstdDecompress'\r\n    at ModuleJob._instantiate (node:internal/modules/esm/module_job:180:21)\r\n    at async ModuleJob.run (node:internal/modules/esm/module_job:263:5)\r\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:578:26)\r\n    at async <anonymous> (<DSH_REPO>\\vendor\\loader\\src\\config\\tree.ts:155:16)\r\n    at async Entry._init (<DSH_REPO>\\vendor\\loader\\src\\config\\entry.ts:280:42)\r\n    at boot (<DSH_REPO>\\packages\\boot\\app-boot\\src\\index.ts:800:11)\r\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\r\n    at async runProfile (<DSH_REPO>\\apps\\cli\\src\\profile-boot.ts:248:15)\r\n    at async <anonymous> (<DSH_REPO>\\apps\\cli\\src\\bin.ts:32:5) {\r\n  [cause]: Error: failed to apply loader entry include (cordis:include): failed to import loader entry session-persistence-jsonl (@deepseek-ai/dsh-session-persistence-jsonl): The requested module 'node:zlib' does not provide an export named 'createZstdDecompress'\r\n      at updateError (<DSH_REPO>\\vendor\\loader\\src\\config\\entry.ts:26:10)\r\n      at Entry._init (<DSH_REPO>\\vendor\\loader\\src\\config\\entry.ts:287:13)\r\n      at process.processTicksAndRejections (node:internal/process/task_queues:105:5) {\r\n    [cause]: Error: failed to import loader entry session-persistence-jsonl (@deepseek-ai/dsh-session-persistence-jsonl): The requested module 'node:zlib' does not provide an export named 'createZstdDecompress'\r\n        at updateError (<DSH_REPO>\\vendor\\loader\\src\\config\\entry.ts:26:10)\r\n        at Entry._init (<DSH_REPO>\\vendor\\loader\\src\\config\\entry.ts:282:13) {\r\n      [cause]: <DSH_REPO>\\packages\\session\\session-persistence-jsonl\\src\\zstd-private-decoder.ts:7\r\n      import { createZstdDecompress } from 'node:zlib'\r\n               ^\r\n      \r\n      SyntaxError: The requested module 'node:zlib' does not provide an export named 'createZstdDecompress'\r\n          at ModuleJob._instantiate (node:internal/modules/esm/module_job:180:21)\r\n          at async ModuleJob.run (node:internal/modules/esm/module_job:263:5)\r\n          at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:578:26)\r\n          at async <anonymous> (<DSH_REPO>\\vendor\\loader\\src\\config\\tree.ts:155:16)\r\n          at async Entry._init (<DSH_REPO>\\vendor\\loader\\src\\config\\entry.ts:280:42)\r\n    }\r\n  }\r\n}\r\n\r\nNode.js v22.14.0\r\n"
+        }
+      ]
+    },
+    {
+      "id": "dsh-skillport-bundle-47f943859bef-20260813T184819z",
+      "status": "failed",
+      "checkedAt": "2026-08-13T18:48:19.683Z",
+      "dsh": {
+        "repository": "deepseek-ai/deepseek-harness",
+        "revision": "47f943859bef60e4160492346772ded9b24f765a",
+        "dirty": true
+      },
+      "environment": {
+        "platform": "win32",
+        "arch": "x64",
+        "node": "v22.14.0"
+      },
+      "package": {
+        "spec": "@dsh-skillport/bundle",
+        "resolvedName": null,
+        "resolvedVersion": null,
+        "manifestSha256": null,
+        "patchPath": null,
+        "patchSha256": null
+      },
+      "stages": [
+        {
+          "name": "install",
+          "ok": false,
+          "exitCode": 1,
+          "signal": null,
+          "timedOut": false,
+          "durationMs": 3381,
+          "stdoutTail": " ERR_PNPM_FETCH_404  GET https://registry.npmmirror.com/@dsh-skillport%2Fbundle: Not Found - 404\n\nThis error happened while installing a direct dependency of <TEMP_DSH_HOME>\\profiles\\web\n\n@dsh-skillport/bundle is not in the npm registry, or you have no permission to fetch it.\n\nNo authorization header was set for the request.\n",
+          "stderrTail": "dsh: initialized profile web at <TEMP_DSH_HOME>\\profiles\\web\ndsh: pnpm failed in profile directory <TEMP_DSH_HOME>\\profiles\\web\n"
+        },
+        {
+          "name": "compose",
+          "ok": false,
+          "skipped": true,
+          "reason": "install failed"
+        },
+        {
+          "name": "boot",
+          "ok": false,
+          "skipped": true,
+          "reason": "install failed"
+        }
+      ]
+    }
+  ]
+}

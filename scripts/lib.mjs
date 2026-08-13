@@ -70,6 +70,15 @@ export function classifyRepository(repository, manifests = []) {
   return best.score >= 2 ? best.category : 'other'
 }
 
+export function resolveCategory(repository, manifests = [], overrides = [], pluginId) {
+  const override = overrides.find(item => item.scope === 'plugin' && item.id === pluginId)
+    ?? overrides.find(item => item.scope === 'repo' && item.id === repository.full_name)
+  return {
+    category: override?.category ?? classifyRepository(repository, manifests),
+    override: override ?? null
+  }
+}
+
 export function extractBundle(manifest, manifestPath, treePaths) {
   const patch = manifest?.dsh?.bundle?.patch
   if (typeof patch !== 'string' || patch.trim() === '') return null

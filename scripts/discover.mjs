@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { posix } from 'node:path'
-import { classifyRepository, extractBundle, parseIntegerFlag, writeJson } from './lib.mjs'
+import { extractBundle, parseIntegerFlag, readJson, resolveCategory, writeJson } from './lib.mjs'
 import { githubJson, githubText, mapConcurrent, searchRepositories } from './github.mjs'
 
 const argv = process.argv.slice(2)
@@ -11,6 +11,7 @@ const verbose = argv.includes('--verbose')
 const query = 'topic:dsh-plugin'
 const generatedAt = new Date().toISOString()
 const excludedRepositories = new Set(['deepseek-ai/deepseek-harness'])
+const categoryOverrides = (await readJson(new URL('../data/category-overrides.json', import.meta.url))).overrides
 
 async function inspectRepository(repository, index) {
   const repo = repository.full_name
@@ -61,13 +62,15 @@ async function inspectRepository(repository, index) {
       return {
         type: 'plugins',
         values: validBundles.map(bundle => {
-          const category = classifyRepository(repository, [bundle])
+          const id = `${repo}:${bundle.manifestPath}`
+          const classification = resolveCategory(repository, [bundle], categoryOverrides, id)
           return {
           ...base,
-          id: `${repo}:${bundle.manifestPath}`,
+          id,
           name: bundle.packageName || repository.name,
           description: bundle.description || repository.description,
-          category,
+          category: classification.category,
+          ...(classification.override === null ? {} : { categoryOverride: classification.override }),
           repositoryBundleCount: validBundles.length,
           verification: {
             status: 'verified-bundle',

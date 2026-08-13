@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "overrides": [
+    {
+      "scope": "repo",
+      "id": "Jesse-njx/dsh-skillport",
+      "category": "developer-tools",
+      "reason": "Imports and converts cross-harness skill formats into the native DSH skill registry.",
+      "source": "https://github.com/Jesse-njx/dsh-skillport#what-you-get"
+    },
+    {
+      "scope": "repo",
+      "id": "Moximxxx/dsh-find-skill",
+      "category": "developer-tools",
+      "reason": "Searches, installs and manages skills from an external skill ecosystem for DSH.",
+      "source": "https://github.com/Moximxxx/dsh-find-skill#%E5%8A%9F%E8%83%BD"
+    },
+    {
+      "scope": "repo",
+      "id": "sakikoTGW/pack-agent",
+      "category": "developer-tools",
+      "reason": "Packages and projects skills, rules and MCP configuration across multiple agent harnesses.",
+      "source": "https://github.com/sakikoTGW/pack-agent#supported-harnesses"
+    }
+  ]
+}

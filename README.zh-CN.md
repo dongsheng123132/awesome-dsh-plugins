@@ -17,7 +17,7 @@
 <!-- RADAR:START -->
 **397** 个 Verified Bundle / 检查 **546** 个 topic 仓库 / GitHub 报告总数 **546**
 
-Other: 163 · UI / TUI: 70 · MCP Bridge: 26 · Model & Routing: 22 · Browser: 20 · Coding: 19 · Token & Cost: 17 · Memory: 16 · Developer Tools: 15 · Long-running: 10 · Security: 7 · Office: 5 · Finance: 4 · Research: 3
+Other: 161 · UI / TUI: 70 · MCP Bridge: 24 · Model & Routing: 22 · Browser: 20 · Coding: 19 · Developer Tools: 19 · Token & Cost: 17 · Memory: 16 · Long-running: 10 · Security: 7 · Office: 5 · Finance: 4 · Research: 3
 
 | 插件 | 分类 | Stars | License | 证据 | 安装 |
 |---|---:|---:|---|---|---|
@@ -64,9 +64,25 @@ npx github:dongsheng123132/awesome-dsh-plugins search memory
 npx github:dongsheng123132/awesome-dsh-plugins trending
 npx github:dongsheng123132/awesome-dsh-plugins verified
 npx github:dongsheng123132/awesome-dsh-plugins experimental
+npx github:dongsheng123132/awesome-dsh-plugins runtime skillport
 ```
 
 CLI 读取仓库已经提交的快照，普通搜索不需要 GitHub Token。
+
+## 运行时兼容证据层
+
+`Verified Bundle` 只证明仓库同时存在 `dsh.bundle.patch` 声明和它引用的 patch 文件。真正的运行证据单独放在 [`data/runtime-compat.json`](data/runtime-compat.json)：每份报告钉死 DSH commit 与 Node 运行时，在全新的临时 profile 中安装、组合 patch 栈，再真实启动 Web profile，直到 DSH 自己打印 readiness URL。
+
+第一次审计已经说明为什么必须分层：审计时 `@dsh-skillport/bundle` 尚未出现在 npm，因此 README 中的 registry 安装路径真实失败；但同一源码 commit 本地构建后，在 Node 24.19.0、已有构建产物的 DSH `47f943859bef` 检出上完成安装、组合并启动到真实 readiness URL。干净 detached DSH 检出能安装、组合插件，但因缺少 DSH Web client bundle 被阻塞；继续构建该检出又先在 DSH 自身的 `tsdown` 缺 `unrun` 处失败。因此目前证据只支持“兼容已有构建产物的检出”，还不支持“干净源码可复现”。Node 22.14 那次另记为 `blocked-environment`，因为它不满足 DSH 自己声明的最低引擎要求，不能算插件失败。
+
+可复跑命令：
+
+```bash
+node scripts/runtime-verify.mjs --spec <包名或已构建检出目录> \
+  --dsh-repo /path/to/deepseek-harness \
+  --node /path/to/node-24 \
+  --record data/runtime-compat.json
+```
 
 ## 2Origin 插件实验室
 

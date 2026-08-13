@@ -15,12 +15,14 @@
   ],
   "scripts": {
     "discover": "node scripts/discover.mjs",
+    "discover:capabilities": "node scripts/discover-capabilities.mjs",
     "reclassify": "node scripts/reclassify.mjs",
     "generate": "node scripts/generate-readme.mjs",
     "runtime:verify": "node scripts/runtime-verify.mjs",
     "check": "node scripts/check.mjs",
     "test": "node --test",
-    "update-radar": "npm run discover && npm run generate && npm run check"
+    "update-radar": "npm run discover && npm run generate && npm run check",
+    "update-capabilities": "npm run discover:capabilities && npm run check"
   },
   "engines": {
     "node": ">=22"

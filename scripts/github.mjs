@@ -6,7 +6,8 @@ function headers(accept = 'application/vnd.github+json') {
     'X-GitHub-Api-Version': '2022-11-28',
     'User-Agent': 'awesome-dsh-plugins-radar'
   }
-  if (process.env.GITHUB_TOKEN) result.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`
+  const token = process.env.GITHUB_TOKEN || process.env.GH_TOKEN
+  if (token) result.Authorization = `Bearer ${token}`
   return result
 }
 
@@ -53,6 +54,20 @@ export async function searchRepositories(query, limit) {
     if (search.items.length < perPage) break
   }
   return { repositories: repositories.slice(0, limit), reportedTotal }
+}
+
+export async function searchCode(query, limit) {
+  const items = []
+  let reportedTotal = 0
+  for (let page = 1; items.length < limit && page <= 10; page += 1) {
+    const remaining = limit - items.length
+    const perPage = Math.min(100, remaining)
+    const search = await githubJson(`/search/code?q=${encodeURIComponent(query)}&per_page=${perPage}&page=${page}`)
+    reportedTotal = search.total_count
+    items.push(...search.items)
+    if (search.items.length < perPage) break
+  }
+  return { items: items.slice(0, limit), reportedTotal }
 }
 
 export async function mapConcurrent(items, concurrency, mapper) {

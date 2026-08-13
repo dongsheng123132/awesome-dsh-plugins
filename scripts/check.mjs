@@ -8,6 +8,7 @@ const candidates = await readJson(new URL('data/candidates.json', root))
 const labs = await readJson(new URL('data/labs.json', root))
 const categoryOverrides = await readJson(new URL('data/category-overrides.json', root))
 const runtime = await readJson(new URL('data/runtime-compat.json', root))
+const capabilities = await readJson(new URL('data/capabilities.json', root))
 const failures = []
 
 if (radar.schemaVersion !== 1) failures.push('data/plugins.json schemaVersion must be 1')
@@ -19,6 +20,9 @@ if (categoryOverrides.schemaVersion !== 1 || !Array.isArray(categoryOverrides.ov
 }
 if (runtime.schemaVersion !== 1 || !Array.isArray(runtime.reports)) {
   failures.push('data/runtime-compat.json must use schemaVersion 1 and a reports array')
+}
+if (capabilities.schemaVersion !== 1 || !Array.isArray(capabilities.capabilities) || !Array.isArray(capabilities.errors)) {
+  failures.push('data/capabilities.json must use schemaVersion 1 with capabilities and errors arrays')
 }
 
 const ids = new Set()
@@ -63,6 +67,30 @@ for (const report of runtime.reports || []) {
   if (!Array.isArray(report.stages) || report.stages.length < 3) failures.push(`${report.id}: at least three stages required`)
 }
 
+const capabilityIds = new Set()
+for (const capability of capabilities.capabilities || []) {
+  if (capabilityIds.has(capability.id)) failures.push(`duplicate capability id: ${capability.id}`)
+  capabilityIds.add(capability.id)
+  if (!/^[0-9a-f]{40}$/i.test(capability.provenance?.revision || '')) failures.push(`${capability.id}: invalid revision`)
+  if (!/^[0-9a-f]{40}$/i.test(capability.provenance?.blobSha || '')) failures.push(`${capability.id}: invalid blob SHA`)
+  if (!/^[0-9a-f]{64}$/i.test(capability.content?.sha256 || '')) failures.push(`${capability.id}: invalid content SHA-256`)
+  if (!['copy', 'wrapper', 'bridge', 'unclassified'].includes(capability.port?.classification)) {
+    failures.push(`${capability.id}: invalid port classification`)
+  }
+  if (!Number.isInteger(capability.port?.score) || capability.port.score < 0 || capability.port.score > 100) {
+    failures.push(`${capability.id}: invalid port score`)
+  }
+  const componentTotal = Object.values(capability.port?.components || {}).reduce((sum, value) => sum + value, 0)
+  if (capability.port?.rawScore !== componentTotal) failures.push(`${capability.id}: score components do not match raw score`)
+  const expectedCap = { copy: 100, wrapper: 79, bridge: 39, unclassified: 49 }[capability.port?.classification]
+  if (capability.port?.classificationCap !== expectedCap || capability.port.score > expectedCap) {
+    failures.push(`${capability.id}: classification score cap is not enforced`)
+  }
+  if (!['skill-frontmatter', 'github-repository', 'unobserved'].includes(capability.metadata?.license?.source)) {
+    failures.push(`${capability.id}: invalid license evidence source`)
+  }
+}
+
 const labIds = new Set()
 for (const project of labs.projects || []) {
   if (labIds.has(project.id)) failures.push(`duplicate lab id: ${project.id}`)
@@ -77,13 +105,16 @@ for (const project of labs.projects || []) {
 
 for (const filename of ['README.md', 'README.zh-CN.md']) {
   const readme = await readFile(new URL(filename, root), 'utf8')
-  for (const marker of ['RADAR', 'LABS']) {
+  for (const marker of ['RADAR', 'CAPABILITIES', 'LABS']) {
     if (!readme.includes(`<!-- ${marker}:START -->`) || !readme.includes(`<!-- ${marker}:END -->`)) {
       failures.push(`${filename}: missing ${marker} markers`)
     }
   }
   if (radar.generatedAt && !readme.includes(radar.generatedAt)) {
     failures.push(`${filename}: generated snapshot timestamp is stale`)
+  }
+  if (capabilities.generatedAt && !readme.includes(capabilities.generatedAt)) {
+    failures.push(`${filename}: generated capability snapshot timestamp is stale`)
   }
 }
 
@@ -97,4 +128,5 @@ console.log(JSON.stringify({
   candidates: candidates.candidates.length,
   labs: labs.projects.length,
   runtimeReports: runtime.reports.length
+  , capabilityCandidates: capabilities.capabilities.length
 }))

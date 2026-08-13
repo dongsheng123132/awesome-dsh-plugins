@@ -20,6 +20,24 @@ export const CATEGORY_LABELS = Object.freeze({
   other: 'Other'
 })
 
+export const REVIEW_SIGNAL_LABELS = Object.freeze({
+  'secret-bearing-config': 'Secrets or credentials referenced',
+  'process-execution': 'Process or shell execution referenced',
+  'filesystem-access': 'Filesystem access referenced',
+  'network-or-browser': 'Network or browser access referenced',
+  'mcp-external-tooling': 'MCP or external tooling referenced',
+  'web-client-extension': 'Web client extension referenced'
+})
+
+const REVIEW_SIGNAL_RULES = [
+  ['secret-bearing-config', /(^|[^a-z])(api[_-]?key|access[_-]?key|token|secret|credential|password)([^a-z]|$)/i],
+  ['process-execution', /(^|[^a-z])(child_process|subprocess|spawn|exec|shell|command)([^a-z]|$)/i],
+  ['filesystem-access', /(^|[^a-z])(filesystem|readfile|writefile|file[_-]?system|fs[_-])(.*|$)/i],
+  ['network-or-browser', /(^|[^a-z])(https?|fetch|axios|websocket|browser|playwright)([^a-z]|$)/i],
+  ['mcp-external-tooling', /(^|[^a-z])(mcp|model[\s_-]?context[\s_-]?protocol|modelcontextprotocol|stdio)([^a-z]|$)/i],
+  ['web-client-extension', /(^|[^a-z])(webui|web[_-]?client|dashboard|client[_-]?entry)([^a-z]|$)/i]
+]
+
 const CATEGORY_RULES = [
   ['token-cost', ['token', 'cost', 'usage', 'meter', 'budget', 'billing']],
   ['model-routing', ['model route', 'router', 'provider', 'fallback', 'gateway']],
@@ -99,8 +117,26 @@ export function extractBundle(manifest, manifestPath, treePaths) {
     private: manifest.private === true,
     installTarget,
     description: typeof manifest.description === 'string' ? manifest.description : null,
-    keywords: Array.isArray(manifest.keywords) ? manifest.keywords.filter(item => typeof item === 'string') : []
+    keywords: Array.isArray(manifest.keywords) ? manifest.keywords.filter(item => typeof item === 'string') : [],
+    dependencies: [...new Set([
+      ...Object.keys(manifest.dependencies || {}),
+      ...Object.keys(manifest.optionalDependencies || {}),
+      ...Object.keys(manifest.peerDependencies || {})
+    ])].sort()
   }
+}
+
+export function deriveReviewSignals(bundle, patchText = '') {
+  const sources = {
+    patch: String(patchText),
+    dependencies: (bundle.dependencies || []).join(' ')
+  }
+  return REVIEW_SIGNAL_RULES.flatMap(([id, pattern]) => {
+    const matchedSources = Object.entries(sources)
+      .filter(([, value]) => pattern.test(value))
+      .map(([source]) => source)
+    return matchedSources.length === 0 ? [] : [{ id, sources: matchedSources }]
+  })
 }
 
 export async function readJson(path) {

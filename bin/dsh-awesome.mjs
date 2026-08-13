@@ -22,7 +22,8 @@ function printable(plugin) {
     license: plugin.license,
     install: plugin.installCommand,
     evidence: `${plugin.verification.manifestPath} -> ${plugin.verification.patchPath}`,
-    url: plugin.url
+    url: plugin.url,
+    reviewSignals: plugin.reviewSignals
   }
 }
 
@@ -100,8 +101,23 @@ switch (command) {
     }
     break
   }
+  case 'risk': {
+    const query = argv[1]?.startsWith('--') ? undefined : argv[1]?.toLowerCase()
+    const results = radar.plugins
+      .filter(plugin => (plugin.reviewSignals?.signals || []).length > 0)
+      .filter(plugin => !query || (plugin.reviewSignals?.signals || []).some(signal => signal.id.includes(query)))
+      .map(printable)
+    if (json) console.log(JSON.stringify(results.slice(0, limit), null, 2))
+    else if (results.length === 0) console.log('No matching static review signals.')
+    else for (const plugin of results.slice(0, limit)) {
+      console.log(`${plugin.name}  ${plugin.repo}`)
+      console.log(`  ${plugin.reviewSignals.signals.map(signal => signal.id).join(', ')}`)
+      console.log(`  ${plugin.url}`)
+    }
+    break
+  }
   case 'help':
-    console.log(`dsh-awesome <command> [options]\n\nCommands:\n  search <query>   Search verified bundles\n  trending        Rank verified bundles by stars\n  new             Show recently pushed bundles\n  verified        List structurally verified bundles\n  runtime [query]  Show install/compose/boot evidence\n  experimental    Show the 2Origin plugin lab\n\nOptions:\n  --limit <n>      Limit results (default 20)\n  --json           Emit JSON`)
+    console.log(`dsh-awesome <command> [options]\n\nCommands:\n  search <query>   Search verified bundles\n  trending        Rank verified bundles by stars\n  new             Show recently pushed bundles\n  verified        List structurally verified bundles\n  runtime [query]  Show install/compose/boot evidence\n  risk [signal]    Show static review signals (not certification)\n  experimental    Show the 2Origin plugin lab\n\nOptions:\n  --limit <n>      Limit results (default 20)\n  --json           Emit JSON`)
     break
   default:
     throw new Error(`unknown command: ${command}`)

@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { classifyRepository, extractBundle, replaceGeneratedSection, resolveCategory } from '../scripts/lib.mjs'
+import { classifyRepository, deriveReviewSignals, extractBundle, replaceGeneratedSection, resolveCategory } from '../scripts/lib.mjs'
 import { appendRuntimeReport, sanitizeOutput, tail } from '../scripts/runtime-lib.mjs'
 import { mkdtemp, readFile, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
@@ -30,6 +30,17 @@ test('extractBundle does not verify a missing patch file', () => {
 
 test('extractBundle ignores ordinary packages', () => {
   assert.equal(extractBundle({ name: 'library' }, 'package.json', new Set()), null)
+})
+
+test('static review signals retain evidence source without claiming certification', () => {
+  const bundle = { dependencies: ['@modelcontextprotocol/sdk', 'playwright'] }
+  const signals = deriveReviewSignals(bundle, 'service:\n  command: node\n  token: ${API_TOKEN}')
+  assert.deepEqual(signals, [
+    { id: 'secret-bearing-config', sources: ['patch'] },
+    { id: 'process-execution', sources: ['patch'] },
+    { id: 'network-or-browser', sources: ['dependencies'] },
+    { id: 'mcp-external-tooling', sources: ['dependencies'] }
+  ])
 })
 
 test('classification prefers specialist categories', () => {

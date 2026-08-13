@@ -2,7 +2,7 @@ name: Update plugin radar
 
 on:
   schedule:
-    - cron: '17 3 * * *'
+    - cron: '17 */4 * * *'
   workflow_dispatch:
     inputs:
       limit:
@@ -53,7 +53,7 @@ jobs:
           git commit -m "Update verified DSH plugin radar"
           git push --force-with-lease origin "$RADAR_BRANCH"
           if gh pr view "$RADAR_BRANCH" >/dev/null 2>&1; then
-            gh pr edit "$RADAR_BRANCH" --title "Update verified DSH plugin radar" --body "Automated daily scan of topic-tagged repositories. Every promoted entry has observable dsh.bundle.patch and patch-file evidence. Review candidate removals and large count changes before merging."
+            gh pr edit "$RADAR_BRANCH" --title "Update verified DSH plugin radar" --body "Automated four-hour scan of topic-tagged repositories. Every promoted entry has observable dsh.bundle.patch and patch-file evidence. Static review signals are triage hints, not a security certification. Review candidate removals and large count changes before merging."
           else
-            gh pr create --base main --head "$RADAR_BRANCH" --title "Update verified DSH plugin radar" --body "Automated daily scan of topic-tagged repositories. Every promoted entry has observable dsh.bundle.patch and patch-file evidence. Review candidate removals and large count changes before merging."
+            gh pr create --base main --head "$RADAR_BRANCH" --title "Update verified DSH plugin radar" --body "Automated four-hour scan of topic-tagged repositories. Every promoted entry has observable dsh.bundle.patch and patch-file evidence. Static review signals are triage hints, not a security certification. Review candidate removals and large count changes before merging."
           fi

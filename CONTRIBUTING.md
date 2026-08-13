@@ -45,4 +45,4 @@ npm run generate
 npm run check
 ```
 
-`data/plugins.json` contains structurally verified bundles. `data/candidates.json` contains topic results that did not pass structural verification. `data/runtime-compat.json` contains the separate install/compose/boot evidence. Audited category corrections live in `data/category-overrides.json` and must retain a reason and source. Do not manually promote a candidate by editing generated data.
+`data/plugins.json` contains structurally verified bundles plus static, source-tagged review signals. Those signals are triage hints, never vulnerability findings or certification. `data/candidates.json` contains topic results that did not pass structural verification. `data/runtime-compat.json` contains the separate install/compose/boot evidence. Audited category corrections live in `data/category-overrides.json` and must retain a reason and source. Do not manually promote a candidate by editing generated data.

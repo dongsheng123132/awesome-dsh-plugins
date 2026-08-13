@@ -42,7 +42,8 @@ function labsSection(language) {
     ? '| 项目 | 状态 | 分类 | 要解决的问题 | 证据 |\n|---|---|---|---|---|'
     : '| Project | Status | Category | Problem | Evidence |\n|---|---|---|---|---|'
   const rows = labs.projects.map(project => {
-    const name = project.repo ? `[${project.name}](https://github.com/${project.repo})` : `\`${project.name}\``
+    const repoUrl = project.repo?.startsWith('https://') ? project.repo : project.repo ? `https://github.com/${project.repo}` : null
+    const name = repoUrl ? `[${project.name}](${repoUrl})` : `\`${project.name}\``
     const evidence = project.evidence.length > 0
       ? project.evidence.map(item => `[${item.label}](${item.url})`).join(', ')
       : language === 'zh' ? '尚无' : 'None yet'

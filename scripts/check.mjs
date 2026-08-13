@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { readFile } from 'node:fs/promises'
-import { CATEGORY_LABELS, readJson } from './lib.mjs'
+import { CATEGORY_LABELS, readJson, REVIEW_SIGNAL_LABELS } from './lib.mjs'
 
 const root = new URL('../', import.meta.url)
 const radar = await readJson(new URL('data/plugins.json', root))
@@ -30,6 +30,13 @@ for (const plugin of radar.plugins || []) {
   if (!plugin.verification?.manifestPath) failures.push(`${plugin.repo}: manifest evidence missing`)
   if (!plugin.verification?.patchPath) failures.push(`${plugin.repo}: patch evidence missing`)
   if (!CATEGORY_LABELS[plugin.category]) failures.push(`${plugin.repo}: unknown category ${plugin.category}`)
+  if (!['signals-only', 'unavailable'].includes(plugin.reviewSignals?.status)) failures.push(`${plugin.repo}: invalid review signal status`)
+  for (const signal of plugin.reviewSignals?.signals || []) {
+    if (!REVIEW_SIGNAL_LABELS[signal.id]) failures.push(`${plugin.repo}: unknown review signal ${signal.id}`)
+    if (!Array.isArray(signal.sources) || signal.sources.some(source => !['patch', 'dependencies'].includes(source))) {
+      failures.push(`${plugin.repo}: invalid review signal evidence sources`)
+    }
+  }
   if (plugin.installCommand && !plugin.installCommand.startsWith('dsh plugin --profile ')) {
     failures.push(`${plugin.repo}: invalid install command`)
   }

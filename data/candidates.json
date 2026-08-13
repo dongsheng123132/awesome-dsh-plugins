@@ -1,20 +1,20 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-13T18:32:51.201Z",
+  "generatedAt": "2026-08-13T21:32:46.503Z",
   "candidates": [
     {
       "repo": "deepseek-ai/deepseek-harness",
       "name": "deepseek-harness",
       "url": "https://github.com/deepseek-ai/deepseek-harness",
       "description": "DeepSeek Harness: Everything is a Plugin.",
-      "stars": 36534,
-      "forks": 2819,
+      "stars": 38346,
+      "forks": 3001,
       "license": "MIT",
       "archived": false,
       "treeTruncated": false,
       "defaultBranch": "master",
       "pushedAt": "2026-08-13T13:00:21Z",
-      "updatedAt": "2026-08-13T18:32:48Z",
+      "updatedAt": "2026-08-13T21:32:46Z",
       "topics": [
         "cordis",
         "dsh",
@@ -30,7 +30,88 @@
           "private": false,
           "installTarget": null,
           "description": "The shared dsh core as a profile bundle: every profile's first patch layer, inserting the base plugin rows over the empty profile root",
-          "keywords": []
+          "keywords": [],
+          "dependencies": [
+            "@deepseek-ai/cordis",
+            "@deepseek-ai/cordis-plugin-hmr",
+            "@deepseek-ai/cordis-plugin-timer",
+            "@deepseek-ai/dsh-agent",
+            "@deepseek-ai/dsh-agent-default-model",
+            "@deepseek-ai/dsh-agent-instructions",
+            "@deepseek-ai/dsh-agent-loop",
+            "@deepseek-ai/dsh-api-gateway",
+            "@deepseek-ai/dsh-attachment-local",
+            "@deepseek-ai/dsh-bash-sandbox",
+            "@deepseek-ai/dsh-command-compact",
+            "@deepseek-ai/dsh-command-feedback",
+            "@deepseek-ai/dsh-command-goal",
+            "@deepseek-ai/dsh-commands",
+            "@deepseek-ai/dsh-compaction-basic",
+            "@deepseek-ai/dsh-compaction-tool-result-pruner",
+            "@deepseek-ai/dsh-credentials-local",
+            "@deepseek-ai/dsh-fs-local",
+            "@deepseek-ai/dsh-fs-observation-policy",
+            "@deepseek-ai/dsh-fs-sandbox",
+            "@deepseek-ai/dsh-goal",
+            "@deepseek-ai/dsh-goal-round-driver",
+            "@deepseek-ai/dsh-invariants",
+            "@deepseek-ai/dsh-jobs-local",
+            "@deepseek-ai/dsh-llm",
+            "@deepseek-ai/dsh-llm-deepseek",
+            "@deepseek-ai/dsh-llm-pi-ai",
+            "@deepseek-ai/dsh-llm-retry",
+            "@deepseek-ai/dsh-permission-presets",
+            "@deepseek-ai/dsh-plan-mode",
+            "@deepseek-ai/dsh-pwsh-sandbox",
+            "@deepseek-ai/dsh-repeat-tool-reminder",
+            "@deepseek-ai/dsh-sandbox-local",
+            "@deepseek-ai/dsh-sandbox-policy",
+            "@deepseek-ai/dsh-session",
+            "@deepseek-ai/dsh-session-checkpoint-policy",
+            "@deepseek-ai/dsh-session-persistence-jsonl",
+            "@deepseek-ai/dsh-session-projection",
+            "@deepseek-ai/dsh-session-query-sqlite",
+            "@deepseek-ai/dsh-session-telemetry-otel",
+            "@deepseek-ai/dsh-session-title",
+            "@deepseek-ai/dsh-session-title-first-prompt-llm",
+            "@deepseek-ai/dsh-settings-file",
+            "@deepseek-ai/dsh-shell-env",
+            "@deepseek-ai/dsh-skill",
+            "@deepseek-ai/dsh-skill-badge",
+            "@deepseek-ai/dsh-skill-filesystem",
+            "@deepseek-ai/dsh-spill-local",
+            "@deepseek-ai/dsh-spill-policy",
+            "@deepseek-ai/dsh-subagent",
+            "@deepseek-ai/dsh-subagent-fork-in-process",
+            "@deepseek-ai/dsh-subagent-spawn-in-process",
+            "@deepseek-ai/dsh-subprocess-local",
+            "@deepseek-ai/dsh-system-prompt",
+            "@deepseek-ai/dsh-token-meter",
+            "@deepseek-ai/dsh-tool-bash",
+            "@deepseek-ai/dsh-tool-call-timeout-policy",
+            "@deepseek-ai/dsh-tool-fs",
+            "@deepseek-ai/dsh-tool-fs-search",
+            "@deepseek-ai/dsh-tool-goal",
+            "@deepseek-ai/dsh-tool-jobs",
+            "@deepseek-ai/dsh-tool-pwsh",
+            "@deepseek-ai/dsh-tool-ralph",
+            "@deepseek-ai/dsh-tool-skill",
+            "@deepseek-ai/dsh-tool-str-replace-editor",
+            "@deepseek-ai/dsh-tool-subagent",
+            "@deepseek-ai/dsh-tool-subagent-control",
+            "@deepseek-ai/dsh-tool-subagent-report",
+            "@deepseek-ai/dsh-tool-todo",
+            "@deepseek-ai/dsh-tool-web",
+            "@deepseek-ai/dsh-tool-workflow",
+            "@deepseek-ai/dsh-tools",
+            "@deepseek-ai/dsh-typert-loader",
+            "@deepseek-ai/dsh-typert-registry",
+            "@deepseek-ai/dsh-user-approval",
+            "@deepseek-ai/dsh-user-questions",
+            "@deepseek-ai/dsh-web",
+            "@deepseek-ai/dsh-web-search-deepseek",
+            "@deepseek-ai/dsh-workflow-worker-thread"
+          ]
         },
         {
           "manifestPath": "packages/bundle/headless/package.json",
@@ -41,7 +122,20 @@
           "private": false,
           "installTarget": null,
           "description": "The dsh one-shot bundle: a direct core Agent/Session runner over dsh-base with no Host, HTTP, or browser layer",
-          "keywords": []
+          "keywords": [],
+          "dependencies": [
+            "@deepseek-ai/cordis",
+            "@deepseek-ai/cordis-plugin-loader",
+            "@deepseek-ai/dsh-agent",
+            "@deepseek-ai/dsh-agent-default-model",
+            "@deepseek-ai/dsh-cmdline",
+            "@deepseek-ai/dsh-code-runtime-worker-thread",
+            "@deepseek-ai/dsh-invariants",
+            "@deepseek-ai/dsh-llm",
+            "@deepseek-ai/dsh-session",
+            "@deepseek-ai/schemastery",
+            "commander"
+          ]
         },
         {
           "manifestPath": "packages/bundle/web-app/package.json",
@@ -52,10 +146,76 @@
           "private": false,
           "installTarget": null,
           "description": "The dsh browser-surface bundle: the web patch layer over dsh-base plus the runtime glue plugin (frontend dist serving, web-surface prompt, bash runtime variables, URL line)",
-          "keywords": []
+          "keywords": [],
+          "dependencies": [
+            "@deepseek-ai/cordis",
+            "@deepseek-ai/cordis-plugin-loader",
+            "@deepseek-ai/dsh-agent-presets",
+            "@deepseek-ai/dsh-api-remotes",
+            "@deepseek-ai/dsh-app-boot",
+            "@deepseek-ai/dsh-client-connection",
+            "@deepseek-ai/dsh-client-hmr",
+            "@deepseek-ai/dsh-client-locale",
+            "@deepseek-ai/dsh-client-modules",
+            "@deepseek-ai/dsh-client-runtime",
+            "@deepseek-ai/dsh-client-ui-agent-preset",
+            "@deepseek-ai/dsh-client-ui-commands",
+            "@deepseek-ai/dsh-client-ui-conversation",
+            "@deepseek-ai/dsh-client-ui-cordis",
+            "@deepseek-ai/dsh-client-ui-deliverables",
+            "@deepseek-ai/dsh-client-ui-directory-picker-browse",
+            "@deepseek-ai/dsh-client-ui-directory-picker-native",
+            "@deepseek-ai/dsh-client-ui-goal",
+            "@deepseek-ai/dsh-client-ui-input-trigger",
+            "@deepseek-ai/dsh-client-ui-jobs",
+            "@deepseek-ai/dsh-client-ui-layout",
+            "@deepseek-ai/dsh-client-ui-message-feedback",
+            "@deepseek-ai/dsh-client-ui-model-selection",
+            "@deepseek-ai/dsh-client-ui-permission-presets",
+            "@deepseek-ai/dsh-client-ui-plan",
+            "@deepseek-ai/dsh-client-ui-settings",
+            "@deepseek-ai/dsh-client-ui-settings-general",
+            "@deepseek-ai/dsh-client-ui-settings-models",
+            "@deepseek-ai/dsh-client-ui-settings-plugin-inventory",
+            "@deepseek-ai/dsh-client-ui-settings-plugins",
+            "@deepseek-ai/dsh-client-ui-sidebar",
+            "@deepseek-ai/dsh-client-ui-skill",
+            "@deepseek-ai/dsh-client-ui-subagent",
+            "@deepseek-ai/dsh-client-ui-theme",
+            "@deepseek-ai/dsh-client-ui-tool",
+            "@deepseek-ai/dsh-client-ui-trajectory",
+            "@deepseek-ai/dsh-client-ui-user-questions",
+            "@deepseek-ai/dsh-client-ui-workflow-run",
+            "@deepseek-ai/dsh-client-ui-workspace",
+            "@deepseek-ai/dsh-cmdline",
+            "@deepseek-ai/dsh-code-runtime-worker-thread",
+            "@deepseek-ai/dsh-cordis-client-runner",
+            "@deepseek-ai/dsh-cordis-host-runner",
+            "@deepseek-ai/dsh-host-apiproxy",
+            "@deepseek-ai/dsh-host-directory-picker-auto",
+            "@deepseek-ai/dsh-host-directory-picker-browse",
+            "@deepseek-ai/dsh-host-directory-picker-native",
+            "@deepseek-ai/dsh-host-frontend-static",
+            "@deepseek-ai/dsh-host-plugin-inventory",
+            "@deepseek-ai/dsh-host-webserver",
+            "@deepseek-ai/dsh-invariants",
+            "@deepseek-ai/dsh-message-feedback",
+            "@deepseek-ai/dsh-session-log-export",
+            "@deepseek-ai/dsh-session-projection-cache",
+            "@deepseek-ai/dsh-session-stats",
+            "@deepseek-ai/dsh-shell-env",
+            "@deepseek-ai/dsh-storage",
+            "@deepseek-ai/dsh-storage-domain",
+            "@deepseek-ai/dsh-storage-json",
+            "@deepseek-ai/dsh-system-prompt",
+            "@deepseek-ai/dsh-web-frontend",
+            "@deepseek-ai/dsh-workspace",
+            "@deepseek-ai/schemastery",
+            "commander"
+          ]
         }
       ],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "official-harness-source"
     },
     {
@@ -63,14 +223,14 @@
       "name": "colleague-skill",
       "url": "https://github.com/titanwings/colleague-skill",
       "description": "将冰冷的离别化为温暖的 Skill，欢迎加入数字生命1.0！Transforming cold farewells into warm skills? It's giving rebirth era. Welcome to Digital Life 1.0. 🫶",
-      "stars": 21033,
+      "stars": 21061,
       "forks": 2033,
       "license": "MIT",
       "archived": false,
       "treeTruncated": false,
       "defaultBranch": "dot-skill",
       "pushedAt": "2026-08-13T15:00:28Z",
-      "updatedAt": "2026-08-13T18:32:30Z",
+      "updatedAt": "2026-08-13T21:28:13Z",
       "topics": [
         "agent-skills",
         "ai-agent",
@@ -85,23 +245,24 @@
         "skill-generator"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
       "repo": "Devin-AXIS/iPolloWork",
       "name": "iPolloWork",
       "url": "https://github.com/Devin-AXIS/iPolloWork",
-      "description": "A next-generation, source-available AI workspace with a self-evolving agent runtime for editable code, design, presentations, websites, and video—a Codex alternative with DeepSeek Harness subagent collaboration.",
-      "stars": 3532,
-      "forks": 772,
+      "description": "A next-generation, source-available AI workspace with a self-evolving agent runtime for editable code, design, presentations, websites, and video—a Codex alternative that integrates DeepSeek Harness for subagent delegation, combining iPolloWork’s complete AI workbench with DSH’s specialized agents and both plugin ecosystems in one workflow.",
+      "stars": 3562,
+      "forks": 774,
       "license": "NOASSERTION",
       "archived": false,
       "treeTruncated": false,
       "defaultBranch": "main",
-      "pushedAt": "2026-08-13T18:18:22Z",
-      "updatedAt": "2026-08-13T18:30:33Z",
+      "pushedAt": "2026-08-13T20:15:08Z",
+      "updatedAt": "2026-08-13T21:31:43Z",
       "topics": [
+        "agent-collaboration",
         "agent-skills",
         "ai-agents",
         "ai-work",
@@ -109,14 +270,16 @@
         "codex",
         "deepseek-harness",
         "dsh-plugin",
+        "enterprise-agent-workspace",
         "hermes-agent",
         "openclaw",
         "opencode",
+        "opencode-plugin",
         "self-evolving-ai",
         "visual-editor"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -124,14 +287,14 @@
       "name": "OpenBiliClaw",
       "url": "https://github.com/whiteguo233/OpenBiliClaw",
       "description": "本地私有、开源的跨平台 AI 内容发现 Agent：先理解你，再主动从 B站、小红书、抖音、YouTube、X、知乎、Reddit、微博等平台与开放 Web 寻找内容。 | Local-first open-source cross-platform AI content discovery agent: understands you, then proactively finds content across Bilibili, Xiaohongshu, Douyin, YouTube, X, Zhihu, Reddit, Weibo and the open web.",
-      "stars": 1902,
-      "forks": 106,
+      "stars": 1927,
+      "forks": 107,
       "license": "MIT",
       "archived": false,
       "treeTruncated": false,
       "defaultBranch": "main",
-      "pushedAt": "2026-08-13T13:43:01Z",
-      "updatedAt": "2026-08-13T18:25:50Z",
+      "pushedAt": "2026-08-13T19:06:47Z",
+      "updatedAt": "2026-08-13T21:31:52Z",
       "topics": [
         "ai-agent",
         "bilibili",
@@ -155,7 +318,7 @@
         "zhihu"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -163,14 +326,14 @@
       "name": "deeptide",
       "url": "https://github.com/paean-ai/deeptide",
       "description": "Built by DeepSeek, for DeepSeek — a Swift-native macOS coding agent",
-      "stars": 1013,
+      "stars": 1015,
       "forks": 133,
       "license": "MIT",
       "archived": false,
       "treeTruncated": false,
       "defaultBranch": "main",
       "pushedAt": "2026-07-08T09:37:30Z",
-      "updatedAt": "2026-08-13T17:14:46Z",
+      "updatedAt": "2026-08-13T21:17:21Z",
       "topics": [
         "coding-agent",
         "deepseek",
@@ -180,7 +343,7 @@
         "swift"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -188,44 +351,20 @@
       "name": "mobius",
       "url": "https://github.com/nutshellai-tech/mobius",
       "description": "The first self-evolving open-source Agent OS, connecting your team, AI agents, devices, and compute",
-      "stars": 913,
+      "stars": 915,
       "forks": 20,
       "license": "NOASSERTION",
       "archived": false,
       "treeTruncated": false,
       "defaultBranch": "main",
       "pushedAt": "2026-08-13T12:12:15Z",
-      "updatedAt": "2026-08-13T18:14:41Z",
+      "updatedAt": "2026-08-13T21:24:18Z",
       "topics": [
         "dsh-plugin",
         "dsh-plugins"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
-      "reason": "no-dsh-bundle-manifest"
-    },
-    {
-      "repo": "yejiming/MuseAI",
-      "name": "MuseAI",
-      "url": "https://github.com/yejiming/MuseAI",
-      "description": "创建你的 AI 角色，进入你的故事世界。和角色聊天、冒险、穿书，让每一次互动都留下羁绊",
-      "stars": 516,
-      "forks": 45,
-      "license": null,
-      "archived": false,
-      "treeTruncated": false,
-      "defaultBranch": "main",
-      "pushedAt": "2026-08-09T06:15:21Z",
-      "updatedAt": "2026-08-13T18:26:37Z",
-      "topics": [
-        "agent",
-        "ai",
-        "companion-ai",
-        "dsh",
-        "dsh-plugin"
-      ],
-      "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -233,14 +372,14 @@
       "name": "agent-vision-toolkit",
       "url": "https://github.com/Anionex/agent-vision-toolkit",
       "description": "为纯文本模型\"看图“设计更好的视觉工具箱和技能，支持多图理解，图片问答，前端UI还原、GUI 自动化等，并可选无缝接入多个主流agent，直接识别粘贴图片｜ A vision toolkit and skill designed for text-only llms — image Q&A, long-screenshot OCR, frontend UI restoration, and GUI automation, with optional seamless integration for Codex, Claude Code, Pi, Oh My Pi, and OpenCode",
-      "stars": 507,
+      "stars": 522,
       "forks": 22,
       "license": "MIT",
       "archived": false,
       "treeTruncated": false,
       "defaultBranch": "main",
       "pushedAt": "2026-08-13T18:30:45Z",
-      "updatedAt": "2026-08-13T18:30:55Z",
+      "updatedAt": "2026-08-13T21:23:34Z",
       "topics": [
         "agent",
         "agent-skills",
@@ -261,7 +400,51 @@
         "vision-language-model"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
+      "reason": "no-dsh-bundle-manifest"
+    },
+    {
+      "repo": "yejiming/MuseAI",
+      "name": "MuseAI",
+      "url": "https://github.com/yejiming/MuseAI",
+      "description": "创建你的 AI 角色，进入你的故事世界。和角色聊天、冒险、穿书，让每一次互动都留下羁绊",
+      "stars": 520,
+      "forks": 45,
+      "license": null,
+      "archived": false,
+      "treeTruncated": false,
+      "defaultBranch": "main",
+      "pushedAt": "2026-08-09T06:15:21Z",
+      "updatedAt": "2026-08-13T20:45:14Z",
+      "topics": [
+        "agent",
+        "ai",
+        "companion-ai",
+        "dsh",
+        "dsh-plugin"
+      ],
+      "manifests": [],
+      "checkedAt": "2026-08-13T21:32:46.503Z",
+      "reason": "no-dsh-bundle-manifest"
+    },
+    {
+      "repo": "AdamPlatin123/awesome-dsh-plugins",
+      "name": "awesome-dsh-plugins",
+      "url": "https://github.com/AdamPlatin123/awesome-dsh-plugins",
+      "description": "前部索引仓库（Radar）：自动扫描发现的所有 dsh 插件候选；经测试合格的将移入后序精选目录仓库",
+      "stars": 297,
+      "forks": 19,
+      "license": "MIT",
+      "archived": false,
+      "treeTruncated": false,
+      "defaultBranch": "main",
+      "pushedAt": "2026-08-13T20:46:33Z",
+      "updatedAt": "2026-08-13T21:27:33Z",
+      "topics": [
+        "dsh-plugin"
+      ],
+      "manifests": [],
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -288,27 +471,7 @@
         "performance-tuning"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
-      "reason": "no-dsh-bundle-manifest"
-    },
-    {
-      "repo": "AdamPlatin123/awesome-dsh-plugins",
-      "name": "awesome-dsh-plugins",
-      "url": "https://github.com/AdamPlatin123/awesome-dsh-plugins",
-      "description": "✨ Awesome DSH Plugins — DeepSeek Harness plugin directory with daily compatibility tracking ｜ DeepSeek Harness 插件生态目录与每日兼容性追踪",
-      "stars": 279,
-      "forks": 13,
-      "license": "MIT",
-      "archived": false,
-      "treeTruncated": false,
-      "defaultBranch": "main",
-      "pushedAt": "2026-08-13T18:10:25Z",
-      "updatedAt": "2026-08-13T18:28:25Z",
-      "topics": [
-        "dsh-plugin"
-      ],
-      "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -316,14 +479,14 @@
       "name": "Abu-Cowork",
       "url": "https://github.com/PM-Shawn/Abu-Cowork",
       "description": "Open-source alternative to Claude Cowork — a local-first AI agent desktop app · multi-model · self-evolving skills · privacy-first",
-      "stars": 279,
+      "stars": 281,
       "forks": 72,
       "license": "NOASSERTION",
       "archived": false,
       "treeTruncated": false,
       "defaultBranch": "main",
-      "pushedAt": "2026-08-13T18:08:07Z",
-      "updatedAt": "2026-08-13T16:37:56Z",
+      "pushedAt": "2026-08-13T20:41:06Z",
+      "updatedAt": "2026-08-13T21:16:20Z",
       "topics": [
         "ai-agent",
         "ai-assistant",
@@ -341,7 +504,7 @@
         "typescript"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -349,14 +512,14 @@
       "name": "claude-paper",
       "url": "https://github.com/alaliqing/claude-paper",
       "description": "📚 Claude Code plugin that automates research papers study with automatic material generation, code demonstrations, and interactive web viewer.",
-      "stars": 272,
+      "stars": 273,
       "forks": 23,
       "license": "MIT",
       "archived": false,
       "treeTruncated": false,
       "defaultBranch": "main",
       "pushedAt": "2026-04-03T09:22:22Z",
-      "updatedAt": "2026-08-13T18:08:48Z",
+      "updatedAt": "2026-08-13T21:19:59Z",
       "topics": [
         "academic-tools",
         "claude-code",
@@ -369,7 +532,7 @@
         "web-viewer"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -377,14 +540,14 @@
       "name": "axern",
       "url": "https://github.com/cofy-x/axern",
       "description": "Open-source sandboxes for AI agents, untrusted code execution, and durable services.",
-      "stars": 245,
+      "stars": 249,
       "forks": 6,
       "license": "Apache-2.0",
       "archived": false,
       "treeTruncated": false,
       "defaultBranch": "main",
       "pushedAt": "2026-08-13T10:11:11Z",
-      "updatedAt": "2026-08-13T16:45:55Z",
+      "updatedAt": "2026-08-13T21:04:46Z",
       "topics": [
         "agent-sandbox",
         "agentic-infrastructure",
@@ -400,7 +563,7 @@
         "self-hosted"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -431,7 +594,7 @@
         "statistical-analysis"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -470,7 +633,7 @@
         "self-hosted-agents"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -478,14 +641,14 @@
       "name": "rea",
       "url": "https://github.com/morluto/rea",
       "description": "Reverse engineer anything with agents, from app behavior down to native binaries.",
-      "stars": 170,
+      "stars": 202,
       "forks": 21,
       "license": "MIT",
       "archived": false,
       "treeTruncated": false,
       "defaultBranch": "main",
       "pushedAt": "2026-08-11T10:36:04Z",
-      "updatedAt": "2026-08-13T18:24:39Z",
+      "updatedAt": "2026-08-13T21:31:40Z",
       "topics": [
         "agent-skills",
         "ai-agent-tools",
@@ -508,7 +671,7 @@
         "static-analysis"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -516,14 +679,14 @@
       "name": "awesome-deepseek-harness",
       "url": "https://github.com/0xsline/awesome-deepseek-harness",
       "description": "DeepSeek Harness (DSH) ecosystem: curated plugins, tools, and infrastructure from dsh-external/hub and the public dsh-plugin topic.",
-      "stars": 127,
-      "forks": 19,
+      "stars": 138,
+      "forks": 24,
       "license": "CC0-1.0",
       "archived": false,
       "treeTruncated": false,
       "defaultBranch": "main",
-      "pushedAt": "2026-08-13T18:22:37Z",
-      "updatedAt": "2026-08-13T18:31:14Z",
+      "pushedAt": "2026-08-13T20:31:28Z",
+      "updatedAt": "2026-08-13T21:25:50Z",
       "topics": [
         "agent",
         "ai",
@@ -545,7 +708,7 @@
         "plugins"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -553,14 +716,14 @@
       "name": "awesome-dsh-plugin",
       "url": "https://github.com/awesome-dsh-plugin/awesome-dsh-plugin",
       "description": "A curated list of plugins for DeepSeek Harness (dsh) · DeepSeek Harness 插件精选列表",
-      "stars": 89,
-      "forks": 11,
+      "stars": 109,
+      "forks": 15,
       "license": "CC0-1.0",
       "archived": false,
       "treeTruncated": false,
       "defaultBranch": "main",
-      "pushedAt": "2026-08-13T18:20:28Z",
-      "updatedAt": "2026-08-13T18:30:20Z",
+      "pushedAt": "2026-08-13T19:30:38Z",
+      "updatedAt": "2026-08-13T21:24:47Z",
       "topics": [
         "awesome",
         "awesome-list",
@@ -569,7 +732,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -577,14 +740,14 @@
       "name": "phi",
       "url": "https://github.com/pulseaiclub/phi",
       "description": "a coding Agent from pi. sub-agents, hashline edits, and a permission gate",
-      "stars": 70,
+      "stars": 72,
       "forks": 4,
       "license": "MIT",
       "archived": false,
       "treeTruncated": false,
       "defaultBranch": "main",
       "pushedAt": "2026-08-13T09:58:12Z",
-      "updatedAt": "2026-08-13T16:38:09Z",
+      "updatedAt": "2026-08-13T21:01:49Z",
       "topics": [
         "ai",
         "ai-agent",
@@ -598,7 +761,46 @@
         "tui"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
+      "reason": "no-dsh-bundle-manifest"
+    },
+    {
+      "repo": "liustack/modsearch",
+      "name": "modsearch",
+      "url": "https://github.com/liustack/modsearch",
+      "description": "The web plugin for DeepSeek Harness, and the search bridge for every text-only coding agent. Ask the web or X, get structured JSON evidence (search, fetch, citations).",
+      "stars": 65,
+      "forks": 3,
+      "license": "MIT",
+      "archived": false,
+      "treeTruncated": false,
+      "defaultBranch": "main",
+      "pushedAt": "2026-08-12T11:53:56Z",
+      "updatedAt": "2026-08-13T20:30:28Z",
+      "topics": [
+        "agent-skills",
+        "agentic-workflow",
+        "claude-code",
+        "claude-skills",
+        "codex",
+        "cordis",
+        "deepseek",
+        "deepseek-harness",
+        "dsh-plugin",
+        "glm",
+        "harness",
+        "harness-engineering",
+        "hermes-agent",
+        "openclaw",
+        "opencode",
+        "pi-agent",
+        "text-only-llm",
+        "web-fetch",
+        "web-search",
+        "x-twitter"
+      ],
+      "manifests": [],
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -606,14 +808,14 @@
       "name": "oh-dsh",
       "url": "https://github.com/hust-open-atom-club/oh-dsh",
       "description": "一站式 DeepSeek Harness 社区发行版：TUI、桌面端与 Web UI 三种形态统一体验，支持分层安装、一步到位，免去手工整合打包。",
-      "stars": 62,
+      "stars": 63,
       "forks": 9,
       "license": "BSD-3-Clause",
       "archived": false,
       "treeTruncated": false,
       "defaultBranch": "main",
-      "pushedAt": "2026-08-13T18:31:37Z",
-      "updatedAt": "2026-08-13T18:26:07Z",
+      "pushedAt": "2026-08-13T21:08:39Z",
+      "updatedAt": "2026-08-13T21:20:27Z",
       "topics": [
         "ai-agent",
         "cordis",
@@ -630,10 +832,11 @@
           "private": true,
           "installTarget": "github:hust-open-atom-club/oh-dsh",
           "description": "An extensible DeepSeek Harness plugin collection and Electron desktop distribution",
-          "keywords": []
+          "keywords": [],
+          "dependencies": []
         }
       ],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "bundle-patch-missing"
     },
     {
@@ -647,13 +850,13 @@
       "archived": false,
       "treeTruncated": false,
       "defaultBranch": "main",
-      "pushedAt": "2026-08-13T18:19:58Z",
-      "updatedAt": "2026-08-13T18:21:57Z",
+      "pushedAt": "2026-08-13T18:44:52Z",
+      "updatedAt": "2026-08-13T18:41:06Z",
       "topics": [
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -661,14 +864,14 @@
       "name": "jacobian",
       "url": "https://github.com/morluto/jacobian",
       "description": "Pure mathematics for agents: search for examples and counterexamples, compute exactly, and independently check what a result proves.",
-      "stars": 37,
+      "stars": 38,
       "forks": 5,
       "license": "MIT",
       "archived": false,
       "treeTruncated": false,
       "defaultBranch": "main",
-      "pushedAt": "2026-08-13T18:32:39Z",
-      "updatedAt": "2026-08-13T18:32:41Z",
+      "pushedAt": "2026-08-13T21:23:04Z",
+      "updatedAt": "2026-08-13T20:58:01Z",
       "topics": [
         "ai-agents",
         "automated-theorem-proving",
@@ -692,7 +895,7 @@
         "z3"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -701,18 +904,18 @@
       "url": "https://github.com/Alex-Yanggg/awesome-DSH-plugin",
       "description": "A meticulously curated list of useful plugins, extensions, tools and development resources built for DSH, covering productivity enhancement, functional expansion, debugging utilities and custom development modules.",
       "stars": 30,
-      "forks": 11,
+      "forks": 14,
       "license": "MIT",
       "archived": false,
       "treeTruncated": false,
       "defaultBranch": "main",
       "pushedAt": "2026-08-13T13:50:18Z",
-      "updatedAt": "2026-08-13T16:38:22Z",
+      "updatedAt": "2026-08-13T19:08:31Z",
       "topics": [
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -751,7 +954,7 @@
         "runtime-analysis"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -759,19 +962,19 @@
       "name": "dsh-find-plugins",
       "url": "https://github.com/Nagi-ovo/dsh-find-plugins",
       "description": null,
-      "stars": 29,
+      "stars": 30,
       "forks": 0,
       "license": null,
       "archived": false,
       "treeTruncated": false,
       "defaultBranch": "main",
       "pushedAt": "2026-08-13T14:29:38Z",
-      "updatedAt": "2026-08-13T18:31:11Z",
+      "updatedAt": "2026-08-13T19:54:52Z",
       "topics": [
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -796,7 +999,7 @@
         "obsidian"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -820,7 +1023,31 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
+      "reason": "no-dsh-bundle-manifest"
+    },
+    {
+      "repo": "LaplaceYoung/oh-my-dsh",
+      "name": "oh-my-dsh",
+      "url": "https://github.com/LaplaceYoung/oh-my-dsh",
+      "description": "oh-my-dsh：面向 DSH (DeepSeek Harness) 的插件生态——700+ 插件，只通过扩展接缝注册，不修改 agent-loop 骨架",
+      "stars": 24,
+      "forks": 0,
+      "license": null,
+      "archived": false,
+      "treeTruncated": false,
+      "defaultBranch": "main",
+      "pushedAt": "2026-08-13T13:04:56Z",
+      "updatedAt": "2026-08-13T19:48:27Z",
+      "topics": [
+        "agent",
+        "deepseek-harness",
+        "dsh-ecosystem",
+        "dsh-plugin",
+        "oh-my-dsh"
+      ],
+      "manifests": [],
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -848,7 +1075,7 @@
         "specification"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -856,45 +1083,69 @@
       "name": "browser-bridge",
       "url": "https://github.com/hanelalo/browser-bridge",
       "description": "让你的agent真的像你一样操控你的浏览器窗口",
-      "stars": 22,
+      "stars": 23,
       "forks": 4,
       "license": null,
       "archived": false,
       "treeTruncated": false,
       "defaultBranch": "main",
       "pushedAt": "2026-08-10T13:37:41Z",
-      "updatedAt": "2026-08-13T17:14:50Z",
+      "updatedAt": "2026-08-13T19:10:20Z",
       "topics": [
         "dsh",
         "dsh-plugin",
         "mcp"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
-      "repo": "LaplaceYoung/oh-my-dsh",
-      "name": "oh-my-dsh",
-      "url": "https://github.com/LaplaceYoung/oh-my-dsh",
-      "description": "oh-my-dsh：面向 DSH (DeepSeek Harness) 的插件生态——700+ 插件，只通过扩展接缝注册，不修改 agent-loop 骨架",
+      "repo": "Ruler4396/dsh-launcher",
+      "name": "dsh-launcher",
+      "url": "https://github.com/Ruler4396/dsh-launcher",
+      "description": "Lightweight Windows launcher for DeepSeek Harness: silent autostart at logon + a minimal WebView2 window instead of a full browser",
       "stars": 21,
       "forks": 0,
-      "license": null,
+      "license": "MIT",
+      "archived": false,
+      "treeTruncated": false,
+      "defaultBranch": "master",
+      "pushedAt": "2026-08-13T18:17:38Z",
+      "updatedAt": "2026-08-13T20:07:35Z",
+      "topics": [
+        "deepseek-harness",
+        "dsh-plugin",
+        "launcher",
+        "webview2",
+        "windows"
+      ],
+      "manifests": [],
+      "checkedAt": "2026-08-13T21:32:46.503Z",
+      "reason": "no-dsh-bundle-manifest"
+    },
+    {
+      "repo": "bruc3van/awesome-dsh-plugin",
+      "name": "awesome-dsh-plugin",
+      "url": "https://github.com/bruc3van/awesome-dsh-plugin",
+      "description": "用 30 秒找到适合你的 DeepSeek Harness 插件。 不只是仓库列表：这里告诉你插件解决什么问题、适合谁，以及从哪里开始。",
+      "stars": 20,
+      "forks": 3,
+      "license": "MIT",
       "archived": false,
       "treeTruncated": false,
       "defaultBranch": "main",
-      "pushedAt": "2026-08-13T13:04:56Z",
-      "updatedAt": "2026-08-13T16:52:40Z",
+      "pushedAt": "2026-08-13T17:56:53Z",
+      "updatedAt": "2026-08-13T20:17:03Z",
       "topics": [
-        "agent",
+        "awesome-list",
         "deepseek-harness",
-        "dsh-ecosystem",
+        "dsh",
         "dsh-plugin",
-        "oh-my-dsh"
+        "plugins"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -926,55 +1177,28 @@
         "tutorial"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
-      "repo": "bruc3van/awesome-dsh-plugin",
-      "name": "awesome-dsh-plugin",
-      "url": "https://github.com/bruc3van/awesome-dsh-plugin",
-      "description": "用 30 秒找到适合你的 DeepSeek Harness 插件。 不只是仓库列表：这里告诉你插件解决什么问题、适合谁，以及从哪里开始。",
-      "stars": 18,
-      "forks": 2,
-      "license": "MIT",
+      "repo": "lhh010/dsh-ui-whale",
+      "name": "dsh-ui-whale",
+      "url": "https://github.com/lhh010/dsh-ui-whale",
+      "description": "【求⭐】🐋DSH Web UI 全手绘像素鲸鱼伙伴插件：会话标题栏常驻，平时眨眼/偶尔摆尾/动胸鳍，思考运行时持续动起来，回合完成头顶喷水，点击还会冒爱心，不工作时还会偷懒睡觉，零核心改动。 【喜欢的话就点点star⭐吧~】",
+      "stars": 16,
+      "forks": 0,
+      "license": "BSD-3-Clause",
       "archived": false,
       "treeTruncated": false,
       "defaultBranch": "main",
-      "pushedAt": "2026-08-13T17:56:53Z",
-      "updatedAt": "2026-08-13T17:56:59Z",
+      "pushedAt": "2026-08-13T13:53:58Z",
+      "updatedAt": "2026-08-13T18:37:09Z",
       "topics": [
-        "awesome-list",
-        "deepseek-harness",
         "dsh",
-        "dsh-plugin",
-        "plugins"
+        "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
-      "reason": "no-dsh-bundle-manifest"
-    },
-    {
-      "repo": "Ruler4396/dsh-launcher",
-      "name": "dsh-launcher",
-      "url": "https://github.com/Ruler4396/dsh-launcher",
-      "description": "Lightweight Windows launcher for DeepSeek Harness: silent autostart at logon + a minimal WebView2 window instead of a full browser",
-      "stars": 18,
-      "forks": 0,
-      "license": "MIT",
-      "archived": false,
-      "treeTruncated": false,
-      "defaultBranch": "master",
-      "pushedAt": "2026-08-13T18:17:38Z",
-      "updatedAt": "2026-08-13T18:31:56Z",
-      "topics": [
-        "deepseek-harness",
-        "dsh-plugin",
-        "launcher",
-        "webview2",
-        "windows"
-      ],
-      "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -1012,7 +1236,7 @@
         "python"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -1023,28 +1247,7 @@
       "stars": 15,
       "reason": "scan-error",
       "error": "GitHub 409 for https://api.github.com/repos/huiliyi37/dsh-tianshu-build/git/trees/main?recursive=1: {\"message\":\"Git Repository is empty.\",\"documentation_url\":\"https://docs.github.com/rest/git/trees#get-a-tree\",\"status\":\"409\"}",
-      "checkedAt": "2026-08-13T18:32:51.201Z"
-    },
-    {
-      "repo": "lhh010/dsh-ui-whale",
-      "name": "dsh-ui-whale",
-      "url": "https://github.com/lhh010/dsh-ui-whale",
-      "description": "【求⭐】🐋DSH Web UI 全手绘像素鲸鱼伙伴插件：会话标题栏常驻，平时眨眼/偶尔摆尾/动胸鳍，思考运行时持续动起来，回合完成头顶喷水，点击还会冒爱心，不工作时还会偷懒睡觉，零核心改动。 【喜欢的话就点点star⭐吧~】",
-      "stars": 15,
-      "forks": 0,
-      "license": "BSD-3-Clause",
-      "archived": false,
-      "treeTruncated": false,
-      "defaultBranch": "main",
-      "pushedAt": "2026-08-13T13:53:58Z",
-      "updatedAt": "2026-08-13T17:52:52Z",
-      "topics": [
-        "dsh",
-        "dsh-plugin"
-      ],
-      "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
-      "reason": "no-dsh-bundle-manifest"
+      "checkedAt": "2026-08-13T21:32:46.503Z"
     },
     {
       "repo": "morluto/leantoken",
@@ -1082,7 +1285,7 @@
         "tree-sitter"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -1090,21 +1293,21 @@
       "name": "dsh-memory-evolve",
       "url": "https://github.com/csyangwen/dsh-memory-evolve",
       "description": "为 DeepSeek Harness 带来「跨会话长期记忆 + 后台自我进化」能力的纯插件实现：五轨记忆 · git 分支感知 · 回合内自我审查 · 技能自我进化与技能管理器 · 四轨待办 · COI 调度 · 会话广播 · 会话搜索 · 提示词管理器 · 临时信息便签——零核心修改、零运行时依赖，随装随用、卸载即净。",
-      "stars": 13,
+      "stars": 14,
       "forks": 0,
       "license": "MIT",
       "archived": false,
       "treeTruncated": false,
       "defaultBranch": "main",
       "pushedAt": "2026-08-13T13:51:07Z",
-      "updatedAt": "2026-08-13T18:03:15Z",
+      "updatedAt": "2026-08-13T19:17:37Z",
       "topics": [
         "deepseek-harness",
         "dsh",
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -1126,7 +1329,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -1147,7 +1350,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -1169,7 +1372,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -1193,7 +1396,7 @@
         "skill"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -1207,8 +1410,8 @@
       "archived": false,
       "treeTruncated": false,
       "defaultBranch": "main",
-      "pushedAt": "2026-08-13T17:24:32Z",
-      "updatedAt": "2026-08-13T17:37:11Z",
+      "pushedAt": "2026-08-13T19:06:56Z",
+      "updatedAt": "2026-08-13T19:07:03Z",
       "topics": [
         "agent-bridge",
         "deepseek-harness",
@@ -1217,7 +1420,7 @@
         "openbiliclaw"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -1225,14 +1428,14 @@
       "name": "dsh-web-review",
       "url": "https://github.com/CanglongCl/dsh-web-review",
       "description": "DeepSeek Harness Web GUI 的网页预览与元素批注插件，让 AI 根据可视化反馈直接修改前端源码。",
-      "stars": 6,
+      "stars": 7,
       "forks": 0,
       "license": null,
       "archived": false,
       "treeTruncated": false,
       "defaultBranch": "main",
       "pushedAt": "2026-08-13T17:16:50Z",
-      "updatedAt": "2026-08-13T17:17:43Z",
+      "updatedAt": "2026-08-13T19:06:01Z",
       "topics": [
         "ai-agents",
         "dsh",
@@ -1240,7 +1443,7 @@
         "human-in-the-loop"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -1262,7 +1465,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -1283,7 +1486,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -1320,7 +1523,7 @@
         "subagents"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -1359,7 +1562,33 @@
         "vibe-coding"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
+      "reason": "no-dsh-bundle-manifest"
+    },
+    {
+      "repo": "wess09/DeepSeekHarnessDesktop",
+      "name": "DeepSeekHarnessDesktop",
+      "url": "https://github.com/wess09/DeepSeekHarnessDesktop",
+      "description": "DeepSeekHarness桌面端打包",
+      "stars": 5,
+      "forks": 0,
+      "license": "MIT",
+      "archived": false,
+      "treeTruncated": false,
+      "defaultBranch": "main",
+      "pushedAt": "2026-08-13T18:00:38Z",
+      "updatedAt": "2026-08-13T18:41:20Z",
+      "topics": [
+        "deepseekharnessdesktop",
+        "desktop",
+        "desktop-app",
+        "desktop-application",
+        "desktop-tools",
+        "dsh-plugin",
+        "dsh-plugins"
+      ],
+      "manifests": [],
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -1379,7 +1608,31 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
+      "reason": "no-dsh-bundle-manifest"
+    },
+    {
+      "repo": "ysr666/dsh-vision-router",
+      "name": "dsh-vision-router",
+      "url": "https://github.com/ysr666/dsh-vision-router",
+      "description": null,
+      "stars": 5,
+      "forks": 0,
+      "license": "LGPL-3.0",
+      "archived": false,
+      "treeTruncated": false,
+      "defaultBranch": "main",
+      "pushedAt": "2026-08-13T19:47:02Z",
+      "updatedAt": "2026-08-13T21:16:25Z",
+      "topics": [
+        "deepseek-harness",
+        "dsh",
+        "dsh-plugin",
+        "multimodal",
+        "vision"
+      ],
+      "manifests": [],
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -1400,7 +1653,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -1421,7 +1674,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -1442,7 +1695,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -1469,7 +1722,7 @@
         "trade"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -1490,7 +1743,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -1515,33 +1768,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
-      "reason": "no-dsh-bundle-manifest"
-    },
-    {
-      "repo": "wess09/DeepSeekHarnessDesktop",
-      "name": "DeepSeekHarnessDesktop",
-      "url": "https://github.com/wess09/DeepSeekHarnessDesktop",
-      "description": "DeepSeekHarness桌面端打包",
-      "stars": 4,
-      "forks": 0,
-      "license": "MIT",
-      "archived": false,
-      "treeTruncated": false,
-      "defaultBranch": "main",
-      "pushedAt": "2026-08-13T18:00:38Z",
-      "updatedAt": "2026-08-13T18:00:51Z",
-      "topics": [
-        "deepseekharnessdesktop",
-        "desktop",
-        "desktop-app",
-        "desktop-application",
-        "desktop-tools",
-        "dsh-plugin",
-        "dsh-plugins"
-      ],
-      "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -1555,8 +1782,8 @@
       "archived": false,
       "treeTruncated": false,
       "defaultBranch": "main",
-      "pushedAt": "2026-08-13T18:27:21Z",
-      "updatedAt": "2026-08-13T18:32:17Z",
+      "pushedAt": "2026-08-13T20:49:27Z",
+      "updatedAt": "2026-08-13T20:49:32Z",
       "topics": [
         "agent",
         "ai-agents",
@@ -1572,7 +1799,7 @@
         "plugin-marketplace"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -1595,7 +1822,29 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
+      "reason": "no-dsh-bundle-manifest"
+    },
+    {
+      "repo": "chen-001/dsh-chat-width",
+      "name": "dsh-chat-width",
+      "url": "https://github.com/chen-001/dsh-chat-width",
+      "description": "Adjust the width of dsh's reply.",
+      "stars": 3,
+      "forks": 0,
+      "license": "BSD-3-Clause",
+      "archived": false,
+      "treeTruncated": false,
+      "defaultBranch": "main",
+      "pushedAt": "2026-08-13T11:43:24Z",
+      "updatedAt": "2026-08-13T18:44:17Z",
+      "topics": [
+        "deepseek-harness",
+        "dsh",
+        "dsh-plugin"
+      ],
+      "manifests": [],
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -1621,7 +1870,7 @@
         "dsh-repository-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -1650,7 +1899,7 @@
         "speed"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -1674,7 +1923,7 @@
         "ego-lite"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -1698,7 +1947,7 @@
         "zotero"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -1718,7 +1967,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -1740,7 +1989,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -1764,7 +2013,7 @@
         "theme"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -1785,7 +2034,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -1815,7 +2064,7 @@
         "skills"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -1836,7 +2085,7 @@
         "dsh-plugins"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -1860,7 +2109,7 @@
         "plugins"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -1874,8 +2123,8 @@
       "archived": false,
       "treeTruncated": false,
       "defaultBranch": "main",
-      "pushedAt": "2026-08-13T18:09:50Z",
-      "updatedAt": "2026-08-13T18:09:20Z",
+      "pushedAt": "2026-08-13T20:08:31Z",
+      "updatedAt": "2026-08-13T20:07:27Z",
       "topics": [
         "deepseek",
         "dsh-plugin",
@@ -1884,7 +2133,7 @@
         "vision"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -1923,7 +2172,7 @@
         "repository-analysis"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -1962,7 +2211,7 @@
         "typescript"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -1984,7 +2233,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -2004,7 +2253,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -2025,7 +2274,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -2048,7 +2297,7 @@
         "windows"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -2057,7 +2306,7 @@
       "url": "https://github.com/Void0312Aurora/dsh-desktop-electron",
       "description": "Cross-platform Electron desktop shell for the DSH Web GUI: tray-resident standalone window over your own dsh web, no bundled Node runtime",
       "stars": 3,
-      "forks": 0,
+      "forks": 1,
       "license": "BSD-3-Clause",
       "archived": false,
       "treeTruncated": false,
@@ -2068,7 +2317,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -2089,7 +2338,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -2115,7 +2364,7 @@
         "wechat-notify"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -2143,7 +2392,7 @@
         "selfloom"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -2165,7 +2414,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -2186,7 +2435,7 @@
         "dsh-plugins"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -2209,29 +2458,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
-      "reason": "no-dsh-bundle-manifest"
-    },
-    {
-      "repo": "chen-001/dsh-chat-width",
-      "name": "dsh-chat-width",
-      "url": "https://github.com/chen-001/dsh-chat-width",
-      "description": "Adjust the width of dsh's reply.",
-      "stars": 2,
-      "forks": 0,
-      "license": "BSD-3-Clause",
-      "archived": false,
-      "treeTruncated": false,
-      "defaultBranch": "main",
-      "pushedAt": "2026-08-13T11:43:24Z",
-      "updatedAt": "2026-08-13T16:42:30Z",
-      "topics": [
-        "deepseek-harness",
-        "dsh",
-        "dsh-plugin"
-      ],
-      "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -2254,7 +2481,7 @@
         "onlyne"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -2279,7 +2506,7 @@
         "typescript"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -2300,7 +2527,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -2320,7 +2547,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -2345,7 +2572,7 @@
         "worktree"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -2368,7 +2595,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -2390,7 +2617,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -2419,7 +2646,7 @@
         "plugins"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -2433,8 +2660,8 @@
       "archived": false,
       "treeTruncated": false,
       "defaultBranch": "main",
-      "pushedAt": "2026-08-13T18:22:52Z",
-      "updatedAt": "2026-08-13T18:28:39Z",
+      "pushedAt": "2026-08-13T18:49:16Z",
+      "updatedAt": "2026-08-13T18:49:16Z",
       "topics": [
         "deepseek",
         "deepseek-ai",
@@ -2445,7 +2672,7 @@
         "dsh-plugins"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -2467,7 +2694,7 @@
         "dsh-plugins"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -2489,7 +2716,7 @@
         "dsh-plugins"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -2515,7 +2742,7 @@
         "plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -2535,7 +2762,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -2557,7 +2784,7 @@
         "git"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -2577,7 +2804,29 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
+      "reason": "no-dsh-bundle-manifest"
+    },
+    {
+      "repo": "moxisuki/dsh-lan",
+      "name": "dsh-lan",
+      "url": "https://github.com/moxisuki/dsh-lan",
+      "description": "DeepSeek Harness（dsh）的局域网插件：一条 overlay 把 dsh web 绑定到局域网，并通过 index tap 注入 crypto.randomUUID    │ polyfill 修复非安全上下文启动崩溃。",
+      "stars": 2,
+      "forks": 0,
+      "license": null,
+      "archived": false,
+      "treeTruncated": false,
+      "defaultBranch": "master",
+      "pushedAt": "2026-08-13T14:52:02Z",
+      "updatedAt": "2026-08-13T19:57:51Z",
+      "topics": [
+        "cordis",
+        "deepseek-harness",
+        "dsh-plugin"
+      ],
+      "manifests": [],
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -2598,7 +2847,7 @@
         "dsh-plugins"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -2624,7 +2873,7 @@
         "plugin-registry"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -2657,7 +2906,7 @@
         "typescript"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -2667,12 +2916,12 @@
       "description": "Everything you need to build DeepSeek Harness plugins: official docs archive (EN/ZH), Cordis primer, 15-repo community deep-dive, 20+ battle-tested pitfalls - plus the dsh-plugin-guide agent skill.",
       "stars": 2,
       "forks": 0,
-      "license": "MIT",
+      "license": "Apache-2.0",
       "archived": false,
       "treeTruncated": false,
       "defaultBranch": "main",
-      "pushedAt": "2026-08-13T17:29:07Z",
-      "updatedAt": "2026-08-13T17:29:20Z",
+      "pushedAt": "2026-08-13T19:35:09Z",
+      "updatedAt": "2026-08-13T19:35:14Z",
       "topics": [
         "agent-skills",
         "cordis",
@@ -2683,7 +2932,37 @@
         "plugin-development"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
+      "reason": "no-dsh-bundle-manifest"
+    },
+    {
+      "repo": "PlutoKeating/dsh-lark-bot",
+      "name": "dsh-lark-bot",
+      "url": "https://github.com/PlutoKeating/dsh-lark-bot",
+      "description": "dsh-lark-bot：把 DeepSeek Harness (dsh) 桥接进飞书/Lark 的 bot，含完整项目工作区管理。A bridge bot connecting DeepSeek Harness (dsh) into Feishu/Lark with full workspace management. deepseek · deepseek harness · feishu · lark · bridge · bot",
+      "stars": 2,
+      "forks": 0,
+      "license": "AGPL-3.0",
+      "archived": false,
+      "treeTruncated": false,
+      "defaultBranch": "main",
+      "pushedAt": "2026-08-13T21:32:20Z",
+      "updatedAt": "2026-08-13T21:32:24Z",
+      "topics": [
+        "bot",
+        "bridge",
+        "chatbot",
+        "deepseek",
+        "deepseek-harness",
+        "dsh",
+        "dsh-plugin",
+        "feishu",
+        "lark",
+        "messaging",
+        "typescript"
+      ],
+      "manifests": [],
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -2703,7 +2982,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -2738,7 +3017,7 @@
         "llm"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -2762,7 +3041,7 @@
         "windows"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -2786,7 +3065,113 @@
         "electron"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
+      "reason": "no-dsh-bundle-manifest"
+    },
+    {
+      "repo": "SnowCrescenter-tech/dsh-desktop",
+      "name": "dsh-desktop",
+      "url": "https://github.com/SnowCrescenter-tech/dsh-desktop",
+      "description": "DeepSeek Harness 桌面版 — 原生 Windows 桌面壳（无边框窗口 / 系统托盘 / 原生通知 / 单实例 / 开机自启）| Native Windows desktop shell for DeepSeek Harness (frameless window, tray, native notifications, single-instance, auto-launch)",
+      "stars": 2,
+      "forks": 0,
+      "license": "MIT",
+      "archived": false,
+      "treeTruncated": false,
+      "defaultBranch": "main",
+      "pushedAt": "2026-08-13T19:01:54Z",
+      "updatedAt": "2026-08-13T19:02:11Z",
+      "topics": [
+        "deepseek",
+        "deepseek-harness",
+        "desktop",
+        "dsh",
+        "dsh-plugin",
+        "electron",
+        "windows"
+      ],
+      "manifests": [],
+      "checkedAt": "2026-08-13T21:32:46.503Z",
+      "reason": "no-dsh-bundle-manifest"
+    },
+    {
+      "repo": "SnowCrescenter-tech/dsh-launcher",
+      "name": "dsh-launcher",
+      "url": "https://github.com/SnowCrescenter-tech/dsh-launcher",
+      "description": "DeepSeek Harness 一键启动器 | Windows 便携免安装版 - One-click portable launcher for DeepSeek Harness (no Node.js, no pnpm, no CLI)",
+      "stars": 2,
+      "forks": 0,
+      "license": "MIT",
+      "archived": false,
+      "treeTruncated": false,
+      "defaultBranch": "main",
+      "pushedAt": "2026-08-13T15:40:33Z",
+      "updatedAt": "2026-08-13T18:58:00Z",
+      "topics": [
+        "deepseek",
+        "deepseek-harness",
+        "dsh",
+        "dsh-plugin",
+        "launcher",
+        "portable",
+        "windows"
+      ],
+      "manifests": [],
+      "checkedAt": "2026-08-13T21:32:46.503Z",
+      "reason": "no-dsh-bundle-manifest"
+    },
+    {
+      "repo": "Sunrisepeak/dsh-index",
+      "name": "dsh-index",
+      "url": "https://github.com/Sunrisepeak/dsh-index",
+      "description": "DeepSeek Harness Plugin Package Index - Install dsh-plugin with just one command",
+      "stars": 2,
+      "forks": 0,
+      "license": "Apache-2.0",
+      "archived": false,
+      "treeTruncated": false,
+      "defaultBranch": "main",
+      "pushedAt": "2026-08-13T21:27:36Z",
+      "updatedAt": "2026-08-13T21:27:41Z",
+      "topics": [
+        "agent",
+        "deepseek",
+        "dsh",
+        "dsh-plugin",
+        "package-index",
+        "xlings"
+      ],
+      "manifests": [],
+      "checkedAt": "2026-08-13T21:32:46.503Z",
+      "reason": "no-dsh-bundle-manifest"
+    },
+    {
+      "repo": "techysy/deepseek-harness-fnos",
+      "name": "deepseek-harness-fnos",
+      "url": "https://github.com/techysy/deepseek-harness-fnos",
+      "description": "DeepSeek Harness (DeepSeek 官方 agent 浏览器 UI) fnOS 应用 — 本地常驻服务, 官方统一网关接入",
+      "stars": 2,
+      "forks": 0,
+      "license": "MIT",
+      "archived": false,
+      "treeTruncated": false,
+      "defaultBranch": "main",
+      "pushedAt": "2026-08-13T20:24:51Z",
+      "updatedAt": "2026-08-13T20:24:55Z",
+      "topics": [
+        "agent",
+        "deepseek",
+        "deepseek-harness",
+        "dsh-plugin",
+        "fnos",
+        "fnos-app",
+        "fnos-appcenter",
+        "fnos-nas",
+        "nas",
+        "self-hosted"
+      ],
+      "manifests": [],
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -2809,7 +3194,7 @@
         "dsh-plugins"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -2823,15 +3208,15 @@
       "archived": false,
       "treeTruncated": false,
       "defaultBranch": "main",
-      "pushedAt": "2026-08-13T17:09:28Z",
-      "updatedAt": "2026-08-13T17:23:04Z",
+      "pushedAt": "2026-08-13T19:29:23Z",
+      "updatedAt": "2026-08-13T19:29:37Z",
       "topics": [
         "acp",
         "context-management",
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -2857,7 +3242,7 @@
         "plugins"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -2883,7 +3268,7 @@
         "skill-generator"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -2920,7 +3305,7 @@
         "vision-mcp"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -2942,7 +3327,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -2963,7 +3348,7 @@
         "dsh-plugins"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -2988,7 +3373,7 @@
         "semantic-search"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -3012,7 +3397,7 @@
         "wails"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -3035,7 +3420,7 @@
         "postmortem"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -3060,7 +3445,7 @@
         "typescript"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -3080,7 +3465,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -3100,7 +3485,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -3120,7 +3505,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -3140,7 +3525,36 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
+      "reason": "no-dsh-bundle-manifest"
+    },
+    {
+      "repo": "baixinghao/intent-gate",
+      "name": "intent-gate",
+      "url": "https://github.com/baixinghao/intent-gate",
+      "description": "Stop AI coding agents from guessing. MCP server + Claude Code plugin that enforces intent alignment BEFORE coding: PRD → intent-confidence gate → Mermaid contracts (state machines / sequence diagrams / decision tables) → mechanical lint with zero CRITICAL → then code. Human-in-the-loop, file-persisted, zero-config.",
+      "stars": 1,
+      "forks": 0,
+      "license": "MIT",
+      "archived": false,
+      "treeTruncated": false,
+      "defaultBranch": "main",
+      "pushedAt": "2026-08-13T20:19:33Z",
+      "updatedAt": "2026-08-13T20:42:52Z",
+      "topics": [
+        "claude-code-plugin",
+        "code-generation",
+        "coding-agent",
+        "dsh-plugin",
+        "dsh-plugins",
+        "harness",
+        "harness-engineering",
+        "mcp",
+        "mcp-server",
+        "mcp-tools"
+      ],
+      "manifests": [],
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -3161,7 +3575,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -3192,7 +3606,7 @@
         "ui-ux"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -3212,7 +3626,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -3226,13 +3640,13 @@
       "archived": false,
       "treeTruncated": false,
       "defaultBranch": "main",
-      "pushedAt": "2026-08-13T16:46:42Z",
-      "updatedAt": "2026-08-13T17:24:10Z",
+      "pushedAt": "2026-08-13T19:25:57Z",
+      "updatedAt": "2026-08-13T19:23:12Z",
       "topics": [
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -3247,7 +3661,7 @@
       "treeTruncated": false,
       "defaultBranch": "main",
       "pushedAt": "2026-08-13T16:46:11Z",
-      "updatedAt": "2026-08-13T17:25:11Z",
+      "updatedAt": "2026-08-13T18:43:03Z",
       "topics": [
         "ai-agent",
         "community-project",
@@ -3258,7 +3672,7 @@
         "windows"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -3285,7 +3699,7 @@
         "one-dark-theme"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -3308,7 +3722,7 @@
         "web-search"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -3331,7 +3745,7 @@
         "web-search"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -3351,7 +3765,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -3371,7 +3785,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -3395,7 +3809,7 @@
         "windows"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -3415,7 +3829,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -3435,7 +3849,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -3455,7 +3869,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -3479,7 +3893,7 @@
         "proof-verification"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -3503,7 +3917,7 @@
         "zotero"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -3517,7 +3931,7 @@
       "archived": false,
       "treeTruncated": false,
       "defaultBranch": "main",
-      "pushedAt": "2026-08-13T17:35:45Z",
+      "pushedAt": "2026-08-13T19:41:02Z",
       "updatedAt": "2026-08-13T17:36:13Z",
       "topics": [
         "deepseek-harness",
@@ -3529,7 +3943,7 @@
         "pet"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -3551,7 +3965,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -3571,7 +3985,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -3595,7 +4009,7 @@
         "token-usage"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -3623,7 +4037,44 @@
         "token-efficiency"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
+      "reason": "no-dsh-bundle-manifest"
+    },
+    {
+      "repo": "kejixiaoliang/awesome-dsh-plugins",
+      "name": "awesome-dsh-plugins",
+      "url": "https://github.com/kejixiaoliang/awesome-dsh-plugins",
+      "description": "DeepSeek Harness (DSH) 插件精选目录 — 14 类 280+ 个社区插件，覆盖 MCP / Skill / TUI / 多 Agent / 上下文记忆 / UI 皮肤，点链接直达仓库。Curated directory of dsh plugins for DeepSeek Harness.",
+      "stars": 1,
+      "forks": 0,
+      "license": "MIT",
+      "archived": false,
+      "treeTruncated": false,
+      "defaultBranch": "main",
+      "pushedAt": "2026-08-13T20:36:34Z",
+      "updatedAt": "2026-08-13T20:37:00Z",
+      "topics": [
+        "agnet",
+        "ai-agents",
+        "awesome",
+        "awesome-list",
+        "awesome-lists",
+        "coding-agent",
+        "coding-agents",
+        "cordis",
+        "cordis-plugin",
+        "deepseek",
+        "deepseek-harness",
+        "deepseek-harness-plugin",
+        "deepseek-harness-plugins",
+        "deepseek-v4-pro",
+        "dsh",
+        "dsh-plugin",
+        "dsh-plugins",
+        "plugins"
+      ],
+      "manifests": [],
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -3648,7 +4099,7 @@
         "windows"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -3668,7 +4119,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -3693,7 +4144,55 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
+      "reason": "no-dsh-bundle-manifest"
+    },
+    {
+      "repo": "kyorakuyk/dsh-desktop",
+      "name": "dsh-desktop",
+      "url": "https://github.com/kyorakuyk/dsh-desktop",
+      "description": null,
+      "stars": 1,
+      "forks": 0,
+      "license": "MIT",
+      "archived": false,
+      "treeTruncated": false,
+      "defaultBranch": "main",
+      "pushedAt": "2026-08-13T19:56:25Z",
+      "updatedAt": "2026-08-13T19:56:30Z",
+      "topics": [
+        "dsh-plugin"
+      ],
+      "manifests": [],
+      "checkedAt": "2026-08-13T21:32:46.503Z",
+      "reason": "no-dsh-bundle-manifest"
+    },
+    {
+      "repo": "libukai/awesome-deepseek-harness",
+      "name": "awesome-deepseek-harness",
+      "url": "https://github.com/libukai/awesome-deepseek-harness",
+      "description": "DeepSeek Harness 终极指南：快速入门、资源推荐、精选插件与实用工具 ｜The Ultimate Guide to DeepSeek Harness: QuickStart, Resources, Plugins&Toolkit",
+      "stars": 1,
+      "forks": 0,
+      "license": null,
+      "archived": false,
+      "treeTruncated": false,
+      "defaultBranch": "main",
+      "pushedAt": "2026-08-13T18:58:14Z",
+      "updatedAt": "2026-08-13T19:03:09Z",
+      "topics": [
+        "agent",
+        "agent-harness",
+        "awesome-list",
+        "deepseek",
+        "deepseek-harness",
+        "developer-tools",
+        "dsh",
+        "dsh-plugin",
+        "plugins"
+      ],
+      "manifests": [],
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -3713,7 +4212,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -3742,7 +4241,7 @@
         "web-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -3773,7 +4272,7 @@
         "runtime-debugging"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -3796,7 +4295,7 @@
         "playwright"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -3818,7 +4317,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -3840,29 +4339,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
-      "reason": "no-dsh-bundle-manifest"
-    },
-    {
-      "repo": "moxisuki/dsh-lan",
-      "name": "dsh-lan",
-      "url": "https://github.com/moxisuki/dsh-lan",
-      "description": "DeepSeek Harness（dsh）的局域网插件：一条 overlay 把 dsh web 绑定到局域网，并通过 index tap 注入 crypto.randomUUID    │ polyfill 修复非安全上下文启动崩溃。",
-      "stars": 1,
-      "forks": 0,
-      "license": null,
-      "archived": false,
-      "treeTruncated": false,
-      "defaultBranch": "master",
-      "pushedAt": "2026-08-13T14:52:02Z",
-      "updatedAt": "2026-08-13T16:46:09Z",
-      "topics": [
-        "cordis",
-        "deepseek-harness",
-        "dsh-plugin"
-      ],
-      "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -3882,7 +4359,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -3907,7 +4384,7 @@
         "workflow-automation"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -3932,7 +4409,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -3957,7 +4434,7 @@
         "nodejs"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -3982,7 +4459,7 @@
         "typescript"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -4002,7 +4479,81 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
+      "reason": "no-dsh-bundle-manifest"
+    },
+    {
+      "repo": "PerryLink/dsh-composer-history",
+      "name": "dsh-composer-history",
+      "url": "https://github.com/PerryLink/dsh-composer-history",
+      "description": "Terminal-style input history for the DeepSeek Harness web composer - edge-first arrow keys, draft stashing with exact restore, Esc recovery. A dsh-plugin.",
+      "stars": 1,
+      "forks": 0,
+      "license": "Apache-2.0",
+      "archived": false,
+      "treeTruncated": false,
+      "defaultBranch": "main",
+      "pushedAt": "2026-08-13T19:16:58Z",
+      "updatedAt": "2026-08-13T20:14:02Z",
+      "topics": [
+        "deepseek-harness",
+        "dsh",
+        "dsh-plugin",
+        "input-history",
+        "keyboard-shortcuts",
+        "typescript",
+        "web-gui"
+      ],
+      "manifests": [],
+      "checkedAt": "2026-08-13T21:32:46.503Z",
+      "reason": "no-dsh-bundle-manifest"
+    },
+    {
+      "repo": "PerryLink/dsh-session-pin",
+      "name": "dsh-session-pin",
+      "url": "https://github.com/PerryLink/dsh-session-pin",
+      "description": "Pin sessions in the DeepSeek Harness (DSH) web sidebar - dual-face plugin with a hover pin badge, durable pinning, and top ordering",
+      "stars": 1,
+      "forks": 0,
+      "license": "Apache-2.0",
+      "archived": false,
+      "treeTruncated": false,
+      "defaultBranch": "main",
+      "pushedAt": "2026-08-13T20:57:09Z",
+      "updatedAt": "2026-08-13T20:57:13Z",
+      "topics": [
+        "deepseek-harness",
+        "dsh",
+        "dsh-plugin",
+        "session-pin"
+      ],
+      "manifests": [],
+      "checkedAt": "2026-08-13T21:32:46.503Z",
+      "reason": "no-dsh-bundle-manifest"
+    },
+    {
+      "repo": "PerryLink/dsh-skill-pack-security",
+      "name": "dsh-skill-pack-security",
+      "url": "https://github.com/PerryLink/dsh-skill-pack-security",
+      "description": "Security-audit skill pack for DeepSeek Harness (dsh): 5 agent skills - secret scan, dependency audit, supply-chain review, prompt-injection review, audit orchestration. Zero runtime code. Apache-2.0.",
+      "stars": 1,
+      "forks": 0,
+      "license": "Apache-2.0",
+      "archived": false,
+      "treeTruncated": false,
+      "defaultBranch": "main",
+      "pushedAt": "2026-08-13T19:47:46Z",
+      "updatedAt": "2026-08-13T20:14:06Z",
+      "topics": [
+        "dsh",
+        "dsh-plugin",
+        "prompt-injection",
+        "security-audit",
+        "skill-pack",
+        "supply-chain-security"
+      ],
+      "manifests": [],
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -4023,7 +4574,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -4055,7 +4606,7 @@
         "self-healing"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -4092,7 +4643,7 @@
         "typescript"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -4116,7 +4667,7 @@
         "guard"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -4139,7 +4690,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -4161,7 +4712,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -4182,7 +4733,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -4204,7 +4755,7 @@
         "dsh-plugins"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -4224,7 +4775,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -4244,7 +4795,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -4264,7 +4815,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -4284,7 +4835,31 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
+      "reason": "no-dsh-bundle-manifest"
+    },
+    {
+      "repo": "shaokeyibb/dsh-plugin-product-subagents",
+      "name": "dsh-plugin-product-subagents",
+      "url": "https://github.com/shaokeyibb/dsh-plugin-product-subagents",
+      "description": "Role-based Codex / Claude Code / ACP subagent providers for the DeepSeek Harness — continuable children, durable session recovery, per-role product permissions, and delegation with a permission ceiling.",
+      "stars": 1,
+      "forks": 0,
+      "license": "MIT",
+      "archived": false,
+      "treeTruncated": false,
+      "defaultBranch": "main",
+      "pushedAt": "2026-08-13T18:33:43Z",
+      "updatedAt": "2026-08-13T18:43:10Z",
+      "topics": [
+        "acp",
+        "claude-code",
+        "codex",
+        "cursor",
+        "dsh-plugin"
+      ],
+      "manifests": [],
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -4295,7 +4870,7 @@
       "stars": 1,
       "reason": "scan-error",
       "error": "GitHub 404 for https://api.github.com/repos/ShawnSiao/dsh-agent-eval/git/trees/main?recursive=1: {\"message\":\"Not Found\",\"documentation_url\":\"https://docs.github.com/rest/git/trees#get-a-tree\",\"status\":\"404\"}",
-      "checkedAt": "2026-08-13T18:32:51.201Z"
+      "checkedAt": "2026-08-13T21:32:46.503Z"
     },
     {
       "repo": "ShawnSiao/dsh-credentials-keychain",
@@ -4317,7 +4892,7 @@
         "security"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -4337,59 +4912,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
-      "reason": "no-dsh-bundle-manifest"
-    },
-    {
-      "repo": "SnowCrescenter-tech/dsh-desktop",
-      "name": "dsh-desktop",
-      "url": "https://github.com/SnowCrescenter-tech/dsh-desktop",
-      "description": "DeepSeek Harness 桌面版 — 原生 Windows 桌面壳（无边框窗口 / 系统托盘 / 原生通知 / 单实例 / 开机自启）| Native Windows desktop shell for DeepSeek Harness (frameless window, tray, native notifications, single-instance, auto-launch)",
-      "stars": 1,
-      "forks": 0,
-      "license": null,
-      "archived": false,
-      "treeTruncated": false,
-      "defaultBranch": "main",
-      "pushedAt": "2026-08-13T17:58:43Z",
-      "updatedAt": "2026-08-13T17:41:07Z",
-      "topics": [
-        "deepseek",
-        "deepseek-harness",
-        "desktop",
-        "dsh",
-        "dsh-plugin",
-        "electron",
-        "windows"
-      ],
-      "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
-      "reason": "no-dsh-bundle-manifest"
-    },
-    {
-      "repo": "SnowCrescenter-tech/dsh-launcher",
-      "name": "dsh-launcher",
-      "url": "https://github.com/SnowCrescenter-tech/dsh-launcher",
-      "description": "DeepSeek Harness 一键启动器 | Windows 便携免安装版 - One-click portable launcher for DeepSeek Harness (no Node.js, no pnpm, no CLI)",
-      "stars": 1,
-      "forks": 0,
-      "license": "MIT",
-      "archived": false,
-      "treeTruncated": false,
-      "defaultBranch": "main",
-      "pushedAt": "2026-08-13T15:40:33Z",
-      "updatedAt": "2026-08-13T17:42:08Z",
-      "topics": [
-        "deepseek",
-        "deepseek-harness",
-        "dsh",
-        "dsh-plugin",
-        "launcher",
-        "portable",
-        "windows"
-      ],
-      "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -4403,8 +4926,8 @@
       "archived": false,
       "treeTruncated": false,
       "defaultBranch": "main",
-      "pushedAt": "2026-08-13T15:45:29Z",
-      "updatedAt": "2026-08-13T16:46:55Z",
+      "pushedAt": "2026-08-13T20:17:19Z",
+      "updatedAt": "2026-08-13T20:25:40Z",
       "topics": [
         "claude-skills",
         "deepseek",
@@ -4413,7 +4936,7 @@
         "skills"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -4427,14 +4950,14 @@
       "archived": false,
       "treeTruncated": false,
       "defaultBranch": "main",
-      "pushedAt": "2026-08-13T18:31:31Z",
-      "updatedAt": "2026-08-13T18:31:41Z",
+      "pushedAt": "2026-08-13T18:40:05Z",
+      "updatedAt": "2026-08-13T18:40:18Z",
       "topics": [
         "dsh-plugin",
         "dsh-plugins"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -4456,7 +4979,7 @@
         "music"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -4481,7 +5004,7 @@
         "mcp-server"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -4508,7 +5031,7 @@
         "typescript"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -4530,7 +5053,7 @@
         "dsh-skill"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -4556,13 +5079,13 @@
         "ssh"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
-      "repo": "vcxmug/dsh-firecrawl",
-      "name": "dsh-firecrawl",
-      "url": "https://github.com/vcxmug/dsh-firecrawl",
+      "repo": "vcxmug/dsh-enhance",
+      "name": "dsh-enhance",
+      "url": "https://github.com/vcxmug/dsh-enhance",
       "description": "Native Firecrawl tools for DeepSeek Harness agents via MCP — one composition row, zero custom code",
       "stars": 1,
       "forks": 0,
@@ -4570,13 +5093,13 @@
       "archived": false,
       "treeTruncated": false,
       "defaultBranch": "main",
-      "pushedAt": "2026-08-13T17:07:56Z",
-      "updatedAt": "2026-08-13T17:24:43Z",
+      "pushedAt": "2026-08-13T20:24:54Z",
+      "updatedAt": "2026-08-13T20:24:59Z",
       "topics": [
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -4596,7 +5119,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -4617,7 +5140,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -4649,7 +5172,7 @@
         "tree-sitter"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -4663,8 +5186,8 @@
       "archived": false,
       "treeTruncated": false,
       "defaultBranch": "main",
-      "pushedAt": "2026-08-13T18:31:41Z",
-      "updatedAt": "2026-08-13T18:32:16Z",
+      "pushedAt": "2026-08-13T18:35:59Z",
+      "updatedAt": "2026-08-13T18:36:02Z",
       "topics": [
         "agent-framework",
         "deepseek-harness",
@@ -4675,7 +5198,7 @@
         "wikipedia"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -4695,7 +5218,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -4715,7 +5238,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -4739,7 +5262,34 @@
         "vision"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
+      "reason": "no-dsh-bundle-manifest"
+    },
+    {
+      "repo": "Yuuz12/dsh-vision-helper",
+      "name": "dsh-vision-helper",
+      "url": "https://github.com/Yuuz12/dsh-vision-helper",
+      "description": "DeepSeek Harness Vision Helper/DeepSeek Harness 视觉辅助方案",
+      "stars": 1,
+      "forks": 0,
+      "license": "MIT",
+      "archived": false,
+      "treeTruncated": false,
+      "defaultBranch": "main",
+      "pushedAt": "2026-08-13T20:00:00Z",
+      "updatedAt": "2026-08-13T20:00:04Z",
+      "topics": [
+        "agent",
+        "agent-skills",
+        "cordis",
+        "dsh",
+        "dsh-plugin",
+        "text-only-llm",
+        "vision",
+        "vision-language-model"
+      ],
+      "manifests": [],
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -4764,7 +5314,7 @@
         "typescript"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -4791,7 +5341,88 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
+      "reason": "no-dsh-bundle-manifest"
+    },
+    {
+      "repo": "asdf17128/dshp",
+      "name": "dshp",
+      "url": "https://github.com/asdf17128/dshp",
+      "description": "Manage DeepSeek Harness profiles — list, create, clone, diff, and share a whole dsh setup as one portable file.",
+      "stars": 0,
+      "forks": 0,
+      "license": "MIT",
+      "archived": false,
+      "treeTruncated": false,
+      "defaultBranch": "main",
+      "pushedAt": "2026-08-13T18:44:53Z",
+      "updatedAt": "2026-08-13T18:45:07Z",
+      "topics": [
+        "cli",
+        "deepseek",
+        "deepseek-harness",
+        "devtools",
+        "dsh",
+        "dsh-plugin",
+        "profile-manager"
+      ],
+      "manifests": [],
+      "checkedAt": "2026-08-13T21:32:46.503Z",
+      "reason": "no-dsh-bundle-manifest"
+    },
+    {
+      "repo": "boNeXY226/dsh-cost-chip",
+      "name": "dsh-cost-chip",
+      "url": "https://github.com/boNeXY226/dsh-cost-chip",
+      "description": "DeepSeek Harness (dsh) 插件：/cost 查看每个会话花费 + 可拖拽的悬浮费用胶囊",
+      "stars": 0,
+      "forks": 0,
+      "license": "MIT",
+      "archived": false,
+      "treeTruncated": false,
+      "defaultBranch": "main",
+      "pushedAt": "2026-08-13T20:23:38Z",
+      "updatedAt": "2026-08-13T20:24:40Z",
+      "topics": [
+        "cordis",
+        "cost-tracking",
+        "deepseek",
+        "deepseek-harness",
+        "dsh",
+        "dsh-plugin",
+        "plugin",
+        "pricing",
+        "slash-command",
+        "token-usage"
+      ],
+      "manifests": [],
+      "checkedAt": "2026-08-13T21:32:46.503Z",
+      "reason": "no-dsh-bundle-manifest"
+    },
+    {
+      "repo": "ChenSheg/knowledge-from-literature-and-bilibili",
+      "name": "knowledge-from-literature-and-bilibili",
+      "url": "https://github.com/ChenSheg/knowledge-from-literature-and-bilibili",
+      "description": "A tool box for literature search and analysis",
+      "stars": 0,
+      "forks": 0,
+      "license": "MIT",
+      "archived": false,
+      "treeTruncated": false,
+      "defaultBranch": "master",
+      "pushedAt": "2026-07-14T05:32:45Z",
+      "updatedAt": "2026-08-13T18:59:59Z",
+      "topics": [
+        "bilibili",
+        "deepseek",
+        "deepseek-harness",
+        "dsh-plugin",
+        "literary-analysis",
+        "literature-search",
+        "skills"
+      ],
+      "manifests": [],
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -4818,7 +5449,7 @@
         "trading"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -4841,7 +5472,53 @@
         "dsh-plugins"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
+      "reason": "no-dsh-bundle-manifest"
+    },
+    {
+      "repo": "crystalWinter666/dsh-header-status",
+      "name": "dsh-header-status",
+      "url": "https://github.com/crystalWinter666/dsh-header-status",
+      "description": "Move the info bar at the bottom of the chat to next to the title",
+      "stars": 0,
+      "forks": 0,
+      "license": null,
+      "archived": false,
+      "treeTruncated": false,
+      "defaultBranch": "main",
+      "pushedAt": "2026-08-13T21:08:54Z",
+      "updatedAt": "2026-08-13T21:08:58Z",
+      "topics": [
+        "deepseek",
+        "dsh",
+        "dsh-plugin"
+      ],
+      "manifests": [],
+      "checkedAt": "2026-08-13T21:32:46.503Z",
+      "reason": "no-dsh-bundle-manifest"
+    },
+    {
+      "repo": "dongsheng123132/awesome-dsh-plugins",
+      "name": "awesome-dsh-plugins",
+      "url": "https://github.com/dongsheng123132/awesome-dsh-plugins",
+      "description": "Evidence-backed DeepSeek Harness plugin radar and 2Origin plugin lab",
+      "stars": 0,
+      "forks": 0,
+      "license": "MIT",
+      "archived": false,
+      "treeTruncated": false,
+      "defaultBranch": "main",
+      "pushedAt": "2026-08-13T21:28:51Z",
+      "updatedAt": "2026-08-13T21:28:55Z",
+      "topics": [
+        "2origin",
+        "awesome-list",
+        "deepseek-harness",
+        "dsh-plugin",
+        "plugin-registry"
+      ],
+      "manifests": [],
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -4862,7 +5539,58 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
+      "reason": "no-dsh-bundle-manifest"
+    },
+    {
+      "repo": "egnmosk/dsh-browser-bridge",
+      "name": "dsh-browser-bridge",
+      "url": "https://github.com/egnmosk/dsh-browser-bridge",
+      "description": "DeepSeek Harness plugin + browser extension bridge: browser_* agent tools (navigate, click, type, screenshot, eval) over a localhost WebSocket — like Kimi WebBridge / Claude's browser extension.",
+      "stars": 0,
+      "forks": 0,
+      "license": "MIT",
+      "archived": false,
+      "treeTruncated": false,
+      "defaultBranch": "main",
+      "pushedAt": "2026-08-13T20:26:28Z",
+      "updatedAt": "2026-08-13T20:26:33Z",
+      "topics": [
+        "browser-extension",
+        "chrome-extension",
+        "deepseek-harness",
+        "dsh-plugin",
+        "webbridge"
+      ],
+      "manifests": [],
+      "checkedAt": "2026-08-13T21:32:46.503Z",
+      "reason": "no-dsh-bundle-manifest"
+    },
+    {
+      "repo": "Gordonynh/dsh-plugin-codex-import",
+      "name": "dsh-plugin-codex-import",
+      "url": "https://github.com/Gordonynh/dsh-plugin-codex-import",
+      "description": "DeepSeek Harness plugin: import OpenAI Codex conversation history into DSH sessions via /codex-import | 用 /codex-import 把 Codex 历史对话导入 DSH",
+      "stars": 0,
+      "forks": 0,
+      "license": "NOASSERTION",
+      "archived": false,
+      "treeTruncated": false,
+      "defaultBranch": "main",
+      "pushedAt": "2026-08-13T21:03:38Z",
+      "updatedAt": "2026-08-13T21:03:46Z",
+      "topics": [
+        "codex",
+        "deepseek",
+        "deepseek-harness",
+        "dsh",
+        "dsh-plugin",
+        "migration",
+        "openai-codex",
+        "session-import"
+      ],
+      "manifests": [],
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -4876,8 +5604,8 @@
       "archived": false,
       "treeTruncated": false,
       "defaultBranch": "master",
-      "pushedAt": "2026-08-13T18:29:25Z",
-      "updatedAt": "2026-08-13T18:30:09Z",
+      "pushedAt": "2026-08-13T20:44:19Z",
+      "updatedAt": "2026-08-13T20:44:13Z",
       "topics": [
         "deepseek-harness",
         "dsh",
@@ -4885,7 +5613,54 @@
         "web-ui"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
+      "reason": "no-dsh-bundle-manifest"
+    },
+    {
+      "repo": "HeiGeAi/deepseek-harness-skin",
+      "name": "deepseek-harness-skin",
+      "url": "https://github.com/HeiGeAi/deepseek-harness-skin",
+      "description": "DeepSeek Harness 换肤系统：21 套内置皮肤 + 一张图生成整套配色的自定义皮肤。数据源驱动，保对比度推导，构建期校验可读性。",
+      "stars": 0,
+      "forks": 0,
+      "license": "MIT",
+      "archived": false,
+      "treeTruncated": false,
+      "defaultBranch": "main",
+      "pushedAt": "2026-08-13T19:46:03Z",
+      "updatedAt": "2026-08-13T19:45:55Z",
+      "topics": [
+        "css",
+        "dark-mode",
+        "deepseek-harness",
+        "dsh-plugin",
+        "skin",
+        "theme",
+        "ui-theme"
+      ],
+      "manifests": [],
+      "checkedAt": "2026-08-13T21:32:46.503Z",
+      "reason": "no-dsh-bundle-manifest"
+    },
+    {
+      "repo": "huashenglian/dsh-her-eyes",
+      "name": "dsh-her-eyes",
+      "url": "https://github.com/huashenglian/dsh-her-eyes",
+      "description": "一个可以让ai自动调用VLM(多模态模型)进行视觉分析的插件。",
+      "stars": 0,
+      "forks": 0,
+      "license": "MIT",
+      "archived": false,
+      "treeTruncated": false,
+      "defaultBranch": "main",
+      "pushedAt": "2026-08-13T21:28:14Z",
+      "updatedAt": "2026-08-13T21:29:09Z",
+      "topics": [
+        "dsh-plugin",
+        "dsh-plugins"
+      ],
+      "manifests": [],
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -4917,7 +5692,7 @@
         "vibecoding"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -4941,7 +5716,47 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
+      "reason": "no-dsh-bundle-manifest"
+    },
+    {
+      "repo": "jasper-zsh/dsh-plugin-llm-codex",
+      "name": "dsh-plugin-llm-codex",
+      "url": "https://github.com/jasper-zsh/dsh-plugin-llm-codex",
+      "description": "让 DeepSeek Harness（DSH） 通过 ChatGPT/Codex 订阅调用 openai-codex 模型，无需配置 OpenAI API Key。",
+      "stars": 0,
+      "forks": 0,
+      "license": null,
+      "archived": false,
+      "treeTruncated": false,
+      "defaultBranch": "main",
+      "pushedAt": "2026-08-13T19:17:16Z",
+      "updatedAt": "2026-08-13T19:22:21Z",
+      "topics": [
+        "dsh-plugin"
+      ],
+      "manifests": [],
+      "checkedAt": "2026-08-13T21:32:46.503Z",
+      "reason": "no-dsh-bundle-manifest"
+    },
+    {
+      "repo": "jasper-zsh/dsh-plugin-provider-quota",
+      "name": "dsh-plugin-provider-quota",
+      "url": "https://github.com/jasper-zsh/dsh-plugin-provider-quota",
+      "description": "DeepSeek Harness（DSH） 的 Web 插件：在对话输入框底部展示模型 Provider 的订阅额度与限流窗口，点击徽标即可查看详情。",
+      "stars": 0,
+      "forks": 0,
+      "license": null,
+      "archived": false,
+      "treeTruncated": false,
+      "defaultBranch": "main",
+      "pushedAt": "2026-08-13T19:34:45Z",
+      "updatedAt": "2026-08-13T19:35:13Z",
+      "topics": [
+        "dsh-plugin"
+      ],
+      "manifests": [],
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -4966,7 +5781,29 @@
         "registry"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
+      "reason": "no-dsh-bundle-manifest"
+    },
+    {
+      "repo": "JustGenius-s/DSH-Decktop",
+      "name": "DSH-Decktop",
+      "url": "https://github.com/JustGenius-s/DSH-Decktop",
+      "description": "DSH-Decktop",
+      "stars": 0,
+      "forks": 0,
+      "license": "MIT",
+      "archived": false,
+      "treeTruncated": false,
+      "defaultBranch": "main",
+      "pushedAt": "2026-08-13T19:41:55Z",
+      "updatedAt": "2026-08-13T19:42:00Z",
+      "topics": [
+        "dsh",
+        "dsh-desktop",
+        "dsh-plugin"
+      ],
+      "manifests": [],
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -4990,7 +5827,7 @@
         "skills"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -5004,7 +5841,7 @@
       "archived": false,
       "treeTruncated": false,
       "defaultBranch": "main",
-      "pushedAt": "2026-08-13T18:18:41Z",
+      "pushedAt": "2026-08-13T19:09:22Z",
       "updatedAt": "2026-08-13T18:19:25Z",
       "topics": [
         "deepseek-harness",
@@ -5012,7 +5849,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -5026,7 +5863,7 @@
       "archived": false,
       "treeTruncated": false,
       "defaultBranch": "main",
-      "pushedAt": "2026-08-13T18:18:29Z",
+      "pushedAt": "2026-08-13T18:46:06Z",
       "updatedAt": "2026-08-13T18:19:31Z",
       "topics": [
         "deepseek-harness",
@@ -5034,7 +5871,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -5048,7 +5885,7 @@
       "archived": false,
       "treeTruncated": false,
       "defaultBranch": "main",
-      "pushedAt": "2026-08-13T18:18:35Z",
+      "pushedAt": "2026-08-13T18:53:50Z",
       "updatedAt": "2026-08-13T18:19:20Z",
       "topics": [
         "deepseek-harness",
@@ -5056,7 +5893,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -5070,7 +5907,7 @@
       "archived": false,
       "treeTruncated": false,
       "defaultBranch": "main",
-      "pushedAt": "2026-08-13T18:18:23Z",
+      "pushedAt": "2026-08-13T18:37:55Z",
       "updatedAt": "2026-08-13T18:19:21Z",
       "topics": [
         "deepseek-harness",
@@ -5078,7 +5915,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -5100,7 +5937,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -5120,7 +5957,32 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
+      "reason": "no-dsh-bundle-manifest"
+    },
+    {
+      "repo": "MashedPotato817/dsh-tui",
+      "name": "dsh-tui",
+      "url": "https://github.com/MashedPotato817/dsh-tui",
+      "description": "Terminal client for DeepSeek Harness: Claude Code-style agent conversation with Vim modal input and a HUD, over the one DSH HTTP contract.",
+      "stars": 0,
+      "forks": 0,
+      "license": null,
+      "archived": false,
+      "treeTruncated": false,
+      "defaultBranch": "feat/dsh-tui",
+      "pushedAt": "2026-08-13T20:28:46Z",
+      "updatedAt": "2026-08-13T20:28:50Z",
+      "topics": [
+        "cli",
+        "deepseek-harness",
+        "dsh",
+        "dsh-plugin",
+        "terminal",
+        "tui"
+      ],
+      "manifests": [],
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -5130,12 +5992,12 @@
       "description": "Use DeepSeek Harness in VS Code like ChatGPT/Copilot: @dsh in native chat, standalone views, cross-project sessions, shared via DSH API. Auto-starts server.",
       "stars": 0,
       "forks": 0,
-      "license": "MIT",
+      "license": "NOASSERTION",
       "archived": false,
       "treeTruncated": false,
       "defaultBranch": "main",
-      "pushedAt": "2026-08-13T17:43:32Z",
-      "updatedAt": "2026-08-13T17:49:34Z",
+      "pushedAt": "2026-08-13T21:10:29Z",
+      "updatedAt": "2026-08-13T21:10:35Z",
       "topics": [
         "deepseek",
         "deepseek-harness",
@@ -5146,27 +6008,151 @@
         "vscode-extension"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
-      "repo": "shaokeyibb/dsh-plugin-product-subagents",
-      "name": "dsh-plugin-product-subagents",
-      "url": "https://github.com/shaokeyibb/dsh-plugin-product-subagents",
-      "description": "Role-based Codex / Claude Code / ACP subagent providers for the DeepSeek Harness — continuable children, durable session recovery, per-role product permissions, and delegation with a permission ceiling.",
+      "repo": "nightwhale-dev/nightwhale",
+      "name": "nightwhale",
+      "url": "https://github.com/nightwhale-dev/nightwhale",
+      "description": "The community power-layer for DeepSeek Harness (dsh). 夜鲲 — 吞并生态好能力,评测集筛选,只喂真正有效的增强。",
       "stars": 0,
       "forks": 0,
       "license": "MIT",
       "archived": false,
       "treeTruncated": false,
       "defaultBranch": "main",
-      "pushedAt": "2026-08-13T18:23:31Z",
-      "updatedAt": "2026-08-13T18:28:08Z",
+      "pushedAt": "2026-08-13T21:11:53Z",
+      "updatedAt": "2026-08-13T21:15:37Z",
       "topics": [
+        "agent",
+        "coding-agent",
+        "deepseek",
+        "deepseek-harness",
+        "dsh",
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
+      "reason": "no-dsh-bundle-manifest"
+    },
+    {
+      "repo": "PerryLink/dsh-output-styles",
+      "name": "dsh-output-styles",
+      "url": "https://github.com/PerryLink/dsh-output-styles",
+      "description": "Claude Code outputStyles for DeepSeek Harness - session-scoped, durable, runtime-switchable model output styles (/style command, output_style storage domain, systemPrompt injection)",
+      "stars": 0,
+      "forks": 0,
+      "license": "Apache-2.0",
+      "archived": false,
+      "treeTruncated": false,
+      "defaultBranch": "main",
+      "pushedAt": "2026-08-13T20:39:30Z",
+      "updatedAt": "2026-08-13T20:39:38Z",
+      "topics": [
+        "claude-code",
+        "deepseek-harness",
+        "dsh",
+        "dsh-plugin",
+        "output-styles"
+      ],
+      "manifests": [],
+      "checkedAt": "2026-08-13T21:32:46.503Z",
+      "reason": "no-dsh-bundle-manifest"
+    },
+    {
+      "repo": "pingfanfan/hello-dsh",
+      "name": "hello-dsh",
+      "url": "https://github.com/pingfanfan/hello-dsh",
+      "description": "从零开始，看懂 DeepSeek Harness 的「万物皆可插件」— 零基础插件开发教程（含 22 个中文技能实例）| Zero-to-plugin tutorial for DeepSeek Harness",
+      "stars": 0,
+      "forks": 0,
+      "license": "MIT",
+      "archived": false,
+      "treeTruncated": false,
+      "defaultBranch": "main",
+      "pushedAt": "2026-08-13T21:22:24Z",
+      "updatedAt": "2026-08-13T21:22:28Z",
+      "topics": [
+        "ai-agent",
+        "chinese",
+        "cordis",
+        "deepseek",
+        "deepseek-harness",
+        "dsh",
+        "dsh-plugin",
+        "tutorial"
+      ],
+      "manifests": [],
+      "checkedAt": "2026-08-13T21:32:46.503Z",
+      "reason": "no-dsh-bundle-manifest"
+    },
+    {
+      "repo": "rxh1999/dsh-jingle",
+      "name": "dsh-jingle",
+      "url": "https://github.com/rxh1999/dsh-jingle",
+      "description": null,
+      "stars": 0,
+      "forks": 0,
+      "license": "MIT",
+      "archived": false,
+      "treeTruncated": false,
+      "defaultBranch": "main",
+      "pushedAt": "2026-08-13T19:05:46Z",
+      "updatedAt": "2026-08-13T19:06:04Z",
+      "topics": [
+        "dsh-plugin",
+        "dsh-plugins"
+      ],
+      "manifests": [],
+      "checkedAt": "2026-08-13T21:32:46.503Z",
+      "reason": "no-dsh-bundle-manifest"
+    },
+    {
+      "repo": "Tokimorphling/deepseek-harness-rs",
+      "name": "deepseek-harness-rs",
+      "url": "https://github.com/Tokimorphling/deepseek-harness-rs",
+      "description": "A rust port for deepseek's harness",
+      "stars": 0,
+      "forks": 0,
+      "license": null,
+      "archived": false,
+      "treeTruncated": false,
+      "defaultBranch": "main",
+      "pushedAt": "2026-08-13T19:06:45Z",
+      "updatedAt": "2026-08-13T19:07:14Z",
+      "topics": [
+        "ai",
+        "dsh",
+        "dsh-plugin",
+        "rust"
+      ],
+      "manifests": [],
+      "checkedAt": "2026-08-13T21:32:46.503Z",
+      "reason": "no-dsh-bundle-manifest"
+    },
+    {
+      "repo": "TtTRz/dsh-gatedflow",
+      "name": "dsh-gatedflow",
+      "url": "https://github.com/TtTRz/dsh-gatedflow",
+      "description": "Gated, durable human-in-the-loop workflow engine for DeepSeek Harness.",
+      "stars": 0,
+      "forks": 0,
+      "license": "MIT",
+      "archived": false,
+      "treeTruncated": false,
+      "defaultBranch": "main",
+      "pushedAt": "2026-08-13T21:23:21Z",
+      "updatedAt": "2026-08-13T21:23:24Z",
+      "topics": [
+        "deepseek-harness",
+        "dsh-plugin",
+        "hitl",
+        "human-in-the-loop",
+        "workflow"
+      ],
+      "manifests": [],
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -5188,7 +6174,7 @@
         "network-tools"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -5208,7 +6194,7 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -5228,7 +6214,32 @@
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
+      "reason": "no-dsh-bundle-manifest"
+    },
+    {
+      "repo": "xiangshangya/deepseek-harness-desktop",
+      "name": "deepseek-harness-desktop",
+      "url": "https://github.com/xiangshangya/deepseek-harness-desktop",
+      "description": "Electron desktop app for DeepSeek Harness: bundles the dsh web server and its frontend into one installable app",
+      "stars": 0,
+      "forks": 0,
+      "license": "MIT",
+      "archived": false,
+      "treeTruncated": false,
+      "defaultBranch": "main",
+      "pushedAt": "2026-08-13T18:42:42Z",
+      "updatedAt": "2026-08-13T18:44:47Z",
+      "topics": [
+        "ai-agent",
+        "deepseek-harness",
+        "desktop-app",
+        "dsh",
+        "dsh-plugin",
+        "electron"
+      ],
+      "manifests": [],
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -5242,13 +6253,41 @@
       "archived": false,
       "treeTruncated": false,
       "defaultBranch": "main",
-      "pushedAt": "2026-08-13T18:28:43Z",
-      "updatedAt": "2026-08-13T18:28:46Z",
+      "pushedAt": "2026-08-13T19:50:13Z",
+      "updatedAt": "2026-08-13T19:50:19Z",
       "topics": [
         "dsh-plugin"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
+      "reason": "no-dsh-bundle-manifest"
+    },
+    {
+      "repo": "xinmo114514/dsh-usage-widget",
+      "name": "dsh-usage-widget",
+      "url": "https://github.com/xinmo114514/dsh-usage-widget",
+      "description": "DSH (DeepSeek Harness) 持久化 Web 插件：Token 用量统计悬浮窗 —— 可拖动窗口/圆点、曲线/热力图、总 tokens 大数字；宿主半聚合会话日志并提供 /usage/api/snapshot",
+      "stars": 0,
+      "forks": 0,
+      "license": "MIT",
+      "archived": false,
+      "treeTruncated": false,
+      "defaultBranch": "main",
+      "pushedAt": "2026-08-13T20:12:59Z",
+      "updatedAt": "2026-08-13T20:13:25Z",
+      "topics": [
+        "deepseek-harness",
+        "dsh",
+        "dsh-plugin",
+        "floating-widget",
+        "plugin",
+        "token-counter",
+        "token-usage",
+        "web-plugin",
+        "widget"
+      ],
+      "manifests": [],
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     },
     {
@@ -5271,7 +6310,31 @@
         "memory"
       ],
       "manifests": [],
-      "checkedAt": "2026-08-13T18:32:51.201Z",
+      "checkedAt": "2026-08-13T21:32:46.503Z",
+      "reason": "no-dsh-bundle-manifest"
+    },
+    {
+      "repo": "YisfL/dsh-desktop",
+      "name": "dsh-desktop",
+      "url": "https://github.com/YisfL/dsh-desktop",
+      "description": "DeepSeek Harness 的非官方桌面客户端（社区维护）：基于 Electron 的桌面壳层，内嵌官方 Web GUI 并管理 dsh 服务生命周期。",
+      "stars": 0,
+      "forks": 0,
+      "license": "MIT",
+      "archived": false,
+      "treeTruncated": false,
+      "defaultBranch": "main",
+      "pushedAt": "2026-08-13T19:06:28Z",
+      "updatedAt": "2026-08-13T19:06:51Z",
+      "topics": [
+        "deepseek",
+        "desktop",
+        "dsh",
+        "dsh-plugin",
+        "electron"
+      ],
+      "manifests": [],
+      "checkedAt": "2026-08-13T21:32:46.503Z",
       "reason": "no-dsh-bundle-manifest"
     }
   ]

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { posix } from 'node:path'
-import { extractBundle, parseIntegerFlag, readJson, resolveCategory, writeJson } from './lib.mjs'
+import { deriveReviewSignals, extractBundle, parseIntegerFlag, readJson, resolveCategory, writeJson } from './lib.mjs'
 import { githubJson, githubText, mapConcurrent, searchRepositories } from './github.mjs'
 
 const argv = process.argv.slice(2)
@@ -40,6 +40,17 @@ async function inspectRepository(repository, index) {
     }
 
     const validBundles = manifests.filter(item => item.patchExists)
+    const patchScans = new Map()
+    for (const bundle of validBundles) {
+      if (!patchScans.has(bundle.patchPath)) {
+        try {
+          const patchText = await githubText(`/repos/${repo}/contents/${encodeURIComponent(bundle.patchPath).replaceAll('%2F', '/')}?ref=${encodeURIComponent(repository.default_branch)}`)
+          patchScans.set(bundle.patchPath, { status: 'signals-only', signals: deriveReviewSignals(bundle, patchText) })
+        } catch (error) {
+          patchScans.set(bundle.patchPath, { status: 'unavailable', signals: [], error: error.message })
+        }
+      }
+    }
     const base = {
       repo,
       name: repository.name,
@@ -77,6 +88,11 @@ async function inspectRepository(repository, index) {
             manifestPath: bundle.manifestPath,
             patchPath: bundle.patchPath,
             checkedAt: generatedAt
+          },
+          reviewSignals: {
+            ...patchScans.get(bundle.patchPath),
+            checkedAt: generatedAt,
+            disclaimer: 'Static triage signals only; not a security certification.'
           },
           installTarget: bundle.installTarget,
           installCommand: bundle.installTarget

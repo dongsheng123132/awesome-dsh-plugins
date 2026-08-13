@@ -112,6 +112,28 @@
       ]
     },
     {
+      "id": "dsh-benchmark",
+      "name": "dsh-benchmark",
+      "category": "benchmarking",
+      "status": "verified",
+      "summary": "Manifest-fixed deterministic command/JSONL benchmarks with revision fingerprints, raw run evidence, versioned scoring and baseline regression comparison.",
+      "repo": "https://github.com/dongsheng123132/dsh-benchmark",
+      "evidence": [
+        {
+          "label": "Immutable plugin source and smoke commands",
+          "url": "https://github.com/dongsheng123132/dsh-benchmark/tree/55eb09430043074f269b4a06fb3583ae9a4f6079"
+        },
+        {
+          "label": "Ubuntu and Windows GitHub Actions run",
+          "url": "https://github.com/dongsheng123132/dsh-benchmark/actions/runs/31751218237"
+        },
+        {
+          "label": "DSH revision used for isolated profile install",
+          "url": "https://github.com/deepseek-ai/deepseek-harness/commit/47f943859bef60e4160492346772ded9b24f765a"
+        }
+      ]
+    },
+    {
       "id": "dsh-novel",
       "name": "dsh-novel",
       "category": "writing-novel",

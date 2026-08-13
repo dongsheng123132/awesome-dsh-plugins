@@ -1,0 +1,38 @@
+{
+  "name": "awesome-dsh-plugins",
+  "version": "0.1.0",
+  "description": "Evidence-backed DeepSeek Harness plugin radar and 2Origin plugin lab",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "dsh-awesome": "./bin/dsh-awesome.mjs"
+  },
+  "files": [
+    "bin/",
+    "data/",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "discover": "node scripts/discover.mjs",
+    "reclassify": "node scripts/reclassify.mjs",
+    "generate": "node scripts/generate-readme.mjs",
+    "check": "node scripts/check.mjs",
+    "test": "node --test",
+    "update-radar": "npm run discover && npm run generate && npm run check"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dongsheng123132/awesome-dsh-plugins.git"
+  },
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "awesome-list",
+    "plugin-registry"
+  ]
+}

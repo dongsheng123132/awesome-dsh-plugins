@@ -1,0 +1,59 @@
+name: Update plugin radar
+
+on:
+  schedule:
+    - cron: '17 3 * * *'
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: Maximum topic repositories to inspect
+        required: false
+        default: '1000'
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: plugin-radar
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GITHUB_TOKEN: ${{ github.token }}
+      RADAR_LIMIT: ${{ inputs.limit || '1000' }}
+      RADAR_BRANCH: automation/plugin-radar
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Scan and verify
+        run: |
+          node scripts/discover.mjs "$RADAR_LIMIT" 12
+          npm run generate
+          npm test
+          npm run check
+      - name: Open or update radar pull request
+        shell: bash
+        run: |
+          if git diff --quiet; then
+            echo "Radar is unchanged."
+            exit 0
+          fi
+          git config user.name "dsh-radar[bot]"
+          git config user.email "dsh-radar[bot]@users.noreply.github.com"
+          git checkout -B "$RADAR_BRANCH"
+          git add data/plugins.json data/candidates.json README.md README.zh-CN.md
+          git commit -m "Update verified DSH plugin radar"
+          git push --force-with-lease origin "$RADAR_BRANCH"
+          if gh pr view "$RADAR_BRANCH" >/dev/null 2>&1; then
+            gh pr edit "$RADAR_BRANCH" --title "Update verified DSH plugin radar" --body "Automated daily scan of topic-tagged repositories. Every promoted entry has observable dsh.bundle.patch and patch-file evidence. Review candidate removals and large count changes before merging."
+          else
+            gh pr create --base main --head "$RADAR_BRANCH" --title "Update verified DSH plugin radar" --body "Automated daily scan of topic-tagged repositories. Every promoted entry has observable dsh.bundle.patch and patch-file evidence. Review candidate removals and large count changes before merging."
+          fi

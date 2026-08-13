@@ -1,0 +1,26 @@
+name: Plugin correction or manual review
+description: Report a missing plugin or incorrect radar field
+title: "[plugin] "
+labels: [plugin-review]
+body:
+  - type: input
+    id: repository
+    attributes:
+      label: Public repository
+      placeholder: https://github.com/owner/repo
+    validations:
+      required: true
+  - type: input
+    id: manifest
+    attributes:
+      label: Bundle manifest path
+      placeholder: package.json
+    validations:
+      required: true
+  - type: textarea
+    id: correction
+    attributes:
+      label: What should be corrected?
+      description: Include exact observed fields or commands. Do not include secrets.
+    validations:
+      required: true

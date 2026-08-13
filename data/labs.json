@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "projects": [
+    {
+      "id": "dsh-switch",
+      "name": "dsh-switch",
+      "category": "model-routing",
+      "status": "planned",
+      "summary": "Provider health, latency, model identity and fallback routing for DSH.",
+      "repo": null,
+      "evidence": []
+    },
+    {
+      "id": "dsh-cost",
+      "name": "dsh-cost",
+      "category": "token-cost",
+      "status": "planned",
+      "summary": "Cost, budget and per-project attribution above DSH token-meter events.",
+      "repo": null,
+      "evidence": []
+    },
+    {
+      "id": "dsh-2origin",
+      "name": "dsh-2origin",
+      "category": "memory",
+      "status": "planned",
+      "summary": "Executable 2Origin state, projection, diff and freeze capabilities for DSH.",
+      "repo": null,
+      "evidence": []
+    },
+    {
+      "id": "dsh-cad-review",
+      "name": "dsh-cad-review",
+      "category": "cad-engineering",
+      "status": "planned",
+      "summary": "Structured CAD evidence extraction and rule-backed drawing review.",
+      "repo": null,
+      "evidence": []
+    },
+    {
+      "id": "dsh-novel",
+      "name": "dsh-novel",
+      "category": "writing-novel",
+      "status": "planned",
+      "summary": "Long-running story state with timeline, knowledge boundaries and contradiction checks.",
+      "repo": null,
+      "evidence": []
+    }
+  ]
+}

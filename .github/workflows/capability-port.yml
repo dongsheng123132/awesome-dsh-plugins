@@ -1,0 +1,60 @@
+name: Update capability port evidence
+
+on:
+  schedule:
+    - cron: '43 */12 * * *'
+  workflow_dispatch:
+    inputs:
+      per_source:
+        description: Maximum code-search results per source query
+        required: false
+        default: '50'
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: capability-port-radar
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ github.token }}
+      GH_TOKEN: ${{ github.token }}
+      PORT_LIMIT: ${{ inputs.per_source || '50' }}
+      PORT_BRANCH: automation/capability-port
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Scan capability sources and verify snapshot
+        run: |
+          node scripts/discover-capabilities.mjs --per-source "$PORT_LIMIT" --concurrency 8
+          npm run generate
+          npm test
+          npm run check
+      - name: Open or update capability evidence pull request
+        shell: bash
+        run: |
+          if git diff --quiet; then
+            echo "Capability snapshot is unchanged."
+            exit 0
+          fi
+          git config user.name "dsh-radar[bot]"
+          git config user.email "dsh-radar[bot]@users.noreply.github.com"
+          git checkout -B "$PORT_BRANCH"
+          git add data/capabilities.json README.md README.zh-CN.md
+          git commit -m "Update capability port evidence"
+          git push --force-with-lease origin "$PORT_BRANCH"
+          BODY="Automated evidence snapshot of public SKILL.md candidates. Copy/Wrapper/Bridge and Capability Port Score are heuristic triage backed by pinned repository/blob observations; they are not compatibility, safety, quality, or license clearance."
+          if gh pr view "$PORT_BRANCH" >/dev/null 2>&1; then
+            gh pr edit "$PORT_BRANCH" --title "Update capability port evidence" --body "$BODY"
+          else
+            gh pr create --base main --head "$PORT_BRANCH" --title "Update capability port evidence" --body "$BODY"
+          fi

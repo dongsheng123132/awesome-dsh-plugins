@@ -5,6 +5,7 @@ import { CATEGORY_LABELS, markdownEscape, readJson, replaceGeneratedSection } fr
 const root = new URL('../', import.meta.url)
 const radar = await readJson(new URL('data/plugins.json', root))
 const labs = await readJson(new URL('data/labs.json', root))
+const capabilities = await readJson(new URL('data/capabilities.json', root))
 
 function radarSection(language) {
   const categoryCounts = new Map()
@@ -52,12 +53,30 @@ function labsSection(language) {
   return `${header}\n${rows.join('\n')}`
 }
 
+function capabilitiesSection(language) {
+  const counts = Object.fromEntries(['copy', 'wrapper', 'bridge', 'unclassified']
+    .map(kind => [kind, capabilities.capabilities.filter(item => item.port.classification === kind).length]))
+  const top = capabilities.capabilities.slice(0, 15)
+  const summary = language === 'zh'
+    ? `**${capabilities.capabilities.length}** 条固定 revision 候选：Copy ${counts.copy} · Wrapper ${counts.wrapper} · Bridge ${counts.bridge} · 未分类 ${counts.unclassified}`
+    : `**${capabilities.capabilities.length}** revision-pinned candidates: Copy ${counts.copy} · Wrapper ${counts.wrapper} · Bridge ${counts.bridge} · Unclassified ${counts.unclassified}`
+  const header = language === 'zh'
+    ? '| 能力 | 来源 | 移植路径 | 分数 | License | 固定证据 |\n|---|---|---:|---:|---|---|'
+    : '| Capability | Source | Port path | Score | License | Pinned evidence |\n|---|---|---:|---:|---|---|'
+  const rows = top.map(item => `| [${markdownEscape(item.metadata.name || item.name)}](${item.url})<br><sub>${markdownEscape(item.repo)}:${markdownEscape(item.path)}</sub> | ${item.ecosystem} | ${item.port.classification} | ${item.port.score}/100 | ${item.metadata.license.value || '—'} | <code>${item.provenance.revision.slice(0, 12)}</code> / <code>${item.provenance.blobSha.slice(0, 12)}</code> |`)
+  const footer = language === 'zh'
+    ? `完整记录、分项得分与逐行信号见 [data/capabilities.json](data/capabilities.json)。快照：${capabilities.generatedAt || '尚未扫描'}。分数只衡量观测到的适配工作量，不代表兼容、安全、质量或许可证已获准。`
+    : `Full records, score components, and line-level signals live in [data/capabilities.json](data/capabilities.json). Snapshot: ${capabilities.generatedAt || 'not scanned yet'}. The score measures only observed adaptation effort; it is not compatibility, safety, quality, or license clearance.`
+  return `${summary}\n\n${header}\n${rows.join('\n')}\n\n${footer}`
+}
+
 for (const [filename, language] of [['README.md', 'en'], ['README.zh-CN.md', 'zh']]) {
   const path = new URL(filename, root)
   let source = await readFile(path, 'utf8')
   source = replaceGeneratedSection(source, 'RADAR', radarSection(language))
+  source = replaceGeneratedSection(source, 'CAPABILITIES', capabilitiesSection(language))
   source = replaceGeneratedSection(source, 'LABS', labsSection(language))
   await writeFile(path, source, 'utf8')
 }
 
-console.log(JSON.stringify({ ok: true, plugins: radar.plugins.length, labs: labs.projects.length }))
+console.log(JSON.stringify({ ok: true, plugins: radar.plugins.length, capabilities: capabilities.capabilities.length, labs: labs.projects.length }))

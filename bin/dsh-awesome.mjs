@@ -5,6 +5,7 @@ const root = new URL('../', import.meta.url)
 const radar = JSON.parse(await readFile(new URL('data/plugins.json', root), 'utf8'))
 const labs = JSON.parse(await readFile(new URL('data/labs.json', root), 'utf8'))
 const runtime = JSON.parse(await readFile(new URL('data/runtime-compat.json', root), 'utf8'))
+const capabilities = JSON.parse(await readFile(new URL('data/capabilities.json', root), 'utf8'))
 const argv = process.argv.slice(2)
 const command = argv[0] || 'help'
 const json = argv.includes('--json')
@@ -116,8 +117,23 @@ switch (command) {
     }
     break
   }
+  case 'ports': {
+    const query = argv[1]?.startsWith('--') ? undefined : argv[1]?.toLowerCase()
+    const results = capabilities.capabilities.filter(item => !query || [
+      item.repo, item.path, item.ecosystem, item.metadata?.name, item.metadata?.description,
+      item.port?.classification
+    ].filter(Boolean).join(' ').toLowerCase().includes(query))
+    if (json) console.log(JSON.stringify(results.slice(0, limit), null, 2))
+    else if (results.length === 0) console.log('No matching capability candidates.')
+    else for (const item of results.slice(0, limit)) {
+      console.log(`${item.metadata.name || item.name}  ${item.port.classification}  ${item.port.score}/100`)
+      console.log(`  ${item.ecosystem} · ${item.repo}:${item.path}`)
+      console.log(`  ${item.provenance.revision.slice(0, 12)} · ${item.metadata.license.value || 'license unobserved'}`)
+    }
+    break
+  }
   case 'help':
-    console.log(`dsh-awesome <command> [options]\n\nCommands:\n  search <query>   Search verified bundles\n  trending        Rank verified bundles by stars\n  new             Show recently pushed bundles\n  verified        List structurally verified bundles\n  runtime [query]  Show install/compose/boot evidence\n  risk [signal]    Show static review signals (not certification)\n  experimental    Show the 2Origin plugin lab\n\nOptions:\n  --limit <n>      Limit results (default 20)\n  --json           Emit JSON`)
+    console.log(`dsh-awesome <command> [options]\n\nCommands:\n  search <query>   Search verified bundles\n  trending        Rank verified bundles by stars\n  new             Show recently pushed bundles\n  verified        List structurally verified bundles\n  runtime [query]  Show install/compose/boot evidence\n  risk [signal]    Show static review signals (not certification)\n  ports [query]    Show evidence-backed capability port candidates\n  experimental    Show the 2Origin plugin lab\n\nOptions:\n  --limit <n>      Limit results (default 20)\n  --json           Emit JSON`)
     break
   default:
     throw new Error(`unknown command: ${command}`)

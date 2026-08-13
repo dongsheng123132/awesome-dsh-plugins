@@ -5,10 +5,23 @@
       "id": "dsh-switch",
       "name": "dsh-switch",
       "category": "model-routing",
-      "status": "planned",
-      "summary": "Provider health, latency, model identity and fallback routing for DSH.",
-      "repo": null,
-      "evidence": []
+      "status": "verified",
+      "summary": "Evidence-first provider health probes and optimistic-lock model switching for DSH.",
+      "repo": "https://github.com/dongsheng123132/dsh-switch",
+      "evidence": [
+        {
+          "label": "Immutable plugin source and smoke commands",
+          "url": "https://github.com/dongsheng123132/dsh-switch/tree/42db01a1f873753e90699f6281094040acca04e6"
+        },
+        {
+          "label": "Clean GitHub Actions run",
+          "url": "https://github.com/dongsheng123132/dsh-switch/actions/runs/31733424075"
+        },
+        {
+          "label": "DSH revision used for isolated profile install",
+          "url": "https://github.com/deepseek-ai/deepseek-harness/commit/47f943859bef60e4160492346772ded9b24f765a"
+        }
+      ]
     },
     {
       "id": "dsh-cost",

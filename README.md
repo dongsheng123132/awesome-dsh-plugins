@@ -73,7 +73,7 @@ The CLI reads the committed snapshot, so normal searches do not require a GitHub
 <!-- LABS:START -->
 | Project | Status | Category | Problem | Evidence |
 |---|---|---|---|---|
-| `dsh-switch` | **planned** | Model & Routing | Provider health, latency, model identity and fallback routing for DSH. | None yet |
+| [dsh-switch](https://github.com/https://github.com/dongsheng123132/dsh-switch) | **verified** | Model & Routing | Evidence-first provider health probes and optimistic-lock model switching for DSH. | [Immutable plugin source and smoke commands](https://github.com/dongsheng123132/dsh-switch/tree/42db01a1f873753e90699f6281094040acca04e6), [Clean GitHub Actions run](https://github.com/dongsheng123132/dsh-switch/actions/runs/31733424075), [DSH revision used for isolated profile install](https://github.com/deepseek-ai/deepseek-harness/commit/47f943859bef60e4160492346772ded9b24f765a) |
 | `dsh-cost` | **planned** | Token & Cost | Cost, budget and per-project attribution above DSH token-meter events. | None yet |
 | `dsh-2origin` | **planned** | Memory | Executable 2Origin state, projection, diff and freeze capabilities for DSH. | None yet |
 | `dsh-cad-review` | **planned** | CAD / Engineering | Structured CAD evidence extraction and rule-backed drawing review. | None yet |

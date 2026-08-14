@@ -117,12 +117,14 @@ test('runtime matrix requires pinned revisions and expands every platform-target
   assert.throws(() => validateRuntimeConfig({ ...config, targets: [{ ...config.targets[0], enforcement: 'ignore' }] }), /observe or required/)
 })
 
-test('runtime workflow rebuilds only the pinned DSH native prerequisite after scriptless install', async () => {
+test('runtime workflow delegates baseline build approval to the pinned DSH policy', async () => {
   const workflow = await readFile(new URL('../.github/workflows/runtime-compat.yml', import.meta.url), 'utf8')
-  assert.ok(workflow.includes('pnpm --dir "$DSH_DIR" install --frozen-lockfile --ignore-scripts'))
-  assert.ok(workflow.includes('pnpm --dir "$DSH_DIR" rebuild --pending node-pty'))
-  assert.ok(workflow.includes('dsh-runtime-baseline-${{ runner.os }}-${{ needs.plan.outputs.dsh_revision }}-v3'))
-  assert.ok(!workflow.includes('dsh-runtime-baseline-${{ runner.os }}-${{ needs.plan.outputs.dsh_revision }}-v2'))
+  assert.ok(workflow.includes('pnpm --dir "$DSH_DIR" install --frozen-lockfile'))
+  assert.ok(!workflow.includes('--ignore-scripts'))
+  assert.ok(!workflow.includes('rebuild node-pty'))
+  assert.ok(!workflow.includes('rebuild --pending node-pty'))
+  assert.ok(workflow.includes('dsh-runtime-baseline-${{ runner.os }}-${{ needs.plan.outputs.dsh_revision }}-v4'))
+  assert.ok(!workflow.includes('dsh-runtime-baseline-${{ runner.os }}-${{ needs.plan.outputs.dsh_revision }}-v3'))
 })
 
 test('runtime evidence store replaces the same immutable report id', async () => {

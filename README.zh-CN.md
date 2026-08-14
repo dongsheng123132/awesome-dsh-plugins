@@ -1,8 +1,31 @@
+![Awesome DSH Plugins——有证据的插件雷达](docs/assets/awesome-dsh-plugins-hero.png)
+
 # Awesome DSH Plugins
 
-> 有证据的 DeepSeek Harness 插件雷达 + 2Origin 自家插件实验室。
+> 发现真正可安装的 DeepSeek Harness 插件，查看每条收录背后的证据，并探索 2Origin 插件实验室。
 
-[English](README.md) · [DeepSeek Harness 官方仓库](https://github.com/deepseek-ai/deepseek-harness) · [插件 Topic](https://github.com/topics/dsh-plugin)
+[![仓库检查](https://github.com/dongsheng123132/awesome-dsh-plugins/actions/workflows/check.yml/badge.svg)](https://github.com/dongsheng123132/awesome-dsh-plugins/actions/workflows/check.yml)
+[![MIT 许可证](https://img.shields.io/github/license/dongsheng123132/awesome-dsh-plugins)](LICENSE)
+[![DSH 插件 Topic](https://img.shields.io/badge/GitHub_topic-dsh--plugin-0969da)](https://github.com/topics/dsh-plugin)
+[![Awesome](https://awesome.re/badge-flat2.svg)](https://awesome.re)
+
+[English](README.md) · [DeepSeek Harness 官方仓库](https://github.com/deepseek-ai/deepseek-harness) · [浏览已验证 Bundle](#插件雷达) · [终端搜索](#在终端里搜索) · [2Origin 插件实验室](#2origin-插件实验室)
+
+## 从这里开始
+
+| 我想…… | 去这里 |
+|---|---|
+| 找一个真正可安装的 DSH profile bundle | [插件雷达](#插件雷达) |
+| 估算把 Agent Skill 移植进 DSH 的工作量 | [能力移植评分](#能力移植评分) |
+| 在终端离线搜索插件 | [CLI 搜索](#在终端里搜索) |
+| 查看带可复现运行证据的插件 | [运行时兼容性层](#运行时兼容性层) |
+| 探索本实验室孵化的证据优先插件 | [2Origin 插件实验室](#2origin-插件实验室) |
+
+普通 CLI 搜索只读仓库内已提交的快照，不需要 GitHub token：
+
+```bash
+npx github:dongsheng123132/awesome-dsh-plugins search memory
+```
 
 本仓刻意区分“提到了 DSH 的仓库”和“DSH 真正能激活的 profile bundle”。扫描器只有同时找到下面两项，才授予 **Verified Bundle**：
 

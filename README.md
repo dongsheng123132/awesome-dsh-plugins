@@ -1,8 +1,31 @@
+![Awesome DSH Plugins — evidence-backed plugin radar](docs/assets/awesome-dsh-plugins-hero.png)
+
 # Awesome DSH Plugins
 
-> Evidence-backed DeepSeek Harness plugin radar + the 2Origin plugin lab.
+> Discover installable DeepSeek Harness plugins, inspect the evidence behind each listing, and explore the 2Origin plugin lab.
 
-[中文](README.zh-CN.md) · [Official DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) · [Plugin topic](https://github.com/topics/dsh-plugin)
+[![Repository checks](https://github.com/dongsheng123132/awesome-dsh-plugins/actions/workflows/check.yml/badge.svg)](https://github.com/dongsheng123132/awesome-dsh-plugins/actions/workflows/check.yml)
+[![MIT license](https://img.shields.io/github/license/dongsheng123132/awesome-dsh-plugins)](LICENSE)
+[![DSH plugin topic](https://img.shields.io/badge/GitHub_topic-dsh--plugin-0969da)](https://github.com/topics/dsh-plugin)
+[![Awesome](https://awesome.re/badge-flat2.svg)](https://awesome.re)
+
+[中文](README.zh-CN.md) · [Official DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) · [Browse verified bundles](#radar) · [Search from the terminal](#search-from-the-terminal) · [2Origin plugin lab](#2origin-plugin-lab)
+
+## Start here
+
+| I want to… | Go to |
+|---|---|
+| Find an installable DSH profile bundle | [Radar](#radar) |
+| Estimate the work needed to port an Agent Skill | [Capability Port Score](#capability-port-score) |
+| Search plugins offline from a terminal | [CLI search](#search-from-the-terminal) |
+| Inspect plugins with reproducible runtime evidence | [Runtime compatibility layer](#runtime-compatibility-layer) |
+| Explore evidence-first plugins built in this lab | [2Origin plugin lab](#2origin-plugin-lab) |
+
+Normal CLI searches use the committed snapshot and need no GitHub token:
+
+```bash
+npx github:dongsheng123132/awesome-dsh-plugins search memory
+```
 
 This repository deliberately distinguishes a repository that mentions DSH from an installable DSH profile bundle. A plugin receives the **Verified Bundle** mark only when the scanner finds both:
 

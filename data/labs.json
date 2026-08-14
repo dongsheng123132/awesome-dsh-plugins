@@ -50,19 +50,19 @@
       "name": "dsh-2origin",
       "category": "memory",
       "status": "verified",
-      "summary": "Integrity-checked 2Origin state projection, semantic diff and optimistic-lock immutable freeze for DSH.",
+      "summary": "Integrity-checked 2Origin state projection, semantic diff and optimistic-lock immutable freeze with a formal Codex manifest, proof-only MCP, real DSH ToolRuntime calls and stock Web Loader boot proof.",
       "repo": "https://github.com/dongsheng123132/dsh-2origin",
       "evidence": [
         {
-          "label": "Immutable plugin source and smoke commands",
-          "url": "https://github.com/dongsheng123132/dsh-2origin/tree/40dca1937a21f3d82922ec41353dce4810e10f64"
+          "label": "Immutable plugin source, proof-only MCP, DSH ToolRuntime and stock Web Loader smoke commands",
+          "url": "https://github.com/dongsheng123132/dsh-2origin/tree/f2d0b362611bdc82463380471f001e4bcce59597"
         },
         {
-          "label": "Clean GitHub Actions run",
-          "url": "https://github.com/dongsheng123132/dsh-2origin/actions/runs/31745733515"
+          "label": "Ubuntu and Windows GitHub Actions run",
+          "url": "https://github.com/dongsheng123132/dsh-2origin/actions/runs/31827357607"
         },
         {
-          "label": "DSH revision used for isolated profile install",
+          "label": "DSH revision used for local and fixed-commit GitHub Web profile installs",
           "url": "https://github.com/deepseek-ai/deepseek-harness/commit/47f943859bef60e4160492346772ded9b24f765a"
         }
       ]

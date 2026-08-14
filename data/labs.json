@@ -178,6 +178,28 @@
       ]
     },
     {
+      "id": "dsh-action-parity",
+      "name": "dsh-action-parity",
+      "category": "action-parity",
+      "status": "verified",
+      "summary": "Content-addressed CLI, MCP and GUI bindings plus deterministic replay evidence for one stable Action ID and action core.",
+      "repo": "https://github.com/dongsheng123132/dsh-action-parity",
+      "evidence": [
+        {
+          "label": "Immutable plugin source and smoke commands",
+          "url": "https://github.com/dongsheng123132/dsh-action-parity/tree/8c7f3ec70f938a343951be87fa489af396f2c8eb"
+        },
+        {
+          "label": "Ubuntu and Windows GitHub Actions run",
+          "url": "https://github.com/dongsheng123132/dsh-action-parity/actions/runs/31761911479"
+        },
+        {
+          "label": "DSH revision used for isolated profile install",
+          "url": "https://github.com/deepseek-ai/deepseek-harness/commit/47f943859bef60e4160492346772ded9b24f765a"
+        }
+      ]
+    },
+    {
       "id": "dsh-novel",
       "name": "dsh-novel",
       "category": "writing-novel",

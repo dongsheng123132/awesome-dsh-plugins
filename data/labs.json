@@ -220,6 +220,28 @@
           "url": "https://github.com/deepseek-ai/deepseek-harness/commit/47f943859bef60e4160492346772ded9b24f765a"
         }
       ]
+    },
+    {
+      "id": "dsh-capability-receipt",
+      "name": "dsh-capability-receipt",
+      "category": "provenance-lineage",
+      "status": "verified",
+      "summary": "Content-addressed evidence for the effective skill body, bounded resource closure, winning provider/source and invocation policy actually loaded by DSH.",
+      "repo": "https://github.com/dongsheng123132/dsh-capability-receipt",
+      "evidence": [
+        {
+          "label": "Immutable plugin source and DSH runtime smoke command",
+          "url": "https://github.com/dongsheng123132/dsh-capability-receipt/tree/7bfaa12c1d29f93ba090b1e1ccc1a28c6f090495"
+        },
+        {
+          "label": "Ubuntu and Windows GitHub Actions run",
+          "url": "https://github.com/dongsheng123132/dsh-capability-receipt/actions/runs/31763697724"
+        },
+        {
+          "label": "DSH revision used for isolated profile install and runtime smoke",
+          "url": "https://github.com/deepseek-ai/deepseek-harness/commit/47f943859bef60e4160492346772ded9b24f765a"
+        }
+      ]
     }
   ]
 }

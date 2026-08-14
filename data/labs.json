@@ -340,16 +340,16 @@
       "name": "dsh-windows-readiness-proof",
       "category": "windows-enterprise-evidence",
       "status": "verified",
-      "summary": "Pinned sanitized managed-Windows readiness evidence for DSH runtime, policy posture, filesystem/ACL, non-interactive service, storage and opaque connectivity controls without host collection or remediation.",
+      "summary": "Pinned sanitized managed-Windows readiness evidence for DSH runtime, policy posture, filesystem/ACL, non-interactive service, storage and opaque connectivity controls; v0.1.1 also proves the namespace plugin through a real stock Web Loader boot without host collection or remediation.",
       "repo": "https://github.com/dongsheng123132/dsh-windows-readiness-proof",
       "evidence": [
         {
-          "label": "Immutable plugin source, MCP and DSH runtime smoke commands",
-          "url": "https://github.com/dongsheng123132/dsh-windows-readiness-proof/tree/0afa1b68d7294c4adfc083dfd6c652b46b332ec5"
+          "label": "Immutable plugin source, MCP, DSH ToolRuntime and stock Web Loader smoke commands",
+          "url": "https://github.com/dongsheng123132/dsh-windows-readiness-proof/tree/291151da48ac229143e1f4e39ee608b856ded3e2"
         },
         {
           "label": "Ubuntu and Windows GitHub Actions run",
-          "url": "https://github.com/dongsheng123132/dsh-windows-readiness-proof/actions/runs/31790841249"
+          "url": "https://github.com/dongsheng123132/dsh-windows-readiness-proof/actions/runs/31799057295"
         },
         {
           "label": "DSH revision used for isolated profile install and runtime smoke",

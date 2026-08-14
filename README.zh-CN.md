@@ -173,7 +173,15 @@ npm run discover -- --limit 25
 
 ## 参与贡献
 
-见 [CONTRIBUTING.md](CONTRIBUTING.md)。添加 `dsh-plugin` topic 能帮助发现，但是否通过验证仍以 bundle manifest 和 patch 文件为准。
+欢迎投稿插件：先把插件仓库设为公开，再添加 [`dsh-plugin`](https://github.com/topics/dsh-plugin) topic。定时雷达会自动创建数据 PR，不需要手改生成的 README 表格。若条目漏收或信息有误，请提交 [插件审核表单](https://github.com/dongsheng123132/awesome-dsh-plugins/issues/new?template=add-plugin.yml)。证据要求与本地检查命令见 [CONTRIBUTING.md](CONTRIBUTING.md)。
+
+## 徽章
+
+插件已被收录？欢迎在插件 README 中挂上徽章：
+
+```markdown
+[![Listed on Awesome DSH Plugins](https://img.shields.io/badge/listed-Awesome%20DSH%20Plugins-2ea44f?logo=github)](https://github.com/dongsheng123132/awesome-dsh-plugins)
+```
 
 ## 免责声明
 

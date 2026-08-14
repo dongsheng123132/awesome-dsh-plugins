@@ -28,19 +28,19 @@
       "name": "dsh-cost",
       "category": "token-cost",
       "status": "verified",
-      "summary": "Durable usage-cost ledger, explicit evidence gaps and fail-closed budget checks for DSH.",
+      "summary": "Durable usage-cost ledger with explicit evidence gaps, fail-closed budget checks, bounded sanitized MCP rows, a formal Codex manifest, real DSH ToolRuntime calls and stock Web Loader boot proof.",
       "repo": "https://github.com/dongsheng123132/dsh-cost",
       "evidence": [
         {
-          "label": "Immutable plugin source and smoke commands",
-          "url": "https://github.com/dongsheng123132/dsh-cost/tree/82b41f21a66f71ee44042d2ea9d3fe64419c4a2d"
+          "label": "Immutable plugin source, MCP, DSH ToolRuntime and stock Web Loader smoke commands",
+          "url": "https://github.com/dongsheng123132/dsh-cost/tree/849d81509b334b42ddd8032cd8f5377758fc34c3"
         },
         {
-          "label": "Clean GitHub Actions run",
-          "url": "https://github.com/dongsheng123132/dsh-cost/actions/runs/31733968794"
+          "label": "Ubuntu and Windows GitHub Actions run",
+          "url": "https://github.com/dongsheng123132/dsh-cost/actions/runs/31807932538"
         },
         {
-          "label": "DSH revision used for isolated profile install",
+          "label": "DSH revision used for local and fixed-commit GitHub Web profile installs",
           "url": "https://github.com/deepseek-ai/deepseek-harness/commit/47f943859bef60e4160492346772ded9b24f765a"
         }
       ]

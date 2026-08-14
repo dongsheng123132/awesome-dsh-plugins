@@ -7,6 +7,7 @@ const SHA40 = /^[0-9a-f]{40}$/i
 const TARGET_ID = /^[a-z0-9]+(?:-[a-z0-9]+)*$/
 const PACKAGE_NAME = /^(?:@[a-z0-9._-]+\/)?[a-z0-9._-]+$/i
 const ALLOWED_PLATFORMS = new Set(['ubuntu-latest', 'windows-latest'])
+const ALLOWED_ENFORCEMENT = new Set(['observe', 'required'])
 
 export function validateRuntimeConfig(config) {
   const failures = []
@@ -33,7 +34,9 @@ export function validateRuntimeConfig(config) {
     if (target.spec !== `github:${target.repository}#${target.revision}`) failures.push(`${target.id}: spec must pin repository and revision exactly`)
     if (!PACKAGE_NAME.test(target.allowBuild ?? '')) failures.push(`${target.id}: allowBuild must name exactly one package`)
     if (target.profile !== 'web') failures.push(`${target.id}: only the isolated web profile is currently supported`)
-    if (!target.sourcePluginId || typeof target.sourcePluginId !== 'string') failures.push(`${target.id}: sourcePluginId is required`)
+    const sourceReferences = [target.sourcePluginId, target.sourceLabId].filter(value => typeof value === 'string' && value.length > 0)
+    if (sourceReferences.length !== 1) failures.push(`${target.id}: exactly one sourcePluginId or sourceLabId is required`)
+    if (!ALLOWED_ENFORCEMENT.has(target.enforcement)) failures.push(`${target.id}: enforcement must be observe or required`)
     if (!target.selection || typeof target.selection !== 'string') failures.push(`${target.id}: selection is required`)
     if (typeof target.rationale !== 'string' || target.rationale.length < 20) failures.push(`${target.id}: rationale is required`)
   }
@@ -50,6 +53,7 @@ export function expandRuntimeMatrix(config) {
       spec: target.spec,
       allowBuild: target.allowBuild,
       profile: target.profile,
+      enforcement: target.enforcement,
       selection: target.selection
     })))
   }

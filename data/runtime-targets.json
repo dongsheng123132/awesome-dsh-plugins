@@ -16,6 +16,7 @@
       "spec": "github:Jesse-njx/dsh-skillport#77c1d4ecc202366e853a39ae7f7f7cf2da6713b7",
       "allowBuild": "@dsh-skillport/bundle",
       "profile": "web",
+      "enforcement": "observe",
       "selection": "capability-port",
       "rationale": "Exercises the highest-priority cross-harness skill portability path."
     },
@@ -27,6 +28,7 @@
       "spec": "github:sakikoTGW/pack-agent#04f7ecac3e76de2c5157bd3dad90ebdd8e61e3c8",
       "allowBuild": "@sakikotgw/pack-agent",
       "profile": "web",
+      "enforcement": "observe",
       "selection": "capability-port",
       "rationale": "Exercises the pack lock and projected DSH capability path."
     },
@@ -38,6 +40,7 @@
       "spec": "github:NanmiCoder/dsh-agent-teams#48a96350cc09ef8ea616abc44408f53e744b80de",
       "allowBuild": "@nanmicoder/dsh-agent-teams",
       "profile": "web",
+      "enforcement": "observe",
       "selection": "high-adoption",
       "rationale": "Samples a high-adoption workflow plugin with a process-execution triage signal."
     },
@@ -49,8 +52,21 @@
       "spec": "github:forrestchang/dsh-multica-runtime#e29aae228449dfe50e88af60ef4281e38ca44e2a",
       "allowBuild": "@multica-ai/dsh-runtime",
       "profile": "web",
+      "enforcement": "observe",
       "selection": "static-review-priority",
       "rationale": "Samples a bundle with process, network and external-MCP triage signals."
+    },
+    {
+      "id": "windows-readiness-proof",
+      "sourceLabId": "dsh-windows-readiness-proof",
+      "repository": "dongsheng123132/dsh-windows-readiness-proof",
+      "revision": "291151da48ac229143e1f4e39ee608b856ded3e2",
+      "spec": "github:dongsheng123132/dsh-windows-readiness-proof#291151da48ac229143e1f4e39ee608b856ded3e2",
+      "allowBuild": "dsh-windows-readiness-proof",
+      "profile": "web",
+      "enforcement": "required",
+      "selection": "2origin-positive-control",
+      "rationale": "Guards the stock Loader injection contract with a pinned 2Origin plugin that must remain bootable."
     }
   ]
 }

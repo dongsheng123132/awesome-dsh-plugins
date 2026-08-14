@@ -75,8 +75,10 @@ for (const report of runtime.reports || []) {
 }
 
 const pluginIds = new Set((radar.plugins || []).map(plugin => plugin.id))
+const knownLabIds = new Set((labs.projects || []).map(project => project.id))
 for (const target of runtimeTargets.targets || []) {
-  if (!pluginIds.has(target.sourcePluginId)) failures.push(`${target.id}: runtime target is not present in the verified structural radar`)
+  if (target.sourcePluginId && !pluginIds.has(target.sourcePluginId)) failures.push(`${target.id}: runtime target is not present in the verified structural radar`)
+  if (target.sourceLabId && !knownLabIds.has(target.sourceLabId)) failures.push(`${target.id}: runtime target is not present in the 2Origin lab`)
 }
 
 const capabilityIds = new Set()

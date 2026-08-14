@@ -156,7 +156,7 @@ jobs:
         shell: bash
         run: |
           if test -f .runtime/report.stdout.json; then
-            node -e "const fs=require('fs'); const r=JSON.parse(fs.readFileSync('.runtime/report.stdout.json')); console.log('### '+r.package.spec); console.log(''); console.log('| OS | status | install | compose | boot |'); console.log('|---|---|---:|---:|---:|'); console.log('| '+r.environment.platform+' | '+r.status+' | '+r.stages[0].ok+' | '+r.stages[1].ok+' | '+r.stages[2].ok+' |')" >> "$GITHUB_STEP_SUMMARY"
+            node -e "const fs=require('fs'); const r=JSON.parse(fs.readFileSync('.runtime/report.stdout.json')); console.log('### '+r.package.spec); console.log(''); console.log('| OS | enforcement | status | install | compose | boot |'); console.log('|---|---|---|---:|---:|---:|'); console.log('| '+r.environment.platform+' | ${{ matrix.enforcement }} | '+r.status+' | '+r.stages[0].ok+' | '+r.stages[1].ok+' | '+r.stages[2].ok+' |')" >> "$GITHUB_STEP_SUMMARY"
           else
             echo "Runtime verifier did not emit a report." >> "$GITHUB_STEP_SUMMARY"
           fi
@@ -168,6 +168,13 @@ jobs:
           path: ${{ env.REPORT_DIR }}
           if-no-files-found: warn
           retention-days: 30
-      - name: Enforce runtime verdict
+      - name: Enforce evidence integrity and required verdicts
         shell: bash
-        run: test '${{ steps.runtime.outputs.exit_code }}' = '0'
+        run: |
+          test -s .runtime/report.stdout.json
+          node -e "JSON.parse(require('fs').readFileSync('.runtime/report.stdout.json', 'utf8'))"
+          if test '${{ matrix.enforcement }}' = 'required'; then
+            test '${{ steps.runtime.outputs.exit_code }}' = '0'
+          else
+            echo "Observed compatibility verdict; a valid negative report does not fail the instrument."
+          fi

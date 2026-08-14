@@ -108,11 +108,13 @@ test('runtime matrix requires pinned revisions and expands every platform-target
     platforms: ['ubuntu-latest', 'windows-latest'],
     targets: [{
       id: 'plugin-one', sourcePluginId: 'owner/plugin:package.json', repository: 'owner/plugin', revision: 'b'.repeat(40),
-      spec: `github:owner/plugin#${'b'.repeat(40)}`, allowBuild: '@owner/plugin', profile: 'web', selection: 'test', rationale: 'A sufficiently explicit test rationale.'
+      spec: `github:owner/plugin#${'b'.repeat(40)}`, allowBuild: '@owner/plugin', profile: 'web', enforcement: 'observe', selection: 'test', rationale: 'A sufficiently explicit test rationale.'
     }]
   }
   assert.equal(expandRuntimeMatrix(config).include.length, 2)
+  assert.equal(expandRuntimeMatrix(config).include[0].enforcement, 'observe')
   assert.throws(() => validateRuntimeConfig({ ...config, targets: [{ ...config.targets[0], spec: 'github:owner/plugin' }] }), /pin repository and revision/)
+  assert.throws(() => validateRuntimeConfig({ ...config, targets: [{ ...config.targets[0], enforcement: 'ignore' }] }), /observe or required/)
 })
 
 test('runtime evidence store replaces the same immutable report id', async () => {

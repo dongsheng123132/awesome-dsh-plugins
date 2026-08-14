@@ -268,6 +268,28 @@
           "url": "https://github.com/deepseek-ai/deepseek-harness/commit/47f943859bef60e4160492346772ded9b24f765a"
         }
       ]
+    },
+    {
+      "id": "dsh-audit-bundle",
+      "name": "dsh-audit-bundle",
+      "category": "audit-evidence",
+      "status": "verified",
+      "summary": "Pinned multi-producer evidence with subject/revision binding, value-hash assertions, control coverage, independence thresholds and a body-free Merkle audit index.",
+      "repo": "https://github.com/dongsheng123132/dsh-audit-bundle",
+      "evidence": [
+        {
+          "label": "Immutable plugin source, MCP and DSH runtime smoke commands",
+          "url": "https://github.com/dongsheng123132/dsh-audit-bundle/tree/a1c76971494f46e74eee3e3e69fbcc6da4c0effd"
+        },
+        {
+          "label": "Ubuntu and Windows GitHub Actions run",
+          "url": "https://github.com/dongsheng123132/dsh-audit-bundle/actions/runs/31775210570"
+        },
+        {
+          "label": "DSH revision used for isolated profile install and runtime smoke",
+          "url": "https://github.com/deepseek-ai/deepseek-harness/commit/47f943859bef60e4160492346772ded9b24f765a"
+        }
+      ]
     }
   ]
 }

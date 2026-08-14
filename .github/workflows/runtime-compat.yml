@@ -71,6 +71,10 @@ jobs:
         with:
           path: .runtime/dsh
           key: dsh-runtime-baseline-${{ runner.os }}-${{ needs.plan.outputs.dsh_revision }}-v4
+      - name: Rehydrate cached Windows pnpm links
+        if: runner.os == 'Windows' && steps.baseline-cache.outputs.cache-hit == 'true'
+        shell: bash
+        run: pnpm --dir "$DSH_DIR" install --frozen-lockfile --offline --config.optimisticRepeatInstall=false
       - name: Build immutable DSH baseline
         if: steps.baseline-cache.outputs.cache-hit != 'true'
         shell: bash
@@ -136,6 +140,10 @@ jobs:
           path: .runtime/dsh
           key: dsh-runtime-baseline-${{ runner.os }}-${{ needs.plan.outputs.dsh_revision }}-v4
           fail-on-cache-miss: true
+      - name: Rehydrate cached Windows pnpm links
+        if: runner.os == 'Windows'
+        shell: bash
+        run: pnpm --dir "$DSH_DIR" install --frozen-lockfile --offline --config.optimisticRepeatInstall=false
       - id: runtime
         name: Install, compose and boot in an isolated DSH home
         shell: bash

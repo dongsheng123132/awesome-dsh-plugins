@@ -312,6 +312,28 @@
           "url": "https://github.com/deepseek-ai/deepseek-harness/commit/47f943859bef60e4160492346772ded9b24f765a"
         }
       ]
+    },
+    {
+      "id": "dsh-surface-contract-proof",
+      "name": "dsh-surface-contract-proof",
+      "category": "contract-evidence",
+      "status": "verified",
+      "summary": "Offline baseline/observed conformance proof that ToolRuntime, MCP JSON-RPC and CLI JSON recordings preserve schema versions, success/error/exit mappings, conflict/confirmation, ordering and result digests.",
+      "repo": "https://github.com/dongsheng123132/dsh-surface-contract-proof",
+      "evidence": [
+        {
+          "label": "Immutable plugin source, MCP and DSH runtime smoke commands",
+          "url": "https://github.com/dongsheng123132/dsh-surface-contract-proof/tree/663c2a6fd9692d23b26d437a79ae73ac2fde483d"
+        },
+        {
+          "label": "Ubuntu and Windows GitHub Actions run",
+          "url": "https://github.com/dongsheng123132/dsh-surface-contract-proof/actions/runs/31785635415"
+        },
+        {
+          "label": "DSH revision used for isolated profile install and runtime smoke",
+          "url": "https://github.com/deepseek-ai/deepseek-harness/commit/47f943859bef60e4160492346772ded9b24f765a"
+        }
+      ]
     }
   ]
 }

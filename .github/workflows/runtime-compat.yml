@@ -1,0 +1,180 @@
+name: Runtime compatibility matrix
+
+on:
+  schedule:
+    - cron: '29 */12 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/runtime-compat.yml'
+      - 'data/runtime-targets.json'
+      - 'scripts/runtime-*.mjs'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: runtime-compat-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.matrix.outputs.matrix }}
+      dsh_revision: ${{ steps.config.outputs.revision }}
+      dsh_clone_url: ${{ steps.config.outputs.clone_url }}
+      package_manager: ${{ steps.config.outputs.package_manager }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - id: matrix
+        shell: bash
+        run: echo "matrix=$(node scripts/runtime-matrix.mjs)" >> "$GITHUB_OUTPUT"
+      - id: config
+        shell: bash
+        run: |
+          node -e "const c=require('./data/runtime-targets.json'); console.log('revision='+c.dsh.revision); console.log('clone_url='+c.dsh.cloneUrl); console.log('package_manager='+c.dsh.packageManager)" >> "$GITHUB_OUTPUT"
+
+  baseline:
+    needs: plan
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 40
+    env:
+      DSH_DIR: .runtime/dsh
+      DSH_REVISION: ${{ needs.plan.outputs.dsh_revision }}
+      DSH_CLONE_URL: ${{ needs.plan.outputs.dsh_clone_url }}
+      PACKAGE_MANAGER: ${{ needs.plan.outputs.package_manager }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Enable pinned pnpm
+        shell: bash
+        run: |
+          corepack enable
+          corepack prepare "$PACKAGE_MANAGER" --activate
+      - id: baseline-cache
+        uses: actions/cache@v4
+        with:
+          path: .runtime/dsh
+          key: dsh-runtime-baseline-${{ runner.os }}-${{ needs.plan.outputs.dsh_revision }}-v1
+      - name: Build immutable DSH baseline
+        if: steps.baseline-cache.outputs.cache-hit != 'true'
+        shell: bash
+        run: |
+          git clone --filter=blob:none --no-checkout "$DSH_CLONE_URL" "$DSH_DIR"
+          git -C "$DSH_DIR" fetch --depth=1 origin "$DSH_REVISION"
+          git -C "$DSH_DIR" checkout --detach "$DSH_REVISION"
+          pnpm --dir "$DSH_DIR" install --frozen-lockfile --ignore-scripts
+          pnpm --dir "$DSH_DIR" run build:lib
+          pnpm --dir "$DSH_DIR" run build:web
+      - name: Verify baseline identity
+        shell: bash
+        run: |
+          test "$(git -C "$DSH_DIR" rev-parse HEAD)" = "$DSH_REVISION"
+          test -f "$DSH_DIR/apps/web/dist/index.html"
+      - name: Boot stock DSH positive control
+        shell: bash
+        run: |
+          mkdir -p .runtime/baseline-report
+          node scripts/runtime-verify.mjs \
+            --baseline-only \
+            --profile web \
+            --dsh-repo "$DSH_DIR" \
+            --artifact-dir .runtime/baseline-report \
+            --timeout-ms 90000
+      - name: Upload stock baseline evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: runtime-baseline-${{ runner.os }}-${{ github.run_id }}
+          path: .runtime/baseline-report
+          if-no-files-found: warn
+          retention-days: 30
+
+  verify:
+    needs: [plan, baseline]
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 25
+    env:
+      DSH_DIR: .runtime/dsh
+      PACKAGE_MANAGER: ${{ needs.plan.outputs.package_manager }}
+      REPORT_DIR: .runtime/reports/${{ matrix.target }}/${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Enable pinned pnpm
+        shell: bash
+        run: |
+          corepack enable
+          corepack prepare "$PACKAGE_MANAGER" --activate
+      - uses: actions/cache/restore@v4
+        with:
+          path: .runtime/dsh
+          key: dsh-runtime-baseline-${{ runner.os }}-${{ needs.plan.outputs.dsh_revision }}-v1
+          fail-on-cache-miss: true
+      - id: runtime
+        name: Install, compose and boot in an isolated DSH home
+        shell: bash
+        run: |
+          mkdir -p "$REPORT_DIR"
+          set +e
+          node scripts/runtime-verify.mjs \
+            --spec '${{ matrix.spec }}' \
+            --display-spec '${{ matrix.spec }}' \
+            --allow-build '${{ matrix.allowBuild }}' \
+            --profile '${{ matrix.profile }}' \
+            --dsh-repo "$DSH_DIR" \
+            --artifact-dir "$REPORT_DIR" \
+            --timeout-ms 90000 > .runtime/report.stdout.json
+          code=$?
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          exit 0
+      - name: Publish concise result
+        if: always()
+        shell: bash
+        run: |
+          if test -f .runtime/report.stdout.json; then
+            node -e "const fs=require('fs'); const r=JSON.parse(fs.readFileSync('.runtime/report.stdout.json')); console.log('### '+r.package.spec); console.log(''); console.log('| OS | enforcement | status | install | compose | boot |'); console.log('|---|---|---|---:|---:|---:|'); console.log('| '+r.environment.platform+' | ${{ matrix.enforcement }} | '+r.status+' | '+r.stages[0].ok+' | '+r.stages[1].ok+' | '+r.stages[2].ok+' |')" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "Runtime verifier did not emit a report." >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - name: Upload immutable runtime evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: runtime-${{ matrix.target }}-${{ runner.os }}-${{ github.run_id }}
+          path: ${{ env.REPORT_DIR }}
+          if-no-files-found: warn
+          retention-days: 30
+      - name: Enforce evidence integrity and required verdicts
+        shell: bash
+        run: |
+          test -s .runtime/report.stdout.json
+          node -e "JSON.parse(require('fs').readFileSync('.runtime/report.stdout.json', 'utf8'))"
+          if test '${{ matrix.enforcement }}' = 'required'; then
+            test '${{ steps.runtime.outputs.exit_code }}' = '0'
+          else
+            echo "Observed compatibility verdict; a valid negative report does not fail the instrument."
+          fi

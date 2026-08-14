@@ -29,10 +29,14 @@ node scripts/runtime-verify.mjs \
   --spec <package-or-built-checkout> \
   --dsh-repo /path/to/deepseek-harness \
   --node /path/to/a-supported-node \
+  --allow-build @scope/exact-package \
+  --artifact-dir artifacts/runtime \
   --record data/runtime-compat.json
 ```
 
-The runner installs into a new temporary `DSH_HOME`, composes the profile, boots the real Web profile on an OS-assigned loopback port, waits for DSH's readiness URL, and records the DSH revision plus manifest and patch hashes. A report may be `passed`, `failed`, `blocked-environment`, or `blocked-harness`; never present a blocked run as a plugin failure.
+The runner removes credential-shaped and CI-control environment variables, allows lifecycle builds for exactly the named pinned package, installs into a new temporary `DSH_HOME`, composes the profile, boots the real Web profile on an OS-assigned loopback port, waits for DSH's readiness URL, and records the DSH revision plus manifest and patch hashes. `--artifact-dir` writes a create-only, content-addressed report. A report may be `passed`, `failed`, `blocked-environment`, or `blocked-harness`; never present a blocked run as a plugin failure.
+
+The scheduled matrix is declared in `data/runtime-targets.json`. Every DSH and plugin source must be pinned to a full commit and one exact `allowBuild` package. The workflow builds the DSH host/client libraries and Web client with dependency scripts disabled, caches one baseline per OS/revision, boots stock DSH as the instrument's positive control, then tests SkillPort, Pack-Agent, a high-adoption plugin, a static-review-priority plugin and a pinned 2Origin positive control on Ubuntu and Windows. Community targets use `observe`: a valid negative compatibility report remains evidence and does not make the instrument itself red. Targets we maintain use `required` and must pass. Missing or invalid reports always fail. Selection is triage, not endorsement; runtime success is compatibility evidence, not a safety certification.
 
 ## Development
 

@@ -1,11 +1,12 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import { classifyRepository, deriveReviewSignals, extractBundle, replaceGeneratedSection, resolveCategory } from '../scripts/lib.mjs'
-import { appendRuntimeReport, sanitizeOutput, tail } from '../scripts/runtime-lib.mjs'
+import { appendRuntimeReport, sanitizeEnvironment, sanitizeOutput, tail, writeImmutableRuntimeArtifact } from '../scripts/runtime-lib.mjs'
 import { mkdtemp, readFile, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { analyzeCapability, inferEcosystem, mergeSearchHits, parseSkillFrontmatter } from '../scripts/capability-lib.mjs'
+import { expandRuntimeMatrix, validateRuntimeConfig } from '../scripts/runtime-matrix.mjs'
 
 test('extractBundle verifies a root bundle and produces a GitHub install target', () => {
   const manifest = {
@@ -78,8 +79,42 @@ test('generated sections preserve surrounding prose', () => {
 })
 
 test('runtime evidence sanitizes local paths and bounds command output', () => {
-  assert.equal(sanitizeOutput('at C:\\secret\\home', [['C:\\secret\\home', '<HOME>']]), 'at <HOME>')
+  assert.equal(sanitizeOutput('at C:\\secret\\home\\AppData', [['C:\\secret\\home\\AppData', '<APP_DATA>'], ['C:\\secret\\home', '<HOME>']]), 'at <APP_DATA>')
   assert.equal(tail('abcdef', 3), 'def')
+})
+
+test('runtime subprocess environment removes credential-shaped names', () => {
+  assert.deepEqual(
+    sanitizeEnvironment({ PATH: 'bin', API_KEY: 'x', GH_TOKEN: 'y', GITHUB_ENV: '/control', ACTIONS_RUNTIME_URL: 'https://control', NORMAL: 'z' }),
+    { PATH: 'bin', NORMAL: 'z' }
+  )
+})
+
+test('runtime artifacts are content-addressed and replay safe', async () => {
+  const directory = await mkdtemp(join(tmpdir(), 'awesome-dsh-artifact-test-'))
+  const report = { id: 'sample', status: 'passed', stages: [] }
+  const first = await writeImmutableRuntimeArtifact(directory, report)
+  const second = await writeImmutableRuntimeArtifact(directory, report)
+  assert.match(first.filename, /^runtime-[0-9a-f]{64}\.json$/)
+  assert.equal(first.sha256, second.sha256)
+  assert.equal(second.replayed, true)
+  assert.deepEqual(JSON.parse(await readFile(join(directory, first.filename), 'utf8')), report)
+})
+
+test('runtime matrix requires pinned revisions and expands every platform-target pair', () => {
+  const config = {
+    schemaVersion: 1,
+    dsh: { cloneUrl: 'https://github.com/deepseek-ai/deepseek-harness.git', revision: 'a'.repeat(40), packageManager: 'pnpm@11.7.0' },
+    platforms: ['ubuntu-latest', 'windows-latest'],
+    targets: [{
+      id: 'plugin-one', sourcePluginId: 'owner/plugin:package.json', repository: 'owner/plugin', revision: 'b'.repeat(40),
+      spec: `github:owner/plugin#${'b'.repeat(40)}`, allowBuild: '@owner/plugin', profile: 'web', enforcement: 'observe', selection: 'test', rationale: 'A sufficiently explicit test rationale.'
+    }]
+  }
+  assert.equal(expandRuntimeMatrix(config).include.length, 2)
+  assert.equal(expandRuntimeMatrix(config).include[0].enforcement, 'observe')
+  assert.throws(() => validateRuntimeConfig({ ...config, targets: [{ ...config.targets[0], spec: 'github:owner/plugin' }] }), /pin repository and revision/)
+  assert.throws(() => validateRuntimeConfig({ ...config, targets: [{ ...config.targets[0], enforcement: 'ignore' }] }), /observe or required/)
 })
 
 test('runtime evidence store replaces the same immutable report id', async () => {

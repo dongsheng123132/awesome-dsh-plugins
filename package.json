@@ -19,6 +19,7 @@
     "reclassify": "node scripts/reclassify.mjs",
     "generate": "node scripts/generate-readme.mjs",
     "runtime:verify": "node scripts/runtime-verify.mjs",
+    "runtime:matrix": "node scripts/runtime-matrix.mjs",
     "check": "node scripts/check.mjs",
     "test": "node --test",
     "update-radar": "npm run discover && npm run generate && npm run check",

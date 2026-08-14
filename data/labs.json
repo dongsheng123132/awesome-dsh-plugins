@@ -334,6 +334,28 @@
           "url": "https://github.com/deepseek-ai/deepseek-harness/commit/47f943859bef60e4160492346772ded9b24f765a"
         }
       ]
+    },
+    {
+      "id": "dsh-windows-readiness-proof",
+      "name": "dsh-windows-readiness-proof",
+      "category": "windows-enterprise-evidence",
+      "status": "verified",
+      "summary": "Pinned sanitized managed-Windows readiness evidence for DSH runtime, policy posture, filesystem/ACL, non-interactive service, storage and opaque connectivity controls without host collection or remediation.",
+      "repo": "https://github.com/dongsheng123132/dsh-windows-readiness-proof",
+      "evidence": [
+        {
+          "label": "Immutable plugin source, MCP and DSH runtime smoke commands",
+          "url": "https://github.com/dongsheng123132/dsh-windows-readiness-proof/tree/0afa1b68d7294c4adfc083dfd6c652b46b332ec5"
+        },
+        {
+          "label": "Ubuntu and Windows GitHub Actions run",
+          "url": "https://github.com/dongsheng123132/dsh-windows-readiness-proof/actions/runs/31790841249"
+        },
+        {
+          "label": "DSH revision used for isolated profile install and runtime smoke",
+          "url": "https://github.com/deepseek-ai/deepseek-harness/commit/47f943859bef60e4160492346772ded9b24f765a"
+        }
+      ]
     }
   ]
 }

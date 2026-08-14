@@ -67,16 +67,13 @@ jobs:
           corepack enable
           corepack prepare "$PACKAGE_MANAGER" --activate
       - id: baseline-cache
+        if: runner.os != 'Windows'
         uses: actions/cache@v4
         with:
           path: .runtime/dsh
           key: dsh-runtime-baseline-${{ runner.os }}-${{ needs.plan.outputs.dsh_revision }}-v4
-      - name: Rehydrate cached Windows pnpm links
-        if: runner.os == 'Windows' && steps.baseline-cache.outputs.cache-hit == 'true'
-        shell: bash
-        run: pnpm --dir "$DSH_DIR" install --frozen-lockfile --offline --config.optimisticRepeatInstall=false
       - name: Build immutable DSH baseline
-        if: steps.baseline-cache.outputs.cache-hit != 'true'
+        if: runner.os == 'Windows' || steps.baseline-cache.outputs.cache-hit != 'true'
         shell: bash
         run: |
           git clone --filter=blob:none --no-checkout "$DSH_CLONE_URL" "$DSH_DIR"
@@ -121,6 +118,8 @@ jobs:
     timeout-minutes: 25
     env:
       DSH_DIR: .runtime/dsh
+      DSH_REVISION: ${{ needs.plan.outputs.dsh_revision }}
+      DSH_CLONE_URL: ${{ needs.plan.outputs.dsh_clone_url }}
       PACKAGE_MANAGER: ${{ needs.plan.outputs.package_manager }}
       REPORT_DIR: .runtime/reports/${{ matrix.target }}/${{ matrix.os }}
     steps:
@@ -135,15 +134,25 @@ jobs:
         run: |
           corepack enable
           corepack prepare "$PACKAGE_MANAGER" --activate
-      - uses: actions/cache/restore@v4
+      - name: Restore immutable DSH baseline
+        if: runner.os != 'Windows'
+        uses: actions/cache/restore@v4
         with:
           path: .runtime/dsh
           key: dsh-runtime-baseline-${{ runner.os }}-${{ needs.plan.outputs.dsh_revision }}-v4
           fail-on-cache-miss: true
-      - name: Rehydrate cached Windows pnpm links
+      - name: Build immutable DSH baseline on Windows
         if: runner.os == 'Windows'
         shell: bash
-        run: pnpm --dir "$DSH_DIR" install --frozen-lockfile --offline --config.optimisticRepeatInstall=false
+        run: |
+          git clone --filter=blob:none --no-checkout "$DSH_CLONE_URL" "$DSH_DIR"
+          git -C "$DSH_DIR" fetch --depth=1 origin "$DSH_REVISION"
+          git -C "$DSH_DIR" checkout --detach "$DSH_REVISION"
+          pnpm --dir "$DSH_DIR" install --frozen-lockfile
+          pnpm --dir "$DSH_DIR" run build:lib
+          pnpm --dir "$DSH_DIR" run build:web
+          test "$(git -C "$DSH_DIR" rev-parse HEAD)" = "$DSH_REVISION"
+          test -f "$DSH_DIR/apps/web/dist/index.html"
       - id: runtime
         name: Install, compose and boot in an isolated DSH home
         shell: bash

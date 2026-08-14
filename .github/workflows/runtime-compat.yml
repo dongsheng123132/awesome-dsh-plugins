@@ -70,7 +70,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: .runtime/dsh
-          key: dsh-runtime-baseline-${{ runner.os }}-${{ needs.plan.outputs.dsh_revision }}-v2
+          key: dsh-runtime-baseline-${{ runner.os }}-${{ needs.plan.outputs.dsh_revision }}-v3
       - name: Build immutable DSH baseline
         if: steps.baseline-cache.outputs.cache-hit != 'true'
         shell: bash
@@ -79,7 +79,9 @@ jobs:
           git -C "$DSH_DIR" fetch --depth=1 origin "$DSH_REVISION"
           git -C "$DSH_DIR" checkout --detach "$DSH_REVISION"
           pnpm --dir "$DSH_DIR" install --frozen-lockfile --ignore-scripts
-          pnpm --dir "$DSH_DIR" rebuild node-pty
+          # --ignore-scripts marks native packages unbuilt; --pending is required
+          # for pnpm to execute this one audited package's lifecycle script.
+          pnpm --dir "$DSH_DIR" rebuild --pending node-pty
           pnpm --dir "$DSH_DIR" run build:lib
           pnpm --dir "$DSH_DIR" run build:web
       - name: Verify baseline identity
@@ -133,7 +135,7 @@ jobs:
       - uses: actions/cache/restore@v4
         with:
           path: .runtime/dsh
-          key: dsh-runtime-baseline-${{ runner.os }}-${{ needs.plan.outputs.dsh_revision }}-v2
+          key: dsh-runtime-baseline-${{ runner.os }}-${{ needs.plan.outputs.dsh_revision }}-v3
           fail-on-cache-miss: true
       - id: runtime
         name: Install, compose and boot in an isolated DSH home

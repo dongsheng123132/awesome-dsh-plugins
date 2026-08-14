@@ -120,9 +120,9 @@ test('runtime matrix requires pinned revisions and expands every platform-target
 test('runtime workflow rebuilds only the pinned DSH native prerequisite after scriptless install', async () => {
   const workflow = await readFile(new URL('../.github/workflows/runtime-compat.yml', import.meta.url), 'utf8')
   assert.ok(workflow.includes('pnpm --dir "$DSH_DIR" install --frozen-lockfile --ignore-scripts'))
-  assert.ok(workflow.includes('pnpm --dir "$DSH_DIR" rebuild node-pty'))
-  assert.ok(workflow.includes('dsh-runtime-baseline-${{ runner.os }}-${{ needs.plan.outputs.dsh_revision }}-v2'))
-  assert.ok(!workflow.includes('dsh-runtime-baseline-${{ runner.os }}-${{ needs.plan.outputs.dsh_revision }}-v1'))
+  assert.ok(workflow.includes('pnpm --dir "$DSH_DIR" rebuild --pending node-pty'))
+  assert.ok(workflow.includes('dsh-runtime-baseline-${{ runner.os }}-${{ needs.plan.outputs.dsh_revision }}-v3'))
+  assert.ok(!workflow.includes('dsh-runtime-baseline-${{ runner.os }}-${{ needs.plan.outputs.dsh_revision }}-v2'))
 })
 
 test('runtime evidence store replaces the same immutable report id', async () => {

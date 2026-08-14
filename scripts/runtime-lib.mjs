@@ -1,6 +1,7 @@
 import { spawn } from 'node:child_process'
 import { createHash } from 'node:crypto'
-import { readFile, writeFile } from 'node:fs/promises'
+import { mkdir, readFile, writeFile } from 'node:fs/promises'
+import { join } from 'node:path'
 
 const MAX_CAPTURE_CHARS = 1600
 
@@ -13,6 +14,43 @@ export function sanitizeOutput(value, replacements = []) {
     (text, [secret, label]) => secret ? text.replaceAll(secret, label) : text,
     value
   )
+}
+
+const SENSITIVE_ENVIRONMENT_NAME = /(?:^|_)(?:api_?key|auth|credential|password|passwd|secret|token)(?:_|$)/i
+const CI_CONTROL_ENVIRONMENT_NAME = /^(?:ACTIONS|GITHUB)_/i
+
+export function sanitizeEnvironment(environment) {
+  return Object.fromEntries(Object.entries(environment).filter(([name]) => (
+    !SENSITIVE_ENVIRONMENT_NAME.test(name) && !CI_CONTROL_ENVIRONMENT_NAME.test(name)
+  )))
+}
+
+function sortForJson(value) {
+  if (Array.isArray(value)) return value.map(sortForJson)
+  if (value && typeof value === 'object') {
+    return Object.fromEntries(Object.keys(value).sort().map(key => [key, sortForJson(value[key])]))
+  }
+  return value
+}
+
+export function stableJson(value) {
+  return `${JSON.stringify(sortForJson(value), null, 2)}\n`
+}
+
+export async function writeImmutableRuntimeArtifact(directory, report) {
+  const content = stableJson(report)
+  const sha256 = createHash('sha256').update(content).digest('hex')
+  const filename = `runtime-${sha256}.json`
+  await mkdir(directory, { recursive: true })
+  const path = join(directory, filename)
+  try {
+    await writeFile(path, content, { encoding: 'utf8', flag: 'wx' })
+    return { filename, sha256, replayed: false }
+  } catch (error) {
+    if (error?.code !== 'EEXIST') throw error
+    if (await readFile(path, 'utf8') !== content) throw new Error(`runtime artifact collision: ${filename}`)
+    return { filename, sha256, replayed: true }
+  }
 }
 
 export async function sha256File(path) {

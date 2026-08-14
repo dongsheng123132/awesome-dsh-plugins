@@ -137,6 +137,8 @@ The radar also reads each verified bundle's patch and runtime dependencies, flag
 
 The first audit already demonstrates why the split matters. `@dsh-skillport/bundle` was not available from npm at audit time, so the documented registry install failed. The same source commit, after a local build, installed, composed, and reached a real DSH Web readiness URL on Node 24.19.0 against a previously built DSH `47f943859bef` checkout. A clean detached DSH checkout installed and composed the plugin but was blocked by missing DSH Web client bundles; rebuilding that checkout then failed earlier in DSH's own build (`tsdown` could not import `unrun`). The evidence therefore supports compatibility with the built checkout, not yet a clean-source reproducibility claim. A Node 22.14 attempt is separately retained as `blocked-environment` because it does not satisfy DSH's declared engine floor.
 
+The next layer is now machine-scheduled: [`data/runtime-targets.json`](data/runtime-targets.json) pins the DSH baseline and four community plugin commits selected for capability portability, adoption and static review priority. [The runtime compatibility matrix](.github/workflows/runtime-compat.yml) builds and caches that exact DSH Web baseline on Ubuntu and Windows, boots stock DSH first as the instrument's positive control, then installs, composes and boots every package/OS pair in a fresh `DSH_HOME`. Each run uploads a create-only, content-addressed report. Credential-shaped and CI-control environment variables are removed; lifecycle builds are allowed only for the one pinned package named by the target. Passing proves only compatibility with the named tuple; it is not a safety certification.
+
 Run a reproducible check:
 
 ```bash

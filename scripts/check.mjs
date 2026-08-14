@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import { readFile } from 'node:fs/promises'
 import { CATEGORY_LABELS, readJson, REVIEW_SIGNAL_LABELS } from './lib.mjs'
+import { validateRuntimeConfig } from './runtime-matrix.mjs'
 
 const root = new URL('../', import.meta.url)
 const radar = await readJson(new URL('data/plugins.json', root))
@@ -8,6 +9,7 @@ const candidates = await readJson(new URL('data/candidates.json', root))
 const labs = await readJson(new URL('data/labs.json', root))
 const categoryOverrides = await readJson(new URL('data/category-overrides.json', root))
 const runtime = await readJson(new URL('data/runtime-compat.json', root))
+const runtimeTargets = await readJson(new URL('data/runtime-targets.json', root))
 const capabilities = await readJson(new URL('data/capabilities.json', root))
 const failures = []
 
@@ -20,6 +22,11 @@ if (categoryOverrides.schemaVersion !== 1 || !Array.isArray(categoryOverrides.ov
 }
 if (runtime.schemaVersion !== 1 || !Array.isArray(runtime.reports)) {
   failures.push('data/runtime-compat.json must use schemaVersion 1 and a reports array')
+}
+try {
+  validateRuntimeConfig(runtimeTargets)
+} catch (error) {
+  failures.push(...String(error.message).split('\n').map(message => `runtime targets: ${message}`))
 }
 if (capabilities.schemaVersion !== 1 || !Array.isArray(capabilities.capabilities) || !Array.isArray(capabilities.errors)) {
   failures.push('data/capabilities.json must use schemaVersion 1 with capabilities and errors arrays')
@@ -65,6 +72,11 @@ for (const report of runtime.reports || []) {
   if (!/^[0-9a-f]{40}$/i.test(report.dsh?.revision || '')) failures.push(`${report.id}: invalid DSH revision`)
   if (!report.package?.spec) failures.push(`${report.id}: package spec missing`)
   if (!Array.isArray(report.stages) || report.stages.length < 3) failures.push(`${report.id}: at least three stages required`)
+}
+
+const pluginIds = new Set((radar.plugins || []).map(plugin => plugin.id))
+for (const target of runtimeTargets.targets || []) {
+  if (!pluginIds.has(target.sourcePluginId)) failures.push(`${target.id}: runtime target is not present in the verified structural radar`)
 }
 
 const capabilityIds = new Set()
@@ -128,5 +140,6 @@ console.log(JSON.stringify({
   candidates: candidates.candidates.length,
   labs: labs.projects.length,
   runtimeReports: runtime.reports.length
+  , runtimeTargets: runtimeTargets.targets?.length ?? 0
   , capabilityCandidates: capabilities.capabilities.length
 }))

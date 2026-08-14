@@ -200,13 +200,26 @@
       ]
     },
     {
-      "id": "dsh-novel",
-      "name": "dsh-novel",
+      "id": "dsh-narrative-ledger",
+      "name": "dsh-narrative-ledger",
       "category": "writing-novel",
-      "status": "planned",
-      "summary": "Long-running story state with timeline, knowledge boundaries and contradiction checks.",
-      "repo": null,
-      "evidence": []
+      "status": "verified",
+      "summary": "Content-addressed canon, immutable fact lifecycle, timeline continuity and spoiler-safe character knowledge projections without manuscript prose.",
+      "repo": "https://github.com/dongsheng123132/dsh-narrative-ledger",
+      "evidence": [
+        {
+          "label": "Immutable plugin source, MCP and smoke commands",
+          "url": "https://github.com/dongsheng123132/dsh-narrative-ledger/tree/1a1f0228eb8866f4a2fe3e65d7f39d595468c6a9"
+        },
+        {
+          "label": "Ubuntu and Windows GitHub Actions run",
+          "url": "https://github.com/dongsheng123132/dsh-narrative-ledger/actions/runs/31762575870"
+        },
+        {
+          "label": "DSH revision used for isolated profile install",
+          "url": "https://github.com/deepseek-ai/deepseek-harness/commit/47f943859bef60e4160492346772ded9b24f765a"
+        }
+      ]
     }
   ]
 }

@@ -137,7 +137,7 @@ CLI 读取仓库已经提交的快照，普通搜索不需要 GitHub Token。
 
 第一次审计已经说明为什么必须分层：审计时 `@dsh-skillport/bundle` 尚未出现在 npm，因此 README 中的 registry 安装路径真实失败；但同一源码 commit 本地构建后，在 Node 24.19.0、已有构建产物的 DSH `47f943859bef` 检出上完成安装、组合并启动到真实 readiness URL。干净 detached DSH 检出能安装、组合插件，但因缺少 DSH Web client bundle 被阻塞；继续构建该检出又先在 DSH 自身的 `tsdown` 缺 `unrun` 处失败。因此目前证据只支持“兼容已有构建产物的检出”，还不支持“干净源码可复现”。Node 22.14 那次另记为 `blocked-environment`，因为它不满足 DSH 自己声明的最低引擎要求，不能算插件失败。
 
-下一层现已机器化：[`data/runtime-targets.json`](data/runtime-targets.json) 钉死 DSH 基线、四个观察型社区插件 commit 和一个必须通过的 2Origin 阳性对照。[运行时兼容矩阵](.github/workflows/runtime-compat.yml) 在 Ubuntu 与 Windows 上构建并缓存该精确 DSH Web 基线，先启动 stock DSH 作为仪器阳性对照，再在全新 `DSH_HOME` 中逐一安装、组合和启动每个 package/OS 组合。基线生命周期脚本由固定 DSH commit 自己的失败闭合 `strictDepBuilds` 与逐项审核 `allowBuilds` 策略管控；插件侧仍只精确放行目标声明的一个固定包。每次运行都会在移除凭据形与 CI 控制环境变量后上传只创建不覆盖、内容寻址的报告。`observe` 目标的有效负报告会记录生态兼容事实但不会把仪器本身判红；`required` 目标必须通过，证据缺失或格式错误始终失败。通过只证明指定组合兼容，不是安全认证。
+下一层现已机器化：[`data/runtime-targets.json`](data/runtime-targets.json) 钉死 DSH 基线、四个观察型社区插件 commit 和一个必须通过的 2Origin 阳性对照。[运行时兼容矩阵](.github/workflows/runtime-compat.yml) 在 Ubuntu 与 Windows 上构建并缓存该精确 DSH Web 基线，先启动 stock DSH 作为仪器阳性对照，再在全新 `DSH_HOME` 中逐一安装、组合和启动每个 package/OS 组合。基线生命周期脚本由固定 DSH commit 自己的失败闭合 `strictDepBuilds` 与逐项审核 `allowBuilds` 策略管控；Windows 缓存消费者会用冻结锁文件的离线安装重新水合 pnpm 工作区链接，插件侧仍只精确放行目标声明的一个固定包。每次运行都会在移除凭据形与 CI 控制环境变量后上传只创建不覆盖、内容寻址的报告。`observe` 目标的有效负报告会记录生态兼容事实但不会把仪器本身判红；`required` 目标必须通过，证据缺失或格式错误始终失败。通过只证明指定组合兼容，不是安全认证。
 
 可复跑命令：
 

@@ -125,6 +125,10 @@ test('runtime workflow delegates baseline build approval to the pinned DSH polic
   assert.ok(!workflow.includes('rebuild --pending node-pty'))
   assert.ok(workflow.includes('dsh-runtime-baseline-${{ runner.os }}-${{ needs.plan.outputs.dsh_revision }}-v4'))
   assert.ok(!workflow.includes('dsh-runtime-baseline-${{ runner.os }}-${{ needs.plan.outputs.dsh_revision }}-v3'))
+  const rehydrate = 'pnpm --dir "$DSH_DIR" install --frozen-lockfile --offline --config.optimisticRepeatInstall=false'
+  assert.equal(workflow.split(rehydrate).length - 1, 2)
+  assert.ok(workflow.includes("if: runner.os == 'Windows' && steps.baseline-cache.outputs.cache-hit == 'true'"))
+  assert.ok(workflow.includes("if: runner.os == 'Windows'"))
 })
 
 test('runtime evidence store replaces the same immutable report id', async () => {

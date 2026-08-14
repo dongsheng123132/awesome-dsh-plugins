@@ -94,19 +94,19 @@
       "name": "dsh-release-proof",
       "category": "release-engineering",
       "status": "verified",
-      "summary": "Reproducible multi-source release evidence for HTTP status, byte length, SHA-256 and version consistency.",
+      "summary": "Reproducible multi-source release evidence with anonymous bounded HTTP checks, deterministic content addressing, a formal Codex manifest, inline proof-only MCP, real DSH ToolRuntime calls and stock Web Loader boot proof.",
       "repo": "https://github.com/dongsheng123132/dsh-release-proof",
       "evidence": [
         {
-          "label": "Immutable plugin source and smoke commands",
-          "url": "https://github.com/dongsheng123132/dsh-release-proof/tree/c78c861e9662f8e4adc76e0cb501bb83f4333a2a"
+          "label": "Immutable plugin source, proof-only MCP, DSH ToolRuntime and stock Web Loader smoke commands",
+          "url": "https://github.com/dongsheng123132/dsh-release-proof/tree/67b233ae720738f89a8933eeba2d620a188b784e"
         },
         {
-          "label": "Clean GitHub Actions run",
-          "url": "https://github.com/dongsheng123132/dsh-release-proof/actions/runs/31749726816"
+          "label": "Ubuntu and Windows GitHub Actions run",
+          "url": "https://github.com/dongsheng123132/dsh-release-proof/actions/runs/31836421539"
         },
         {
-          "label": "DSH revision used for isolated profile install",
+          "label": "DSH revision used for local and fixed-commit GitHub Web profile installs",
           "url": "https://github.com/deepseek-ai/deepseek-harness/commit/47f943859bef60e4160492346772ded9b24f765a"
         }
       ]

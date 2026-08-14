@@ -246,6 +246,28 @@
           "url": "https://github.com/sakikoTGW/pack-agent/tree/e2db1f8f56b74b64597a01175c810358f2c0b450"
         }
       ]
+    },
+    {
+      "id": "dsh-policy-drift-proof",
+      "name": "dsh-policy-drift-proof",
+      "category": "policy-governance",
+      "status": "verified",
+      "summary": "Pinned baseline/observed policy snapshots with value-redacted weakening, tightening, exact and fail-closed unclassified drift evidence.",
+      "repo": "https://github.com/dongsheng123132/dsh-policy-drift-proof",
+      "evidence": [
+        {
+          "label": "Immutable plugin source, MCP and DSH runtime smoke commands",
+          "url": "https://github.com/dongsheng123132/dsh-policy-drift-proof/tree/27e2338e467f38caf9bf21dd38039394e80927e3"
+        },
+        {
+          "label": "Ubuntu and Windows GitHub Actions run",
+          "url": "https://github.com/dongsheng123132/dsh-policy-drift-proof/actions/runs/31769088784"
+        },
+        {
+          "label": "DSH revision used for isolated profile install and runtime smoke",
+          "url": "https://github.com/deepseek-ai/deepseek-harness/commit/47f943859bef60e4160492346772ded9b24f765a"
+        }
+      ]
     }
   ]
 }

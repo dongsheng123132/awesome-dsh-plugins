@@ -138,19 +138,19 @@
       "name": "dsh-lineage",
       "category": "provenance-lineage",
       "status": "verified",
-      "summary": "Append-only content-addressed artifact/fact/action/report lineage with DAG checks, missing/stale disclosure and verified upstream/downstream closure reports.",
+      "summary": "Append-only content-addressed artifact/fact/action/report lineage with DAG checks, missing/stale disclosure, verified closure reports, proof-only MCP, real DSH ToolRuntime smoke and stock Web Loader boot.",
       "repo": "https://github.com/dongsheng123132/dsh-lineage",
       "evidence": [
         {
-          "label": "Immutable plugin source and smoke commands",
-          "url": "https://github.com/dongsheng123132/dsh-lineage/tree/1d2fef3dafccab3266fbe29f2a6aa8641579e63e"
+          "label": "Immutable plugin source, proof-only MCP, DSH ToolRuntime and stock Web Loader smoke commands",
+          "url": "https://github.com/dongsheng123132/dsh-lineage/tree/bb9932ef5c2533c00697a27825109f1590217453"
         },
         {
           "label": "Ubuntu and Windows GitHub Actions run",
-          "url": "https://github.com/dongsheng123132/dsh-lineage/actions/runs/31752043859"
+          "url": "https://github.com/dongsheng123132/dsh-lineage/actions/runs/31874116647"
         },
         {
-          "label": "DSH revision used for isolated profile install",
+          "label": "DSH revision used for local and fixed-commit GitHub Web profile installs",
           "url": "https://github.com/deepseek-ai/deepseek-harness/commit/47f943859bef60e4160492346772ded9b24f765a"
         }
       ]

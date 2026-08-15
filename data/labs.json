@@ -116,19 +116,19 @@
       "name": "dsh-benchmark",
       "category": "benchmarking",
       "status": "verified",
-      "summary": "Manifest-fixed deterministic command/JSONL benchmarks with revision fingerprints, raw run evidence, versioned scoring and baseline regression comparison.",
+      "summary": "Manifest-fixed deterministic command/JSONL benchmarks with revision fingerprints, bounded raw measurements without business output, versioned scoring, proof-only MCP, real DSH ToolRuntime calls and stock Web Loader boot proof.",
       "repo": "https://github.com/dongsheng123132/dsh-benchmark",
       "evidence": [
         {
-          "label": "Immutable plugin source and smoke commands",
-          "url": "https://github.com/dongsheng123132/dsh-benchmark/tree/55eb09430043074f269b4a06fb3583ae9a4f6079"
+          "label": "Immutable plugin source, proof-only MCP, DSH ToolRuntime and stock Web Loader smoke commands",
+          "url": "https://github.com/dongsheng123132/dsh-benchmark/tree/3c2eedee2ee3cdb26975744bb826a7321288a4d1"
         },
         {
           "label": "Ubuntu and Windows GitHub Actions run",
-          "url": "https://github.com/dongsheng123132/dsh-benchmark/actions/runs/31751218237"
+          "url": "https://github.com/dongsheng123132/dsh-benchmark/actions/runs/31868994202"
         },
         {
-          "label": "DSH revision used for isolated profile install",
+          "label": "DSH revision used for local and fixed-commit GitHub Web profile installs",
           "url": "https://github.com/deepseek-ai/deepseek-harness/commit/47f943859bef60e4160492346772ded9b24f765a"
         }
       ]

@@ -159,6 +159,13 @@ export function collectUnscannableRepositories(source = {}) {
   return unscannable
 }
 
+// A sweep we could not complete has the same shape as a shrinking ecosystem. Refuse to publish one.
+export function radarIsPublishable(examined, unreadable, threshold = 0.2) {
+  if (examined <= 0) return { publishable: false, ratio: 0 }
+  const ratio = unreadable / examined
+  return { publishable: ratio <= threshold, ratio: Number(ratio.toFixed(4)) }
+}
+
 export function describeMissingRuntimeTarget(target, unscannable = new Map()) {
   const scanFailure = unscannable.get(target.repository)
   return scanFailure

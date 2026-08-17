@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { classifyRepository, collectUnscannableRepositories, deriveReviewSignals, describeMissingRuntimeTarget, extractBundle, replaceGeneratedSection, resolveCategory } from '../scripts/lib.mjs'
+import { classifyRepository, collectUnscannableRepositories, deriveReviewSignals, describeMissingRuntimeTarget, extractBundle, radarIsPublishable, replaceGeneratedSection, resolveCategory } from '../scripts/lib.mjs'
 import { appendRuntimeReport, sanitizeEnvironment, sanitizeOutput, tail, writeImmutableRuntimeArtifact } from '../scripts/runtime-lib.mjs'
 import { mkdtemp, readFile, writeFile } from 'node:fs/promises'
 import { readFileSync } from 'node:fs'
@@ -143,6 +143,17 @@ test('an unscannable pinned repository is not reported as a missing plugin', () 
 
   const discover = readFileSync(new URL('../scripts/discover.mjs', import.meta.url), 'utf8')
   assert.ok(discover.includes('repositories.unshift(repository)'), 'pinned repositories must be inspected before the bulk scan')
+})
+
+test('a sweep we could not complete is not published as a shrinking ecosystem', () => {
+  assert.equal(radarIsPublishable(1000, 0).publishable, true)
+  assert.equal(radarIsPublishable(1000, 200).publishable, true)
+  assert.equal(radarIsPublishable(1000, 201).publishable, false)
+  assert.equal(radarIsPublishable(1000, 1000).ratio, 1)
+  assert.equal(radarIsPublishable(0, 0).publishable, false)
+  const discover = readFileSync(new URL('../scripts/discover.mjs', import.meta.url), 'utf8')
+  const guard = discover.indexOf('radarIsPublishable(')
+  assert.ok(guard > 0 && guard < discover.indexOf("writeJson(new URL('../data/plugins.json'"), 'the guard must run before the radar is written')
 })
 
 test('search transport retries the timeouts the search API asks us to retry', async () => {

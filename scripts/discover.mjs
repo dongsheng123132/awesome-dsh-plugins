@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { posix } from 'node:path'
-import { deriveReviewSignals, extractBundle, parseIntegerFlag, readJson, resolveCategory, writeJson } from './lib.mjs'
+import { deriveReviewSignals, extractBundle, parseIntegerFlag, radarIsPublishable, readJson, resolveCategory, writeJson } from './lib.mjs'
 import { githubJson, githubText, mapConcurrent, searchRepositories } from './github.mjs'
 import { pinnedRepositories } from './runtime-matrix.mjs'
 
@@ -177,6 +177,26 @@ const plugins = inspected.filter(item => item.type === 'plugins').flatMap(item =
 const candidates = inspected.filter(item => item.type === 'candidate').map(item => item.value)
   .sort((left, right) => right.stars - left.stars || left.repo.localeCompare(right.repo))
 
+// A throttled sweep produces the same shape as a shrinking ecosystem: repositories we could not read
+// are indistinguishable from repositories with nothing to find. Refuse to overwrite the radar with
+// one. Observed 2026-08-17: three scans inside one hour exhausted the Actions token and the run
+// reported 0 verified bundles out of 1000 examined.
+const scanErrors = candidates.filter(candidate => candidate.reason === 'scan-error').length
+const unreadable = scanErrors + pinnedUnreachable.length
+const verdict = radarIsPublishable(repositories.length, unreadable, Number.parseFloat(process.env.RADAR_MAX_UNREADABLE || '0.2'))
+if (!verdict.publishable) {
+  process.stderr.write(`${JSON.stringify({
+    ok: false,
+    reason: 'instrument-failure',
+    detail: 'too many repositories could not be read; refusing to publish a radar that would report throttling as a shrinking ecosystem',
+    examined: repositories.length,
+    unreadable,
+    unreadableRatio: verdict.ratio,
+    sample: candidates.filter(candidate => candidate.reason === 'scan-error').slice(0, 3).map(candidate => ({ repo: candidate.repo, error: candidate.error }))
+  })}\n`)
+  process.exit(2)
+}
+
 await writeJson(new URL('../data/plugins.json', import.meta.url), {
   schemaVersion: 1,
   generatedAt,
@@ -186,6 +206,7 @@ await writeJson(new URL('../data/plugins.json', import.meta.url), {
     searchWindow: repositories.length - pinnedOutsideSearchWindow.length,
     reportedTotal,
     pinnedOutsideSearchWindow,
+    unreadable,
     ...(pinnedUnreachable.length > 0 ? { pinnedUnreachable } : {}),
     ...(pinnedInspection.length > 0 ? { pinnedInspection } : {})
   },

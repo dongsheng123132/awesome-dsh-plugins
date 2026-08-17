@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { readFile } from 'node:fs/promises'
-import { CATEGORY_LABELS, readJson, REVIEW_SIGNAL_LABELS } from './lib.mjs'
+import { CATEGORY_LABELS, collectUnscannableRepositories, describeMissingRuntimeTarget, readJson, REVIEW_SIGNAL_LABELS } from './lib.mjs'
 import { validateRuntimeConfig } from './runtime-matrix.mjs'
 
 const root = new URL('../', import.meta.url)
@@ -76,8 +76,11 @@ for (const report of runtime.reports || []) {
 
 const pluginIds = new Set((radar.plugins || []).map(plugin => plugin.id))
 const knownLabIds = new Set((labs.projects || []).map(project => project.id))
+const unscannable = collectUnscannableRepositories(radar.source)
 for (const target of runtimeTargets.targets || []) {
-  if (target.sourcePluginId && !pluginIds.has(target.sourcePluginId)) failures.push(`${target.id}: runtime target is not present in the verified structural radar`)
+  if (target.sourcePluginId && !pluginIds.has(target.sourcePluginId)) {
+    failures.push(describeMissingRuntimeTarget(target, unscannable))
+  }
   if (target.sourceLabId && !knownLabIds.has(target.sourceLabId)) failures.push(`${target.id}: runtime target is not present in the 2Origin lab`)
 }
 

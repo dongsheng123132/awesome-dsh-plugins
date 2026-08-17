@@ -1,8 +1,9 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { classifyRepository, deriveReviewSignals, extractBundle, replaceGeneratedSection, resolveCategory } from '../scripts/lib.mjs'
+import { classifyRepository, collectUnscannableRepositories, deriveReviewSignals, describeMissingRuntimeTarget, extractBundle, replaceGeneratedSection, resolveCategory } from '../scripts/lib.mjs'
 import { appendRuntimeReport, sanitizeEnvironment, sanitizeOutput, tail, writeImmutableRuntimeArtifact } from '../scripts/runtime-lib.mjs'
 import { mkdtemp, readFile, writeFile } from 'node:fs/promises'
+import { readFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { analyzeCapability, inferEcosystem, mergeSearchHits, parseSkillFrontmatter } from '../scripts/capability-lib.mjs'
@@ -125,6 +126,23 @@ test('every runtime target repository stays inspectable outside the search windo
   assert.deepEqual(pinnedRepositories({}), [])
   const discover = await readFile(new URL('../scripts/discover.mjs', import.meta.url), 'utf8')
   assert.ok(discover.includes('pinnedRepositories('), 'discover must inspect pinned repositories by name')
+})
+
+test('an unscannable pinned repository is not reported as a missing plugin', () => {
+  const target = { id: 'skillport', repository: 'owner/plugin', sourcePluginId: 'owner/plugin:package.json' }
+  const absent = describeMissingRuntimeTarget(target, collectUnscannableRepositories({}))
+  assert.match(absent, /not present in the verified structural radar/)
+
+  const throttled = collectUnscannableRepositories({ pinnedInspection: [{ repo: 'owner/plugin', reason: 'scan-error', error: 'GitHub 403' }] })
+  const message = describeMissingRuntimeTarget(target, throttled)
+  assert.match(message, /could not be scanned \(GitHub 403\)/)
+  assert.doesNotMatch(message, /not present in the verified structural radar/)
+
+  const unreachable = collectUnscannableRepositories({ pinnedUnreachable: [{ repo: 'owner/plugin' }] })
+  assert.match(describeMissingRuntimeTarget(target, unreachable), /could not be scanned \(unreachable\)/)
+
+  const discover = readFileSync(new URL('../scripts/discover.mjs', import.meta.url), 'utf8')
+  assert.ok(discover.includes('repositories.unshift(repository)'), 'pinned repositories must be inspected before the bulk scan')
 })
 
 test('search transport retries the timeouts the search API asks us to retry', async () => {

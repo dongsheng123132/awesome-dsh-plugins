@@ -149,6 +149,23 @@ export function deriveReviewSignals(bundle, patchText = '') {
   })
 }
 
+// A pinned target can be absent from the radar for two opposite reasons: the scan could not read the
+// repository, or the scan read it and found no bundle. Only the second one is a finding about the
+// plugin. Collapsing them is what let a throttled scan report three plugins as gone.
+export function collectUnscannableRepositories(source = {}) {
+  const unscannable = new Map()
+  for (const entry of source.pinnedUnreachable || []) unscannable.set(entry.repo, entry.error || 'unreachable')
+  for (const entry of source.pinnedInspection || []) unscannable.set(entry.repo, entry.error || entry.reason || 'not inspected')
+  return unscannable
+}
+
+export function describeMissingRuntimeTarget(target, unscannable = new Map()) {
+  const scanFailure = unscannable.get(target.repository)
+  return scanFailure
+    ? `${target.id}: pinned repository ${target.repository} could not be scanned (${scanFailure}); the radar is incomplete, not the plugin missing`
+    : `${target.id}: runtime target is not present in the verified structural radar`
+}
+
 export async function readJson(path) {
   return JSON.parse(await readFile(path, 'utf8'))
 }

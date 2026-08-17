@@ -139,13 +139,20 @@ const pinned = pinnedRepositories(await readJson(new URL('../data/runtime-target
 const knownRepositories = new Set(repositories.map(repository => repository.full_name))
 const pinnedOutsideSearchWindow = []
 const pinnedUnreachable = []
+const pinnedNames = new Set()
 for (const repo of pinned) {
-  if (knownRepositories.has(repo)) continue
+  if (knownRepositories.has(repo)) {
+    pinnedNames.add(repo)
+    continue
+  }
   try {
     const repository = await githubJson(`/repos/${repo}`)
     if (knownRepositories.has(repository.full_name)) continue
     knownRepositories.add(repository.full_name)
-    repositories.push(repository)
+    // Ahead of the bulk scan: a thousand concurrent tree reads exhaust the API budget, and a pinned
+    // repository that gets throttled comes back looking exactly like a repository with no bundle.
+    repositories.unshift(repository)
+    pinnedNames.add(repository.full_name)
     pinnedOutsideSearchWindow.push(repository.full_name)
   } catch (error) {
     pinnedUnreachable.push({ repo, error: error.message })
@@ -154,6 +161,17 @@ for (const repo of pinned) {
 }
 
 const inspected = await mapConcurrent(repositories, concurrency, inspectRepository)
+
+// A pinned repository that fails to scan must not be filed as "no DSH bundle here". Keep the
+// distinction the radar check will need: unscannable is an instrument failure, absent is a finding.
+const pinnedInspection = []
+for (const [index, repository] of repositories.entries()) {
+  if (!pinnedNames.has(repository.full_name)) continue
+  const item = inspected[index]
+  if (item?.type === 'plugins') continue
+  pinnedInspection.push({ repo: repository.full_name, reason: item?.value?.reason ?? 'not-inspected', error: item?.value?.error })
+  process.stderr.write(`pinned repository not promoted: ${repository.full_name}: ${item?.value?.reason ?? 'not-inspected'}\n`)
+}
 const plugins = inspected.filter(item => item.type === 'plugins').flatMap(item => item.values)
   .sort((left, right) => right.stars - left.stars || left.id.localeCompare(right.id))
 const candidates = inspected.filter(item => item.type === 'candidate').map(item => item.value)
@@ -168,7 +186,8 @@ await writeJson(new URL('../data/plugins.json', import.meta.url), {
     searchWindow: repositories.length - pinnedOutsideSearchWindow.length,
     reportedTotal,
     pinnedOutsideSearchWindow,
-    ...(pinnedUnreachable.length > 0 ? { pinnedUnreachable } : {})
+    ...(pinnedUnreachable.length > 0 ? { pinnedUnreachable } : {}),
+    ...(pinnedInspection.length > 0 ? { pinnedInspection } : {})
   },
   plugins
 })

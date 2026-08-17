@@ -59,6 +59,14 @@ export function expandRuntimeMatrix(config) {
   }
 }
 
+export function pinnedRepositories(config) {
+  const repositories = new Set()
+  for (const target of config?.targets ?? []) {
+    if (typeof target.repository === 'string' && target.repository.length > 0) repositories.add(target.repository)
+  }
+  return [...repositories]
+}
+
 export async function loadRuntimeConfig(path = new URL('../data/runtime-targets.json', import.meta.url)) {
   return validateRuntimeConfig(JSON.parse(await readFile(path, 'utf8')))
 }

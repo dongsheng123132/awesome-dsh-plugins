@@ -6,7 +6,7 @@ import { mkdtemp, readFile, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { analyzeCapability, inferEcosystem, mergeSearchHits, parseSkillFrontmatter } from '../scripts/capability-lib.mjs'
-import { expandRuntimeMatrix, validateRuntimeConfig } from '../scripts/runtime-matrix.mjs'
+import { expandRuntimeMatrix, loadRuntimeConfig, pinnedRepositories, validateRuntimeConfig } from '../scripts/runtime-matrix.mjs'
 
 test('extractBundle verifies a root bundle and produces a GitHub install target', () => {
   const manifest = {
@@ -115,6 +115,23 @@ test('runtime matrix requires pinned revisions and expands every platform-target
   assert.equal(expandRuntimeMatrix(config).include[0].enforcement, 'observe')
   assert.throws(() => validateRuntimeConfig({ ...config, targets: [{ ...config.targets[0], spec: 'github:owner/plugin' }] }), /pin repository and revision/)
   assert.throws(() => validateRuntimeConfig({ ...config, targets: [{ ...config.targets[0], enforcement: 'ignore' }] }), /observe or required/)
+})
+
+test('every runtime target repository stays inspectable outside the search window', async () => {
+  const config = await loadRuntimeConfig()
+  const pinned = new Set(pinnedRepositories(config))
+  for (const target of config.targets) assert.ok(pinned.has(target.repository), `${target.id} is not pinned for inspection`)
+  assert.deepEqual(pinnedRepositories({ targets: [{ repository: 'owner/one' }, { repository: 'owner/one' }] }), ['owner/one'])
+  assert.deepEqual(pinnedRepositories({}), [])
+  const discover = await readFile(new URL('../scripts/discover.mjs', import.meta.url), 'utf8')
+  assert.ok(discover.includes('pinnedRepositories('), 'discover must inspect pinned repositories by name')
+})
+
+test('search transport retries the timeouts the search API asks us to retry', async () => {
+  const github = await readFile(new URL('../scripts/github.mjs', import.meta.url), 'utf8')
+  for (const status of ['403', '408', '429']) {
+    assert.ok(github.includes(`response.status === ${status}`), `${status} must stay retryable`)
+  }
 })
 
 test('runtime workflow delegates baseline build approval to the pinned DSH policy', async () => {

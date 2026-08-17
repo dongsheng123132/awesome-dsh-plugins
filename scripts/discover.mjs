@@ -2,6 +2,7 @@
 import { posix } from 'node:path'
 import { deriveReviewSignals, extractBundle, parseIntegerFlag, readJson, resolveCategory, writeJson } from './lib.mjs'
 import { githubJson, githubText, mapConcurrent, searchRepositories } from './github.mjs'
+import { pinnedRepositories } from './runtime-matrix.mjs'
 
 const argv = process.argv.slice(2)
 const positional = argv.filter(value => /^\d+$/.test(value)).map(value => Number.parseInt(value, 10))
@@ -130,6 +131,28 @@ async function inspectRepository(repository, index) {
 }
 
 const { repositories, reportedTotal } = await searchRepositories(query, limit)
+
+// GitHub search returns at most 1000 results, ranked by stars. Repositories we already pinned a
+// runtime report against can fall out of that window as the topic grows, and the resulting radar
+// gap is a limit of the instrument, not evidence that the plugin disappeared. Inspect them by name.
+const pinned = pinnedRepositories(await readJson(new URL('../data/runtime-targets.json', import.meta.url)))
+const knownRepositories = new Set(repositories.map(repository => repository.full_name))
+const pinnedOutsideSearchWindow = []
+const pinnedUnreachable = []
+for (const repo of pinned) {
+  if (knownRepositories.has(repo)) continue
+  try {
+    const repository = await githubJson(`/repos/${repo}`)
+    if (knownRepositories.has(repository.full_name)) continue
+    knownRepositories.add(repository.full_name)
+    repositories.push(repository)
+    pinnedOutsideSearchWindow.push(repository.full_name)
+  } catch (error) {
+    pinnedUnreachable.push({ repo, error: error.message })
+    process.stderr.write(`pinned repository unreachable: ${repo}: ${error.message}\n`)
+  }
+}
+
 const inspected = await mapConcurrent(repositories, concurrency, inspectRepository)
 const plugins = inspected.filter(item => item.type === 'plugins').flatMap(item => item.values)
   .sort((left, right) => right.stars - left.stars || left.id.localeCompare(right.id))
@@ -139,7 +162,14 @@ const candidates = inspected.filter(item => item.type === 'candidate').map(item 
 await writeJson(new URL('../data/plugins.json', import.meta.url), {
   schemaVersion: 1,
   generatedAt,
-  source: { query, examined: repositories.length, reportedTotal },
+  source: {
+    query,
+    examined: repositories.length,
+    searchWindow: repositories.length - pinnedOutsideSearchWindow.length,
+    reportedTotal,
+    pinnedOutsideSearchWindow,
+    ...(pinnedUnreachable.length > 0 ? { pinnedUnreachable } : {})
+  },
   plugins
 })
 await writeJson(new URL('../data/candidates.json', import.meta.url), {
@@ -153,6 +183,8 @@ console.log(JSON.stringify({
   generatedAt,
   reportedTotal,
   examined: repositories.length,
+  pinnedOutsideSearchWindow: pinnedOutsideSearchWindow.length,
+  pinnedUnreachable: pinnedUnreachable.length,
   verifiedBundles: plugins.length,
   candidates: candidates.length
 }))

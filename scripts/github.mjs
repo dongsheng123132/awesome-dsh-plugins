@@ -21,7 +21,8 @@ export async function githubRequest(path, { accept, retries = 3 } = {}) {
     const response = await fetch(url, { headers: headers(accept) })
     if (response.ok) return response
 
-    const retryable = response.status === 403 || response.status === 429 || response.status >= 500
+    // 408 is the search API asking us to try again; it is not a verdict about the query.
+    const retryable = response.status === 403 || response.status === 408 || response.status === 429 || response.status >= 500
     if (!retryable || attempt === retries) {
       const detail = (await response.text()).slice(0, 500)
       throw new Error(`GitHub ${response.status} for ${url}: ${detail}`)

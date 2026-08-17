@@ -14997,9 +14997,9 @@
       "installCommand": "dsh plugin --profile web add github:omdsh-dev/fabric"
     },
     {
-      "repo": "forrestchang/dsh-multica-runtime",
+      "repo": "multica-ai/dsh-multica-runtime",
       "name": "@multica-ai/dsh-runtime",
-      "url": "https://github.com/forrestchang/dsh-multica-runtime",
+      "url": "https://github.com/multica-ai/dsh-multica-runtime",
       "description": "Private DeepSeek Harness runtime bridge for Multica",
       "stars": 6,
       "forks": 0,
@@ -15021,7 +15021,7 @@
           "packageName": "@multica-ai/dsh-runtime",
           "packageVersion": "0.1.0-private.1",
           "private": true,
-          "installTarget": "github:forrestchang/dsh-multica-runtime",
+          "installTarget": "github:multica-ai/dsh-multica-runtime",
           "description": "Private DeepSeek Harness runtime bridge for Multica",
           "keywords": [],
           "dependencies": [
@@ -15039,7 +15039,7 @@
         }
       ],
       "checkedAt": "2026-08-13T21:32:46.503Z",
-      "id": "forrestchang/dsh-multica-runtime:package.json",
+      "id": "multica-ai/dsh-multica-runtime:package.json",
       "category": "mcp-bridge",
       "repositoryBundleCount": 1,
       "verification": {
@@ -15074,8 +15074,8 @@
         "checkedAt": "2026-08-13T21:32:46.503Z",
         "disclaimer": "Static triage signals only; not a security certification."
       },
-      "installTarget": "github:forrestchang/dsh-multica-runtime",
-      "installCommand": "dsh plugin --profile web add github:forrestchang/dsh-multica-runtime"
+      "installTarget": "github:multica-ai/dsh-multica-runtime",
+      "installCommand": "dsh plugin --profile web add github:multica-ai/dsh-multica-runtime"
     },
     {
       "repo": "lhh010/dsh-minigames",

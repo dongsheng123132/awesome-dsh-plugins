@@ -46,10 +46,10 @@
     },
     {
       "id": "multica-runtime",
-      "sourcePluginId": "forrestchang/dsh-multica-runtime:package.json",
-      "repository": "forrestchang/dsh-multica-runtime",
+      "sourcePluginId": "multica-ai/dsh-multica-runtime:package.json",
+      "repository": "multica-ai/dsh-multica-runtime",
       "revision": "e29aae228449dfe50e88af60ef4281e38ca44e2a",
-      "spec": "github:forrestchang/dsh-multica-runtime#e29aae228449dfe50e88af60ef4281e38ca44e2a",
+      "spec": "github:multica-ai/dsh-multica-runtime#e29aae228449dfe50e88af60ef4281e38ca44e2a",
       "allowBuild": "@multica-ai/dsh-runtime",
       "profile": "web",
       "enforcement": "observe",

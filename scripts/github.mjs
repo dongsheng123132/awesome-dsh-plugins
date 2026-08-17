@@ -15,20 +15,45 @@ async function wait(milliseconds) {
   await new Promise(resolve => setTimeout(resolve, milliseconds))
 }
 
-export async function githubRequest(path, { accept, retries = 3 } = {}) {
+const SEARCH_PATH = '/search/'
+const SEARCH_MIN_GAP_MS = 2000
+const SEARCH_RETRIES = 6
+let nextSearchAt = 0
+
+// Search is metered far more tightly than the rest of the API, and the five capability queries are
+// fired back to back. Space them out instead of finding out from a 429.
+async function paceSearch(url) {
+  if (!url.includes(SEARCH_PATH)) return
+  const now = Date.now()
+  if (now < nextSearchAt) await wait(nextSearchAt - now)
+  nextSearchAt = Math.max(now, nextSearchAt) + SEARCH_MIN_GAP_MS
+}
+
+// A secondary rate limit states its wait in the body, not in a header:
+// {"message":"try again in 309.763326ms", ..., "status":"429"}
+export function retryDelay(response, detail, attempt) {
+  const retryAfter = Number.parseInt(response.headers?.get?.('retry-after') || '', 10)
+  if (Number.isInteger(retryAfter)) return Math.max(retryAfter * 1000, 1000)
+  const hint = /try again in ([\d.]+)\s*(ms|s)\b/i.exec(detail || '')
+  const hinted = hint ? Number(hint[1]) * (hint[2].toLowerCase() === 's' ? 1000 : 1) : 0
+  return Math.max(hinted, 1000 * 2 ** attempt)
+}
+
+export async function githubRequest(path, { accept, retries } = {}) {
   const url = path.startsWith('http') ? path : `${API_ROOT}${path}`
-  for (let attempt = 0; attempt <= retries; attempt += 1) {
+  // The observed 429 kept answering "try again in 310ms" for five straight seconds, so the wait it
+  // states is a floor, not the gate. Give search a budget that outlasts the limiter.
+  const budget = retries ?? (url.includes(SEARCH_PATH) ? SEARCH_RETRIES : 3)
+  for (let attempt = 0; attempt <= budget; attempt += 1) {
+    await paceSearch(url)
     const response = await fetch(url, { headers: headers(accept) })
     if (response.ok) return response
 
-    // 408 is the search API asking us to try again; it is not a verdict about the query.
+    // 408 and 429 are the search API asking us to wait; neither is a verdict about the query.
     const retryable = response.status === 403 || response.status === 408 || response.status === 429 || response.status >= 500
-    if (!retryable || attempt === retries) {
-      const detail = (await response.text()).slice(0, 500)
-      throw new Error(`GitHub ${response.status} for ${url}: ${detail}`)
-    }
-    const retryAfter = Number.parseInt(response.headers.get('retry-after') || '', 10)
-    await wait(Number.isInteger(retryAfter) ? retryAfter * 1000 : 750 * (2 ** attempt))
+    const detail = (await response.text()).slice(0, 500)
+    if (!retryable || attempt === budget) throw new Error(`GitHub ${response.status} for ${url}: ${detail}`)
+    await wait(retryDelay(response, detail, attempt))
   }
   throw new Error(`unreachable retry loop for ${url}`)
 }

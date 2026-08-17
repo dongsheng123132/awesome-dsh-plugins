@@ -8,6 +8,7 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { analyzeCapability, inferEcosystem, mergeSearchHits, parseSkillFrontmatter } from '../scripts/capability-lib.mjs'
 import { expandRuntimeMatrix, loadRuntimeConfig, pinnedRepositories, validateRuntimeConfig } from '../scripts/runtime-matrix.mjs'
+import { retryDelay } from '../scripts/github.mjs'
 
 test('extractBundle verifies a root bundle and produces a GitHub install target', () => {
   const manifest = {
@@ -161,6 +162,18 @@ test('search transport retries the timeouts the search API asks us to retry', as
   for (const status of ['403', '408', '429']) {
     assert.ok(github.includes(`response.status === ${status}`), `${status} must stay retryable`)
   }
+})
+
+test('a secondary rate limit states its wait in the body, and the body is a floor', () => {
+  const noHeaders = { headers: { get: () => null } }
+  const body = '{"message":"try again in 309.763326ms","status":"429"}'
+  // The stated 310ms must never shorten the backoff below the exponential floor: the observed limiter
+  // kept saying 310ms for five seconds straight, which is how four quick retries all burned out.
+  assert.equal(retryDelay(noHeaders, body, 0), 1000)
+  assert.equal(retryDelay(noHeaders, body, 3), 8000)
+  assert.equal(retryDelay(noHeaders, '{"message":"try again in 45s"}', 0), 45000)
+  assert.equal(retryDelay({ headers: { get: name => (name === 'retry-after' ? '30' : null) } }, '', 0), 30000)
+  assert.equal(retryDelay(noHeaders, '', 5), 32000)
 })
 
 test('runtime workflow delegates baseline build approval to the pinned DSH policy', async () => {

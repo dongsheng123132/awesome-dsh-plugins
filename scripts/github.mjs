@@ -71,32 +71,39 @@ export async function githubText(path) {
   return response.text()
 }
 
-export async function searchRepositories(query, limit) {
-  const repositories = []
-  let reportedTotal = 0
-  for (let page = 1; repositories.length < limit && page <= 10; page += 1) {
-    const remaining = limit - repositories.length
-    const perPage = Math.min(100, remaining)
-    const search = await githubJson(`/search/repositories?q=${encodeURIComponent(query)}&sort=stars&order=desc&per_page=${perPage}&page=${page}`)
-    reportedTotal = search.total_count
-    repositories.push(...search.items)
-    if (search.items.length < perPage) break
-  }
-  return { repositories: repositories.slice(0, limit), reportedTotal }
-}
-
-export async function searchCode(query, limit) {
+// Paging a search is not reading a snapshot. The result set is ranked, the ranking moves while we
+// walk it, and a topic gaining repositories mid-sweep pushes one across a page boundary we already
+// crossed — so the same repository arrives on two pages. Undeduped it reaches the radar twice and
+// the check reports "duplicate plugin id", which reads as a statement about the ecosystem when it is
+// an artifact of our own paging. Key the pages so the instrument stops inventing findings.
+// Page size stays fixed: deriving it from what is left makes page N cover a different span than the
+// offset GitHub computes from it, which is a second way to see the same item twice.
+async function searchPages(path, query, limit, identify, sort = '') {
+  const seen = new Set()
   const items = []
+  const perPage = Math.min(100, limit)
   let reportedTotal = 0
   for (let page = 1; items.length < limit && page <= 10; page += 1) {
-    const remaining = limit - items.length
-    const perPage = Math.min(100, remaining)
-    const search = await githubJson(`/search/code?q=${encodeURIComponent(query)}&per_page=${perPage}&page=${page}`)
+    const search = await githubJson(`${path}?q=${encodeURIComponent(query)}${sort}&per_page=${perPage}&page=${page}`)
     reportedTotal = search.total_count
-    items.push(...search.items)
+    for (const item of search.items) {
+      const id = identify(item)
+      if (seen.has(id)) continue
+      seen.add(id)
+      items.push(item)
+    }
     if (search.items.length < perPage) break
   }
   return { items: items.slice(0, limit), reportedTotal }
+}
+
+export async function searchRepositories(query, limit) {
+  const { items, reportedTotal } = await searchPages('/search/repositories', query, limit, item => item.full_name, '&sort=stars&order=desc')
+  return { repositories: items, reportedTotal }
+}
+
+export async function searchCode(query, limit) {
+  return searchPages('/search/code', query, limit, item => `${item.repository.full_name}:${item.path}`)
 }
 
 export async function mapConcurrent(items, concurrency, mapper) {

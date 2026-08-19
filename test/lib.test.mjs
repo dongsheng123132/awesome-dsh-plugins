@@ -8,7 +8,7 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { analyzeCapability, inferEcosystem, mergeSearchHits, parseSkillFrontmatter } from '../scripts/capability-lib.mjs'
 import { expandRuntimeMatrix, loadRuntimeConfig, pinnedRepositories, validateRuntimeConfig } from '../scripts/runtime-matrix.mjs'
-import { retryDelay } from '../scripts/github.mjs'
+import { retryDelay, searchRepositories } from '../scripts/github.mjs'
 
 test('extractBundle verifies a root bundle and produces a GitHub install target', () => {
   const manifest = {
@@ -174,6 +174,31 @@ test('a secondary rate limit states its wait in the body, and that wait is a gro
   assert.equal(retryDelay(noHeaders, '{"message":"try again in 45s"}', 0), 46000)
   assert.equal(retryDelay({ headers: { get: name => (name === 'retry-after' ? '30' : null) } }, '', 0), 30000)
   assert.equal(retryDelay(noHeaders, '', 5), 32000)
+})
+
+test('a repository the moving ranking shows on two pages is carried once', async () => {
+  // Observed 2026-08-19: the sweep read the topic while it was gaining repositories, one crossed a
+  // page boundary we had already passed, and the check announced "duplicate plugin id" against a
+  // third-party repository. Nothing about the ecosystem had changed; our paging saw it twice.
+  const pages = [
+    [{ full_name: 'owner/a' }, { full_name: 'owner/b' }, { full_name: 'owner/b' }],
+    [{ full_name: 'owner/b' }, { full_name: 'owner/c' }, { full_name: 'owner/d' }]
+  ]
+  const pageSizes = []
+  const original = globalThis.fetch
+  globalThis.fetch = async url => {
+    const parameters = new URL(url).searchParams
+    pageSizes.push(parameters.get('per_page'))
+    return { ok: true, json: async () => ({ total_count: 8184, items: pages[Number(parameters.get('page')) - 1] ?? [] }) }
+  }
+  try {
+    const { repositories, reportedTotal } = await searchRepositories('topic:dsh-plugin', 3)
+    assert.deepEqual(repositories.map(repository => repository.full_name), ['owner/a', 'owner/b', 'owner/c'])
+    assert.equal(reportedTotal, 8184, 'the reported total stays what the search claims, not what we kept')
+    assert.deepEqual(pageSizes, ['3', '3'], 'page size must not shrink as duplicates are dropped, or the offsets misalign')
+  } finally {
+    globalThis.fetch = original
+  }
 })
 
 test('runtime workflow delegates baseline build approval to the pinned DSH policy', async () => {

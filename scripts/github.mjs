@@ -36,7 +36,10 @@ export function retryDelay(response, detail, attempt) {
   if (Number.isInteger(retryAfter)) return Math.max(retryAfter * 1000, 1000)
   const hint = /try again in ([\d.]+)\s*(ms|s)\b/i.exec(detail || '')
   const hinted = hint ? Number(hint[1]) * (hint[2].toLowerCase() === 's' ? 1000 : 1) : 0
-  return Math.max(hinted, 1000 * 2 ** attempt)
+  // The body states a floor, not a gate: the limiter re-arms on every request, so a wait that only
+  // matches the hint retries at the boundary and stays throttled. Add growing margin on top of it.
+  // Observed twice: a 310ms hint cycling for five seconds, then an 8s hint that re-armed across all six retries.
+  return hinted + 1000 * 2 ** attempt
 }
 
 export async function githubRequest(path, { accept, retries } = {}) {

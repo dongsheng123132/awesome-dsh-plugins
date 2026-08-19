@@ -164,14 +164,14 @@ test('search transport retries the timeouts the search API asks us to retry', as
   }
 })
 
-test('a secondary rate limit states its wait in the body, and the body is a floor', () => {
+test('a secondary rate limit states its wait in the body, and that wait is a growing floor', () => {
   const noHeaders = { headers: { get: () => null } }
-  const body = '{"message":"try again in 309.763326ms","status":"429"}'
-  // The stated 310ms must never shorten the backoff below the exponential floor: the observed limiter
-  // kept saying 310ms for five seconds straight, which is how four quick retries all burned out.
-  assert.equal(retryDelay(noHeaders, body, 0), 1000)
-  assert.equal(retryDelay(noHeaders, body, 3), 8000)
-  assert.equal(retryDelay(noHeaders, '{"message":"try again in 45s"}', 0), 45000)
+  // The body states a floor, not a gate: the limiter re-arms on every request, so a wait that only
+  // matches the hint retries at the boundary and stays throttled. Add growing margin on top of it.
+  // Observed twice: a 310ms hint cycling for five seconds, then an 8s hint that re-armed across all six retries.
+  assert.equal(retryDelay(noHeaders, '{"message":"try again in 8s"}', 0), 9000)
+  assert.equal(retryDelay(noHeaders, '{"message":"try again in 8s"}', 3), 16000)
+  assert.equal(retryDelay(noHeaders, '{"message":"try again in 45s"}', 0), 46000)
   assert.equal(retryDelay({ headers: { get: name => (name === 'retry-after' ? '30' : null) } }, '', 0), 30000)
   assert.equal(retryDelay(noHeaders, '', 5), 32000)
 })

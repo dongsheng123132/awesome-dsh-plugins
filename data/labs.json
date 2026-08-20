@@ -160,19 +160,19 @@
       "name": "dsh-recovery-proof",
       "category": "recovery-evidence",
       "status": "verified",
-      "summary": "Read-only recovery drill evidence for object freshness, exact stages, RTO, failed-apply rollback and stale-plan rejection.",
+      "summary": "Read-only recovery drill evidence for object freshness, exact stages, RTO, failed-apply rollback and stale-plan rejection, with proof-only MCP, real DSH ToolRuntime smoke and stock Web Loader boot.",
       "repo": "https://github.com/dongsheng123132/dsh-recovery-proof",
       "evidence": [
         {
-          "label": "Immutable plugin source and smoke commands",
-          "url": "https://github.com/dongsheng123132/dsh-recovery-proof/tree/ee31fe7d1e257cf0219e4b980cd279860b69a7c9"
+          "label": "Immutable plugin source, proof-only MCP, DSH ToolRuntime and stock Web Loader smoke commands",
+          "url": "https://github.com/dongsheng123132/dsh-recovery-proof/tree/7ecd2bc72663507b9f3d71bfd28378d0c9145d61"
         },
         {
           "label": "Ubuntu and Windows GitHub Actions run",
-          "url": "https://github.com/dongsheng123132/dsh-recovery-proof/actions/runs/31755305561"
+          "url": "https://github.com/dongsheng123132/dsh-recovery-proof/actions/runs/32334603570"
         },
         {
-          "label": "DSH revision used for isolated profile install",
+          "label": "DSH revision used for local and fixed-commit GitHub Web profile installs",
           "url": "https://github.com/deepseek-ai/deepseek-harness/commit/47f943859bef60e4160492346772ded9b24f765a"
         }
       ]

@@ -226,16 +226,16 @@
       "name": "dsh-capability-receipt",
       "category": "provenance-lineage",
       "status": "verified",
-      "summary": "Content-addressed evidence for the effective skill body and bounded resource closure actually loaded by DSH, including direct verification against pack-agent skill locks.",
+      "summary": "Content-addressed evidence for the effective skill body and bounded resource closure actually loaded by DSH, with pack-agent lock verification, a proof-only MCP surface, and verified stock Web-profile loading.",
       "repo": "https://github.com/dongsheng123132/dsh-capability-receipt",
       "evidence": [
         {
-          "label": "Immutable plugin source and DSH runtime smoke command",
-          "url": "https://github.com/dongsheng123132/dsh-capability-receipt/tree/57619a12f64a2d1f9b640be80cb7bd58c92201e9"
+          "label": "Immutable plugin source, MCP, DSH runtime and stock Web loader smoke commands",
+          "url": "https://github.com/dongsheng123132/dsh-capability-receipt/tree/53fe2a117909c17be7996c7eadfea330897398c2"
         },
         {
           "label": "Ubuntu and Windows GitHub Actions run",
-          "url": "https://github.com/dongsheng123132/dsh-capability-receipt/actions/runs/31765903184"
+          "url": "https://github.com/dongsheng123132/dsh-capability-receipt/actions/runs/32396265896"
         },
         {
           "label": "DSH revision used for isolated profile install and runtime smoke",

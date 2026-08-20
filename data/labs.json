@@ -252,19 +252,19 @@
       "name": "dsh-policy-drift-proof",
       "category": "policy-governance",
       "status": "verified",
-      "summary": "Pinned baseline/observed policy snapshots with value-redacted weakening, tightening, exact and fail-closed unclassified drift evidence.",
+      "summary": "Pinned baseline/observed policy snapshots with value-redacted weakening, tightening, exact and fail-closed unclassified drift evidence; proof-only Codex MCP, real DSH ToolRuntime calls and stock Web Loader boot are verified.",
       "repo": "https://github.com/dongsheng123132/dsh-policy-drift-proof",
       "evidence": [
         {
-          "label": "Immutable plugin source, MCP and DSH runtime smoke commands",
-          "url": "https://github.com/dongsheng123132/dsh-policy-drift-proof/tree/27e2338e467f38caf9bf21dd38039394e80927e3"
+          "label": "Immutable plugin source, proof-only MCP, DSH ToolRuntime and stock Web Loader smoke commands",
+          "url": "https://github.com/dongsheng123132/dsh-policy-drift-proof/tree/3d9c66f23dd9cfb47855a9823eb5dd09a3afa7fc"
         },
         {
           "label": "Ubuntu and Windows GitHub Actions run",
-          "url": "https://github.com/dongsheng123132/dsh-policy-drift-proof/actions/runs/31769088784"
+          "url": "https://github.com/dongsheng123132/dsh-policy-drift-proof/actions/runs/32362309630"
         },
         {
-          "label": "DSH revision used for isolated profile install and runtime smoke",
+          "label": "DSH revision used for local and fixed-commit GitHub Web profile installs",
           "url": "https://github.com/deepseek-ai/deepseek-harness/commit/47f943859bef60e4160492346772ded9b24f765a"
         }
       ]

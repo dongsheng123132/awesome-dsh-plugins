@@ -182,19 +182,19 @@
       "name": "dsh-action-parity",
       "category": "action-parity",
       "status": "verified",
-      "summary": "Content-addressed CLI, MCP and GUI bindings plus deterministic replay evidence for one stable Action ID and action core.",
+      "summary": "Content-addressed CLI, MCP and GUI bindings plus deterministic replay evidence for one stable Action ID and action core; formal Codex bundle, proof-only MCP, real DSH ToolRuntime calls and stock Web Loader boot are verified.",
       "repo": "https://github.com/dongsheng123132/dsh-action-parity",
       "evidence": [
         {
-          "label": "Immutable plugin source and smoke commands",
-          "url": "https://github.com/dongsheng123132/dsh-action-parity/tree/8c7f3ec70f938a343951be87fa489af396f2c8eb"
+          "label": "Immutable plugin source, proof-only MCP, DSH ToolRuntime and stock Web Loader smoke commands",
+          "url": "https://github.com/dongsheng123132/dsh-action-parity/tree/33eb4e6cab585d2fbc3a6e53170df91144b5d5da"
         },
         {
           "label": "Ubuntu and Windows GitHub Actions run",
-          "url": "https://github.com/dongsheng123132/dsh-action-parity/actions/runs/31761911479"
+          "url": "https://github.com/dongsheng123132/dsh-action-parity/actions/runs/32343259659"
         },
         {
-          "label": "DSH revision used for isolated profile install",
+          "label": "DSH revision used for local and fixed-commit GitHub Web profile installs",
           "url": "https://github.com/deepseek-ai/deepseek-harness/commit/47f943859bef60e4160492346772ded9b24f765a"
         }
       ]

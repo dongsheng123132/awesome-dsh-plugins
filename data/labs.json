@@ -296,16 +296,16 @@
       "name": "dsh-profile-lock-proof",
       "category": "supply-chain-evidence",
       "status": "verified",
-      "summary": "Content-addressed closure proof across a DSH profile declaration, pnpm importer, installed package identities and bundle patch hashes, with immutable-source and lifecycle-script checks.",
+      "summary": "Content-addressed closure proof across a DSH profile declaration, pnpm importer, installed package identities and bundle patch hashes, with immutable-source and lifecycle-script checks; v0.2.0 adds host-neutral ToolDefinitions, proof-only inline MCP and real stock Web Loader coverage.",
       "repo": "https://github.com/dongsheng123132/dsh-profile-lock-proof",
       "evidence": [
         {
-          "label": "Immutable plugin source, MCP and DSH runtime smoke commands",
-          "url": "https://github.com/dongsheng123132/dsh-profile-lock-proof/tree/5db7fbd63ddb87b8263d9c6ab084591ba7e5d0ad"
+          "label": "Immutable v0.2.0 source, proof-only MCP, installed-entry ToolRuntime and stock Web Loader smoke",
+          "url": "https://github.com/dongsheng123132/dsh-profile-lock-proof/tree/503407c6537791f2fa2a060fd8d126535538e977"
         },
         {
           "label": "Ubuntu and Windows GitHub Actions run",
-          "url": "https://github.com/dongsheng123132/dsh-profile-lock-proof/actions/runs/31782572042"
+          "url": "https://github.com/dongsheng123132/dsh-profile-lock-proof/actions/runs/32372938842"
         },
         {
           "label": "DSH revision used for isolated profile install and runtime smoke",

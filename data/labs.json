@@ -444,6 +444,28 @@
           "url": "https://github.com/deepseek-ai/deepseek-harness/commit/47f943859bef60e4160492346772ded9b24f765a"
         }
       ]
+    },
+    {
+      "id": "dsh-output-custody-proof",
+      "name": "dsh-output-custody-proof",
+      "category": "output-evidence",
+      "status": "verified",
+      "summary": "Body-free, content-addressed custody proof across formatted DSH tool results, model-visible or durable-only projections, full spill references and durable events, with byte budgets, exact omission, stage order and upstream-incompleteness disclosure.",
+      "repo": "https://github.com/dongsheng123132/dsh-output-custody-proof",
+      "evidence": [
+        {
+          "label": "Immutable plugin source, MCP, DSH ToolRuntime and stock Web Loader smoke commands",
+          "url": "https://github.com/dongsheng123132/dsh-output-custody-proof/tree/38d774be7734500ebc25e83890290c4c6b5fcc4f"
+        },
+        {
+          "label": "Ubuntu and Windows GitHub Actions run",
+          "url": "https://github.com/dongsheng123132/dsh-output-custody-proof/actions/runs/32476712917"
+        },
+        {
+          "label": "DSH 0.1.1-rc.1 revision used for source build, isolated path and fixed-commit GitHub installs",
+          "url": "https://github.com/deepseek-ai/deepseek-harness/commit/528c682e061696f5a160f363f236ecbf53cbd006"
+        }
+      ]
     }
   ]
 }

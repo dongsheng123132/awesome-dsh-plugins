@@ -422,6 +422,28 @@
           "url": "https://github.com/deepseek-ai/deepseek-harness/commit/47f943859bef60e4160492346772ded9b24f765a"
         }
       ]
+    },
+    {
+      "id": "dsh-decision-effect-proof",
+      "name": "dsh-decision-effect-proof",
+      "category": "authorization-evidence",
+      "status": "verified",
+      "summary": "Body-free, content-addressed reconciliation of recorded DSH authorization decisions and effect envelopes: request/state/policy binding, confirmation, denied-effect absence, settlement, replay and ordering checks without granting authority or executing actions.",
+      "repo": "https://github.com/dongsheng123132/dsh-decision-effect-proof",
+      "evidence": [
+        {
+          "label": "Immutable plugin source, MCP, DSH ToolRuntime and stock Web Loader smoke commands",
+          "url": "https://github.com/dongsheng123132/dsh-decision-effect-proof/tree/42fc63a8a0ab65be5ff03306b96e3d585365327d"
+        },
+        {
+          "label": "Ubuntu and Windows GitHub Actions run",
+          "url": "https://github.com/dongsheng123132/dsh-decision-effect-proof/actions/runs/32466988649"
+        },
+        {
+          "label": "DSH revision used for isolated path and fixed-commit GitHub installs",
+          "url": "https://github.com/deepseek-ai/deepseek-harness/commit/47f943859bef60e4160492346772ded9b24f765a"
+        }
+      ]
     }
   ]
 }

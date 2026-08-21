@@ -204,16 +204,16 @@
       "name": "dsh-narrative-ledger",
       "category": "writing-novel",
       "status": "verified",
-      "summary": "Content-addressed canon, immutable fact lifecycle, timeline continuity and spoiler-safe character knowledge projections without manuscript prose.",
+      "summary": "Content-addressed canon, immutable fact lifecycle, timeline continuity and spoiler-safe knowledge projections; v0.2 adds verified stock Web loading and a proof-only inline MCP surface without manuscript prose.",
       "repo": "https://github.com/dongsheng123132/dsh-narrative-ledger",
       "evidence": [
         {
-          "label": "Immutable plugin source, MCP and smoke commands",
-          "url": "https://github.com/dongsheng123132/dsh-narrative-ledger/tree/1a1f0228eb8866f4a2fe3e65d7f39d595468c6a9"
+          "label": "Immutable plugin source, MCP, DSH runtime and stock Web loader smoke commands",
+          "url": "https://github.com/dongsheng123132/dsh-narrative-ledger/tree/21851f7f0b7fc33a3a34d4f08ef8034124117867"
         },
         {
           "label": "Ubuntu and Windows GitHub Actions run",
-          "url": "https://github.com/dongsheng123132/dsh-narrative-ledger/actions/runs/31762575870"
+          "url": "https://github.com/dongsheng123132/dsh-narrative-ledger/actions/runs/32435395343"
         },
         {
           "label": "DSH revision used for isolated profile install",

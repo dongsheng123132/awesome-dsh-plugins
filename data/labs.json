@@ -72,19 +72,19 @@
       "name": "dsh-cad-review",
       "category": "cad-engineering",
       "status": "verified",
-      "summary": "Source-hashed ASCII DXF inspection and deterministic rule review with entity, layer, line and coordinate evidence.",
+      "summary": "Source-hashed ASCII DXF inspection and deterministic rule review with entity/layer/line/coordinate evidence, redacted drawing text, proof-only MCP and verified stock Web-profile loading.",
       "repo": "https://github.com/dongsheng123132/dsh-cad-review",
       "evidence": [
         {
-          "label": "Immutable plugin source and smoke commands",
-          "url": "https://github.com/dongsheng123132/dsh-cad-review/tree/69b808ecceb7eb98e4acb7d036a5ce8706fb43d9"
+          "label": "Immutable plugin source, MCP, DSH runtime and stock Web loader smoke commands",
+          "url": "https://github.com/dongsheng123132/dsh-cad-review/tree/b2ecef56a9c0d50d870134bbc4caacb598594b1f"
         },
         {
-          "label": "Clean GitHub Actions run",
-          "url": "https://github.com/dongsheng123132/dsh-cad-review/actions/runs/31748669218"
+          "label": "Ubuntu and Windows GitHub Actions run",
+          "url": "https://github.com/dongsheng123132/dsh-cad-review/actions/runs/32434425650"
         },
         {
-          "label": "DSH revision used for isolated profile install",
+          "label": "DSH revision used for local and fixed-commit GitHub Web profile installs",
           "url": "https://github.com/deepseek-ai/deepseek-harness/commit/47f943859bef60e4160492346772ded9b24f765a"
         }
       ]

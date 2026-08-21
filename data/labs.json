@@ -356,6 +356,28 @@
           "url": "https://github.com/deepseek-ai/deepseek-harness/commit/47f943859bef60e4160492346772ded9b24f765a"
         }
       ]
+    },
+    {
+      "id": "dsh-config-origin-proof",
+      "name": "dsh-config-origin-proof",
+      "category": "configuration-evidence",
+      "status": "verified",
+      "summary": "Value-redacted configuration-source precedence receipts with winner, shadowed-source and unobserved-higher-priority evidence, plus proof-only MCP and verified stock Web loading.",
+      "repo": "https://github.com/dongsheng123132/dsh-config-origin-proof",
+      "evidence": [
+        {
+          "label": "Immutable plugin source, MCP, DSH ToolRuntime and stock Web Loader smoke commands",
+          "url": "https://github.com/dongsheng123132/dsh-config-origin-proof/tree/0dbc4878fe187de130e310afa6e60fb0a46a6362"
+        },
+        {
+          "label": "Ubuntu and Windows GitHub Actions run",
+          "url": "https://github.com/dongsheng123132/dsh-config-origin-proof/actions/runs/32442473912"
+        },
+        {
+          "label": "DSH revision used for isolated profile install and runtime smoke",
+          "url": "https://github.com/deepseek-ai/deepseek-harness/commit/47f943859bef60e4160492346772ded9b24f765a"
+        }
+      ]
     }
   ]
 }

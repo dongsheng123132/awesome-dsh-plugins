@@ -378,6 +378,28 @@
           "url": "https://github.com/deepseek-ai/deepseek-harness/commit/47f943859bef60e4160492346772ded9b24f765a"
         }
       ]
+    },
+    {
+      "id": "dsh-schema-migration-proof",
+      "name": "dsh-schema-migration-proof",
+      "category": "migration-evidence",
+      "status": "verified",
+      "summary": "Revision-bound schema migration fixture evidence for idempotence, rollback, required invariants and explicit loss disclosure, with proof-only MCP and verified stock Web loading.",
+      "repo": "https://github.com/dongsheng123132/dsh-schema-migration-proof",
+      "evidence": [
+        {
+          "label": "Immutable plugin source, MCP, DSH ToolRuntime and stock Web Loader smoke commands",
+          "url": "https://github.com/dongsheng123132/dsh-schema-migration-proof/tree/77fd665831654c16628af9398afc3ea3f59a83df"
+        },
+        {
+          "label": "Ubuntu and Windows GitHub Actions run",
+          "url": "https://github.com/dongsheng123132/dsh-schema-migration-proof/actions/runs/32449658428"
+        },
+        {
+          "label": "DSH revision used for isolated profile install and runtime smoke",
+          "url": "https://github.com/deepseek-ai/deepseek-harness/commit/47f943859bef60e4160492346772ded9b24f765a"
+        }
+      ]
     }
   ]
 }

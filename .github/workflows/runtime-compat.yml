@@ -23,9 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.matrix.outputs.matrix }}
-      dsh_revision: ${{ steps.config.outputs.revision }}
-      dsh_clone_url: ${{ steps.config.outputs.clone_url }}
-      package_manager: ${{ steps.config.outputs.package_manager }}
+      baseline_matrix: ${{ steps.matrix.outputs.baseline_matrix }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -35,25 +33,23 @@ jobs:
           node-version: 24
       - id: matrix
         shell: bash
-        run: echo "matrix=$(node scripts/runtime-matrix.mjs)" >> "$GITHUB_OUTPUT"
-      - id: config
-        shell: bash
         run: |
-          node -e "const c=require('./data/runtime-targets.json'); console.log('revision='+c.dsh.revision); console.log('clone_url='+c.dsh.cloneUrl); console.log('package_manager='+c.dsh.packageManager)" >> "$GITHUB_OUTPUT"
+          echo "matrix=$(node scripts/runtime-matrix.mjs)" >> "$GITHUB_OUTPUT"
+          echo "baseline_matrix=$(node scripts/runtime-matrix.mjs --baselines)" >> "$GITHUB_OUTPUT"
 
   baseline:
     needs: plan
+    name: stock / ${{ matrix.baseline }} / ${{ matrix.os }}
     strategy:
       fail-fast: false
-      matrix:
-        os: [ubuntu-latest, windows-latest]
+      matrix: ${{ fromJSON(needs.plan.outputs.baseline_matrix) }}
     runs-on: ${{ matrix.os }}
     timeout-minutes: 40
     env:
       DSH_DIR: .runtime/dsh
-      DSH_REVISION: ${{ needs.plan.outputs.dsh_revision }}
-      DSH_CLONE_URL: ${{ needs.plan.outputs.dsh_clone_url }}
-      PACKAGE_MANAGER: ${{ needs.plan.outputs.package_manager }}
+      DSH_REVISION: ${{ matrix.dshRevision }}
+      DSH_CLONE_URL: ${{ matrix.dshCloneUrl }}
+      PACKAGE_MANAGER: ${{ matrix.packageManager }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -71,7 +67,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: .runtime/dsh
-          key: dsh-runtime-baseline-${{ runner.os }}-${{ needs.plan.outputs.dsh_revision }}-v4
+          key: dsh-runtime-baseline-${{ runner.os }}-${{ matrix.dshRevision }}-v5
       - name: Build immutable DSH baseline
         if: runner.os == 'Windows' || steps.baseline-cache.outputs.cache-hit != 'true'
         shell: bash
@@ -103,13 +99,14 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: runtime-baseline-${{ runner.os }}-${{ github.run_id }}
+          name: runtime-baseline-${{ matrix.baseline }}-${{ runner.os }}-${{ github.run_id }}
           path: .runtime/baseline-report
           if-no-files-found: warn
           retention-days: 30
 
   verify:
     needs: [plan, baseline]
+    name: ${{ matrix.target }} / ${{ matrix.baseline }} / ${{ matrix.os }}
     strategy:
       fail-fast: false
       max-parallel: 4
@@ -118,10 +115,10 @@ jobs:
     timeout-minutes: 25
     env:
       DSH_DIR: .runtime/dsh
-      DSH_REVISION: ${{ needs.plan.outputs.dsh_revision }}
-      DSH_CLONE_URL: ${{ needs.plan.outputs.dsh_clone_url }}
-      PACKAGE_MANAGER: ${{ needs.plan.outputs.package_manager }}
-      REPORT_DIR: .runtime/reports/${{ matrix.target }}/${{ matrix.os }}
+      DSH_REVISION: ${{ matrix.dshRevision }}
+      DSH_CLONE_URL: ${{ matrix.dshCloneUrl }}
+      PACKAGE_MANAGER: ${{ matrix.packageManager }}
+      REPORT_DIR: .runtime/reports/${{ matrix.baseline }}/${{ matrix.target }}/${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -139,7 +136,7 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: .runtime/dsh
-          key: dsh-runtime-baseline-${{ runner.os }}-${{ needs.plan.outputs.dsh_revision }}-v4
+          key: dsh-runtime-baseline-${{ runner.os }}-${{ matrix.dshRevision }}-v5
           fail-on-cache-miss: true
       - name: Build immutable DSH baseline on Windows
         if: runner.os == 'Windows'
@@ -175,7 +172,7 @@ jobs:
         shell: bash
         run: |
           if test -f .runtime/report.stdout.json; then
-            node -e "const fs=require('fs'); const r=JSON.parse(fs.readFileSync('.runtime/report.stdout.json')); console.log('### '+r.package.spec); console.log(''); console.log('| OS | enforcement | status | install | compose | boot |'); console.log('|---|---|---|---:|---:|---:|'); console.log('| '+r.environment.platform+' | ${{ matrix.enforcement }} | '+r.status+' | '+r.stages[0].ok+' | '+r.stages[1].ok+' | '+r.stages[2].ok+' |')" >> "$GITHUB_STEP_SUMMARY"
+            node -e "const fs=require('fs'); const r=JSON.parse(fs.readFileSync('.runtime/report.stdout.json')); console.log('### '+r.package.spec+' on ${{ matrix.baseline }}'); console.log(''); console.log('| DSH | OS | enforcement | status | install | compose | boot |'); console.log('|---|---|---|---|---:|---:|---:|'); console.log('| '+r.dsh.revision.slice(0,10)+' | '+r.environment.platform+' | ${{ matrix.enforcement }} | '+r.status+' | '+r.stages[0].ok+' | '+r.stages[1].ok+' | '+r.stages[2].ok+' |')" >> "$GITHUB_STEP_SUMMARY"
           else
             echo "Runtime verifier did not emit a report." >> "$GITHUB_STEP_SUMMARY"
           fi
@@ -183,7 +180,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: runtime-${{ matrix.target }}-${{ runner.os }}-${{ github.run_id }}
+          name: runtime-${{ matrix.baseline }}-${{ matrix.target }}-${{ runner.os }}-${{ github.run_id }}
           path: ${{ env.REPORT_DIR }}
           if-no-files-found: warn
           retention-days: 30

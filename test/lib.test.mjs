@@ -7,7 +7,7 @@ import { readFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { analyzeCapability, inferEcosystem, mergeSearchHits, parseSkillFrontmatter } from '../scripts/capability-lib.mjs'
-import { expandRuntimeMatrix, loadRuntimeConfig, pinnedRepositories, validateRuntimeConfig } from '../scripts/runtime-matrix.mjs'
+import { expandBaselineMatrix, expandRuntimeMatrix, loadRuntimeConfig, pinnedRepositories, validateRuntimeConfig } from '../scripts/runtime-matrix.mjs'
 import { retryDelay, searchRepositories } from '../scripts/github.mjs'
 
 test('extractBundle verifies a root bundle and produces a GitHub install target', () => {
@@ -103,20 +103,26 @@ test('runtime artifacts are content-addressed and replay safe', async () => {
   assert.deepEqual(JSON.parse(await readFile(join(directory, first.filename), 'utf8')), report)
 })
 
-test('runtime matrix requires pinned revisions and expands every platform-target pair', () => {
+test('runtime matrix requires pinned revisions and expands every baseline-platform-target tuple', () => {
   const config = {
-    schemaVersion: 1,
-    dsh: { cloneUrl: 'https://github.com/deepseek-ai/deepseek-harness.git', revision: 'a'.repeat(40), packageManager: 'pnpm@11.7.0' },
+    schemaVersion: 2,
+    baselines: [
+      { id: 'old', label: 'old baseline', cloneUrl: 'https://github.com/deepseek-ai/deepseek-harness.git', revision: 'a'.repeat(40), packageManager: 'pnpm@11.7.0' },
+      { id: 'new', label: 'new baseline', cloneUrl: 'https://github.com/deepseek-ai/deepseek-harness.git', revision: 'c'.repeat(40), packageManager: 'pnpm@11.7.0' }
+    ],
     platforms: ['ubuntu-latest', 'windows-latest'],
     targets: [{
       id: 'plugin-one', sourcePluginId: 'owner/plugin:package.json', repository: 'owner/plugin', revision: 'b'.repeat(40),
       spec: `github:owner/plugin#${'b'.repeat(40)}`, allowBuild: '@owner/plugin', profile: 'web', enforcement: 'observe', selection: 'test', rationale: 'A sufficiently explicit test rationale.'
     }]
   }
-  assert.equal(expandRuntimeMatrix(config).include.length, 2)
+  assert.equal(expandRuntimeMatrix(config).include.length, 4)
+  assert.equal(expandBaselineMatrix(config).include.length, 4)
+  assert.deepEqual(new Set(expandRuntimeMatrix(config).include.map(item => item.baseline)), new Set(['old', 'new']))
   assert.equal(expandRuntimeMatrix(config).include[0].enforcement, 'observe')
   assert.throws(() => validateRuntimeConfig({ ...config, targets: [{ ...config.targets[0], spec: 'github:owner/plugin' }] }), /pin repository and revision/)
   assert.throws(() => validateRuntimeConfig({ ...config, targets: [{ ...config.targets[0], enforcement: 'ignore' }] }), /observe or required/)
+  assert.throws(() => validateRuntimeConfig({ ...config, baselines: [...config.baselines, config.baselines[0]] }), /duplicate baseline id/)
 })
 
 test('every runtime target repository stays inspectable outside the search window', async () => {
@@ -207,8 +213,8 @@ test('runtime workflow delegates baseline build approval to the pinned DSH polic
   assert.ok(!workflow.includes('--ignore-scripts'))
   assert.ok(!workflow.includes('rebuild node-pty'))
   assert.ok(!workflow.includes('rebuild --pending node-pty'))
-  assert.ok(workflow.includes('dsh-runtime-baseline-${{ runner.os }}-${{ needs.plan.outputs.dsh_revision }}-v4'))
-  assert.ok(!workflow.includes('dsh-runtime-baseline-${{ runner.os }}-${{ needs.plan.outputs.dsh_revision }}-v3'))
+  assert.ok(workflow.includes('dsh-runtime-baseline-${{ runner.os }}-${{ matrix.dshRevision }}-v5'))
+  assert.ok(workflow.includes('matrix: ${{ fromJSON(needs.plan.outputs.baseline_matrix) }}'))
   const rehydrate = 'pnpm --dir "$DSH_DIR" install --frozen-lockfile --offline --config.optimisticRepeatInstall=false'
   assert.equal(workflow.split(rehydrate).length - 1, 0)
   assert.equal(workflow.split('git clone --filter=blob:none --no-checkout "$DSH_CLONE_URL" "$DSH_DIR"').length - 1, 2)

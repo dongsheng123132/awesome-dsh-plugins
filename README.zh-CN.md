@@ -38,44 +38,44 @@ npx github:dongsheng123132/awesome-dsh-plugins search memory
 ## 插件雷达
 
 <!-- RADAR:START -->
-**488** 个 Verified Bundle / 检查 **666** 个 topic 仓库 / GitHub 报告总数 **666**
+**1047** 个 Verified Bundle / 检查 **1003** 个 topic 仓库 / GitHub 报告总数 **10691**
 
-Other: 185 · UI / TUI: 91 · MCP Bridge: 34 · Model & Routing: 26 · Developer Tools: 24 · Token & Cost: 24 · Coding: 23 · Browser: 22 · Memory: 18 · Long-running: 15 · Security: 13 · Office: 7 · Finance: 4 · Research: 2
+Other: 317 · UI / TUI: 227 · Token & Cost: 68 · Browser: 65 · MCP Bridge: 65 · Security: 57 · Model & Routing: 54 · Memory: 44 · Coding: 31 · Developer Tools: 28 · Finance: 28 · Office: 22 · Long-running: 20 · Writing / Novel: 13 · Research: 7 · Provenance & Lineage: 1
 
 | 插件 | 分类 | Stars | License | 证据 | 安装 |
 |---|---:|---:|---|---|---|
-| [@liustack/modlens](https://github.com/liustack/modlens)<br><sub>liustack/modlens</sub> | MCP Bridge | 703 | MIT | `package.json` → `cordis.patch.yml` | `dsh plugin --profile web add github:liustack/modlens` |
-| [@linxin666/dsh-client-ui-aionui-panel](https://github.com/zhu1090093659/dsh-web-ui)<br><sub>zhu1090093659/dsh-web-ui</sub> | UI / TUI | 508 | — | `packages/dsh-aionui-panel/package.json` → `packages/dsh-aionui-panel/cordis.patch.yml` | 需看包说明 |
-| [dsh-cc-tui](https://github.com/ccch1mneyyy/dsh-cc-tui)<br><sub>ccch1mneyyy/dsh-cc-tui</sub> | UI / TUI | 198 | BSD-3-Clause | `package.json` → `cordis.patch.yml` | `dsh plugin --profile web add github:ccch1mneyyy/dsh-cc-tui` |
-| [@dsh-external/dsh-vision-toolkit](https://github.com/Anionex/dsh-vision-toolkit)<br><sub>Anionex/dsh-vision-toolkit</sub> | UI / TUI | 152 | MIT | `package.json` → `cordis.patch.yml` | `dsh plugin --profile web add github:Anionex/dsh-vision-toolkit` |
-| [dsh-better-sidebar](https://github.com/omdsh-dev/DSH-better-sidebar)<br><sub>omdsh-dev/DSH-better-sidebar</sub> | UI / TUI | 127 | MIT | `package.json` → `cordis.patch.yml` | `dsh plugin --profile web add github:omdsh-dev/DSH-better-sidebar` |
-| [@dsh-external/dsh-client-ui-skin-maid-atelier](https://github.com/Small-tailqwq/dsh-deep-whale)<br><sub>Small-tailqwq/dsh-deep-whale</sub> | UI / TUI | 119 | — | `maid-atelier/package.json` → `maid-atelier/cordis.patch.yml` | 需看包说明 |
-| [@dsh-external/dsh-ads](https://github.com/Nagi-ovo/dsh-ads)<br><sub>Nagi-ovo/dsh-ads</sub> | UI / TUI | 105 | — | `package.json` → `cordis.patch.yml` | `dsh plugin --profile web add github:Nagi-ovo/dsh-ads` |
-| [@huiliyi37/dsh-tianshu-tui](https://github.com/huiliyi37/dsh-tianshu-tui)<br><sub>huiliyi37/dsh-tianshu-tui</sub> | UI / TUI | 73 | Apache-2.0 | `package.json` → `cordis.patch.yml` | `dsh plugin --profile web add github:huiliyi37/dsh-tianshu-tui` |
-| [dsh-agent-teams](https://github.com/NanmiCoder/dsh-agent-teams)<br><sub>NanmiCoder/dsh-agent-teams</sub> | Long-running | 72 | — | `package.json` → `cordis.patch.yml` | `dsh plugin --profile web add github:NanmiCoder/dsh-agent-teams` |
-| [@taxueseek/argo-dsh](https://github.com/taxueseek/argo)<br><sub>taxueseek/argo</sub> | MCP Bridge | 56 | MIT | `packages/dsh-plugin/package.json` → `packages/dsh-plugin/cordis.patch.yml` | 需看包说明 |
-| [@mstar-harness/dsh](https://github.com/btspoony/mstar-harness)<br><sub>btspoony/mstar-harness</sub> | Long-running | 39 | MIT | `packages/dsh/package.json` → `packages/dsh/bundle/cordis.patch.yml` | 需看包说明 |
-| [@dsh-external/workflow](https://github.com/icetomoyo/dsh_workflow)<br><sub>icetomoyo/dsh_workflow</sub> | Long-running | 35 | MIT | `package.json` → `cordis.patch.yml` | `dsh plugin --profile web add github:icetomoyo/dsh_workflow` |
-| [dsh-open-in-vscode](https://github.com/omdsh-dev/dsh-open-in-vscode)<br><sub>omdsh-dev/dsh-open-in-vscode</sub> | Other | 33 | MIT | `package.json` → `cordis.patch.yml` | `dsh plugin --profile web add github:omdsh-dev/dsh-open-in-vscode` |
-| [@zseven-w/dsh-openpencil](https://github.com/ZSeven-W/dsh-openpencil)<br><sub>ZSeven-W/dsh-openpencil</sub> | Other | 33 | MIT | `package.json` → `cordis.patch.yml` | `dsh plugin --profile web add github:ZSeven-W/dsh-openpencil` |
-| [@dsh-external/dsh-visualize](https://github.com/Nagi-ovo/dsh-visualize)<br><sub>Nagi-ovo/dsh-visualize</sub> | UI / TUI | 30 | — | `package.json` → `cordis.patch.yml` | `dsh plugin --profile web add github:Nagi-ovo/dsh-visualize` |
-| [whale-girl](https://github.com/vlln/whale-girl)<br><sub>vlln/whale-girl</sub> | Other | 27 | MIT | `package.json` → `cordis.patch.yml` | `dsh plugin --profile web add github:vlln/whale-girl` |
-| [dsh-at-file](https://github.com/omdsh-dev/dsh-at-file)<br><sub>omdsh-dev/dsh-at-file</sub> | Other | 25 | MIT | `package.json` → `cordis.patch.yml` | `dsh plugin --profile web add github:omdsh-dev/dsh-at-file` |
-| [dsh-notification](https://github.com/omdsh-dev/dsh-notification)<br><sub>omdsh-dev/dsh-notification</sub> | Browser | 25 | MIT | `package.json` → `cordis.patch.yml` | `dsh plugin --profile web add github:omdsh-dev/dsh-notification` |
-| [@dsh-external/turn-rewind](https://github.com/Anionex/dsh-turn-rewind)<br><sub>Anionex/dsh-turn-rewind</sub> | Other | 23 | BSD-3-Clause | `package.json` → `cordis.patch.yml` | `dsh plugin --profile web add github:Anionex/dsh-turn-rewind` |
-| [dsh-ui-status-label](https://github.com/alingalingling/ui-status-label)<br><sub>alingalingling/ui-status-label</sub> | Model & Routing | 21 | — | `package.json` → `cordis.patch.yml` | `dsh plugin --profile web add github:alingalingling/ui-status-label` |
-| [@omdsh-dev/dsh-annotation](https://github.com/omdsh-dev/dsh-annotation)<br><sub>omdsh-dev/dsh-annotation</sub> | Other | 18 | MIT | `package.json` → `cordis.patch.yml` | `dsh plugin --profile web add github:omdsh-dev/dsh-annotation` |
-| [dsh-custom-tool](https://github.com/omdsh-dev/dsh-custom-tool)<br><sub>omdsh-dev/dsh-custom-tool</sub> | UI / TUI | 18 | MIT | `package.json` → `cordis.patch.yml` | `dsh plugin --profile web add github:omdsh-dev/dsh-custom-tool` |
-| [dsh-interconnect](https://github.com/Chinesezjc/dsh-interconnect)<br><sub>Chinesezjc/dsh-interconnect</sub> | MCP Bridge | 15 | MIT | `package.json` → `cordis.patch.yml` | `dsh plugin --profile web add github:Chinesezjc/dsh-interconnect` |
-| [@omdsh-dev/dsh-genui](https://github.com/omdsh-dev/dsh-genui)<br><sub>omdsh-dev/dsh-genui</sub> | Browser | 14 | MIT | `package.json` → `cordis.patch.yml` | `dsh plugin --profile web add github:omdsh-dev/dsh-genui` |
-| [@dsh-external/plugin-console](https://github.com/vlln/plugin-registry)<br><sub>vlln/plugin-registry</sub> | UI / TUI | 13 | MIT | `packages/plugin/console/package.json` → `packages/plugin/console/cordis.patch.yml` | 需看包说明 |
-| [@dsh-external/dsh-computer-use](https://github.com/Anionex/dsh-computer-use)<br><sub>Anionex/dsh-computer-use</sub> | Other | 12 | MIT | `package.json` → `cordis.patch.yml` | `dsh plugin --profile web add github:Anionex/dsh-computer-use` |
-| [@loserfox/distill](https://github.com/LoserFox/distill)<br><sub>LoserFox/distill</sub> | Other | 12 | — | `package.json` → `cordis.patch.yml` | `dsh plugin --profile web add github:LoserFox/distill` |
-| [@dsh-external/dsh-share](https://github.com/hellodigua/dsh-share)<br><sub>hellodigua/dsh-share</sub> | Other | 11 | MIT | `package.json` → `cordis.patch.yml` | `dsh plugin --profile web add github:hellodigua/dsh-share` |
-| [dsh-message-edit](https://github.com/Moeblack/dsh-message-edit)<br><sub>Moeblack/dsh-message-edit</sub> | Other | 11 | — | `package.json` → `cordis.patch.yml` | `dsh plugin --profile web add github:Moeblack/dsh-message-edit` |
-| [@deepseek-ai/dsh-plugin-check](https://github.com/omdsh-dev/dsh-plugin-check)<br><sub>omdsh-dev/dsh-plugin-check</sub> | Other | 11 | MIT | `package.json` → `cordis.patch.yml` | `dsh plugin --profile web add github:omdsh-dev/dsh-plugin-check` |
+| [@open-design/dsh-runtime](https://github.com/nexu-io/open-design)<br><sub>nexu-io/open-design</sub> | Office | 90411 | Apache-2.0 | `packages/dsh-runtime/package.json` → `packages/dsh-runtime/cordis.patch.yml` | 需看包说明 |
+| [dsh-plugin-reactive-resume](https://github.com/amruthpillai/reactive-resume)<br><sub>amruthpillai/reactive-resume</sub> | MCP Bridge | 41517 | MIT | `packages/dsh-plugin/package.json` → `packages/dsh-plugin/cordis.patch.yml` | 需看包说明 |
+| [@openviking/dsh-memory-plugin](https://github.com/volcengine/OpenViking)<br><sub>volcengine/OpenViking</sub> | Memory | 32009 | AGPL-3.0 | `examples/dsh-memory-plugin/package.json` → `examples/dsh-memory-plugin/cordis.patch.yml` | 需看包说明 |
+| [@wxg-prc-cpg/dsh-weknora](https://github.com/Tencent/WeKnora)<br><sub>Tencent/WeKnora</sub> | Office | 20359 | NOASSERTION | `packages/dsh-weknora/package.json` → `packages/dsh-weknora/cordis.patch.yml` | 需看包说明 |
+| [dsh-plugin-desktop](https://github.com/anywhere-labs/deepseek-harness-desktop)<br><sub>anywhere-labs/deepseek-harness-desktop</sub> | Other | 18281 | MIT | `dsh-plugin-desktop/package.json` → `dsh-plugin-desktop/cordis.patch.yml` | 需看包说明 |
+| [@tt-a1i/archify-dsh](https://github.com/tt-a1i/archify)<br><sub>tt-a1i/archify</sub> | Long-running | 15050 | MIT | `integrations/deepseek-harness/package.json` → `integrations/deepseek-harness/cordis.patch.yml` | 需看包说明 |
+| [@evermind-ai/dsh-plugin](https://github.com/EverMind-AI/EverOS)<br><sub>EverMind-AI/EverOS</sub> | Memory | 12342 | Apache-2.0 | `examples/dsh/package.json` → `examples/dsh/cordis.patch.yml` | 需看包说明 |
+| [@memtensor/memos-local-plugin](https://github.com/MemTensor/MemOS)<br><sub>MemTensor/MemOS</sub> | Token & Cost | 10920 | Apache-2.0 | `apps/memos-local-plugin/package.json` → `apps/memos-local-plugin/adapters/deepseek-harness/cordis.patch.yml` | 需看包说明 |
+| [dsh-ouroboros](https://github.com/Q00/ouroboros)<br><sub>Q00/ouroboros</sub> | Long-running | 5623 | MIT | `integrations/dsh-plugin/package.json` → `integrations/dsh-plugin/cordis.patch.yml` | 需看包说明 |
+| [@linxin666/dsh-client-ui-aionui-panel](https://github.com/zhu1090093659/dsh-web-ui)<br><sub>zhu1090093659/dsh-web-ui</sub> | UI / TUI | 5591 | Apache-2.0 | `packages/dsh-aionui-panel/package.json` → `packages/dsh-aionui-panel/cordis.patch.yml` | 需看包说明 |
+| [deepseek-idesign](https://github.com/Devin-AXIS/iPolloWork)<br><sub>Devin-AXIS/iPolloWork</sub> | Other | 4511 | NOASSERTION | `external-plugins/deepseek-harness/design-studio/package.json` → `external-plugins/deepseek-harness/design-studio/cordis.patch.yml` | 需看包说明 |
+| [@petdex/dsh-plugin](https://github.com/crafter-station/petdex)<br><sub>crafter-station/petdex</sub> | Other | 3953 | MIT | `packages/petdex-desktop-native/integrations/dsh/package.json` → `packages/petdex-desktop-native/integrations/dsh/cordis.patch.yml` | 需看包说明 |
+| [@struktoai/mirage-dsh](https://github.com/strukto-ai/mirage)<br><sub>strukto-ai/mirage</sub> | Other | 3552 | Apache-2.0 | `typescript/packages/dsh/package.json` → `typescript/packages/dsh/cordis.patch.yml` | 需看包说明 |
+| [@liustack/modlens](https://github.com/liustack/modlens)<br><sub>liustack/modlens</sub> | MCP Bridge | 3526 | MIT | `package.json` → `cordis.patch.yml` | `dsh plugin --profile web add github:liustack/modlens` |
+| [dsh-better-sidebar](https://github.com/omdsh-dev/DSH-better-sidebar)<br><sub>omdsh-dev/DSH-better-sidebar</sub> | UI / TUI | 2652 | MIT | `package.json` → `cordis.patch.yml` | `dsh plugin --profile web add github:omdsh-dev/DSH-better-sidebar` |
+| [dsh-codex-taskboard](https://github.com/chuspeeism/dashi-taskboard)<br><sub>chuspeeism/dashi-taskboard</sub> | Other | 2460 | Apache-2.0 | `integrations/deepseek-harness/package.json` → `integrations/deepseek-harness/cordis.patch.yml` | 需看包说明 |
+| [@deepseek-harness-tui/dsh-tui](https://github.com/ccch1mneyyy/dsh-TUI)<br><sub>ccch1mneyyy/dsh-TUI</sub> | UI / TUI | 2315 | MIT | `package.json` → `cordis.patch.yml` | `dsh plugin --profile web add github:ccch1mneyyy/dsh-TUI` |
+| [dshmarket](https://github.com/dsh-market/dsh-market)<br><sub>dsh-market/dsh-market</sub> | Finance | 1826 | MIT | `package.json` → `cordis.patch.yml` | `dsh plugin --profile web add github:dsh-market/dsh-market` |
+| [@dsh-external/dsh-client-ui-skin-maid-atelier](https://github.com/Small-tailqwq/dsh-deep-whale)<br><sub>Small-tailqwq/dsh-deep-whale</sub> | UI / TUI | 1596 | — | `maid-atelier/package.json` → `maid-atelier/cordis.patch.yml` | 需看包说明 |
+| [@wxg-prc-cpg/browser-skill-dsh-plugin](https://github.com/Tencent/BrowserSkill)<br><sub>Tencent/BrowserSkill</sub> | Browser | 1263 | MIT | `packages/dsh-plugin-browserskill/package.json` → `packages/dsh-plugin-browserskill/cordis.patch.yml` | 需看包说明 |
+| [@mem9/dsh-plugin](https://github.com/mem9-ai/mem9)<br><sub>mem9-ai/mem9</sub> | Memory | 1196 | Apache-2.0 | `dsh-plugin/package.json` → `dsh-plugin/cordis.patch.yml` | 需看包说明 |
+| [aegis](https://github.com/GanyuanRan/Aegis)<br><sub>GanyuanRan/Aegis</sub> | Coding | 1108 | MIT | `package.json` → `extensions/dsh/cordis.patch.yml` | `dsh plugin --profile web add github:GanyuanRan/Aegis` |
+| [@open-pets/dsh](https://github.com/alvinunreal/openpets)<br><sub>alvinunreal/openpets</sub> | Coding | 1107 | MIT | `packages/dsh/package.json` → `packages/dsh/cordis.patch.yml` | 需看包说明 |
+| [@agentrq/dsh-plugin-agentrq](https://github.com/agentrq/agentrq)<br><sub>agentrq/agentrq</sub> | Long-running | 1088 | Apache-2.0 | `plugins/deepseek-harness/package.json` → `plugins/deepseek-harness/cordis.patch.yml` | 需看包说明 |
+| [dsh-vision-router](https://github.com/ysr666/dsh-vision-router)<br><sub>ysr666/dsh-vision-router</sub> | Model & Routing | 937 | MIT | `package.json` → `cordis.patch.yml` | `dsh plugin --profile web add github:ysr666/dsh-vision-router` |
+| [dsh-tongflow](https://github.com/tong-io/tongflow)<br><sub>tong-io/tongflow</sub> | Long-running | 913 | AGPL-3.0 | `packages/dsh-tongflow/package.json` → `packages/dsh-tongflow/cordis.patch.yml` | 需看包说明 |
+| [@nanmicoder/dsh-agent-teams](https://github.com/NanmiCoder/dsh-agent-teams)<br><sub>NanmiCoder/dsh-agent-teams</sub> | Long-running | 830 | MIT | `package.json` → `cordis.patch.yml` | `dsh plugin --profile web add github:NanmiCoder/dsh-agent-teams` |
+| [dsh-context](https://github.com/bowenliang123/dsh-context)<br><sub>bowenliang123/dsh-context</sub> | Browser | 821 | Apache-2.0 | `package.json` → `cordis.patch.yml` | `dsh plugin --profile web add github:bowenliang123/dsh-context` |
+| [@anionex/dsh-vision-toolkit](https://github.com/Anionex/dsh-vision-toolkit)<br><sub>Anionex/dsh-vision-toolkit</sub> | UI / TUI | 809 | MIT | `package.json` → `cordis.patch.yml` | `dsh plugin --profile web add github:Anionex/dsh-vision-toolkit` |
+| [dsh-api-relay-audit](https://github.com/toby-bridges/api-relay-audit)<br><sub>toby-bridges/api-relay-audit</sub> | Security | 798 | AGPL-3.0 | `package.json` → `dsh/cordis.patch.yml` | `dsh plugin --profile web add github:toby-bridges/api-relay-audit` |
 
-首页按仓库去重展示 Stars 前 30 项；同仓多 bundle 与全部结果见 [data/plugins.json](data/plugins.json)。快照：2026-08-13T21:32:46.503Z。
+首页按仓库去重展示 Stars 前 30 项；同仓多 bundle 与全部结果见 [data/plugins.json](data/plugins.json)。快照：2026-08-22T20:38:38.670Z。
 <!-- RADAR:END -->
 
 完整机器可读记录在 [`data/plugins.json`](data/plugins.json)。只贴了 topic、尚未通过 bundle 验证的仓库保留在 [`data/candidates.json`](data/candidates.json)，不会悄悄混进“可安装插件”。

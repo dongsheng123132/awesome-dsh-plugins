@@ -576,6 +576,28 @@
           "url": "https://www.npmjs.com/package/@deepseek-ai/dsh/v/0.1.0-rc.7"
         }
       ]
+    },
+    {
+      "id": "dsh-policy-waiver-proof",
+      "name": "dsh-policy-waiver-proof",
+      "category": "policy-exception-evidence",
+      "status": "verified",
+      "summary": "Offline, content-addressed proof that a temporary policy waiver stayed within its approved pseudonymous subject, target revision, scope, action allowlist, lifetime and use limit, with fresh compensating-control, revocation and closure checks and no policy change, approval or command execution.",
+      "repo": "https://github.com/dongsheng123132/dsh-policy-waiver-proof",
+      "evidence": [
+        {
+          "label": "Immutable plugin source, formal Codex manifest, redacted MCP and real DSH ToolRuntime containment smoke",
+          "url": "https://github.com/dongsheng123132/dsh-policy-waiver-proof/tree/cf815ad410c41f603845d39ff97666697dfc6e1f"
+        },
+        {
+          "label": "Ubuntu and Windows GitHub Actions run",
+          "url": "https://github.com/dongsheng123132/dsh-policy-waiver-proof/actions/runs/32909367205"
+        },
+        {
+          "label": "DSH 0.1.0-rc.7 used for isolated local-path and fixed-commit GitHub installs",
+          "url": "https://www.npmjs.com/package/@deepseek-ai/dsh/v/0.1.0-rc.7"
+        }
+      ]
     }
   ]
 }

@@ -532,6 +532,28 @@
           "url": "https://www.npmjs.com/package/@deepseek-ai/dsh/v/0.1.0-rc.7"
         }
       ]
+    },
+    {
+      "id": "dsh-windows-settlement-proof",
+      "name": "dsh-windows-settlement-proof",
+      "category": "windows-operations-evidence",
+      "status": "verified",
+      "summary": "Offline, content-addressed proof that an approved Windows control-plane change settled across required service, scheduled-task, event and policy surfaces at the required restart epoch, with hash-only drift disclosure and no PowerShell, registry, service or task execution.",
+      "repo": "https://github.com/dongsheng123132/dsh-windows-settlement-proof",
+      "evidence": [
+        {
+          "label": "Immutable plugin source, formal Codex manifest, redacted MCP and real DSH ToolRuntime settlement smoke",
+          "url": "https://github.com/dongsheng123132/dsh-windows-settlement-proof/tree/1ae1c2f70223cd984cc980fea6c7c1da26988e46"
+        },
+        {
+          "label": "Ubuntu and Windows GitHub Actions run",
+          "url": "https://github.com/dongsheng123132/dsh-windows-settlement-proof/actions/runs/32887770116"
+        },
+        {
+          "label": "DSH 0.1.0-rc.7 used for isolated local-path and fixed-commit GitHub installs",
+          "url": "https://www.npmjs.com/package/@deepseek-ai/dsh/v/0.1.0-rc.7"
+        }
+      ]
     }
   ]
 }

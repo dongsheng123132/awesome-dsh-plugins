@@ -16,7 +16,10 @@ async function wait(milliseconds) {
 }
 
 const SEARCH_PATH = '/search/'
-const SEARCH_MIN_GAP_MS = 2000
+// GitHub code search enforced an approximately eight-second rolling window on the 2026-08-25
+// scheduled run ("try again in 7.768s"). Stay beyond the observed gate instead of exhausting the
+// retry budget across the ordinary five-query capability sweep.
+export const SEARCH_MIN_GAP_MS = 8000
 const SEARCH_RETRIES = 6
 let nextSearchAt = 0
 

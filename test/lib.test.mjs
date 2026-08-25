@@ -8,7 +8,7 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { analyzeCapability, inferEcosystem, mergeSearchHits, parseSkillFrontmatter } from '../scripts/capability-lib.mjs'
 import { expandBaselineMatrix, expandRuntimeMatrix, loadRuntimeConfig, pinnedRepositories, validateRuntimeConfig } from '../scripts/runtime-matrix.mjs'
-import { retryDelay, searchRepositories } from '../scripts/github.mjs'
+import { retryDelay, SEARCH_MIN_GAP_MS, searchRepositories } from '../scripts/github.mjs'
 
 test('extractBundle verifies a root bundle and produces a GitHub install target', () => {
   const manifest = {
@@ -194,6 +194,10 @@ test('a secondary rate limit states its wait in the body, and that wait is a gro
   assert.equal(retryDelay(noHeaders, '{"message":"try again in 45s"}', 0), 46000)
   assert.equal(retryDelay({ headers: { get: name => (name === 'retry-after' ? '30' : null) } }, '', 0), 30000)
   assert.equal(retryDelay(noHeaders, '', 5), 32000)
+})
+
+test('code search pacing outlasts the observed rolling limiter window', () => {
+  assert.ok(SEARCH_MIN_GAP_MS >= 8000)
 })
 
 test('a repository the moving ranking shows on two pages is carried once', async () => {

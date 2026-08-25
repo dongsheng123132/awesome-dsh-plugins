@@ -510,6 +510,28 @@
           "url": "https://github.com/deepseek-ai/deepseek-harness/commit/528c682e061696f5a160f363f236ecbf53cbd006"
         }
       ]
+    },
+    {
+      "id": "dsh-tool-surface-proof",
+      "name": "dsh-tool-surface-proof",
+      "category": "tool-surface-evidence",
+      "status": "verified",
+      "summary": "Offline, content-addressed conformance proof for explicitly recorded model-visible DSH tool surfaces across deployment revision, agent scope, permission mode and presentation mode, with hashed add/remove/schema/order drift and no schema, description or secret disclosure.",
+      "repo": "https://github.com/dongsheng123132/dsh-tool-surface-proof",
+      "evidence": [
+        {
+          "label": "Immutable plugin source, formal Codex manifest, redacted MCP and real DSH ToolRuntime smoke commands",
+          "url": "https://github.com/dongsheng123132/dsh-tool-surface-proof/tree/547284bb71b68a96467379aa60ad1f3a8aa98f00"
+        },
+        {
+          "label": "Ubuntu and Windows GitHub Actions run",
+          "url": "https://github.com/dongsheng123132/dsh-tool-surface-proof/actions/runs/32876330180"
+        },
+        {
+          "label": "DSH 0.1.0-rc.7 used for isolated local-path and fixed-commit GitHub installs",
+          "url": "https://www.npmjs.com/package/@deepseek-ai/dsh/v/0.1.0-rc.7"
+        }
+      ]
     }
   ]
 }

@@ -554,6 +554,28 @@
           "url": "https://www.npmjs.com/package/@deepseek-ai/dsh/v/0.1.0-rc.7"
         }
       ]
+    },
+    {
+      "id": "dsh-principal-binding-proof",
+      "name": "dsh-principal-binding-proof",
+      "category": "identity-binding-evidence",
+      "status": "verified",
+      "summary": "Offline, content-addressed proof that one pseudonymous authority, tenant and target revision remain consistently bound across principal, session, agent, tool-call, runtime and artifact surfaces, with issuer, validity, revocation, key-epoch and unique-chain checks and no authentication or authority grant.",
+      "repo": "https://github.com/dongsheng123132/dsh-principal-binding-proof",
+      "evidence": [
+        {
+          "label": "Immutable plugin source, formal Codex manifest, proof-only MCP and real DSH ToolRuntime binding smoke",
+          "url": "https://github.com/dongsheng123132/dsh-principal-binding-proof/tree/2d49983c583b0d58584a07e22cd6f597d9b0ca73"
+        },
+        {
+          "label": "Ubuntu and Windows GitHub Actions run",
+          "url": "https://github.com/dongsheng123132/dsh-principal-binding-proof/actions/runs/32899300850"
+        },
+        {
+          "label": "DSH 0.1.0-rc.7 used for isolated local-path and fixed-commit GitHub installs",
+          "url": "https://www.npmjs.com/package/@deepseek-ai/dsh/v/0.1.0-rc.7"
+        }
+      ]
     }
   ]
 }

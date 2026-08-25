@@ -1,7 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import { classifyRepository, collectUnscannableRepositories, deriveReviewSignals, describeMissingRuntimeTarget, extractBundle, radarIsPublishable, replaceGeneratedSection, resolveCategory } from '../scripts/lib.mjs'
-import { appendRuntimeReport, sanitizeEnvironment, sanitizeOutput, tail, writeImmutableRuntimeArtifact } from '../scripts/runtime-lib.mjs'
+import { appendRuntimeReport, classifyRuntimeFailure, declaredPackageEntrypoint, sanitizeEnvironment, sanitizeOutput, tail, writeImmutableRuntimeArtifact } from '../scripts/runtime-lib.mjs'
 import { mkdtemp, readFile, writeFile } from 'node:fs/promises'
 import { readFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
@@ -101,6 +101,20 @@ test('runtime artifacts are content-addressed and replay safe', async () => {
   assert.equal(first.sha256, second.sha256)
   assert.equal(second.replayed, true)
   assert.deepEqual(JSON.parse(await readFile(join(directory, first.filename), 'utf8')), report)
+})
+
+test('runtime evidence separates missing package artifacts from DSH boot failures', () => {
+  assert.equal(declaredPackageEntrypoint({ exports: { '.': { default: './lib/index.js' } }, main: './fallback.js' }), './lib/index.js')
+  assert.equal(declaredPackageEntrypoint({ main: './dist/index.js' }), './dist/index.js')
+  assert.equal(classifyRuntimeFailure({
+    install: { ok: true }, compose: { ok: true }, boot: { ok: false },
+    entrypoint: { declared: './lib/index.js', exists: false }, harnessBlocked: false, engineSatisfied: true
+  }), 'package-artifact-missing')
+  assert.equal(classifyRuntimeFailure({
+    install: { ok: true }, compose: { ok: true }, boot: { ok: false },
+    entrypoint: { declared: './lib/index.js', exists: true }, harnessBlocked: false, engineSatisfied: true
+  }), 'boot-failed')
+  assert.equal(classifyRuntimeFailure({ install: { ok: true }, compose: { ok: true }, boot: { ok: true } }), null)
 })
 
 test('runtime matrix requires pinned revisions and expands every baseline-platform-target tuple', () => {

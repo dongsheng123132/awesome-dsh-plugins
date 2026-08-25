@@ -1,8 +1,8 @@
 #!/usr/bin/env node
-import { appendFile, mkdtemp, readFile, rm } from 'node:fs/promises'
+import { appendFile, mkdtemp, readFile, rm, stat } from 'node:fs/promises'
 import { homedir, tmpdir } from 'node:os'
-import { basename, isAbsolute, join, resolve } from 'node:path'
-import { appendRuntimeReport, bootUntilReady, runProcess, sanitizeEnvironment, sha256File, writeImmutableRuntimeArtifact } from './runtime-lib.mjs'
+import { basename, isAbsolute, join, relative, resolve } from 'node:path'
+import { appendRuntimeReport, bootUntilReady, classifyRuntimeFailure, declaredPackageEntrypoint, runProcess, sanitizeEnvironment, sha256File, writeImmutableRuntimeArtifact } from './runtime-lib.mjs'
 
 const argv = process.argv.slice(2)
 const value = flag => {
@@ -100,6 +100,7 @@ try {
   let manifestPath = null
   let patchPath = null
   let packageManifest = null
+  let entrypoint = null
   if (install.ok && !baselineOnly) {
     const profileManifest = JSON.parse(await readFile(profileManifestPath, 'utf8'))
     const bundles = profileManifest.dsh?.profile?.bundles ?? []
@@ -108,6 +109,20 @@ try {
       manifestPath = join(profileDir, 'node_modules', ...resolvedPackage.split('/'), 'package.json')
       packageManifest = JSON.parse(await readFile(manifestPath, 'utf8'))
       patchPath = resolve(join(manifestPath, '..'), packageManifest.dsh.bundle.patch)
+      const declared = declaredPackageEntrypoint(packageManifest)
+      if (declared) {
+        const packageRoot = resolve(join(manifestPath, '..'))
+        const entrypointPath = resolve(packageRoot, declared)
+        const packageRelative = relative(packageRoot, entrypointPath)
+        if (packageRelative.startsWith('..') || isAbsolute(packageRelative)) throw new Error('package entrypoint escapes installed package root')
+        let exists = false
+        try { exists = (await stat(entrypointPath)).isFile() } catch {}
+        entrypoint = {
+          declared,
+          exists,
+          sha256: exists ? await sha256File(entrypointPath) : null
+        }
+      }
     }
   }
 
@@ -125,14 +140,17 @@ try {
 
   const checkedAt = new Date().toISOString()
   const harnessBlocked = boot.stderrTail?.includes('MissingClientBundleError') === true
+  const engineSatisfied = supportsDsh(nodeVersion)
   const status = install.ok && compose.ok && boot.ok
     ? 'passed'
     : install.ok && compose.ok && harnessBlocked ? 'blocked-harness'
     : install.ok && compose.ok && !supportsDsh(nodeVersion) ? 'blocked-environment' : 'failed'
+  const failureClass = classifyRuntimeFailure({ install, compose, boot, entrypoint, harnessBlocked, engineSatisfied })
   const identity = (baselineOnly ? `dsh-${profile}-baseline` : packageManifest?.name ?? spec).replace(/[^a-z0-9]+/gi, '-').replace(/^-|-$/g, '').toLowerCase()
   report = {
     id: `${identity}-${revision.slice(0, 12)}-${checkedAt.replace(/[-:.]/g, '').slice(0, 15)}z`,
     status,
+    failureClass,
     checkedAt,
     dsh: {
       repository: 'deepseek-ai/deepseek-harness',
@@ -143,7 +161,7 @@ try {
       platform: process.platform,
       arch: process.arch,
       node: nodeVersion,
-      dshEngineSatisfied: supportsDsh(nodeVersion)
+      dshEngineSatisfied: engineSatisfied
     },
     executionPolicy: {
       sensitiveEnvironmentNamesRemoved: true,
@@ -158,7 +176,8 @@ try {
       resolvedVersion: packageManifest?.version ?? null,
       manifestSha256: manifestPath ? await sha256File(manifestPath) : null,
       patchPath: patchPath ? basename(patchPath) : null,
-      patchSha256: patchPath ? await sha256File(patchPath) : null
+      patchSha256: patchPath ? await sha256File(patchPath) : null,
+      entrypoint
     },
     stages: [
       { name: 'install', ...install },

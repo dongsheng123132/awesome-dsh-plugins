@@ -37,6 +37,24 @@ export function stableJson(value) {
   return `${JSON.stringify(sortForJson(value), null, 2)}\n`
 }
 
+export function declaredPackageEntrypoint(manifest) {
+  const rootExport = manifest?.exports?.['.']
+  if (typeof rootExport === 'string') return rootExport
+  if (typeof rootExport?.default === 'string') return rootExport.default
+  if (typeof rootExport?.import === 'string') return rootExport.import
+  return typeof manifest?.main === 'string' ? manifest.main : null
+}
+
+export function classifyRuntimeFailure({ install, compose, boot, entrypoint, harnessBlocked, engineSatisfied }) {
+  if (install?.ok && compose?.ok && boot?.ok) return null
+  if (!install?.ok) return 'install-failed'
+  if (entrypoint?.declared && entrypoint.exists === false) return 'package-artifact-missing'
+  if (!compose?.ok) return 'composition-failed'
+  if (harnessBlocked) return 'blocked-harness'
+  if (!engineSatisfied) return 'blocked-environment'
+  return 'boot-failed'
+}
+
 export async function writeImmutableRuntimeArtifact(directory, report) {
   const content = stableJson(report)
   const sha256 = createHash('sha256').update(content).digest('hex')

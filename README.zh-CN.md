@@ -137,7 +137,7 @@ CLI 读取仓库已经提交的快照，普通搜索不需要 GitHub Token。
 
 第一次审计已经说明为什么必须分层：审计时 `@dsh-skillport/bundle` 尚未出现在 npm，因此 README 中的 registry 安装路径真实失败；但同一源码 commit 本地构建后，在 Node 24.19.0、已有构建产物的 DSH `47f943859bef` 检出上完成安装、组合并启动到真实 readiness URL。干净 detached DSH 检出能安装、组合插件，但因缺少 DSH Web client bundle 被阻塞；继续构建该检出又先在 DSH 自身的 `tsdown` 缺 `unrun` 处失败。因此目前证据只支持“兼容已有构建产物的检出”，还不支持“干净源码可复现”。Node 22.14 那次另记为 `blocked-environment`，因为它不满足 DSH 自己声明的最低引擎要求，不能算插件失败。
 
-下一层现已机器化：[`data/runtime-targets.json`](data/runtime-targets.json) 同时钉死 0.1.1 之前的兼容锚点与官方 `dsh-v0.1.1-rc.1` 两条具名 DSH 基线、四个观察型社区插件 commit 和一个必须通过的 2Origin 阳性对照。[运行时兼容矩阵](.github/workflows/runtime-compat.yml) 在 Ubuntu 与 Windows 上运行完整的“基线 × OS × package”笛卡尔积，先启动每条 stock DSH Web 基线作为仪器阳性对照，再在全新 `DSH_HOME` 中逐一安装、组合和启动各元组。基线 ID、固定 revision、报告路径、缓存键与 artifact 名互相隔离，升级证据不能覆盖旧锚点。基线生命周期脚本由各固定 DSH commit 自己的失败闭合 `strictDepBuilds` 与逐项审核 `allowBuilds` 策略管控，插件侧仍只精确放行目标声明的一个固定包。每次运行都会在移除凭据形与 CI 控制环境变量后上传只创建不覆盖、内容寻址的报告。`observe` 目标的有效负报告会记录生态兼容事实但不会把仪器本身判红；`required` 目标必须通过，证据缺失或格式错误始终失败。通过只证明指定组合兼容，不是安全认证。
+下一层现已机器化：[`data/runtime-targets.json`](data/runtime-targets.json) 同时钉死 0.1.1 之前的兼容锚点与官方 `dsh-v0.1.1-rc.2` 两条具名 DSH 基线、四个观察型社区插件 commit 和一个必须通过的 2Origin 阳性对照。[运行时兼容矩阵](.github/workflows/runtime-compat.yml) 在 Ubuntu 与 Windows 上运行完整的“基线 × OS × package”笛卡尔积，先启动每条 stock DSH Web 基线作为仪器阳性对照，再在全新 `DSH_HOME` 中逐一安装、组合和启动各元组。基线 ID、固定 revision、报告路径、缓存键与 artifact 名互相隔离，升级证据不能覆盖旧锚点。基线生命周期脚本由各固定 DSH commit 自己的失败闭合 `strictDepBuilds` 与逐项审核 `allowBuilds` 策略管控，插件侧仍只精确放行目标声明的一个固定包。报告还会解析已安装包声明的入口；若构建产物缺失，则记为 `package-artifact-missing`，不再与 Harness 启动故障混为一谈。每次运行都会在移除凭据形与 CI 控制环境变量后上传只创建不覆盖、内容寻址的报告。`observe` 目标的有效负报告会记录生态兼容事实但不会把仪器本身判红；`required` 目标必须通过，证据缺失或格式错误始终失败。通过只证明指定组合兼容，不是安全认证。
 
 可复跑命令：
 

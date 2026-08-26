@@ -752,6 +752,28 @@
           "url": "https://www.npmjs.com/package/@deepseek-ai/dsh/v/0.1.0-rc.7"
         }
       ]
+    },
+    {
+      "id": "dsh-access-review-proof",
+      "name": "dsh-access-review-proof",
+      "category": "access-recertification-evidence",
+      "status": "verified",
+      "summary": "Offline, content-addressed proof that one supplied access-review campaign covered its complete declared entitlement inventory, met risk-based staged and independent-reviewer policy, closed every final keep/revoke decision into matching active/revoked evidence, and produced an exact fresh post-review snapshot with observer diversity, without approving or changing access, authenticating receipts, querying live identity systems or claiming the supplied inventory is exhaustive.",
+      "repo": "https://github.com/dongsheng123132/dsh-access-review-proof",
+      "evidence": [
+        {
+          "label": "Immutable plugin source, formal Codex manifest, proof-only MCP and real DSH ToolRuntime access-review smoke",
+          "url": "https://github.com/dongsheng123132/dsh-access-review-proof/tree/166021f85f78633b8c94e98b04216a4701652594"
+        },
+        {
+          "label": "Ubuntu and Windows GitHub Actions run",
+          "url": "https://github.com/dongsheng123132/dsh-access-review-proof/actions/runs/32985020604"
+        },
+        {
+          "label": "DSH 0.1.0-rc.7 used for isolated local-path and fixed-commit GitHub installs",
+          "url": "https://www.npmjs.com/package/@deepseek-ai/dsh/v/0.1.0-rc.7"
+        }
+      ]
     }
   ]
 }

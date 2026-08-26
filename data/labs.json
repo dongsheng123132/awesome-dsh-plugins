@@ -708,6 +708,28 @@
           "url": "https://www.npmjs.com/package/@deepseek-ai/dsh/v/0.1.0-rc.7"
         }
       ]
+    },
+    {
+      "id": "dsh-change-window-proof",
+      "name": "dsh-change-window-proof",
+      "category": "change-window-settlement-evidence",
+      "status": "verified",
+      "summary": "Offline, content-addressed proof that one supplied hash-linked change event ledger stayed inside one declared UTC maintenance window and cutoff while remaining bound to the same change receipt, artifact, environment, policy and plan with observer diversity and fresh chronology, without approving, waiving, scheduling or executing change, authenticating receipts, observing live systems or claiming absence of unrecorded actions.",
+      "repo": "https://github.com/dongsheng123132/dsh-change-window-proof",
+      "evidence": [
+        {
+          "label": "Immutable plugin source, formal Codex manifest, proof-only MCP and real DSH ToolRuntime change-window smoke",
+          "url": "https://github.com/dongsheng123132/dsh-change-window-proof/tree/62279527de798aecf50d6ea5947efa98cfc4e74b"
+        },
+        {
+          "label": "Ubuntu and Windows GitHub Actions run",
+          "url": "https://github.com/dongsheng123132/dsh-change-window-proof/actions/runs/32962483321"
+        },
+        {
+          "label": "DSH 0.1.0-rc.7 used for isolated local-path and fixed-commit GitHub installs",
+          "url": "https://www.npmjs.com/package/@deepseek-ai/dsh/v/0.1.0-rc.7"
+        }
+      ]
     }
   ]
 }

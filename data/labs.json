@@ -598,6 +598,28 @@
           "url": "https://www.npmjs.com/package/@deepseek-ai/dsh/v/0.1.0-rc.7"
         }
       ]
+    },
+    {
+      "id": "dsh-reproducible-build-proof",
+      "name": "dsh-reproducible-build-proof",
+      "category": "supply-chain-reproducibility-evidence",
+      "status": "verified",
+      "summary": "Offline, content-addressed proof that two or more independently operated allowed builders recorded equivalent source, recipe, build type, parameters, dependency set and environment contract and reproduced the exact byte-identical specified outputs, without running builds, authenticating provenance or claiming complete supply-chain security.",
+      "repo": "https://github.com/dongsheng123132/dsh-reproducible-build-proof",
+      "evidence": [
+        {
+          "label": "Immutable plugin source, formal Codex manifest, proof-only MCP and real DSH ToolRuntime reproducibility smoke",
+          "url": "https://github.com/dongsheng123132/dsh-reproducible-build-proof/tree/9a0dc2cc6dafd514aab4cf4bbc3d81b5e5b815f4"
+        },
+        {
+          "label": "Ubuntu and Windows GitHub Actions run",
+          "url": "https://github.com/dongsheng123132/dsh-reproducible-build-proof/actions/runs/32918100298"
+        },
+        {
+          "label": "DSH 0.1.0-rc.7 used for isolated local-path and fixed-commit GitHub installs",
+          "url": "https://www.npmjs.com/package/@deepseek-ai/dsh/v/0.1.0-rc.7"
+        }
+      ]
     }
   ]
 }

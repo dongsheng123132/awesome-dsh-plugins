@@ -620,6 +620,28 @@
           "url": "https://www.npmjs.com/package/@deepseek-ai/dsh/v/0.1.0-rc.7"
         }
       ]
+    },
+    {
+      "id": "dsh-build-hermeticity-proof",
+      "name": "dsh-build-hermeticity-proof",
+      "category": "supply-chain-hermeticity-evidence",
+      "status": "verified",
+      "summary": "Offline, content-addressed proof that one explicit hash-only build access receipt stayed inside its declared file, environment, deny-network, fixed-clock, fixed-randomness and output closure, without executing or sandboxing a build, authenticating the recorder or proving reproducibility.",
+      "repo": "https://github.com/dongsheng123132/dsh-build-hermeticity-proof",
+      "evidence": [
+        {
+          "label": "Immutable plugin source, formal Codex manifest, proof-only MCP and real DSH ToolRuntime hermeticity smoke",
+          "url": "https://github.com/dongsheng123132/dsh-build-hermeticity-proof/tree/e0fe71e6a724e66f8b5d93983fdb123042a19c65"
+        },
+        {
+          "label": "Ubuntu and Windows GitHub Actions run",
+          "url": "https://github.com/dongsheng123132/dsh-build-hermeticity-proof/actions/runs/32925918422"
+        },
+        {
+          "label": "DSH 0.1.0-rc.7 used for isolated local-path and fixed-commit GitHub installs",
+          "url": "https://www.npmjs.com/package/@deepseek-ai/dsh/v/0.1.0-rc.7"
+        }
+      ]
     }
   ]
 }

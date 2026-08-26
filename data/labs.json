@@ -642,6 +642,28 @@
           "url": "https://www.npmjs.com/package/@deepseek-ai/dsh/v/0.1.0-rc.7"
         }
       ]
+    },
+    {
+      "id": "dsh-artifact-promotion-proof",
+      "name": "dsh-artifact-promotion-proof",
+      "category": "supply-chain-promotion-evidence",
+      "status": "verified",
+      "summary": "Offline, content-addressed proof that one immutable artifact digest followed an exact ordered build-to-staging-to-production chain with environment bindings, predecessor deployment receipts, required gate types, distinct authorities and fresh chronology, without deploying, granting approval, authenticating receipts or claiming runtime health.",
+      "repo": "https://github.com/dongsheng123132/dsh-artifact-promotion-proof",
+      "evidence": [
+        {
+          "label": "Immutable plugin source, formal Codex manifest, proof-only MCP and real DSH ToolRuntime promotion smoke",
+          "url": "https://github.com/dongsheng123132/dsh-artifact-promotion-proof/tree/4aa5c1b56ca41be6f3a8d2c40f4850ec016f36c6"
+        },
+        {
+          "label": "Ubuntu and Windows GitHub Actions run",
+          "url": "https://github.com/dongsheng123132/dsh-artifact-promotion-proof/actions/runs/32933265139"
+        },
+        {
+          "label": "DSH 0.1.0-rc.7 used for isolated local-path and fixed-commit GitHub installs",
+          "url": "https://www.npmjs.com/package/@deepseek-ai/dsh/v/0.1.0-rc.7"
+        }
+      ]
     }
   ]
 }

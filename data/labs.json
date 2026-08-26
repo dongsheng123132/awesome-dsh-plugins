@@ -664,6 +664,28 @@
           "url": "https://www.npmjs.com/package/@deepseek-ai/dsh/v/0.1.0-rc.7"
         }
       ]
+    },
+    {
+      "id": "dsh-deployment-rollback-proof",
+      "name": "dsh-deployment-rollback-proof",
+      "category": "deployment-rollback-settlement-evidence",
+      "status": "verified",
+      "summary": "Offline, content-addressed proof that every explicitly declared deployment target stopped serving one failed artifact and converged within RTO to the same last-known-good digest with exact replica counts, incident and rollback-plan binding, observer diversity and fresh chronology, without executing rollback, authenticating receipts, observing live infrastructure or claiming application correctness.",
+      "repo": "https://github.com/dongsheng123132/dsh-deployment-rollback-proof",
+      "evidence": [
+        {
+          "label": "Immutable plugin source, formal Codex manifest, proof-only MCP and real DSH ToolRuntime rollback-convergence smoke",
+          "url": "https://github.com/dongsheng123132/dsh-deployment-rollback-proof/tree/87bdcec4f4c9c3c2df87d8de8ff4e1015a9a23d7"
+        },
+        {
+          "label": "Ubuntu and Windows GitHub Actions run",
+          "url": "https://github.com/dongsheng123132/dsh-deployment-rollback-proof/actions/runs/32941994523"
+        },
+        {
+          "label": "DSH 0.1.0-rc.7 used for isolated local-path and fixed-commit GitHub installs",
+          "url": "https://www.npmjs.com/package/@deepseek-ai/dsh/v/0.1.0-rc.7"
+        }
+      ]
     }
   ]
 }

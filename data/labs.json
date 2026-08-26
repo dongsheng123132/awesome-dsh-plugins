@@ -774,6 +774,28 @@
           "url": "https://www.npmjs.com/package/@deepseek-ai/dsh/v/0.1.0-rc.7"
         }
       ]
+    },
+    {
+      "id": "dsh-duty-separation-proof",
+      "name": "dsh-duty-separation-proof",
+      "category": "duty-separation-evidence",
+      "status": "verified",
+      "summary": "Offline, content-addressed proof that one supplied hash-linked DSH workflow followed its exact request/approval/execution/observation sequence, kept declared conflicting duties on disjoint pseudonymous principals, met approval, principal and observer thresholds, and remained fresh, without granting authority, approving or executing actions, authenticating receipts, observing live systems or claiming the supplied ledger is exhaustive.",
+      "repo": "https://github.com/dongsheng123132/dsh-duty-separation-proof",
+      "evidence": [
+        {
+          "label": "Immutable plugin source, formal Codex manifest, proof-only MCP and real DSH ToolRuntime duty-separation smoke",
+          "url": "https://github.com/dongsheng123132/dsh-duty-separation-proof/tree/8eedb0139b0515b3164faab46d400e2b8ca6a83f"
+        },
+        {
+          "label": "Ubuntu and Windows GitHub Actions run",
+          "url": "https://github.com/dongsheng123132/dsh-duty-separation-proof/actions/runs/33015019867"
+        },
+        {
+          "label": "DSH 0.1.0-rc.7 used for isolated local-path and fixed-commit GitHub installs",
+          "url": "https://www.npmjs.com/package/@deepseek-ai/dsh/v/0.1.0-rc.7"
+        }
+      ]
     }
   ]
 }

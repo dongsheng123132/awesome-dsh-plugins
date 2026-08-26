@@ -796,6 +796,28 @@
           "url": "https://github.com/deepseek-ai/DeepSeek-Harness/tree/47f943859bef60e4160492346772ded9b24f765a"
         }
       ]
+    },
+    {
+      "id": "dsh-credential-retirement-proof",
+      "name": "dsh-credential-retirement-proof",
+      "category": "credential-retirement-evidence",
+      "status": "verified",
+      "summary": "Offline, content-addressed proof that one supplied credential rotation settled across every explicitly declared consumer: the new credential was accepted, the old credential was rejected, overlap stayed bounded, receipt identities remained distinct and a fresh closure observation reported zero residual old bindings, without reading, issuing, rotating or revoking secrets, authenticating receipts, querying live systems or claiming the supplied consumer inventory is exhaustive.",
+      "repo": "https://github.com/dongsheng123132/dsh-credential-retirement-proof",
+      "evidence": [
+        {
+          "label": "Immutable plugin source, formal Codex manifest, proof-only MCP and real DSH ToolRuntime credential-retirement smoke",
+          "url": "https://github.com/dongsheng123132/dsh-credential-retirement-proof/tree/8afd58a313dec57d30c5f81f383f31c12df3cf0a"
+        },
+        {
+          "label": "Ubuntu and Windows GitHub Actions run",
+          "url": "https://github.com/dongsheng123132/dsh-credential-retirement-proof/actions/runs/33022813233"
+        },
+        {
+          "label": "DSH source checkout 47f943859bef (package 0.1.0-rc.5) used for isolated local-path and fixed-commit GitHub installs",
+          "url": "https://github.com/deepseek-ai/DeepSeek-Harness/tree/47f943859bef60e4160492346772ded9b24f765a"
+        }
+      ]
     }
   ]
 }

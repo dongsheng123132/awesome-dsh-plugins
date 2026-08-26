@@ -8,7 +8,7 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { analyzeCapability, inferEcosystem, mergeSearchHits, parseSkillFrontmatter } from '../scripts/capability-lib.mjs'
 import { expandBaselineMatrix, expandRuntimeMatrix, loadRuntimeConfig, pinnedRepositories, validateRuntimeConfig } from '../scripts/runtime-matrix.mjs'
-import { retryDelay, SEARCH_MIN_GAP_MS, searchRepositories } from '../scripts/github.mjs'
+import { reserveSearchSlot, retryDelay, SEARCH_MIN_GAP_MS, searchRepositories } from '../scripts/github.mjs'
 
 test('extractBundle verifies a root bundle and produces a GitHub install target', () => {
   const manifest = {
@@ -198,6 +198,14 @@ test('a secondary rate limit states its wait in the body, and that wait is a gro
 
 test('code search pacing outlasts the observed rolling limiter window', () => {
   assert.ok(SEARCH_MIN_GAP_MS >= 8000)
+})
+
+test('concurrent search callers reserve different limiter slots before yielding', () => {
+  const now = 1000
+  const first = reserveSearchSlot(now, 0)
+  const second = reserveSearchSlot(now, first.nextSearchAt)
+  const third = reserveSearchSlot(now, second.nextSearchAt)
+  assert.deepEqual([first.delayMs, second.delayMs, third.delayMs], [0, SEARCH_MIN_GAP_MS, SEARCH_MIN_GAP_MS * 2])
 })
 
 test('a repository the moving ranking shows on two pages is carried once', async () => {

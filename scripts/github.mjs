@@ -23,13 +23,21 @@ export const SEARCH_MIN_GAP_MS = 8000
 const SEARCH_RETRIES = 6
 let nextSearchAt = 0
 
+export function reserveSearchSlot(now, currentNextAt, gap = SEARCH_MIN_GAP_MS) {
+  const reservedAt = Math.max(now, currentNextAt)
+  return { delayMs: reservedAt - now, nextSearchAt: reservedAt + gap }
+}
+
 // Search is metered far more tightly than the rest of the API, and the five capability queries are
 // fired back to back. Space them out instead of finding out from a 429.
 async function paceSearch(url) {
   if (!url.includes(SEARCH_PATH)) return
   const now = Date.now()
-  if (now < nextSearchAt) await wait(nextSearchAt - now)
-  nextSearchAt = Math.max(now, nextSearchAt) + SEARCH_MIN_GAP_MS
+  // Reserve before yielding. Capability discovery starts its source searches concurrently; if
+  // callers wait before reserving, they all wake on the same boundary and burst into the limiter.
+  const reservation = reserveSearchSlot(now, nextSearchAt)
+  nextSearchAt = reservation.nextSearchAt
+  if (reservation.delayMs > 0) await wait(reservation.delayMs)
 }
 
 // A secondary rate limit states its wait in the body, not in a header:

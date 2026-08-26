@@ -730,6 +730,28 @@
           "url": "https://www.npmjs.com/package/@deepseek-ai/dsh/v/0.1.0-rc.7"
         }
       ]
+    },
+    {
+      "id": "dsh-break-glass-settlement-proof",
+      "name": "dsh-break-glass-settlement-proof",
+      "category": "emergency-access-settlement-evidence",
+      "status": "verified",
+      "summary": "Offline, content-addressed proof that one supplied emergency-access session stayed within its request, activation, termination and expiry bounds, used only explicitly allowlisted action/resource receipts, retained one session/principal binding, revoked every declared grant before a fresh zero-residual closure observation, and met observer diversity, without granting, activating, approving or revoking access, authenticating receipts, querying live identity systems or claiming absence of undeclared actions or grants.",
+      "repo": "https://github.com/dongsheng123132/dsh-break-glass-settlement-proof",
+      "evidence": [
+        {
+          "label": "Immutable plugin source, formal Codex manifest, proof-only MCP and real DSH ToolRuntime break-glass settlement smoke",
+          "url": "https://github.com/dongsheng123132/dsh-break-glass-settlement-proof/tree/ea045a788d61755835ab7358384919ce5e0e5032"
+        },
+        {
+          "label": "Ubuntu and Windows GitHub Actions run",
+          "url": "https://github.com/dongsheng123132/dsh-break-glass-settlement-proof/actions/runs/32973600449"
+        },
+        {
+          "label": "DSH 0.1.0-rc.7 used for isolated local-path and fixed-commit GitHub installs",
+          "url": "https://www.npmjs.com/package/@deepseek-ai/dsh/v/0.1.0-rc.7"
+        }
+      ]
     }
   ]
 }

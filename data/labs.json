@@ -792,8 +792,8 @@
           "url": "https://github.com/dongsheng123132/dsh-duty-separation-proof/actions/runs/33015019867"
         },
         {
-          "label": "DSH 0.1.0-rc.7 used for isolated local-path and fixed-commit GitHub installs",
-          "url": "https://www.npmjs.com/package/@deepseek-ai/dsh/v/0.1.0-rc.7"
+          "label": "DSH source checkout 47f943859bef (package 0.1.0-rc.5) used for isolated local-path and fixed-commit GitHub installs",
+          "url": "https://github.com/deepseek-ai/DeepSeek-Harness/tree/47f943859bef60e4160492346772ded9b24f765a"
         }
       ]
     }

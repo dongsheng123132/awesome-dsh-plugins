@@ -686,6 +686,28 @@
           "url": "https://www.npmjs.com/package/@deepseek-ai/dsh/v/0.1.0-rc.7"
         }
       ]
+    },
+    {
+      "id": "dsh-canary-decision-proof",
+      "name": "dsh-canary-decision-proof",
+      "category": "progressive-delivery-decision-evidence",
+      "status": "verified",
+      "summary": "Offline, content-addressed proof that a recorded canary promote, abort or pause decision follows exact hash-bound baseline/canary windows, exposure limits, sample floors, observer diversity, metric regression thresholds and evidence chronology, failing closed to pause when evidence is incomplete, without querying metrics, executing rollout, authenticating receipts or claiming statistical significance.",
+      "repo": "https://github.com/dongsheng123132/dsh-canary-decision-proof",
+      "evidence": [
+        {
+          "label": "Immutable plugin source, formal Codex manifest, proof-only MCP and real DSH ToolRuntime canary-decision smoke",
+          "url": "https://github.com/dongsheng123132/dsh-canary-decision-proof/tree/1a65bdc6f108d9de7f6ec370613b60256e47d590"
+        },
+        {
+          "label": "Ubuntu and Windows GitHub Actions run",
+          "url": "https://github.com/dongsheng123132/dsh-canary-decision-proof/actions/runs/32951805754"
+        },
+        {
+          "label": "DSH 0.1.0-rc.7 used for isolated local-path and fixed-commit GitHub installs",
+          "url": "https://www.npmjs.com/package/@deepseek-ai/dsh/v/0.1.0-rc.7"
+        }
+      ]
     }
   ]
 }

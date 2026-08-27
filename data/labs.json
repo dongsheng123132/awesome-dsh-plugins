@@ -840,6 +840,28 @@
           "url": "https://github.com/deepseek-ai/DeepSeek-Harness/tree/47f943859bef60e4160492346772ded9b24f765a"
         }
       ]
+    },
+    {
+      "id": "dsh-license-obligation-proof",
+      "name": "dsh-license-obligation-proof",
+      "category": "license-obligation-evidence",
+      "status": "verified",
+      "summary": "Offline, content-addressed proof that every explicitly declared component decision for one supplied release had exact NOTICE, license-text, source-offer, source-bundle or modification-notice obligations matched by delivered artifact digests, distinct receipts, reviewer and observer thresholds and a fresh zero-unresolved closure, without scanning packages, normalizing SPDX, interpreting licenses, providing legal advice, authenticating receipts or claiming legal compliance or exhaustive component coverage.",
+      "repo": "https://github.com/dongsheng123132/dsh-license-obligation-proof",
+      "evidence": [
+        {
+          "label": "Immutable plugin source, formal Codex manifest, proof-only MCP and real DSH ToolRuntime obligation-closure smoke",
+          "url": "https://github.com/dongsheng123132/dsh-license-obligation-proof/tree/2a6f39cb8a5e361929f9357489880be48aaed24c"
+        },
+        {
+          "label": "Ubuntu and Windows GitHub Actions run",
+          "url": "https://github.com/dongsheng123132/dsh-license-obligation-proof/actions/runs/33035982640"
+        },
+        {
+          "label": "DSH source checkout 47f943859bef (package 0.1.0-rc.5) used for isolated local-path and fixed-commit GitHub installs",
+          "url": "https://github.com/deepseek-ai/DeepSeek-Harness/tree/47f943859bef60e4160492346772ded9b24f765a"
+        }
+      ]
     }
   ]
 }

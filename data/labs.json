@@ -818,6 +818,28 @@
           "url": "https://github.com/deepseek-ai/DeepSeek-Harness/tree/47f943859bef60e4160492346772ded9b24f765a"
         }
       ]
+    },
+    {
+      "id": "dsh-vulnerability-remediation-proof",
+      "name": "dsh-vulnerability-remediation-proof",
+      "category": "vulnerability-remediation-evidence",
+      "status": "verified",
+      "summary": "Offline, content-addressed proof that one supplied remediation campaign covered every explicitly declared asset, deployed the same fixed artifact, rescanned after deployment, met its deadline and produced a fresh zero-vulnerable closure with observer diversity, without discovering assets, scanning, patching, authenticating receipts, querying live systems or claiming the supplied inventory is exhaustive or that no other vulnerability exists.",
+      "repo": "https://github.com/dongsheng123132/dsh-vulnerability-remediation-proof",
+      "evidence": [
+        {
+          "label": "Immutable plugin source, formal Codex manifest, proof-only MCP and real DSH ToolRuntime remediation-closure smoke",
+          "url": "https://github.com/dongsheng123132/dsh-vulnerability-remediation-proof/tree/ac9601007f9a20a00a45dc5c4c4a7f8733512d9e"
+        },
+        {
+          "label": "Ubuntu and Windows GitHub Actions run",
+          "url": "https://github.com/dongsheng123132/dsh-vulnerability-remediation-proof/actions/runs/33030120120"
+        },
+        {
+          "label": "DSH source checkout 47f943859bef (package 0.1.0-rc.5) used for isolated local-path and fixed-commit GitHub installs",
+          "url": "https://github.com/deepseek-ai/DeepSeek-Harness/tree/47f943859bef60e4160492346772ded9b24f765a"
+        }
+      ]
     }
   ]
 }

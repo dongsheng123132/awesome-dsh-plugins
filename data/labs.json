@@ -862,6 +862,28 @@
           "url": "https://github.com/deepseek-ai/DeepSeek-Harness/tree/47f943859bef60e4160492346772ded9b24f765a"
         }
       ]
+    },
+    {
+      "id": "dsh-support-lifecycle-proof",
+      "name": "dsh-support-lifecycle-proof",
+      "category": "support-lifecycle-evidence",
+      "status": "verified",
+      "summary": "Offline, content-addressed proof that a supplied release support declaration has exact component/release bindings, support-window chronology, distinct reviewer and receipt thresholds, explicit retirement notice and migration artifact digests for expired components, freshness, and a zero-unsupported closure. It does not scan compatibility, query deployments, announce or execute end-of-life, authenticate receipt issuers, prove inventory completeness, or provide operational or legal advice.",
+      "repo": "https://github.com/dongsheng123132/dsh-support-lifecycle-proof",
+      "evidence": [
+        {
+          "label": "Immutable plugin source, formal Codex manifest, proof-only MCP and isolated DSH local-path plus fixed-commit GitHub installation evidence",
+          "url": "https://github.com/dongsheng123132/dsh-support-lifecycle-proof/tree/df33364fee39fbb55b53b8c290df6b28d0f072c6"
+        },
+        {
+          "label": "Ubuntu and Windows GitHub Actions run",
+          "url": "https://github.com/dongsheng123132/dsh-support-lifecycle-proof/actions/runs/33233372375"
+        },
+        {
+          "label": "DSH source checkout 47f943859bef (package 0.1.0-rc.5) used for isolated local-path and fixed-commit GitHub installs",
+          "url": "https://github.com/deepseek-ai/DeepSeek-Harness/tree/47f943859bef60e4160492346772ded9b24f765a"
+        }
+      ]
     }
   ]
 }

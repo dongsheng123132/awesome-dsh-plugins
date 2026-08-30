@@ -222,7 +222,15 @@ npm run discover -- --limit 25
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md). Adding the `dsh-plugin` topic helps discovery, but verification still depends on the bundle manifest and patch file.
+To submit a plugin, make its repository public and add the [`dsh-plugin`](https://github.com/topics/dsh-plugin) topic. The scheduled radar opens the data PR automatically; no generated README editing is required. For a missing entry or correction, open the [plugin review form](https://github.com/dongsheng123132/awesome-dsh-plugins/issues/new?template=add-plugin.yml). See [CONTRIBUTING.md](CONTRIBUTING.md) for evidence requirements and local checks.
+
+## Badge
+
+Listed here? Add this badge to your plugin README:
+
+```markdown
+[![Listed on Awesome DSH Plugins](https://img.shields.io/badge/listed-Awesome%20DSH%20Plugins-2ea44f?logo=github)](https://github.com/dongsheng123132/awesome-dsh-plugins)
+```
 
 ## Disclaimer
 

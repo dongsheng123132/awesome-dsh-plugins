@@ -90,27 +90,13 @@ This second radar finds public `SKILL.md` candidates from Claude, Codex, shared 
 - `unclassified`: required identity evidence is missing.
 
 <!-- CAPABILITIES:START -->
-**49** revision-pinned candidates: Copy 15 · Wrapper 30 · Bridge 2 · Unclassified 2
+**0** revision-pinned candidates: Copy 0 · Wrapper 0 · Bridge 0 · Unclassified 0
 
 | Capability | Source | Port path | Score | License | Pinned evidence |
 |---|---|---:|---:|---|---|
-| [code-conventions](https://github.com/iflytek/skillhub/blob/d2403bb5911953b8f53e62c3f0a9edc291363944/.agents/skills/code-conventions/SKILL.md)<br><sub>iflytek/skillhub:.agents/skills/code-conventions/SKILL.md</sub> | agents | copy | 100/100 | Apache-2.0 | <code>d2403bb59119</code> / <code>2add2e311e6c</code> |
-| [fix](https://github.com/motiondivision/motion/blob/adaf7a4e5368d704ea350669f6ac674fb26ff270/.agents/skills/fix/SKILL.md)<br><sub>motiondivision/motion:.agents/skills/fix/SKILL.md</sub> | agents | copy | 95/100 | MIT | <code>adaf7a4e5368</code> / <code>a00ab8442e03</code> |
-| [fix-pr](https://github.com/questdb/questdb/blob/6610ab113b84528a73388b0722a38b97f9df78c2/.codex/skills/fix-pr/SKILL.md)<br><sub>questdb/questdb:.codex/skills/fix-pr/SKILL.md</sub> | codex | copy | 95/100 | Apache-2.0 | <code>6610ab113b84</code> / <code>e2293795c80c</code> |
-| [pr](https://github.com/GetStream/Vision-Agents/blob/3a8eec104f90ad3dbf76069ab99b40bac577f41b/.claude/skills/pr/SKILL.md)<br><sub>GetStream/Vision-Agents:.claude/skills/pr/SKILL.md</sub> | claude | copy | 95/100 | Apache-2.0 | <code>3a8eec104f90</code> / <code>85f841bbc968</code> |
-| [review](https://github.com/ailyProject/aily-blockly/blob/03989eedeae06c95ad9fbe31472db2091bb7ac10/.codex/skills/review/SKILL.md)<br><sub>ailyProject/aily-blockly:.codex/skills/review/SKILL.md</sub> | codex | copy | 95/100 | GPL-3.0 | <code>03989eedeae0</code> / <code>c417789bb49b</code> |
-| [seo](https://github.com/gridaco/grida/blob/5909675470e89f793becbd6d556c56485bcef7f9/.agents/skills/seo/SKILL.md)<br><sub>gridaco/grida:.agents/skills/seo/SKILL.md</sub> | agents | copy | 95/100 | Apache-2.0 | <code>5909675470e8</code> / <code>51350f506838</code> |
-| [pr](https://github.com/meshtastic/Meshtastic-Android/blob/42b07b22d7f2ed10d0ecc876796d8102d27631e6/.claude/skills/pr/SKILL.md)<br><sub>meshtastic/Meshtastic-Android:.claude/skills/pr/SKILL.md</sub> | claude | copy | 95/100 | GPL-3.0 | <code>42b07b22d7f2</code> / <code>7a332c807d86</code> |
-| [qa](https://github.com/wp-media/wp-rocket/blob/d103284e1931f34e8c078ad92dbb1c6912e3cfed/.claude/skills/qa/SKILL.md)<br><sub>wp-media/wp-rocket:.claude/skills/qa/SKILL.md</sub> | claude | copy | 95/100 | GPL-2.0 | <code>d103284e1931</code> / <code>dc958f2e1d97</code> |
-| [pr](https://github.com/woocommerce/woocommerce-ios/blob/8193985dbb9e1e05b3f0720fdff3b90ff1f658ea/.claude/skills/pr/SKILL.md)<br><sub>woocommerce/woocommerce-ios:.claude/skills/pr/SKILL.md</sub> | claude | copy | 95/100 | GPL-2.0 | <code>8193985dbb9e</code> / <code>f075eba0d630</code> |
-| [zod](https://github.com/hashintel/hash/blob/840ac684fbbad14fe07a8b27389cd90ad5210938/.codex/skills/zod/SKILL.md)<br><sub>hashintel/hash:.codex/skills/zod/SKILL.md</sub> | codex | copy | 90/100 | AGPL-3.0 | <code>840ac684fbba</code> / <code>a117ffc26060</code> |
-| [jna](https://github.com/JetBrains/intellij-community/blob/d698802bc0c02ef5816678a219f9fb3d158b6ee1/.agents/skills/jna/SKILL.md)<br><sub>JetBrains/intellij-community:.agents/skills/jna/SKILL.md</sub> | agents | copy | 85/100 | — | <code>d698802bc0c0</code> / <code>a27c2e6d5151</code> |
-| [s](https://github.com/RyanCodrai/turbovec/blob/8202f194a0cbbd52213a004290401e180e5c123d/.claude/skills/s/SKILL.md)<br><sub>RyanCodrai/turbovec:.claude/skills/s/SKILL.md</sub> | claude | copy | 85/100 | MIT | <code>8202f194a0cb</code> / <code>97d5d955a57a</code> |
-| [pr](https://github.com/liferay/liferay-portal/blob/4210365ab97e95a46106e7807dcb07199084dc60/.claude/skills/pr/SKILL.md)<br><sub>liferay/liferay-portal:.claude/skills/pr/SKILL.md</sub> | claude | copy | 85/100 | — | <code>4210365ab97e</code> / <code>3e71624f776d</code> |
-| [go](https://github.com/nevalang/neva/blob/bb7b3301b461c1d6ad8bc0199d51b6c4437855c3/.codex/skills/go/SKILL.md)<br><sub>nevalang/neva:.codex/skills/go/SKILL.md</sub> | codex | copy | 85/100 | MIT | <code>bb7b3301b461</code> / <code>675bccd70ae5</code> |
-| [pr](https://github.com/EverMind-AI/EverOS/blob/b078f72138ebd0148de5a24c4ce0283e2ebde8b7/.claude/skills/pr/SKILL.md)<br><sub>EverMind-AI/EverOS:.claude/skills/pr/SKILL.md</sub> | claude | wrapper | 79/100 | Apache-2.0 | <code>b078f72138eb</code> / <code>d24a3217df00</code> |
 
-Full records, score components, and line-level signals live in [data/capabilities.json](data/capabilities.json). Snapshot: 2026-08-13T22:47:12.754Z. The score measures only observed adaptation effort; it is not compatibility, safety, quality, or license clearance.
+
+Full records, score components, and line-level signals live in [data/capabilities.json](data/capabilities.json). Snapshot: 2026-09-05T15:34:14.404Z. The score measures only observed adaptation effort; it is not compatibility, safety, quality, or license clearance.
 <!-- CAPABILITIES:END -->
 
 ## Search from the terminal

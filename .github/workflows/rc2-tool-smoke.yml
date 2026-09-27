@@ -58,17 +58,17 @@ jobs:
         working-directory: .runtime/dsh
         run: |
           $env:DSH_HOME = Join-Path $env:RUNNER_TEMP 'rc2-stock-home'
-          pnpm run dsh -- --help
+          node --import tsx/esm apps/cli/src/bin.ts --help
           if ($LASTEXITCODE -ne 0) { throw 'CLI help failed' }
-          pnpm run dsh -- --profile headless --dump-config | Out-Null
+          node --import tsx/esm apps/cli/src/bin.ts --profile headless --dump-config | Out-Null
           if ($LASTEXITCODE -ne 0) { throw 'Stock composition failed' }
       - name: Install GitHub commit and compose in another DSH_HOME
         working-directory: .runtime/dsh
         run: |
           $env:DSH_HOME = Join-Path $env:RUNNER_TEMP 'rc2-plugin-home'
-          pnpm run dsh -- plugin --profile headless add 'github:dongsheng123132/dsh-support-lifecycle-proof#df33364fee39fbb55b53b8c290df6b28d0f072c6'
+          node --import tsx/esm apps/cli/src/bin.ts plugin --profile headless add 'github:dongsheng123132/dsh-support-lifecycle-proof#df33364fee39fbb55b53b8c290df6b28d0f072c6'
           if ($LASTEXITCODE -ne 0) { throw 'Plugin installation failed' }
-          $composed = pnpm run dsh -- --profile headless --dump-config
+          $composed = node --import tsx/esm apps/cli/src/bin.ts --profile headless --dump-config
           if ($LASTEXITCODE -ne 0) { throw 'Plugin composition failed' }
           if (-not ($composed -match 'name: dsh-support-lifecycle-proof')) { throw 'Plugin layer absent' }
       - name: Execute real ToolRuntime positive and negative cases

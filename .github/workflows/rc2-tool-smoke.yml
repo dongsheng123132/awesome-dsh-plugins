@@ -1,0 +1,81 @@
+name: RC2 tool business smoke
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - '.github/workflows/rc2-tool-smoke.yml'
+      - 'docs/evidence/rc2-support-lifecycle-smoke.ts'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/rc2-tool-smoke.yml'
+      - 'docs/evidence/rc2-support-lifecycle-smoke.ts'
+
+permissions:
+  contents: read
+
+jobs:
+  business:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: deepseek-ai/DeepSeek-Harness
+          ref: 477b4f420553e8a52c2fbccc464d7561b239c443
+          path: .runtime/dsh
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: dongsheng123132/dsh-support-lifecycle-proof
+          ref: df33364fee39fbb55b53b8c290df6b28d0f072c6
+          path: .runtime/plugin-source
+          persist-credentials: false
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.7.0
+          run_install: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.19.0
+      - name: Install pinned official workspace
+        working-directory: .runtime/dsh
+        run: |
+          pnpm install --frozen-lockfile
+          if ($LASTEXITCODE -ne 0) { throw 'Workspace installation failed' }
+      - name: Check stock CLI and headless composition
+        working-directory: .runtime/dsh
+        run: |
+          $env:DSH_HOME = Join-Path $env:RUNNER_TEMP 'rc2-stock-home'
+          node --import tsx/esm apps/cli/src/bin.ts --help
+          if ($LASTEXITCODE -ne 0) { throw 'CLI help failed' }
+          node --import tsx/esm apps/cli/src/bin.ts --profile headless --dump-config | Out-Null
+          if ($LASTEXITCODE -ne 0) { throw 'Stock composition failed' }
+      - name: Install GitHub commit and compose in another DSH_HOME
+        working-directory: .runtime/dsh
+        run: |
+          $env:DSH_HOME = Join-Path $env:RUNNER_TEMP 'rc2-plugin-home'
+          node --import tsx/esm apps/cli/src/bin.ts plugin --profile headless add 'github:dongsheng123132/dsh-support-lifecycle-proof#df33364fee39fbb55b53b8c290df6b28d0f072c6'
+          if ($LASTEXITCODE -ne 0) { throw 'Plugin installation failed' }
+          $composed = node --import tsx/esm apps/cli/src/bin.ts --profile headless --dump-config
+          if ($LASTEXITCODE -ne 0) { throw 'Plugin composition failed' }
+          if (-not ($composed -match 'name: dsh-support-lifecycle-proof')) { throw 'Plugin layer absent' }
+      - name: Execute real ToolRuntime positive and negative cases
+        working-directory: .runtime/dsh
+        run: |
+          $script = Join-Path $env:GITHUB_WORKSPACE 'docs/evidence/rc2-support-lifecycle-smoke.ts'
+          $installed = Join-Path $env:RUNNER_TEMP 'rc2-plugin-home/profiles/headless/node_modules/dsh-support-lifecycle-proof'
+          $source = Join-Path $env:GITHUB_WORKSPACE '.runtime/plugin-source'
+          node --import tsx/esm $script $installed $source
+          if ($LASTEXITCODE -ne 0) { throw 'ToolRuntime business smoke failed' }

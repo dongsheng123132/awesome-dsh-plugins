@@ -49,5 +49,5 @@ try {
   const missing = await call('dsh_support_lifecycle_verify', { manifestPath: 'incomplete.json', artifactDir: 'artifacts' })
   assert.equal(missing.isError, false)
   assert.equal(missing.value.verdict, 'not-closed')
-  console.log(JSON.stringify({ ok: true, dshRevision, pluginRevision, tools, cases: ['inspect', 'closed-readback', 'missing-retirement'], reportSha256: closed.value.artifact.sha256, platform: process.platform, node: process.version, scope: 'real ToolRuntime service execution; no full profile Loader or Linux verification' }))
+  console.log(JSON.stringify({ ok: true, dshRevision, pluginRevision, tools, cases: ['inspect', 'closed-readback', 'missing-retirement'], reportSha256: closed.value.artifact.sha256, platform: process.platform, node: process.version, scope: 'real ToolRuntime service execution; not full profile Loader or model-driven calls' }))
 } finally { await ctx.fiber.dispose() }

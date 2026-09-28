@@ -1,4 +1,4 @@
-// Run from the isolated DSH checkout with: node --import tsx/esm <this-file> <installed-package-directory> <plugin-git-checkout>
+// Run from the isolated DSH checkout with: DSH_EXPECTED_REVISION=<40-hex SHA> node --import tsx/esm <this-file> <installed-package-directory> <plugin-git-checkout>
 import assert from 'node:assert/strict'
 import { execFileSync } from 'node:child_process'
 import { mkdtemp, writeFile, readFile } from 'node:fs/promises'
@@ -11,7 +11,8 @@ import ToolRuntime from '@deepseek-ai/dsh-tools'
 import SystemPrompt from '@deepseek-ai/dsh-system-prompt'
 import { ToolCallId } from '@deepseek-ai/dsh-llm'
 
-const dshRevision = '477b4f420553e8a52c2fbccc464d7561b239c443'
+const dshRevision = process.env.DSH_EXPECTED_REVISION ?? '477b4f420553e8a52c2fbccc464d7561b239c443'
+assert.match(dshRevision, /^[a-f0-9]{40}$/, 'expected DSH revision must be a pinned commit')
 const pluginRevision = 'df33364fee39fbb55b53b8c290df6b28d0f072c6'
 assert.equal(process.argv.length, 4, 'provide installed package directory and plugin Git checkout')
 const installed = resolve(process.argv[2])

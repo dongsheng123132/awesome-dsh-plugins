@@ -1,4 +1,4 @@
-name: RC2 tool business smoke
+name: Pinned release tool business smoke
 
 on:
   workflow_dispatch:
@@ -20,9 +20,16 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest]
+        include:
+          - { release: 0.1.7-rc.2, os: ubuntu-latest, dshRevision: 477b4f420553e8a52c2fbccc464d7561b239c443 }
+          - { release: 0.1.7-rc.2, os: windows-latest, dshRevision: 477b4f420553e8a52c2fbccc464d7561b239c443 }
+          - { release: 0.2.0-rc.1, os: ubuntu-latest, dshRevision: 4878cdabd87d4041bdaff61d04c966883b9fd07a }
+          - { release: 0.2.0-rc.1, os: windows-latest, dshRevision: 4878cdabd87d4041bdaff61d04c966883b9fd07a }
     runs-on: ${{ matrix.os }}
     timeout-minutes: 20
+    name: ${{ matrix.release }} / ${{ matrix.os }}
+    env:
+      DSH_EXPECTED_REVISION: ${{ matrix.dshRevision }}
     defaults:
       run:
         shell: pwsh
@@ -33,7 +40,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: deepseek-ai/DeepSeek-Harness
-          ref: 477b4f420553e8a52c2fbccc464d7561b239c443
+          ref: ${{ matrix.dshRevision }}
           path: .runtime/dsh
           persist-credentials: false
       - uses: actions/checkout@v4

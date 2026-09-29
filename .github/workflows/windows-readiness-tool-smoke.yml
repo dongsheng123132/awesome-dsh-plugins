@@ -20,12 +20,16 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest]
+        include:
+          - { release: 0.2.0-rc.1, os: ubuntu-latest, dshRevision: 4878cdabd87d4041bdaff61d04c966883b9fd07a }
+          - { release: 0.2.0-rc.1, os: windows-latest, dshRevision: 4878cdabd87d4041bdaff61d04c966883b9fd07a }
+          - { release: 0.2.0-rc.2, os: ubuntu-latest, dshRevision: 639ed015397290b3745d163aafe02ffee4aa3f84 }
+          - { release: 0.2.0-rc.2, os: windows-latest, dshRevision: 639ed015397290b3745d163aafe02ffee4aa3f84 }
     runs-on: ${{ matrix.os }}
     timeout-minutes: 20
-    name: 0.2.0-rc.1 / ${{ matrix.os }}
+    name: ${{ matrix.release }} / ${{ matrix.os }}
     env:
-      DSH_EXPECTED_REVISION: 4878cdabd87d4041bdaff61d04c966883b9fd07a
+      DSH_EXPECTED_REVISION: ${{ matrix.dshRevision }}
       PLUGIN_EXPECTED_REVISION: 46cc6b8dbaa0f970ffa326615cb1e52683516929
     defaults:
       run:
@@ -37,7 +41,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: deepseek-ai/DeepSeek-Harness
-          ref: 4878cdabd87d4041bdaff61d04c966883b9fd07a
+          ref: ${{ matrix.dshRevision }}
           path: .runtime/dsh
           persist-credentials: false
       - uses: actions/checkout@v4

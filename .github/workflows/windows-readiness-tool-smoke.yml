@@ -1,0 +1,85 @@
+name: Pinned Windows readiness tool smoke
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - '.github/workflows/windows-readiness-tool-smoke.yml'
+      - 'docs/evidence/windows-readiness-runtime-smoke.ts'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/windows-readiness-tool-smoke.yml'
+      - 'docs/evidence/windows-readiness-runtime-smoke.ts'
+
+permissions:
+  contents: read
+
+jobs:
+  business:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    name: 0.2.0-rc.1 / ${{ matrix.os }}
+    env:
+      DSH_EXPECTED_REVISION: 4878cdabd87d4041bdaff61d04c966883b9fd07a
+      PLUGIN_EXPECTED_REVISION: 46cc6b8dbaa0f970ffa326615cb1e52683516929
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: deepseek-ai/DeepSeek-Harness
+          ref: 4878cdabd87d4041bdaff61d04c966883b9fd07a
+          path: .runtime/dsh
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: dongsheng123132/dsh-windows-readiness-proof
+          ref: 46cc6b8dbaa0f970ffa326615cb1e52683516929
+          path: .runtime/plugin-source
+          persist-credentials: false
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.7.0
+          run_install: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.19.0
+      - name: Install pinned official workspace
+        working-directory: .runtime/dsh
+        run: |
+          pnpm install --frozen-lockfile
+          if ($LASTEXITCODE -ne 0) { throw 'Workspace installation failed' }
+      - name: Stock CLI and headless composition
+        working-directory: .runtime/dsh
+        run: |
+          $env:DSH_HOME = Join-Path $env:RUNNER_TEMP 'windows-readiness-stock-home'
+          node --import tsx/esm apps/cli/src/bin.ts --help
+          if ($LASTEXITCODE -ne 0) { throw 'CLI help failed' }
+          node --import tsx/esm apps/cli/src/bin.ts --profile headless --dump-config | Out-Null
+          if ($LASTEXITCODE -ne 0) { throw 'Stock composition failed' }
+      - name: Install fixed GitHub plugin in another DSH_HOME
+        working-directory: .runtime/dsh
+        run: |
+          $env:DSH_HOME = Join-Path $env:RUNNER_TEMP 'windows-readiness-plugin-home'
+          node --import tsx/esm apps/cli/src/bin.ts plugin --profile headless add 'github:dongsheng123132/dsh-windows-readiness-proof#46cc6b8dbaa0f970ffa326615cb1e52683516929'
+          if ($LASTEXITCODE -ne 0) { throw 'GitHub install failed' }
+          $composed = node --import tsx/esm apps/cli/src/bin.ts --profile headless --dump-config
+          if ($LASTEXITCODE -ne 0) { throw 'Plugin composition failed' }
+          if (-not ($composed -match 'name: dsh-windows-readiness-proof')) { throw 'Plugin layer absent' }
+      - name: Execute real ToolRuntime business and rejection cases
+        working-directory: .runtime/dsh
+        run: |
+          $script = Join-Path $env:GITHUB_WORKSPACE 'docs/evidence/windows-readiness-runtime-smoke.ts'
+          $installed = Join-Path $env:RUNNER_TEMP 'windows-readiness-plugin-home/profiles/headless/node_modules/dsh-windows-readiness-proof'
+          $source = Join-Path $env:GITHUB_WORKSPACE '.runtime/plugin-source'
+          node --import tsx/esm $script $installed $source
+          if ($LASTEXITCODE -ne 0) { throw 'ToolRuntime business smoke failed' }

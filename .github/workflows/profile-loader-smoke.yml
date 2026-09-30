@@ -1,0 +1,73 @@
+name: Pinned full Web profile Loader smoke
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - '.github/workflows/profile-loader-smoke.yml'
+      - 'docs/evidence/profile-loader-smoke.mjs'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/profile-loader-smoke.yml'
+      - 'docs/evidence/profile-loader-smoke.mjs'
+
+permissions:
+  contents: read
+
+jobs:
+  loader:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+    name: 0.2.0-rc.2 / ${{ matrix.os }}
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: deepseek-ai/DeepSeek-Harness
+          ref: 639ed015397290b3745d163aafe02ffee4aa3f84
+          path: .runtime/dsh
+          persist-credentials: false
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.7.0
+          run_install: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.19.0
+      - name: Install and build pinned official host and client
+        working-directory: .runtime/dsh
+        run: |
+          pnpm install --frozen-lockfile
+          if ($LASTEXITCODE -ne 0) { throw 'Workspace install failed' }
+          pnpm run build:lib
+          if ($LASTEXITCODE -ne 0) { throw 'Official build failed' }
+      - name: Boot stock Web profile with real Loader
+        working-directory: .runtime/dsh
+        run: |
+          $env:DSH_HOME = Join-Path $env:RUNNER_TEMP 'loader-stock-home'
+          node --import tsx/esm apps/cli/src/bin.ts --profile web --dump-config | Out-Null
+          if ($LASTEXITCODE -ne 0) { throw 'Stock compose failed' }
+          $script = Join-Path $env:GITHUB_WORKSPACE 'docs/evidence/profile-loader-smoke.mjs'
+          node --import tsx/esm $script (Get-Location).Path '639ed015397290b3745d163aafe02ffee4aa3f84' web
+          if ($LASTEXITCODE -ne 0) { throw 'Stock Loader boot failed' }
+      - name: Install two fixed commits and boot plugin Web profile
+        working-directory: .runtime/dsh
+        run: |
+          $env:DSH_HOME = Join-Path $env:RUNNER_TEMP 'loader-plugin-home'
+          node --import tsx/esm apps/cli/src/bin.ts plugin --profile web add 'github:dongsheng123132/dsh-support-lifecycle-proof#df33364fee39fbb55b53b8c290df6b28d0f072c6'
+          if ($LASTEXITCODE -ne 0) { throw 'Support plugin install failed' }
+          node --import tsx/esm apps/cli/src/bin.ts plugin --profile web add 'github:dongsheng123132/dsh-windows-readiness-proof#46cc6b8dbaa0f970ffa326615cb1e52683516929'
+          if ($LASTEXITCODE -ne 0) { throw 'Windows plugin install failed' }
+          $script = Join-Path $env:GITHUB_WORKSPACE 'docs/evidence/profile-loader-smoke.mjs'
+          node --import tsx/esm $script (Get-Location).Path '639ed015397290b3745d163aafe02ffee4aa3f84' web dsh_support_lifecycle_inspect dsh_support_lifecycle_verify dsh_windows_readiness_inspect dsh_windows_readiness_verify
+          if ($LASTEXITCODE -ne 0) { throw 'Plugin Loader boot failed' }

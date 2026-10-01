@@ -1,0 +1,89 @@
+name: Pinned Web-headless business parity
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - '.github/workflows/profile-business-parity.yml'
+      - 'docs/evidence/profile-business-smoke.mjs'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/profile-business-parity.yml'
+      - 'docs/evidence/profile-business-smoke.mjs'
+
+permissions:
+  contents: read
+
+jobs:
+  parity:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+    name: RC2 Web/headless tools / ${{ matrix.os }}
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: deepseek-ai/DeepSeek-Harness
+          ref: 639ed015397290b3745d163aafe02ffee4aa3f84
+          path: .runtime/dsh
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: dongsheng123132/dsh-support-lifecycle-proof
+          ref: df33364fee39fbb55b53b8c290df6b28d0f072c6
+          path: .runtime/support
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: dongsheng123132/dsh-windows-readiness-proof
+          ref: 46cc6b8dbaa0f970ffa326615cb1e52683516929
+          path: .runtime/windows
+          persist-credentials: false
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.7.0
+          run_install: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.19.0
+      - name: Build official fixed source
+        working-directory: .runtime/dsh
+        run: |
+          pnpm install --frozen-lockfile
+          if ($LASTEXITCODE -ne 0) { throw 'Official frozen install failed' }
+          pnpm run build:lib
+          if ($LASTEXITCODE -ne 0) { throw 'Official build failed' }
+      - name: Install fixed plugins and compare full-profile business results
+        working-directory: .runtime/dsh
+        run: |
+          $script = Join-Path $env:GITHUB_WORKSPACE 'docs/evidence/profile-business-smoke.mjs'
+          $support = Join-Path $env:GITHUB_WORKSPACE '.runtime/support'
+          $windows = Join-Path $env:GITHUB_WORKSPACE '.runtime/windows'
+          $reports = @{}
+          foreach ($profile in @('web', 'headless')) {
+            $env:DSH_HOME = Join-Path $env:RUNNER_TEMP ("business-$profile-home")
+            node --import tsx/esm apps/cli/src/bin.ts --profile $profile --dump-config | Out-Null
+            if ($LASTEXITCODE -ne 0) { throw "$profile stock compose failed" }
+            node --import tsx/esm apps/cli/src/bin.ts plugin --profile $profile add 'github:dongsheng123132/dsh-support-lifecycle-proof#df33364fee39fbb55b53b8c290df6b28d0f072c6'
+            if ($LASTEXITCODE -ne 0) { throw "$profile support install failed" }
+            node --import tsx/esm apps/cli/src/bin.ts plugin --profile $profile add 'github:dongsheng123132/dsh-windows-readiness-proof#46cc6b8dbaa0f970ffa326615cb1e52683516929'
+            if ($LASTEXITCODE -ne 0) { throw "$profile Windows install failed" }
+            $raw = node --import tsx/esm $script (Get-Location).Path '639ed015397290b3745d163aafe02ffee4aa3f84' $profile $support $windows
+            if ($LASTEXITCODE -ne 0) { throw "$profile full Loader business probe failed" }
+            $reports[$profile] = $raw | ConvertFrom-Json
+            if (-not $reports[$profile].ok) { throw "$profile probe did not attest success" }
+            Write-Output $raw
+          }
+          if ($reports.web.supportSha256 -ne $reports.headless.supportSha256) { throw 'Support report differs across profiles' }
+          if ($reports.web.windowsSha256 -ne $reports.headless.windowsSha256) { throw 'Windows report differs across profiles' }
+          Write-Output 'Web/headless report hashes match on this runner'

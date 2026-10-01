@@ -5,6 +5,7 @@ import { execFileSync } from 'node:child_process'
 import { mkdtemp, readFile, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join, resolve, relative, isAbsolute } from 'node:path'
+import { PassThrough } from 'node:stream'
 import { pathToFileURL } from 'node:url'
 
 const [dshArg, dshRevision, profile, supportArg, windowsArg] = process.argv.slice(2)
@@ -44,13 +45,17 @@ const { loadLayeredEnv } = await importFromDsh('packages/boot/app-boot/src/index
 const { runProfile } = await importFromDsh('apps/cli/src/profile-boot.ts')
 const stdout = process.stdout.write.bind(process.stdout)
 const stderr = process.stderr.write.bind(process.stderr)
+const stdinDescriptor = Object.getOwnPropertyDescriptor(process, 'stdin')
+// Park the headless task on an open, empty stdin so its real Loader can settle
+// without racing an agent failure or sending a prompt to a model.
+if (profile === 'headless') Object.defineProperty(process, 'stdin', { configurable: true, enumerable: true, value: new PassThrough() })
 // Web emits a bearer URL and headless emits model diagnostics. Neither belongs in evidence.
 process.stdout.write = () => true
 process.stderr.write = () => true
 const deadline = setTimeout(() => { stderr('profile business probe timed out\n'); process.exit(1) }, 60000)
 let booted
 try {
-  const args = profile === 'web' ? ['--no-open', '--host', '127.0.0.1', '--port', '0'] : ['__business_probe_no_model__']
+  const args = profile === 'web' ? ['--no-open', '--host', '127.0.0.1', '--port', '0'] : ['-']
   booted = await runProfile({ environment: loadLayeredEnv('dsh'), profile, patchFiles: [], args })
   const { ctx, shutdown } = booted
   let report
@@ -101,5 +106,6 @@ try {
   clearTimeout(deadline)
   process.stdout.write = stdout
   process.stderr.write = stderr
+  if (stdinDescriptor) Object.defineProperty(process, 'stdin', stdinDescriptor)
   if (booted === undefined) process.exitCode = 1
 }

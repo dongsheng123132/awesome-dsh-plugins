@@ -2,6 +2,7 @@
 import { readFile } from 'node:fs/promises'
 import { CATEGORY_LABELS, collectUnscannableRepositories, describeMissingRuntimeTarget, readJson, REVIEW_SIGNAL_LABELS } from './lib.mjs'
 import { validateRuntimeConfig } from './runtime-matrix.mjs'
+import { capabilityScanHealth } from './capability-lib.mjs'
 
 const root = new URL('../', import.meta.url)
 const radar = await readJson(new URL('data/plugins.json', root))
@@ -30,6 +31,9 @@ try {
 }
 if (capabilities.schemaVersion !== 1 || !Array.isArray(capabilities.capabilities) || !Array.isArray(capabilities.errors)) {
   failures.push('data/capabilities.json must use schemaVersion 1 with capabilities and errors arrays')
+} else {
+  const health = capabilityScanHealth({ uniqueHits: capabilities.source?.uniqueHits, capabilities: capabilities.capabilities, errors: capabilities.errors })
+  if (!health.ok) failures.push(`data/capabilities.json is an incomplete scan: ${health.reason}`)
 }
 
 const ids = new Set()

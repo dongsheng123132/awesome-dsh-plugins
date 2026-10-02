@@ -89,6 +89,8 @@ This second radar finds public `SKILL.md` candidates from Claude, Codex, shared 
 - `bridge`: a harness hook, plugin protocol, or runtime-specific configuration must be translated;
 - `unclassified`: required identity evidence is missing.
 
+The scheduled scan keeps the last committed snapshot when GitHub search finds no hits or fewer than half of the pinned files can be inspected (for example, during API rate limiting). A failed scan is not interpreted as zero available capabilities.
+
 <!-- CAPABILITIES:START -->
 **49** revision-pinned candidates: Copy 15 · Wrapper 30 · Bridge 2 · Unclassified 2
 

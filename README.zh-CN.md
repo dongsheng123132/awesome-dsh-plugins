@@ -89,6 +89,8 @@ Other: 329 · UI / TUI: 225 · Token & Cost: 68 · Browser: 67 · MCP Bridge: 63
 - `bridge`：必须翻译 Harness hook、插件协议或运行时专属配置；
 - `unclassified`：缺少必要的身份信息，保持未分类。
 
+定时扫描若搜索结果为空，或因 API 限流等原因无法检查至少一半候选文件，会保留上一份已提交快照；扫描失败不等于生态中没有可迁移能力。
+
 <!-- CAPABILITIES:START -->
 **49** 条固定 revision 候选：Copy 15 · Wrapper 30 · Bridge 2 · 未分类 2
 

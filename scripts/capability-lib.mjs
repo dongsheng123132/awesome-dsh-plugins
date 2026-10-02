@@ -156,3 +156,14 @@ export function mergeSearchHits(groups) {
   }
   return [...merged.values()].map(item => ({ ...item, queryIds: [...new Set(item.queryIds)].sort() }))
 }
+
+// A rate-limited scan is an observation failure, not evidence that capabilities vanished.
+// Keep the previous committed snapshot until at least half the inspected hits resolve.
+export function capabilityScanHealth({ uniqueHits, capabilities, errors }) {
+  if (!Number.isInteger(uniqueHits) || uniqueHits < 1) return { ok: false, reason: 'no-search-hits' }
+  if (!Array.isArray(capabilities) || !Array.isArray(errors) || capabilities.length + errors.length !== uniqueHits) {
+    return { ok: false, reason: 'incomplete-inspection' }
+  }
+  if (capabilities.length * 2 < uniqueHits) return { ok: false, reason: 'insufficient-successful-inspections' }
+  return { ok: true, reason: 'publishable' }
+}

@@ -6,7 +6,23 @@ import { mkdtemp, readFile, writeFile } from 'node:fs/promises'
 import { readFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
-import { analyzeCapability, inferEcosystem, mergeSearchHits, parseSkillFrontmatter } from '../scripts/capability-lib.mjs'
+import { analyzeCapability, capabilityScanHealth, inferEcosystem, mergeSearchHits, parseSkillFrontmatter } from '../scripts/capability-lib.mjs'
+
+test('capability scan refuses an all-rate-limited snapshot', () => {
+  assert.deepEqual(capabilityScanHealth({ uniqueHits: 246, capabilities: [], errors: Array(246).fill({}) }), {
+    ok: false, reason: 'insufficient-successful-inspections'
+  })
+})
+
+test('capability scan accepts disclosed partial failures only at majority coverage', () => {
+  assert.equal(capabilityScanHealth({ uniqueHits: 10, capabilities: Array(5).fill({}), errors: Array(5).fill({}) }).ok, true)
+  assert.equal(capabilityScanHealth({ uniqueHits: 10, capabilities: Array(4).fill({}), errors: Array(6).fill({}) }).ok, false)
+})
+
+test('capability scan rejects empty and incomplete observations', () => {
+  assert.equal(capabilityScanHealth({ uniqueHits: 0, capabilities: [], errors: [] }).reason, 'no-search-hits')
+  assert.equal(capabilityScanHealth({ uniqueHits: 4, capabilities: [{}], errors: [] }).reason, 'incomplete-inspection')
+})
 import { expandBaselineMatrix, expandRuntimeMatrix, loadRuntimeConfig, pinnedRepositories, validateRuntimeConfig } from '../scripts/runtime-matrix.mjs'
 import { reserveSearchSlot, retryDelay, SEARCH_MIN_GAP_MS, searchRepositories } from '../scripts/github.mjs'
 

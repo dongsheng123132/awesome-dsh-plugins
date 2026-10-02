@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { analyzeCapability, inferEcosystem, mergeSearchHits } from './capability-lib.mjs'
+import { analyzeCapability, capabilityScanHealth, inferEcosystem, mergeSearchHits } from './capability-lib.mjs'
 import { githubJson, mapConcurrent, searchCode } from './github.mjs'
 import { parseIntegerFlag, writeJson } from './lib.mjs'
 
@@ -85,6 +85,10 @@ const inspected = await mapConcurrent(hits, concurrency, inspect)
 const capabilities = inspected.filter(item => item.ok).map(item => item.value)
   .sort((left, right) => right.port.score - left.port.score || right.stars - left.stars || left.id.localeCompare(right.id))
 const errors = inspected.filter(item => !item.ok).map(item => item.error)
+const health = capabilityScanHealth({ uniqueHits: hits.length, capabilities, errors })
+if (!health.ok) {
+  throw new Error(`Capability scan refused to replace snapshot: ${health.reason}; ${capabilities.length}/${hits.length} inspected successfully`)
+}
 
 await writeJson(new URL('../data/capabilities.json', import.meta.url), {
   schemaVersion: 1,

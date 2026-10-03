@@ -49,6 +49,13 @@ export function validateRuntimeConfig(config) {
     const sourceReferences = [target.sourcePluginId, target.sourceLabId].filter(value => typeof value === 'string' && value.length > 0)
     if (sourceReferences.length !== 1) failures.push(`${target.id}: exactly one sourcePluginId or sourceLabId is required`)
     if (!ALLOWED_ENFORCEMENT.has(target.enforcement)) failures.push(`${target.id}: enforcement must be observe or required`)
+    if (target.baselineIds !== undefined) {
+      if (!Array.isArray(target.baselineIds) || target.baselineIds.length === 0) failures.push(`${target.id}: baselineIds must be a non-empty array`)
+      else {
+        if (new Set(target.baselineIds).size !== target.baselineIds.length) failures.push(`${target.id}: baselineIds must be unique`)
+        for (const id of target.baselineIds) if (!baselineIds.has(id)) failures.push(`${target.id}: unknown baselineId ${id}`)
+      }
+    }
     if (!target.selection || typeof target.selection !== 'string') failures.push(`${target.id}: selection is required`)
     if (typeof target.rationale !== 'string' || target.rationale.length < 20) failures.push(`${target.id}: rationale is required`)
   }
@@ -59,7 +66,9 @@ export function validateRuntimeConfig(config) {
 export function expandRuntimeMatrix(config) {
   validateRuntimeConfig(config)
   return {
-    include: config.baselines.flatMap(baseline => config.platforms.flatMap(os => config.targets.map(target => ({
+    include: config.baselines.flatMap(baseline => config.platforms.flatMap(os => config.targets
+      .filter(target => target.baselineIds === undefined || target.baselineIds.includes(baseline.id))
+      .map(target => ({
       os,
       baseline: baseline.id,
       baselineLabel: baseline.label,

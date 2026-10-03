@@ -16,12 +16,21 @@
       "cloneUrl": "https://github.com/deepseek-ai/deepseek-harness.git",
       "revision": "b150a551b8d465e31e418e1b2eaf5e79bbb7d28e",
       "packageManager": "pnpm@11.7.0"
+    },
+    {
+      "id": "v0-2-1-alpha-1",
+      "label": "official dsh-v0.2.1-alpha.1",
+      "repository": "deepseek-ai/deepseek-harness",
+      "cloneUrl": "https://github.com/deepseek-ai/deepseek-harness.git",
+      "revision": "5badb15009ae1756c3afe0ae0cef1faafc290ccc",
+      "packageManager": "pnpm@11.7.0"
     }
   ],
   "platforms": ["ubuntu-latest", "windows-latest"],
   "targets": [
     {
       "id": "skillport",
+      "baselineIds": ["stable-2026-08-12", "v0-1-1-rc-2"],
       "sourcePluginId": "Jesse-njx/dsh-skillport:package.json",
       "repository": "Jesse-njx/dsh-skillport",
       "revision": "77c1d4ecc202366e853a39ae7f7f7cf2da6713b7",
@@ -34,6 +43,7 @@
     },
     {
       "id": "pack-agent",
+      "baselineIds": ["stable-2026-08-12", "v0-1-1-rc-2"],
       "sourcePluginId": "sakikoTGW/pack-agent:package.json",
       "repository": "sakikoTGW/pack-agent",
       "revision": "04f7ecac3e76de2c5157bd3dad90ebdd8e61e3c8",
@@ -46,6 +56,7 @@
     },
     {
       "id": "agent-teams",
+      "baselineIds": ["stable-2026-08-12", "v0-1-1-rc-2"],
       "sourcePluginId": "NanmiCoder/dsh-agent-teams:package.json",
       "repository": "NanmiCoder/dsh-agent-teams",
       "revision": "48a96350cc09ef8ea616abc44408f53e744b80de",
@@ -58,6 +69,7 @@
     },
     {
       "id": "multica-runtime",
+      "baselineIds": ["stable-2026-08-12", "v0-1-1-rc-2"],
       "sourcePluginId": "multica-ai/dsh-multica-runtime:package.json",
       "repository": "multica-ai/dsh-multica-runtime",
       "revision": "e29aae228449dfe50e88af60ef4281e38ca44e2a",
@@ -70,6 +82,7 @@
     },
     {
       "id": "windows-readiness-proof",
+      "baselineIds": ["stable-2026-08-12", "v0-1-1-rc-2"],
       "sourceLabId": "dsh-windows-readiness-proof",
       "repository": "dongsheng123132/dsh-windows-readiness-proof",
       "revision": "291151da48ac229143e1f4e39ee608b856ded3e2",
@@ -79,6 +92,19 @@
       "enforcement": "required",
       "selection": "2origin-positive-control",
       "rationale": "Guards the stock Loader injection contract with a pinned 2Origin plugin that must remain bootable."
+    },
+    {
+      "id": "support-lifecycle-alpha-control",
+      "baselineIds": ["v0-2-1-alpha-1"],
+      "sourceLabId": "dsh-support-lifecycle-proof",
+      "repository": "dongsheng123132/dsh-support-lifecycle-proof",
+      "revision": "df33364fee39fbb55b53b8c290df6b28d0f072c6",
+      "spec": "github:dongsheng123132/dsh-support-lifecycle-proof#df33364fee39fbb55b53b8c290df6b28d0f072c6",
+      "allowBuild": "dsh-support-lifecycle-proof",
+      "profile": "web",
+      "enforcement": "required",
+      "selection": "2origin-positive-control",
+      "rationale": "Separately guards the official 0.2.1 alpha stock Loader and fixed 2Origin bundle install without re-running old third-party targets on a new release."
     }
   ]
 }

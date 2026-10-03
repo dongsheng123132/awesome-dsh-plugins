@@ -153,6 +153,11 @@ test('runtime matrix requires pinned revisions and expands every baseline-platfo
   assert.throws(() => validateRuntimeConfig({ ...config, targets: [{ ...config.targets[0], spec: 'github:owner/plugin' }] }), /pin repository and revision/)
   assert.throws(() => validateRuntimeConfig({ ...config, targets: [{ ...config.targets[0], enforcement: 'ignore' }] }), /observe or required/)
   assert.throws(() => validateRuntimeConfig({ ...config, baselines: [...config.baselines, config.baselines[0]] }), /duplicate baseline id/)
+  const scoped = { ...config, targets: [{ ...config.targets[0], baselineIds: ['new'] }] }
+  assert.deepEqual(expandRuntimeMatrix(scoped).include.map(item => item.baseline), ['new', 'new'])
+  assert.equal(expandBaselineMatrix(scoped).include.length, 4, 'stock controls still cover every baseline')
+  assert.throws(() => validateRuntimeConfig({ ...config, targets: [{ ...config.targets[0], baselineIds: ['missing'] }] }), /unknown baselineId/)
+  assert.throws(() => validateRuntimeConfig({ ...config, targets: [{ ...config.targets[0], baselineIds: ['old', 'old'] }] }), /baselineIds must be unique/)
 })
 
 test('every runtime target repository stays inspectable outside the search window', async () => {

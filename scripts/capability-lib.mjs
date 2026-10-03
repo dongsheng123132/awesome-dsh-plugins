@@ -13,6 +13,8 @@ const EXECUTABLE_RULES = [
 
 const RESOURCE_RULES = [
   ['bundled-resource', /(?:^|[\s`(])(?:\.\/)?(?:assets?|references?|templates?|examples?)\/[\w./-]+/i],
+  // A top-level skill index can be copied only together with the skills it sends the reader to.
+  ['nested-skill', /(?:^|[\s`(])(?:\.\/)?skills\/[\w./-]+\/SKILL\.md\b/i],
   ['relative-markdown-link', /\[[^\]]+\]\((?!https?:|mailto:|#)([^)]+)\)/i]
 ]
 

@@ -86,6 +86,7 @@ This second radar finds public `SKILL.md` candidates from Claude, Codex, shared 
 
 - `copy`: self-contained instructions with no observed runtime, bundled-resource, executable, or permission dependency;
 - `wrapper`: instructions that need a command, bundled resource, network, secret, write, or shell adapter;
+- a skill index that refers to relative `skills/<name>/SKILL.md` files is a `wrapper`, because copying only the entry file omits required instructions;
 - `bridge`: a harness hook, plugin protocol, or runtime-specific configuration must be translated;
 - `unclassified`: required identity evidence is missing.
 

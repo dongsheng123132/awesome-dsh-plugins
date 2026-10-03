@@ -86,6 +86,7 @@ Other: 329 · UI / TUI: 225 · Token & Cost: 68 · Browser: 67 · MCP Bridge: 63
 
 - `copy`：未观察到运行时、随包资源、可执行命令或权限依赖的自包含指令；
 - `wrapper`：需要命令、随包资源、网络、密钥、写入或 Shell 适配层；
+- 入口文档若指向相对路径 `skills/<name>/SKILL.md`，也归为 `wrapper`：只复制入口会漏掉被引用的子技能；
 - `bridge`：必须翻译 Harness hook、插件协议或运行时专属配置；
 - `unclassified`：缺少必要的身份信息，保持未分类。
 

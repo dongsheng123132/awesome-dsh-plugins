@@ -295,6 +295,17 @@ test('capability analysis requires wrapper evidence for scripts and bridge evide
   assert.equal(bridge.evidence.bridge[0].signal, 'harness-hook')
 })
 
+test('a skill index pointing to nested SKILL.md files needs a wrapper, not a direct copy', () => {
+  // Pinned source: https://github.com/TencentEdgeOne/edgeone-makers-tools/blob/008dd4dfd987de3d33932fe243db8e248d221c1d/SKILL.md
+  const index = analyzeCapability('---\nname: edgeone-makers-tools\ndescription: Route platform tasks.\nlicense: MIT\n---\nRead skills/makers-agents/SKILL.md for Agent development.')
+  assert.equal(index.port.classification, 'wrapper')
+  assert.equal(index.evidence.resources[0].signal, 'nested-skill')
+  assert.equal(index.port.score, 79)
+  const standalone = analyzeCapability('---\nname: reference\ndescription: Read a website.\n---\nSee https://example.com/skills/reference/SKILL.md.')
+  assert.equal(standalone.evidence.resources.some(item => item.signal === 'nested-skill'), false,
+    'external URLs are not bundled relative dependencies')
+})
+
 test('permission-bearing instructions cannot be presented as a direct copy', () => {
   const result = analyzeCapability('---\nname: remote\ndescription: Query a remote service.\n---\nSet API_KEY and use network access.')
   assert.equal(result.port.classification, 'wrapper')

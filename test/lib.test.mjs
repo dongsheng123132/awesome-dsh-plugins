@@ -270,6 +270,17 @@ test('runtime workflow delegates baseline build approval to the pinned DSH polic
   assert.ok(workflow.includes("if: runner.os == 'Windows'"))
 })
 
+test('full-profile business CI replays RC2 and alpha on both operating systems', async () => {
+  const workflow = await readFile(new URL('../.github/workflows/profile-business-parity.yml', import.meta.url), 'utf8')
+  assert.ok(workflow.includes('os: [ubuntu-latest, windows-latest]'))
+  assert.ok(workflow.includes('id: v0-2-0-rc-2\n            revision: 639ed015397290b3745d163aafe02ffee4aa3f84'))
+  assert.ok(workflow.includes('id: v0-2-1-alpha-1\n            revision: 5badb15009ae1756c3afe0ae0cef1faafc290ccc'))
+  assert.ok(workflow.includes('ref: ${{ matrix.baseline.revision }}'))
+  assert.ok(workflow.includes('$env:DSH_REVISION $profile $support $windows'))
+  assert.ok(workflow.includes('github:dongsheng123132/dsh-support-lifecycle-proof#df33364fee39fbb55b53b8c290df6b28d0f072c6'))
+  assert.ok(workflow.includes('github:dongsheng123132/dsh-windows-readiness-proof#46cc6b8dbaa0f970ffa326615cb1e52683516929'))
+})
+
 test('runtime evidence store replaces the same immutable report id', async () => {
   const directory = await mkdtemp(join(tmpdir(), 'awesome-dsh-test-'))
   const path = join(directory, 'runtime.json')

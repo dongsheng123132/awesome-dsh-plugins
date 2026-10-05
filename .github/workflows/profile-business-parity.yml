@@ -21,9 +21,16 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest]
+        baseline:
+          - id: v0-2-0-rc-2
+            revision: 639ed015397290b3745d163aafe02ffee4aa3f84
+          - id: v0-2-1-alpha-1
+            revision: 5badb15009ae1756c3afe0ae0cef1faafc290ccc
     runs-on: ${{ matrix.os }}
     timeout-minutes: 30
-    name: RC2 Web/headless tools / ${{ matrix.os }}
+    name: ${{ matrix.baseline.id }} Web/headless tools / ${{ matrix.os }}
+    env:
+      DSH_REVISION: ${{ matrix.baseline.revision }}
     defaults:
       run:
         shell: pwsh
@@ -34,7 +41,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: deepseek-ai/DeepSeek-Harness
-          ref: 639ed015397290b3745d163aafe02ffee4aa3f84
+          ref: ${{ matrix.baseline.revision }}
           path: .runtime/dsh
           persist-credentials: false
       - uses: actions/checkout@v4
@@ -78,7 +85,7 @@ jobs:
             if ($LASTEXITCODE -ne 0) { throw "$profile support install failed" }
             node --import tsx/esm apps/cli/src/bin.ts plugin --profile $profile add 'github:dongsheng123132/dsh-windows-readiness-proof#46cc6b8dbaa0f970ffa326615cb1e52683516929'
             if ($LASTEXITCODE -ne 0) { throw "$profile Windows install failed" }
-            $raw = node --import tsx/esm $script (Get-Location).Path '639ed015397290b3745d163aafe02ffee4aa3f84' $profile $support $windows
+            $raw = node --import tsx/esm $script (Get-Location).Path $env:DSH_REVISION $profile $support $windows
             if ($LASTEXITCODE -ne 0) { throw "$profile full Loader business probe failed" }
             $reports[$profile] = $raw | ConvertFrom-Json
             if (-not $reports[$profile].ok) { throw "$profile probe did not attest success" }

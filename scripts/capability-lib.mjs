@@ -169,3 +169,12 @@ export function capabilityScanHealth({ uniqueHits, capabilities, errors }) {
   if (capabilities.length * 2 < uniqueHits) return { ok: false, reason: 'insufficient-successful-inspections' }
   return { ok: true, reason: 'publishable' }
 }
+
+export function allInitialInspectionsThrottled(inspected) {
+  return inspected.length >= 3 && inspected.every(item => !item.ok && [403, 429].includes(item.error?.httpStatus))
+}
+
+export function inspectionStatusCounts(errors) {
+  return Object.fromEntries([...new Set(errors.map(error => error.httpStatus ?? 'other'))]
+    .sort().map(status => [status, errors.filter(error => (error.httpStatus ?? 'other') === status).length]))
+}

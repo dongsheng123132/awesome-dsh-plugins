@@ -6,7 +6,7 @@ import { mkdtemp, readFile, writeFile } from 'node:fs/promises'
 import { readFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
-import { analyzeCapability, capabilityScanHealth, inferEcosystem, mergeSearchHits, parseSkillFrontmatter } from '../scripts/capability-lib.mjs'
+import { allInitialInspectionsThrottled, analyzeCapability, capabilityScanHealth, inferEcosystem, inspectionStatusCounts, mergeSearchHits, parseSkillFrontmatter } from '../scripts/capability-lib.mjs'
 import { classifyPreflightFailure, probeExternalPublicRepository } from '../scripts/capability-preflight.mjs'
 
 test('capability preflight pins an external public file without reading its body', async () => {
@@ -46,6 +46,14 @@ test('capability scan accepts disclosed partial failures only at majority covera
 test('capability scan rejects empty and incomplete observations', () => {
   assert.equal(capabilityScanHealth({ uniqueHits: 0, capabilities: [], errors: [] }).reason, 'no-search-hits')
   assert.equal(capabilityScanHealth({ uniqueHits: 4, capabilities: [{}], errors: [] }).reason, 'incomplete-inspection')
+})
+
+test('capability scan stops only a systemic initial throttle and reports counts without response bodies', () => {
+  const blocked = [{ ok: false, error: { httpStatus: 403 } }, { ok: false, error: { httpStatus: 429 } }, { ok: false, error: { httpStatus: 403 } }]
+  assert.equal(allInitialInspectionsThrottled(blocked), true)
+  assert.equal(allInitialInspectionsThrottled(blocked.slice(0, 2)), false)
+  assert.equal(allInitialInspectionsThrottled([...blocked, { ok: true, value: {} }]), false)
+  assert.deepEqual(inspectionStatusCounts([{ httpStatus: 403, message: 'secret' }, { httpStatus: 403 }, { httpStatus: 404 }]), { 403: 2, 404: 1 })
 })
 import { expandBaselineMatrix, expandRuntimeMatrix, loadRuntimeConfig, pinnedRepositories, validateRuntimeConfig } from '../scripts/runtime-matrix.mjs'
 import { reserveSearchSlot, retryDelay, REST_MIN_GAP_MS, SEARCH_MIN_GAP_MS, searchRepositories } from '../scripts/github.mjs'

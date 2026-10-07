@@ -83,8 +83,8 @@ export async function githubRequest(path, { accept, retries } = {}) {
   throw new Error(`unreachable retry loop for ${url}`)
 }
 
-export async function githubJson(path) {
-  const response = await githubRequest(path)
+export async function githubJson(path, options) {
+  const response = await githubRequest(path, options)
   return response.json()
 }
 

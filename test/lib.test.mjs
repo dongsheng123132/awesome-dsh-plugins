@@ -7,6 +7,30 @@ import { readFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { analyzeCapability, capabilityScanHealth, inferEcosystem, mergeSearchHits, parseSkillFrontmatter } from '../scripts/capability-lib.mjs'
+import { classifyPreflightFailure, probeExternalPublicRepository } from '../scripts/capability-preflight.mjs'
+
+test('capability preflight pins an external public file without reading its body', async () => {
+  const paths = []
+  const revision = 'a'.repeat(40)
+  const result = await probeExternalPublicRepository(async path => {
+    paths.push(path)
+    if (paths.length === 1) return { full_name: 'deepseek-ai/deepseek-harness', default_branch: 'main' }
+    if (paths.length === 2) return { sha: revision }
+    return { type: 'file', encoding: 'base64', sha: 'b'.repeat(40), content: 'secret-that-must-not-appear' }
+  })
+  assert.deepEqual(paths, [
+    '/repos/deepseek-ai/deepseek-harness',
+    '/repos/deepseek-ai/deepseek-harness/commits/main',
+    `/repos/deepseek-ai/deepseek-harness/contents/README.md?ref=${revision}`
+  ])
+  assert.equal(result.ok, true)
+  assert.equal(JSON.stringify(result).includes('secret-that-must-not-appear'), false)
+})
+
+test('capability preflight discloses status but not response text or token', () => {
+  const result = classifyPreflightFailure(new Error('GitHub 403 for https://api.github.com/repos/example: token-secret'))
+  assert.deepEqual(result, { ok: false, reason: 'external-public-read-http-error', httpStatus: 403 })
+})
 
 test('capability scan refuses an all-rate-limited snapshot', () => {
   assert.deepEqual(capabilityScanHealth({ uniqueHits: 246, capabilities: [], errors: Array(246).fill({}) }), {

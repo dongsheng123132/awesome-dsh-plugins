@@ -9,6 +9,11 @@ on:
         description: Maximum code-search results per source query
         required: false
         default: '50'
+      preflight_only:
+        description: Probe public cross-repository API reads without writing a snapshot
+        type: boolean
+        required: false
+        default: false
 
 permissions:
   contents: write
@@ -33,13 +38,17 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 24
+      - name: Verify public cross-repository API reads
+        run: node scripts/capability-preflight.mjs
       - name: Scan capability sources and verify snapshot
+        if: ${{ !inputs.preflight_only }}
         run: |
           node scripts/discover-capabilities.mjs --per-source "$PORT_LIMIT" --concurrency 8
           npm run generate
           npm test
           npm run check
       - name: Open or update capability evidence pull request
+        if: ${{ !inputs.preflight_only }}
         shell: bash
         run: |
           if git diff --quiet; then

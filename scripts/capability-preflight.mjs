@@ -21,8 +21,14 @@ export async function probeExternalPublicRepository(readJson = readOnce) {
 }
 
 export function classifyPreflightFailure(error) {
-  const status = /^GitHub (\d{3})\b/.exec(String(error?.message || ''))?.[1]
-  return { ok: false, reason: status ? 'external-public-read-http-error' : 'external-public-read-invalid-response', httpStatus: status ? Number(status) : null }
+  const status = error?.httpStatus ?? (Number(/^GitHub (\d{3})\b/.exec(String(error?.message || ''))?.[1]) || null)
+  const remaining = /^\d+$/.test(String(error?.rateLimitRemaining)) ? Number(error.rateLimitRemaining) : null
+  const reset = /^\d+$/.test(String(error?.rateLimitReset)) ? Number(error.rateLimitReset) : null
+  const resource = typeof error?.rateLimitResource === 'string' && /^[a-z_]+$/.test(error.rateLimitResource) ? error.rateLimitResource : null
+  const reason = remaining === 0 && [403, 429].includes(status) ? 'primary-rate-limit-exhausted'
+    : [403, 429].includes(status) ? 'secondary-limit-or-permission-denial'
+      : status ? 'external-public-read-http-error' : 'external-public-read-invalid-response'
+  return { ok: false, reason, httpStatus: status, rateLimitRemaining: remaining, rateLimitReset: reset, rateLimitResource: resource }
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {

@@ -77,7 +77,14 @@ export async function githubRequest(path, { accept, retries } = {}) {
     // 408 and 429 are the search API asking us to wait; neither is a verdict about the query.
     const retryable = response.status === 403 || response.status === 408 || response.status === 429 || response.status >= 500
     const detail = (await response.text()).slice(0, 500)
-    if (!retryable || attempt === budget) throw new Error(`GitHub ${response.status} for ${url}: ${detail}`)
+    if (!retryable || attempt === budget) {
+      const failure = new Error(`GitHub ${response.status} for ${url}: ${detail}`)
+      failure.httpStatus = response.status
+      failure.rateLimitRemaining = response.headers.get('x-ratelimit-remaining')
+      failure.rateLimitReset = response.headers.get('x-ratelimit-reset')
+      failure.rateLimitResource = response.headers.get('x-ratelimit-resource')
+      throw failure
+    }
     await wait(retryDelay(response, detail, attempt))
   }
   throw new Error(`unreachable retry loop for ${url}`)

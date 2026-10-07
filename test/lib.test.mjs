@@ -29,7 +29,10 @@ test('capability preflight pins an external public file without reading its body
 
 test('capability preflight discloses status but not response text or token', () => {
   const result = classifyPreflightFailure(new Error('GitHub 403 for https://api.github.com/repos/example: token-secret'))
-  assert.deepEqual(result, { ok: false, reason: 'external-public-read-http-error', httpStatus: 403 })
+  assert.deepEqual(result, { ok: false, reason: 'secondary-limit-or-permission-denial', httpStatus: 403, rateLimitRemaining: null, rateLimitReset: null, rateLimitResource: null })
+  assert.deepEqual(classifyPreflightFailure({ httpStatus: 403, rateLimitRemaining: '0', rateLimitReset: '1791239000', rateLimitResource: 'core' }), {
+    ok: false, reason: 'primary-rate-limit-exhausted', httpStatus: 403, rateLimitRemaining: 0, rateLimitReset: 1791239000, rateLimitResource: 'core'
+  })
 })
 
 test('capability scan refuses an all-rate-limited snapshot', () => {

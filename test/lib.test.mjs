@@ -6,7 +6,7 @@ import { mkdtemp, readFile, writeFile } from 'node:fs/promises'
 import { readFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
-import { allInitialInspectionsThrottled, analyzeCapability, capabilityScanHealth, inferEcosystem, inspectionStatusCounts, mergeSearchHits, parseSkillFrontmatter } from '../scripts/capability-lib.mjs'
+import { allInitialInspectionsThrottled, analyzeCapability, capabilityCoreBudget, capabilityScanHealth, inferEcosystem, inspectionStatusCounts, mergeSearchHits, parseSkillFrontmatter } from '../scripts/capability-lib.mjs'
 import { classifyPreflightFailure, probeExternalPublicRepository } from '../scripts/capability-preflight.mjs'
 
 test('capability preflight pins an external public file without reading its body', async () => {
@@ -57,6 +57,17 @@ test('capability scan stops only a systemic initial throttle and reports counts 
   assert.equal(allInitialInspectionsThrottled(blocked.slice(0, 2)), false)
   assert.equal(allInitialInspectionsThrottled([...blocked, { ok: true, value: {} }]), false)
   assert.deepEqual(inspectionStatusCounts([{ httpStatus: 403, message: 'secret' }, { httpStatus: 403 }, { httpStatus: 404 }]), { 403: 2, 404: 1 })
+})
+
+test('capability scan reserves core requests before inspecting fixed revisions', () => {
+  const hits = [
+    { repository: { full_name: 'owner/a' } },
+    { repository: { full_name: 'owner/a' } },
+    { repository: { full_name: 'owner/b' } }
+  ]
+  assert.deepEqual(capabilityCoreBudget(hits, 57), { ok: true, remaining: 57, required: 57, repositories: 2, files: 3, reserve: 50 })
+  assert.equal(capabilityCoreBudget(hits, 56).ok, false)
+  assert.equal(capabilityCoreBudget(hits, undefined).ok, false)
 })
 import { expandBaselineMatrix, expandRuntimeMatrix, loadRuntimeConfig, pinnedRepositories, validateRuntimeConfig } from '../scripts/runtime-matrix.mjs'
 import { reserveSearchSlot, retryDelay, REST_MIN_GAP_MS, SEARCH_MIN_GAP_MS, searchRepositories } from '../scripts/github.mjs'

@@ -1,0 +1,9 @@
+# Capability Port scan: preserve evidence when GitHub core is empty
+
+The scheduled [2026-10-06 scan](https://github.com/dongsheng123132/awesome-dsh-plugins/actions/runs/37512724355) found 245 unique `SKILL.md` hits but resolved 0 files. The existing majority-health gate refused to replace the committed 49-candidate snapshot. That is a source-observation failure, not evidence that the skills disappeared.
+
+An isolated, nonpublishing [cross-repository preflight](https://github.com/dongsheng123132/awesome-dsh-plugins/actions/runs/37578302117) initially read the public DeepSeek Harness repository, fixed commit, and README blob successfully with the workflow token. A later nonpublishing [preflight](https://github.com/dongsheng123132/awesome-dsh-plugins/actions/runs/37580325715) failed before search: HTTP 403, `x-ratelimit-resource: core`, `x-ratelimit-remaining: 0`, reset epoch `1791355823`. The two observations show that baseline public-repository access can work, and that the later run had exhausted its primary core allowance. They do not prove the earlier 245 failures had that same cause.
+
+This change adds a read-only preflight, a post-search source check, serialized candidate inspection, sanitized status/count disclosure, and a pre-inspection core budget estimate of two repository reads per unique repository plus one file read per hit and a 50-request reserve. Insufficient budget fails before inspecting candidates; no result overwrites the old snapshot. `workflow_dispatch` can run `preflight_only` or `scan_only` without updating the automated PR. The normal Check suite now runs on Ubuntu and Windows.
+
+The score remains a source-backed triage signal, not DSH compatibility, security, quality, or license certification. No new Lab, plugin install, or DSH tool-call claim is made here. A successful full scheduled scan after the core reset is still required to call the moving candidate snapshot refreshed.

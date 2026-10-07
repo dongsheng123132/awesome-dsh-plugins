@@ -178,3 +178,16 @@ export function inspectionStatusCounts(errors) {
   return Object.fromEntries([...new Set(errors.map(error => error.httpStatus ?? 'other'))]
     .sort().map(status => [status, errors.filter(error => (error.httpStatus ?? 'other') === status).length]))
 }
+
+export function capabilityCoreBudget(hits, remaining, reserve = 50) {
+  const repositories = new Set(hits.map(hit => hit.repository?.full_name).filter(Boolean)).size
+  const required = repositories * 2 + hits.length + reserve
+  return {
+    ok: Number.isInteger(remaining) && remaining >= required,
+    remaining,
+    required,
+    repositories,
+    files: hits.length,
+    reserve
+  }
+}

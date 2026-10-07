@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { allInitialInspectionsThrottled, analyzeCapability, capabilityScanHealth, inferEcosystem, inspectionStatusCounts, mergeSearchHits } from './capability-lib.mjs'
+import { allInitialInspectionsThrottled, analyzeCapability, capabilityCoreBudget, capabilityScanHealth, inferEcosystem, inspectionStatusCounts, mergeSearchHits } from './capability-lib.mjs'
 import { githubJson, mapConcurrent, searchCode } from './github.mjs'
 import { classifyPreflightFailure, probeExternalPublicRepository } from './capability-preflight.mjs'
 import { parseIntegerFlag, writeJson } from './lib.mjs'
@@ -27,6 +27,13 @@ for (const query of queries) {
 }
 const hits = mergeSearchHits(groups)
 if (hits.length > 0) {
+  // /rate_limit does not count against the primary REST allowance. Reserve the fixed-revision
+  // metadata, commit and file reads before starting them; do not turn an empty budget into 0/N data.
+  const limit = await githubJson('/rate_limit', { retries: 0 })
+  const budget = capabilityCoreBudget(hits, limit.resources?.core?.remaining)
+  if (!budget.ok) {
+    throw new Error(`Capability scan core budget insufficient: remaining=${budget.remaining ?? 'unknown'} required=${budget.required} reset=${limit.resources?.core?.reset ?? 'unknown'}; prior snapshot preserved`)
+  }
   // Code search can leave the token under a secondary limit even when a pre-search read passed.
   // Re-check a known public file before touching hundreds of candidate repositories. One bounded
   // cooldown is preferable to 245 identical per-file retry loops and cannot alter the old snapshot.

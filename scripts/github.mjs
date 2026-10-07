@@ -20,8 +20,10 @@ const SEARCH_PATH = '/search/'
 // scheduled run ("try again in 7.768s"). Stay beyond the observed gate instead of exhausting the
 // retry budget across the ordinary five-query capability sweep.
 export const SEARCH_MIN_GAP_MS = 8000
+export const REST_MIN_GAP_MS = 250
 const SEARCH_RETRIES = 6
 let nextSearchAt = 0
+let nextRestAt = 0
 
 export function reserveSearchSlot(now, currentNextAt, gap = SEARCH_MIN_GAP_MS) {
   const reservedAt = Math.max(now, currentNextAt)
@@ -31,8 +33,13 @@ export function reserveSearchSlot(now, currentNextAt, gap = SEARCH_MIN_GAP_MS) {
 // Search is metered far more tightly than the rest of the API, and the five capability queries are
 // fired back to back. Space them out instead of finding out from a 429.
 async function paceSearch(url) {
-  if (!url.includes(SEARCH_PATH)) return
   const now = Date.now()
+  if (!url.includes(SEARCH_PATH)) {
+    const reservation = reserveSearchSlot(now, nextRestAt, REST_MIN_GAP_MS)
+    nextRestAt = reservation.nextSearchAt
+    if (reservation.delayMs > 0) await wait(reservation.delayMs)
+    return
+  }
   // Reserve before yielding. Capability discovery starts its source searches concurrently; if
   // callers wait before reserving, they all wake on the same boundary and burst into the limiter.
   const reservation = reserveSearchSlot(now, nextSearchAt)
@@ -47,6 +54,10 @@ export function retryDelay(response, detail, attempt) {
   if (Number.isInteger(retryAfter)) return Math.max(retryAfter * 1000, 1000)
   const hint = /try again in ([\d.]+)\s*(ms|s)\b/i.exec(detail || '')
   const hinted = hint ? Number(hint[1]) * (hint[2].toLowerCase() === 's' ? 1000 : 1) : 0
+  // GitHub's published guidance says to wait at least one minute when a secondary-limit response
+  // gives neither Retry-After nor a usable body hint. Short synchronized retries made 0/245 reads
+  // succeed on the scheduled capability scan, even though its external-repository preflight passed.
+  if (!hint && (response.status === 403 || response.status === 429)) return 60_000 * 2 ** attempt
   // The body states a floor, not a gate: the limiter re-arms on every request, so a wait that only
   // matches the hint retries at the boundary and stays throttled. Add growing margin on top of it.
   // Observed twice: a 310ms hint cycling for five seconds, then an 8s hint that re-armed across all six retries.

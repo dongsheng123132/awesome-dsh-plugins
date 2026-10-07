@@ -14,6 +14,11 @@ on:
         type: boolean
         required: false
         default: false
+      scan_only:
+        description: Scan and verify a temporary snapshot without publishing a pull request
+        type: boolean
+        required: false
+        default: false
 
 permissions:
   contents: write
@@ -43,12 +48,12 @@ jobs:
       - name: Scan capability sources and verify snapshot
         if: ${{ !inputs.preflight_only }}
         run: |
-          node scripts/discover-capabilities.mjs --per-source "$PORT_LIMIT" --concurrency 8
+          node scripts/discover-capabilities.mjs --per-source "$PORT_LIMIT" --concurrency 1
           npm run generate
           npm test
           npm run check
       - name: Open or update capability evidence pull request
-        if: ${{ !inputs.preflight_only }}
+        if: ${{ !inputs.preflight_only && !inputs.scan_only }}
         shell: bash
         run: |
           if git diff --quiet; then

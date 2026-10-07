@@ -48,7 +48,7 @@ test('capability scan rejects empty and incomplete observations', () => {
   assert.equal(capabilityScanHealth({ uniqueHits: 4, capabilities: [{}], errors: [] }).reason, 'incomplete-inspection')
 })
 import { expandBaselineMatrix, expandRuntimeMatrix, loadRuntimeConfig, pinnedRepositories, validateRuntimeConfig } from '../scripts/runtime-matrix.mjs'
-import { reserveSearchSlot, retryDelay, SEARCH_MIN_GAP_MS, searchRepositories } from '../scripts/github.mjs'
+import { reserveSearchSlot, retryDelay, REST_MIN_GAP_MS, SEARCH_MIN_GAP_MS, searchRepositories } from '../scripts/github.mjs'
 
 test('extractBundle verifies a root bundle and produces a GitHub install target', () => {
   const manifest = {
@@ -243,6 +243,13 @@ test('a secondary rate limit states its wait in the body, and that wait is a gro
 
 test('code search pacing outlasts the observed rolling limiter window', () => {
   assert.ok(SEARCH_MIN_GAP_MS >= 8000)
+  assert.ok(REST_MIN_GAP_MS >= 250)
+})
+
+test('unhinted GitHub secondary throttles cool down for at least one minute', () => {
+  const throttled = { status: 403, headers: { get: () => null } }
+  assert.equal(retryDelay(throttled, '{"message":"secondary rate limit"}', 0), 60000)
+  assert.equal(retryDelay(throttled, '{"message":"secondary rate limit"}', 1), 120000)
 })
 
 test('concurrent search callers reserve different limiter slots before yielding', () => {

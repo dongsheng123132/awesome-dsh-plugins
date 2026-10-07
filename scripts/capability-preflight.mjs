@@ -1,10 +1,12 @@
 #!/usr/bin/env node
 import { pathToFileURL } from 'node:url'
-import { githubJson } from './github.mjs'
+import { githubRequest } from './github.mjs'
 
 const PUBLIC_REPO = 'deepseek-ai/deepseek-harness'
 
-export async function probeExternalPublicRepository(readJson = githubJson) {
+const readOnce = async path => (await githubRequest(path, { retries: 0 })).json()
+
+export async function probeExternalPublicRepository(readJson = readOnce) {
   const repository = await readJson(`/repos/${PUBLIC_REPO}`)
   if (repository.full_name !== PUBLIC_REPO || !repository.default_branch) {
     throw new Error('unexpected-public-repository-metadata')

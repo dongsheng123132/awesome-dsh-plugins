@@ -1,6 +1,7 @@
 #!/usr/bin/env node
-import { analyzeCapability, capabilityScanHealth, inferEcosystem, mergeSearchHits } from './capability-lib.mjs'
+import { allInitialInspectionsThrottled, analyzeCapability, capabilityCoreBudget, capabilityScanHealth, inferEcosystem, inspectionStatusCounts, mergeSearchHits } from './capability-lib.mjs'
 import { githubJson, mapConcurrent, searchCode } from './github.mjs'
+import { classifyPreflightFailure, probeExternalPublicRepository } from './capability-preflight.mjs'
 import { parseIntegerFlag, writeJson } from './lib.mjs'
 
 const argv = process.argv.slice(2)
@@ -25,13 +26,40 @@ for (const query of queries) {
   })
 }
 const hits = mergeSearchHits(groups)
+if (hits.length > 0) {
+  // /rate_limit does not count against the primary REST allowance. Reserve the fixed-revision
+  // metadata, commit and file reads before starting them; do not turn an empty budget into 0/N data.
+  const limit = await githubJson('/rate_limit', { retries: 0 })
+  const budget = capabilityCoreBudget(hits, limit.resources?.core?.remaining)
+  if (!budget.ok) {
+    throw new Error(`Capability scan core budget insufficient: remaining=${budget.remaining ?? 'unknown'} required=${budget.required} reset=${limit.resources?.core?.reset ?? 'unknown'}; prior snapshot preserved`)
+  }
+  // Code search can leave the token under a secondary limit even when a pre-search read passed.
+  // Re-check a known public file before touching hundreds of candidate repositories. One bounded
+  // cooldown is preferable to 245 identical per-file retry loops and cannot alter the old snapshot.
+  try {
+    await probeExternalPublicRepository()
+  } catch (firstError) {
+    const first = classifyPreflightFailure(firstError)
+    if (![403, 429].includes(first.httpStatus)) {
+      throw new Error(`Capability scan source unavailable after search: ${first.reason}; HTTP ${first.httpStatus ?? 'unknown'}`)
+    }
+    await new Promise(resolve => setTimeout(resolve, 60_000))
+    try {
+      await probeExternalPublicRepository()
+    } catch (secondError) {
+      const second = classifyPreflightFailure(secondError)
+      throw new Error(`Capability scan source unavailable after cooldown: ${second.reason}; HTTP ${second.httpStatus ?? 'unknown'}`)
+    }
+  }
+}
 const repositoryCache = new Map()
 
 async function repositoryFacts(repo) {
   if (!repositoryCache.has(repo)) {
     repositoryCache.set(repo, (async () => {
-      const metadata = await githubJson(`/repos/${repo}`)
-      const commit = await githubJson(`/repos/${repo}/commits/${encodeURIComponent(metadata.default_branch)}`)
+      const metadata = await githubJson(`/repos/${repo}`, { retries: 0 })
+      const commit = await githubJson(`/repos/${repo}/commits/${encodeURIComponent(metadata.default_branch)}`, { retries: 0 })
       return { metadata, revision: commit.sha }
     })())
   }
@@ -43,7 +71,7 @@ async function inspect(hit) {
   try {
     const { metadata, revision } = await repositoryFacts(repo)
     const encodedPath = encodeURIComponent(hit.path).replaceAll('%2F', '/')
-    const file = await githubJson(`/repos/${repo}/contents/${encodedPath}?ref=${revision}`)
+    const file = await githubJson(`/repos/${repo}/contents/${encodedPath}?ref=${revision}`, { retries: 0 })
     if (file.type !== 'file' || file.encoding !== 'base64') throw new Error('SKILL.md is not a base64 GitHub file response')
     const content = Buffer.from(String(file.content).replaceAll('\n', ''), 'base64').toString('utf8')
     if (Buffer.byteLength(content) > 256 * 1024) throw new Error('SKILL.md exceeds 256 KiB scan limit')
@@ -77,17 +105,23 @@ async function inspect(hit) {
       }
     }
   } catch (error) {
-    return { ok: false, error: { repo, path: hit.path, queryIds: hit.queryIds, message: error.message } }
+    const failure = classifyPreflightFailure(error)
+    return { ok: false, error: { repo, path: hit.path, queryIds: hit.queryIds, reason: failure.reason, httpStatus: failure.httpStatus } }
   }
 }
 
-const inspected = await mapConcurrent(hits, concurrency, inspect)
+const initial = await mapConcurrent(hits.slice(0, 5), 1, inspect)
+if (allInitialInspectionsThrottled(initial)) {
+  throw new Error(`Capability scan stopped after ${initial.length} consecutive throttled inspections; prior snapshot preserved`)
+}
+const inspected = [...initial, ...await mapConcurrent(hits.slice(initial.length), concurrency, inspect)]
 const capabilities = inspected.filter(item => item.ok).map(item => item.value)
   .sort((left, right) => right.port.score - left.port.score || right.stars - left.stars || left.id.localeCompare(right.id))
 const errors = inspected.filter(item => !item.ok).map(item => item.error)
 const health = capabilityScanHealth({ uniqueHits: hits.length, capabilities, errors })
 if (!health.ok) {
-  throw new Error(`Capability scan refused to replace snapshot: ${health.reason}; ${capabilities.length}/${hits.length} inspected successfully`)
+  const statusCounts = inspectionStatusCounts(errors)
+  throw new Error(`Capability scan refused to replace snapshot: ${health.reason}; ${capabilities.length}/${hits.length} inspected successfully; failureStatusCounts=${JSON.stringify(statusCounts)}`)
 }
 
 await writeJson(new URL('../data/capabilities.json', import.meta.url), {

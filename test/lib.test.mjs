@@ -6,7 +6,34 @@ import { mkdtemp, readFile, writeFile } from 'node:fs/promises'
 import { readFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
-import { analyzeCapability, capabilityScanHealth, inferEcosystem, mergeSearchHits, parseSkillFrontmatter } from '../scripts/capability-lib.mjs'
+import { allInitialInspectionsThrottled, analyzeCapability, capabilityCoreBudget, capabilityScanHealth, inferEcosystem, inspectionStatusCounts, mergeSearchHits, parseSkillFrontmatter } from '../scripts/capability-lib.mjs'
+import { classifyPreflightFailure, probeExternalPublicRepository } from '../scripts/capability-preflight.mjs'
+
+test('capability preflight pins an external public file without reading its body', async () => {
+  const paths = []
+  const revision = 'a'.repeat(40)
+  const result = await probeExternalPublicRepository(async path => {
+    paths.push(path)
+    if (paths.length === 1) return { full_name: 'deepseek-ai/deepseek-harness', default_branch: 'main' }
+    if (paths.length === 2) return { sha: revision }
+    return { type: 'file', encoding: 'base64', sha: 'b'.repeat(40), content: 'secret-that-must-not-appear' }
+  })
+  assert.deepEqual(paths, [
+    '/repos/deepseek-ai/deepseek-harness',
+    '/repos/deepseek-ai/deepseek-harness/commits/main',
+    `/repos/deepseek-ai/deepseek-harness/contents/README.md?ref=${revision}`
+  ])
+  assert.equal(result.ok, true)
+  assert.equal(JSON.stringify(result).includes('secret-that-must-not-appear'), false)
+})
+
+test('capability preflight discloses status but not response text or token', () => {
+  const result = classifyPreflightFailure(new Error('GitHub 403 for https://api.github.com/repos/example: token-secret'))
+  assert.deepEqual(result, { ok: false, reason: 'secondary-limit-or-permission-denial', httpStatus: 403, rateLimitRemaining: null, rateLimitReset: null, rateLimitResource: null })
+  assert.deepEqual(classifyPreflightFailure({ httpStatus: 403, rateLimitRemaining: '0', rateLimitReset: '1791239000', rateLimitResource: 'core' }), {
+    ok: false, reason: 'primary-rate-limit-exhausted', httpStatus: 403, rateLimitRemaining: 0, rateLimitReset: 1791239000, rateLimitResource: 'core'
+  })
+})
 
 test('capability scan refuses an all-rate-limited snapshot', () => {
   assert.deepEqual(capabilityScanHealth({ uniqueHits: 246, capabilities: [], errors: Array(246).fill({}) }), {
@@ -23,8 +50,27 @@ test('capability scan rejects empty and incomplete observations', () => {
   assert.equal(capabilityScanHealth({ uniqueHits: 0, capabilities: [], errors: [] }).reason, 'no-search-hits')
   assert.equal(capabilityScanHealth({ uniqueHits: 4, capabilities: [{}], errors: [] }).reason, 'incomplete-inspection')
 })
+
+test('capability scan stops only a systemic initial throttle and reports counts without response bodies', () => {
+  const blocked = [{ ok: false, error: { httpStatus: 403 } }, { ok: false, error: { httpStatus: 429 } }, { ok: false, error: { httpStatus: 403 } }]
+  assert.equal(allInitialInspectionsThrottled(blocked), true)
+  assert.equal(allInitialInspectionsThrottled(blocked.slice(0, 2)), false)
+  assert.equal(allInitialInspectionsThrottled([...blocked, { ok: true, value: {} }]), false)
+  assert.deepEqual(inspectionStatusCounts([{ httpStatus: 403, message: 'secret' }, { httpStatus: 403 }, { httpStatus: 404 }]), { 403: 2, 404: 1 })
+})
+
+test('capability scan reserves core requests before inspecting fixed revisions', () => {
+  const hits = [
+    { repository: { full_name: 'owner/a' } },
+    { repository: { full_name: 'owner/a' } },
+    { repository: { full_name: 'owner/b' } }
+  ]
+  assert.deepEqual(capabilityCoreBudget(hits, 57), { ok: true, remaining: 57, required: 57, repositories: 2, files: 3, reserve: 50 })
+  assert.equal(capabilityCoreBudget(hits, 56).ok, false)
+  assert.equal(capabilityCoreBudget(hits, undefined).ok, false)
+})
 import { expandBaselineMatrix, expandRuntimeMatrix, loadRuntimeConfig, pinnedRepositories, validateRuntimeConfig } from '../scripts/runtime-matrix.mjs'
-import { reserveSearchSlot, retryDelay, SEARCH_MIN_GAP_MS, searchRepositories } from '../scripts/github.mjs'
+import { reserveSearchSlot, retryDelay, REST_MIN_GAP_MS, SEARCH_MIN_GAP_MS, searchRepositories } from '../scripts/github.mjs'
 
 test('extractBundle verifies a root bundle and produces a GitHub install target', () => {
   const manifest = {
@@ -219,6 +265,13 @@ test('a secondary rate limit states its wait in the body, and that wait is a gro
 
 test('code search pacing outlasts the observed rolling limiter window', () => {
   assert.ok(SEARCH_MIN_GAP_MS >= 8000)
+  assert.ok(REST_MIN_GAP_MS >= 250)
+})
+
+test('unhinted GitHub secondary throttles cool down for at least one minute', () => {
+  const throttled = { status: 403, headers: { get: () => null } }
+  assert.equal(retryDelay(throttled, '{"message":"secondary rate limit"}', 0), 60000)
+  assert.equal(retryDelay(throttled, '{"message":"secondary rate limit"}', 1), 120000)
 })
 
 test('concurrent search callers reserve different limiter slots before yielding', () => {

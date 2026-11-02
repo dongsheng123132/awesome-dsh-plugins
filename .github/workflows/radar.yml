@@ -41,6 +41,11 @@ jobs:
           npm run check
       - name: Open or update radar pull request
         shell: bash
+        env:
+          PR_BRANCH: ${{ env.RADAR_BRANCH }}
+          PR_BASE: main
+          PR_TITLE: Update verified DSH plugin radar
+          PR_BODY: "Automated four-hour scan of topic-tagged repositories. Every promoted entry has observable dsh.bundle.patch and patch-file evidence. Static review signals are triage hints, not a security certification. Review candidate removals and large count changes before merging."
         run: |
           if git diff --quiet; then
             echo "Radar is unchanged."
@@ -52,8 +57,4 @@ jobs:
           git add data/plugins.json data/candidates.json README.md README.zh-CN.md
           git commit -m "Update verified DSH plugin radar"
           git push --force-with-lease origin "$RADAR_BRANCH"
-          if gh pr view "$RADAR_BRANCH" >/dev/null 2>&1; then
-            gh pr edit "$RADAR_BRANCH" --title "Update verified DSH plugin radar" --body "Automated four-hour scan of topic-tagged repositories. Every promoted entry has observable dsh.bundle.patch and patch-file evidence. Static review signals are triage hints, not a security certification. Review candidate removals and large count changes before merging."
-          else
-            gh pr create --base main --head "$RADAR_BRANCH" --title "Update verified DSH plugin radar" --body "Automated four-hour scan of topic-tagged repositories. Every promoted entry has observable dsh.bundle.patch and patch-file evidence. Static review signals are triage hints, not a security certification. Review candidate removals and large count changes before merging."
-          fi
+          node scripts/pr-state.mjs

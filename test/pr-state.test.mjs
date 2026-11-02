@@ -1,5 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
+import { readFile } from 'node:fs/promises'
 import { describeCommand, parseArguments, planPullRequest, pullRequestCommand, readPullRequests, runPullRequestStep } from '../scripts/pr-state.mjs'
 
 const BRANCH = 'automation/plugin-radar'
@@ -126,4 +127,17 @@ test('radar dry-run reports the planned mutation without opening or editing anyt
   assert.equal(result.url, null)
   assert.deepEqual(calls.map(args => args.slice(0, 2)), [['pr', 'list'], ['pr', 'list']], 'a dry run only reads pull request state')
   assert.match(logs.join('\n'), /dry-run: would run gh pr create --base main --head automation\/plugin-radar/)
+})
+
+test('radar workflows decide from pull request state, not from the branch name', async () => {
+  const radar = await readFile(new URL('../.github/workflows/radar.yml', import.meta.url), 'utf8')
+  const port = await readFile(new URL('../.github/workflows/capability-port.yml', import.meta.url), 'utf8')
+  for (const [name, workflow] of [['radar.yml', radar], ['capability-port.yml', port]]) {
+    assert.ok(workflow.includes('node scripts/pr-state.mjs'), `${name} must delegate the pull request decision to the tested helper`)
+    assert.equal(/gh pr (view|edit|create)/.test(workflow), false, `${name} must not branch on a name that also resolves merged pull requests`)
+  }
+  assert.ok(radar.includes('PR_BRANCH: ${{ env.RADAR_BRANCH }}'))
+  assert.ok(radar.includes(TITLE))
+  assert.ok(radar.includes('Automated four-hour scan of topic-tagged repositories. Every promoted entry has observable dsh.bundle.patch and patch-file evidence. Static review signals are triage hints, not a security certification. Review candidate removals and large count changes before merging.'))
+  assert.ok(port.includes('Automated evidence snapshot of public SKILL.md candidates. Copy/Wrapper/Bridge and Capability Port Score are heuristic triage backed by pinned repository/blob observations; they are not compatibility, safety, quality, or license clearance.'))
 })

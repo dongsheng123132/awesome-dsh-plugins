@@ -55,6 +55,11 @@ jobs:
       - name: Open or update capability evidence pull request
         if: ${{ !inputs.preflight_only && !inputs.scan_only }}
         shell: bash
+        env:
+          PR_BRANCH: ${{ env.PORT_BRANCH }}
+          PR_BASE: main
+          PR_TITLE: Update capability port evidence
+          PR_BODY: "Automated evidence snapshot of public SKILL.md candidates. Copy/Wrapper/Bridge and Capability Port Score are heuristic triage backed by pinned repository/blob observations; they are not compatibility, safety, quality, or license clearance."
         run: |
           if git diff --quiet; then
             echo "Capability snapshot is unchanged."
@@ -66,9 +71,4 @@ jobs:
           git add data/capabilities.json README.md README.zh-CN.md
           git commit -m "Update capability port evidence"
           git push --force-with-lease origin "$PORT_BRANCH"
-          BODY="Automated evidence snapshot of public SKILL.md candidates. Copy/Wrapper/Bridge and Capability Port Score are heuristic triage backed by pinned repository/blob observations; they are not compatibility, safety, quality, or license clearance."
-          if gh pr view "$PORT_BRANCH" >/dev/null 2>&1; then
-            gh pr edit "$PORT_BRANCH" --title "Update capability port evidence" --body "$BODY"
-          else
-            gh pr create --base main --head "$PORT_BRANCH" --title "Update capability port evidence" --body "$BODY"
-          fi
+          node scripts/pr-state.mjs

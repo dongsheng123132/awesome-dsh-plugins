@@ -4,6 +4,8 @@
 
 > Discover installable DeepSeek Harness plugins, inspect the evidence behind each listing, and explore the 2Origin plugin lab.
 
+> **Scheduled refresh is paused (2026-11-09).** The committed snapshot was generated on 2026-08-25 and is kept as a static dataset. To rebuild it, run the **Update plugin radar** workflow manually from the Actions tab (`workflow_dispatch`); the four-hourly and twelve-hourly crons are disabled.
+
 [![Repository checks](https://github.com/dongsheng123132/awesome-dsh-plugins/actions/workflows/check.yml/badge.svg)](https://github.com/dongsheng123132/awesome-dsh-plugins/actions/workflows/check.yml)
 [![MIT license](https://img.shields.io/github/license/dongsheng123132/awesome-dsh-plugins)](LICENSE)
 [![DSH plugin topic](https://img.shields.io/badge/GitHub_topic-dsh--plugin-0969da)](https://github.com/topics/dsh-plugin)

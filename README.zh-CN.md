@@ -4,6 +4,8 @@
 
 > 发现真正可安装的 DeepSeek Harness 插件，查看每条收录背后的证据，并探索 2Origin 插件实验室。
 
+> **定时刷新已暂停（2026-11-09）。** 仓库里的快照生成于 2026-08-25，作为静态数据集保留。需要重建时，在 Actions 页手动运行 **Update plugin radar** 工作流（`workflow_dispatch`）；每 4 小时与每 12 小时的 cron 已关闭。
+
 [![仓库检查](https://github.com/dongsheng123132/awesome-dsh-plugins/actions/workflows/check.yml/badge.svg)](https://github.com/dongsheng123132/awesome-dsh-plugins/actions/workflows/check.yml)
 [![MIT 许可证](https://img.shields.io/github/license/dongsheng123132/awesome-dsh-plugins)](LICENSE)
 [![DSH 插件 Topic](https://img.shields.io/badge/GitHub_topic-dsh--plugin-0969da)](https://github.com/topics/dsh-plugin)

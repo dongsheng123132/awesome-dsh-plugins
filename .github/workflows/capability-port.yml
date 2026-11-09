@@ -1,8 +1,7 @@
 name: Update capability port evidence
 
 on:
-  schedule:
-    - cron: '43 */12 * * *'
+  # Scheduled refresh paused on 2026-11-09; run this workflow manually from the Actions tab.
   workflow_dispatch:
     inputs:
       per_source:
